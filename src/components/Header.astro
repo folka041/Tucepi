@@ -1,4 +1,5 @@
 ---
+import LanguageSelector from './LanguageSelector.astro';
 ---
 
 <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50 transition-all duration-300">
@@ -18,20 +19,25 @@
       <!-- Navigation Links -->
       <div class="hidden lg:block">
         <div class="ml-10 flex items-baseline space-x-8">
-          <a href="/" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Home</a>
-          <a href="/apartments" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Apartments</a>
-          <a href="/amenities" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Amenities</a>
-          <a href="/location" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Location</a>
-          <a href="/contact" class="text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+          <a href="/" class="nav-link text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors" data-key="home">Home</a>
+          <a href="/apartments" class="nav-link text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors" data-key="apartments">Apartments</a>
+          <a href="/amenities" class="nav-link text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors" data-key="amenities">Amenities</a>
+          <a href="/location" class="nav-link text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors" data-key="location">Location</a>
+          <a href="/contact" class="nav-link text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors" data-key="contact">Contact</a>
         </div>
       </div>
       
-      <!-- Book Now Button -->
+      <!-- Right side items -->
       <div class="flex items-center space-x-4">
+        <!-- Language Selector -->
+        <LanguageSelector />
+        
+        <!-- Book Now Button -->
         <div class="hidden sm:block">
           <a
             href="/apartments"
-            class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
+            class="book-now-btn bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
+            data-key="bookNow"
           >
             Book Now
           </a>
@@ -55,17 +61,18 @@
     <!-- Mobile Navigation Menu -->
     <div id="mobile-menu" class="hidden lg:hidden">
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200 shadow-lg">
-        <a href="/" class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md">Home</a>
-        <a href="/apartments" class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md">Apartments</a>
-        <a href="/amenities" class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md">Amenities</a>
-        <a href="/location" class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md">Location</a>
-        <a href="/contact" class="text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md">Contact</a>
+        <a href="/" class="nav-link text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md" data-key="home">Home</a>
+        <a href="/apartments" class="nav-link text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md" data-key="apartments">Apartments</a>
+        <a href="/amenities" class="nav-link text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md" data-key="amenities">Amenities</a>
+        <a href="/location" class="nav-link text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md" data-key="location">Location</a>
+        <a href="/contact" class="nav-link text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md" data-key="contact">Contact</a>
         
         <!-- Mobile Book Now Button -->
         <div class="pt-4 border-t border-gray-200">
           <a
             href="/apartments"
-            class="bg-primary-600 hover:bg-primary-700 text-white block px-3 py-3 text-base font-medium rounded-lg text-center transition-colors"
+            class="book-now-btn bg-primary-600 hover:bg-primary-700 text-white block px-3 py-3 text-base font-medium rounded-lg text-center transition-colors"
+            data-key="bookNow"
           >
             Book Now
           </a>
@@ -76,9 +83,12 @@
 </header>
 
 <script>
+  import { t } from '../lib/i18n';
+
   class Header {
     constructor() {
       this.init();
+      this.updateTranslations();
     }
 
     init() {
@@ -126,6 +136,31 @@
           }
         });
       }
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
+      });
+    }
+
+    updateTranslations() {
+      // Update navigation links
+      const navLinks = document.querySelectorAll('.nav-link[data-key]');
+      navLinks.forEach(link => {
+        const key = link.getAttribute('data-key');
+        if (key) {
+          link.textContent = t(key);
+        }
+      });
+
+      // Update book now buttons
+      const bookNowButtons = document.querySelectorAll('.book-now-btn[data-key]');
+      bookNowButtons.forEach(button => {
+        const key = button.getAttribute('data-key');
+        if (key) {
+          button.textContent = t(key);
+        }
+      });
     }
   }
 

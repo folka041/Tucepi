@@ -2,6 +2,7 @@
 const apartments = [
   {
     id: 1,
+    nameKey: "oceanViewStudio",
     name: "Ocean View Studio",
     image: "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
     price: "$150",
@@ -13,6 +14,7 @@ const apartments = [
   },
   {
     id: 2,
+    nameKey: "deluxeOneBedroom",
     name: "Deluxe One Bedroom",
     image: "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
     price: "$220",
@@ -24,6 +26,7 @@ const apartments = [
   },
   {
     id: 3,
+    nameKey: "premiumTwoBedroom",
     name: "Premium Two Bedroom",
     image: "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
     price: "$320",
@@ -36,13 +39,13 @@ const apartments = [
 ];
 ---
 
-<section class="py-20 bg-white">
+<section id="apartments-section" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16 animate-slide-up">
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4" data-key="ourApartments">
         Our Apartment Collection
       </h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="ourApartmentsSubtitle">
         Choose from our carefully curated selection of luxury apartments, each designed to provide the ultimate comfort and stunning ocean views.
       </p>
     </div>
@@ -76,19 +79,19 @@ const apartments = [
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                {apartment.guests} Guests
+                <span>{apartment.guests}</span> <span data-key="guests">Guests</span>
               </span>
               <span class="flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
                 </svg>
-                {apartment.beds} Bed
+                <span>{apartment.beds}</span> <span data-key={apartment.beds > 1 ? "beds" : "bed"}>{apartment.beds > 1 ? "Beds" : "Bed"}</span>
               </span>
               <span class="flex items-center">
                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M5 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1H5zM13 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1h-2z"></path>
                 </svg>
-                {apartment.baths} Bath
+                <span>{apartment.baths}</span> <span data-key={apartment.baths > 1 ? "baths" : "bath"}>{apartment.baths > 1 ? "Baths" : "Bath"}</span>
               </span>
             </div>
             
@@ -105,8 +108,9 @@ const apartments = [
             
             <!-- CTA -->
             <a
-              href={`/apartments/${apartment.id}`}
+              href={`/apartments`}
               class="block w-full bg-primary-600 hover:bg-primary-700 text-white text-center py-3 rounded-lg font-semibold transition-colors duration-200"
+              data-key="viewDetailsBook"
             >
               View Details & Book
             </a>
@@ -116,3 +120,32 @@ const apartments = [
     </div>
   </div>
 </section>
+
+<script>
+  import { t } from '../lib/i18n';
+
+  class Apartments {
+    constructor() {
+      this.updateTranslations();
+    }
+
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          element.textContent = t(key);
+        }
+      });
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new Apartments();
+  });
+</script>

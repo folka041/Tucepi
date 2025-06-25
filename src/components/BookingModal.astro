@@ -6,7 +6,7 @@
     <div class="p-6 sm:p-8">
       <!-- Header -->
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-2xl font-bold text-gray-900">Book Your Stay</h2>
+        <h2 class="text-2xl font-bold text-gray-900" data-key="bookYourStayTitle">Book Your Stay</h2>
         <button id="closeBookingModal" class="text-gray-400 hover:text-gray-600 transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -29,7 +29,7 @@
       <form id="bookingForm" class="space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label for="checkIn" class="block text-sm font-medium text-gray-700 mb-2">Check-in Date</label>
+            <label for="checkIn" class="block text-sm font-medium text-gray-700 mb-2" data-key="checkinDate">Check-in Date</label>
             <input
               type="date"
               id="checkIn"
@@ -38,7 +38,7 @@
             />
           </div>
           <div>
-            <label for="checkOut" class="block text-sm font-medium text-gray-700 mb-2">Check-out Date</label>
+            <label for="checkOut" class="block text-sm font-medium text-gray-700 mb-2" data-key="checkoutDate">Check-out Date</label>
             <input
               type="date"
               id="checkOut"
@@ -49,13 +49,13 @@
         </div>
 
         <div>
-          <label for="guests" class="block text-sm font-medium text-gray-700 mb-2">Number of Guests</label>
+          <label for="guests" class="block text-sm font-medium text-gray-700 mb-2" data-key="numberOfGuests">Number of Guests</label>
           <select
             id="guests"
             required
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
           >
-            <option value="">Select number of guests</option>
+            <option value="" data-key="selectGuests">Select number of guests</option>
             <option value="1">1 Guest</option>
             <option value="2">2 Guests</option>
             <option value="3">3 Guests</option>
@@ -69,11 +69,13 @@
 
         <!-- Guest Information -->
         <div class="space-y-4">
-          <h4 class="text-lg font-semibold text-gray-900">Guest Information</h4>
+          <h4 class="text-lg font-semibold text-gray-900" data-key="guestInformation">Guest Information</h4>
           
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">
+                <span data-key="firstName">First Name</span> *
+              </label>
               <input
                 type="text"
                 id="firstName"
@@ -83,7 +85,9 @@
               />
             </div>
             <div>
-              <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+              <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">
+                <span data-key="lastName">Last Name</span> *
+              </label>
               <input
                 type="text"
                 id="lastName"
@@ -95,7 +99,9 @@
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+              <span data-key="emailAddress">Email Address</span> *
+            </label>
             <input
               type="email"
               id="email"
@@ -106,7 +112,9 @@
           </div>
 
           <div>
-            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+              <span data-key="phoneNumber">Phone Number</span> *
+            </label>
             <input
               type="tel"
               id="phone"
@@ -118,38 +126,41 @@
         </div>
 
         <div>
-          <label for="specialRequests" class="block text-sm font-medium text-gray-700 mb-2">Special Requests (Optional)</label>
+          <label for="specialRequests" class="block text-sm font-medium text-gray-700 mb-2">
+            <span data-key="specialRequests">Special Requests</span> (<span data-key="optional">Optional</span>)
+          </label>
           <textarea
             id="specialRequests"
             rows="3"
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-vertical"
+            data-key="specialRequestsPlaceholder"
             placeholder="Any special requests or requirements..."
           ></textarea>
         </div>
 
         <!-- Booking Summary -->
         <div class="bg-primary-50 rounded-lg p-4">
-          <h4 class="font-semibold text-gray-900 mb-3">Booking Summary</h4>
+          <h4 class="font-semibold text-gray-900 mb-3" data-key="bookingSummary">Booking Summary</h4>
           <div class="space-y-2 text-sm">
             <div class="flex justify-between">
-              <span class="text-gray-600">Nights:</span>
+              <span class="text-gray-600" data-key="nights">Nights:</span>
               <span id="totalNights" class="font-medium">0</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-gray-600">Rate per night:</span>
+              <span class="text-gray-600" data-key="ratePerNight">Rate per night:</span>
               <span id="ratePerNight" class="font-medium">$0</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-gray-600">Subtotal:</span>
+              <span class="text-gray-600" data-key="subtotal">Subtotal:</span>
               <span id="subtotal" class="font-medium">$0</span>
             </div>
             <div class="flex justify-between">
-              <span class="text-gray-600">Taxes & Fees:</span>
+              <span class="text-gray-600" data-key="taxesFees">Taxes & Fees:</span>
               <span id="taxes" class="font-medium">$0</span>
             </div>
             <hr class="my-2">
             <div class="flex justify-between text-lg font-semibold">
-              <span>Total:</span>
+              <span data-key="total">Total:</span>
               <span id="totalPrice" class="text-primary-600">$0</span>
             </div>
           </div>
@@ -158,6 +169,7 @@
         <button
           type="submit"
           class="w-full bg-primary-600 hover:bg-primary-700 text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-200 transform hover:scale-105"
+          data-key="confirmBooking"
         >
           Confirm Booking
         </button>
@@ -166,7 +178,7 @@
       <!-- Loading State -->
       <div id="bookingLoading" class="hidden text-center py-8">
         <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
-        <p class="mt-4 text-gray-600">Processing your booking...</p>
+        <p class="mt-4 text-gray-600" data-key="loading">Processing your booking...</p>
       </div>
 
       <!-- Success Message -->
@@ -176,11 +188,12 @@
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
           </svg>
         </div>
-        <h3 class="text-xl font-semibold text-gray-900 mb-2">Booking Confirmed!</h3>
-        <p class="text-gray-600 mb-4">Thank you for your reservation. We'll contact you shortly with confirmation details.</p>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2" data-key="bookingConfirmed">Booking Confirmed!</h3>
+        <p class="text-gray-600 mb-4" data-key="bookingConfirmedMessage">Thank you for your reservation. We'll contact you shortly with confirmation details.</p>
         <button
           onclick="window.bookingModal?.close()"
           class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+          data-key="close"
         >
           Close
         </button>
@@ -195,6 +208,8 @@
 </div>
 
 <script>
+  import { t } from '../lib/i18n';
+
   class BookingModal {
     constructor() {
       this.modal = document.getElementById('bookingModal');
@@ -206,6 +221,7 @@
       this.currentApartment = null;
 
       this.init();
+      this.updateTranslations();
     }
 
     init() {
@@ -238,6 +254,23 @@
           }
         }
       });
+
+      // Listen for calendar date selection
+      window.addEventListener('datesSelected', (e) => {
+        const { checkin, checkout } = e.detail;
+        if (checkin && checkout) {
+          const checkinInput = document.getElementById('checkIn');
+          const checkoutInput = document.getElementById('checkOut');
+          if (checkinInput) checkinInput.value = checkin.toISOString().split('T')[0];
+          if (checkoutInput) checkoutInput.value = checkout.toISOString().split('T')[0];
+          this.calculatePrice();
+        }
+      });
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
+      });
     }
 
     open(apartment) {
@@ -250,6 +283,26 @@
       // Reset form state
       this.showForm();
       this.hideError();
+      
+      // Pre-fill dates from calendar if available
+      if (window.calendar) {
+        const selectedDates = window.calendar.getSelectedDates();
+        if (selectedDates.checkin) {
+          const checkinInput = document.getElementById('checkIn');
+          if (checkinInput) {
+            checkinInput.value = selectedDates.checkin.toISOString().split('T')[0];
+          }
+        }
+        if (selectedDates.checkout) {
+          const checkoutInput = document.getElementById('checkOut');
+          if (checkoutInput) {
+            checkoutInput.value = selectedDates.checkout.toISOString().split('T')[0];
+          }
+        }
+        if (selectedDates.checkin && selectedDates.checkout) {
+          this.calculatePrice();
+        }
+      }
     }
 
     close() {
@@ -333,6 +386,22 @@
       this.error?.classList.add('hidden');
     }
 
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
+            element.placeholder = t(key);
+          } else if (element.tagName === 'TEXTAREA') {
+            element.placeholder = t(key);
+          } else {
+            element.textContent = t(key);
+          }
+        }
+      });
+    }
+
     async handleBooking(e) {
       e.preventDefault();
       
@@ -393,6 +462,11 @@
         const existingBookings = JSON.parse(localStorage.getItem('apartmentBookings') || '[]');
         existingBookings.push(bookingData);
         localStorage.setItem('apartmentBookings', JSON.stringify(existingBookings));
+
+        // Clear calendar selection
+        if (window.calendar) {
+          window.calendar.clearSelection();
+        }
 
         this.showSuccess();
       } catch (error) {

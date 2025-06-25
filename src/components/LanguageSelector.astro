@@ -1,0 +1,156 @@
+---
+---
+
+<div class="relative">
+  <button 
+    id="languageButton" 
+    class="flex items-center space-x-2 px-3 py-2 text-sm text-gray-700 hover:text-primary-600 transition-colors"
+    aria-label="Select language"
+  >
+    <span id="currentFlag" class="text-lg">🇺🇸</span>
+    <span id="currentLang" class="hidden sm:inline">English</span>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </button>
+  
+  <div 
+    id="languageDropdown" 
+    class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 hidden"
+  >
+    <div class="py-2">
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="en">
+        <span class="text-lg">🇺🇸</span>
+        <span>English</span>
+      </button>
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="cs">
+        <span class="text-lg">🇨🇿</span>
+        <span>Čeština</span>
+      </button>
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="sk">
+        <span class="text-lg">🇸🇰</span>
+        <span>Slovenčina</span>
+      </button>
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="pl">
+        <span class="text-lg">🇵🇱</span>
+        <span>Polski</span>
+      </button>
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="fr">
+        <span class="text-lg">🇫🇷</span>
+        <span>Français</span>
+      </button>
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="it">
+        <span class="text-lg">🇮🇹</span>
+        <span>Italiano</span>
+      </button>
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="de">
+        <span class="text-lg">🇩🇪</span>
+        <span>Deutsch</span>
+      </button>
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="uk">
+        <span class="text-lg">🇺🇦</span>
+        <span>Українська</span>
+      </button>
+      <button class="language-option w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 flex items-center space-x-3" data-lang="ru">
+        <span class="text-lg">🇷🇺</span>
+        <span>Русский</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { getCurrentLanguage, setLanguage, supportedLanguages } from '../lib/i18n';
+
+  class LanguageSelector {
+    constructor() {
+      this.button = document.getElementById('languageButton');
+      this.dropdown = document.getElementById('languageDropdown');
+      this.currentFlag = document.getElementById('currentFlag');
+      this.currentLang = document.getElementById('currentLang');
+      this.options = document.querySelectorAll('.language-option');
+      
+      this.init();
+    }
+
+    init() {
+      this.updateDisplay();
+      this.bindEvents();
+    }
+
+    bindEvents() {
+      this.button?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.toggleDropdown();
+      });
+
+      this.options.forEach(option => {
+        option.addEventListener('click', (e) => {
+          const lang = e.currentTarget.getAttribute('data-lang');
+          if (lang) {
+            this.selectLanguage(lang);
+          }
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener('click', () => {
+        this.closeDropdown();
+      });
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateDisplay();
+      });
+    }
+
+    toggleDropdown() {
+      if (this.dropdown?.classList.contains('hidden')) {
+        this.openDropdown();
+      } else {
+        this.closeDropdown();
+      }
+    }
+
+    openDropdown() {
+      this.dropdown?.classList.remove('hidden');
+    }
+
+    closeDropdown() {
+      this.dropdown?.classList.add('hidden');
+    }
+
+    selectLanguage(lang) {
+      setLanguage(lang);
+      this.updateDisplay();
+      this.closeDropdown();
+      
+      // Reload page to apply translations
+      window.location.reload();
+    }
+
+    updateDisplay() {
+      const currentLang = getCurrentLanguage();
+      const langInfo = supportedLanguages.find(l => l.code === currentLang);
+      
+      if (langInfo && this.currentFlag && this.currentLang) {
+        this.currentFlag.textContent = langInfo.flag;
+        this.currentLang.textContent = langInfo.name;
+      }
+
+      // Update active state
+      this.options.forEach(option => {
+        const optionLang = option.getAttribute('data-lang');
+        if (optionLang === currentLang) {
+          option.classList.add('bg-primary-50', 'text-primary-600');
+        } else {
+          option.classList.remove('bg-primary-50', 'text-primary-600');
+        }
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new LanguageSelector();
+  });
+</script>

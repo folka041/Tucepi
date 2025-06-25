@@ -2,33 +2,33 @@
 const features = [
   {
     icon: "🏖️",
-    title: "Beachfront Location",
-    description: "Just steps away from pristine sandy beaches and crystal-clear waters."
+    titleKey: "beachfrontLocation",
+    descKey: "beachfrontDesc"
   },
   {
     icon: "🌊",
-    title: "Ocean Views",
-    description: "Wake up to breathtaking panoramic views of the ocean from your private balcony."
+    titleKey: "oceanViews",
+    descKey: "oceanViewsDesc"
   },
   {
     icon: "🏊",
-    title: "Swimming Pool",
-    description: "Relax in our infinity pool overlooking the ocean with poolside service."
+    titleKey: "swimmingPool",
+    descKey: "swimmingPoolDesc"
   },
   {
     icon: "🍽️",
-    title: "Full Kitchen",
-    description: "Modern, fully equipped kitchens with premium appliances and dining areas."
+    titleKey: "fullKitchen",
+    descKey: "fullKitchenDesc"
   },
   {
     icon: "📶",
-    title: "Free WiFi",
-    description: "Stay connected with complimentary high-speed wireless internet throughout."
+    titleKey: "freeWifi",
+    descKey: "freeWifiDesc"
   },
   {
     icon: "🅿️",
-    title: "Free Parking",
-    description: "Secure, covered parking included with every apartment reservation."
+    titleKey: "freeParking",
+    descKey: "freeParkingDesc"
   }
 ];
 ---
@@ -36,10 +36,10 @@ const features = [
 <section class="py-20 bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-16 animate-slide-up">
-      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4" data-key="whyChoose">
         Why Choose Apartments Delfin?
       </h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto" data-key="whyChooseSubtitle">
         Discover the perfect combination of luxury, comfort, and convenience that makes our apartments the ideal choice for your vacation.
       </p>
     </div>
@@ -51,10 +51,43 @@ const features = [
           style={`animation-delay: ${index * 0.1}s`}
         >
           <div class="text-4xl mb-4 text-center">{feature.icon}</div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-3 text-center">{feature.title}</h3>
-          <p class="text-gray-600 text-center leading-relaxed">{feature.description}</p>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3 text-center" data-key={feature.titleKey}>
+            Feature Title
+          </h3>
+          <p class="text-gray-600 text-center leading-relaxed" data-key={feature.descKey}>
+            Feature Description
+          </p>
         </div>
       ))}
     </div>
   </div>
 </section>
+
+<script>
+  import { t } from '../lib/i18n';
+
+  class Features {
+    constructor() {
+      this.updateTranslations();
+    }
+
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          element.textContent = t(key);
+        }
+      });
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new Features();
+  });
+</script>
