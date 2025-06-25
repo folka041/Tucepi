@@ -1,0 +1,367 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const nearbyAttractions = [
+  {
+    name: "Sunset Beach",
+    distance: "2 min walk",
+    description: "Pristine sandy beach perfect for swimming, sunbathing, and romantic sunset walks.",
+    image: "https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    type: "Beach"
+  },
+  {
+    name: "Marina Bay",
+    distance: "5 min walk",
+    description: "Luxury marina with yacht charters, waterfront dining, and shopping.",
+    image: "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    type: "Marina"
+  },
+  {
+    name: "Ocean View Golf Club",
+    distance: "10 min drive",
+    description: "Championship 18-hole golf course with stunning ocean views.",
+    image: "https://images.pexels.com/photos/1325735/pexels-photo-1325735.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    type: "Recreation"
+  },
+  {
+    name: "Coastal Nature Reserve",
+    distance: "15 min drive",
+    description: "Protected nature area with hiking trails and wildlife viewing.",
+    image: "https://images.pexels.com/photos/1761279/pexels-photo-1761279.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    type: "Nature"
+  },
+  {
+    name: "Historic Downtown",
+    distance: "20 min drive",
+    description: "Charming historic district with boutique shops, galleries, and restaurants.",
+    image: "https://images.pexels.com/photos/1134166/pexels-photo-1134166.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    type: "Culture"
+  },
+  {
+    name: "Aquarium & Marine Center",
+    distance: "25 min drive",
+    description: "World-class aquarium featuring local marine life and interactive exhibits.",
+    image: "https://images.pexels.com/photos/2156311/pexels-photo-2156311.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop",
+    type: "Attraction"
+  }
+];
+
+const restaurants = [
+  {
+    name: "Ocean's Edge",
+    cuisine: "Fine Dining",
+    distance: "3 min walk",
+    rating: 4.8,
+    description: "Award-winning restaurant specializing in fresh seafood and ocean views."
+  },
+  {
+    name: "Beachside Grill",
+    cuisine: "Casual Dining",
+    distance: "5 min walk",
+    rating: 4.6,
+    description: "Relaxed beachfront dining with grilled specialties and tropical cocktails."
+  },
+  {
+    name: "Marina Café",
+    cuisine: "Breakfast & Brunch",
+    distance: "7 min walk",
+    rating: 4.7,
+    description: "Popular breakfast spot with fresh pastries and artisan coffee."
+  },
+  {
+    name: "Sunset Lounge",
+    cuisine: "Bar & Tapas",
+    distance: "4 min walk",
+    rating: 4.5,
+    description: "Rooftop bar with craft cocktails and small plates, perfect for sunset viewing."
+  }
+];
+
+const transportation = [
+  {
+    type: "Airport",
+    name: "Coastal International Airport",
+    distance: "45 min drive",
+    description: "Major international airport with direct flights to major cities worldwide."
+  },
+  {
+    type: "Train Station",
+    name: "Central Station",
+    distance: "30 min drive",
+    description: "High-speed rail connections to major metropolitan areas."
+  },
+  {
+    type: "Bus Terminal",
+    name: "Coastal Bus Hub",
+    distance: "25 min drive",
+    description: "Regional bus services and tour connections."
+  },
+  {
+    type: "Ferry Terminal",
+    name: "Island Ferry Dock",
+    distance: "10 min walk",
+    description: "Regular ferry services to nearby islands and coastal towns."
+  }
+];
+---
+
+<Layout 
+  title="Location & Area Guide - Apartments Delfin" 
+  description="Discover our prime beachfront location with easy access to beaches, dining, attractions, and transportation. Explore what makes our location perfect for your vacation."
+  keywords="beachfront location, coastal vacation, nearby attractions, restaurants, transportation, Delfin location"
+>
+  <Header />
+  
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-primary-600 to-primary-800 text-white py-20">
+      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl sm:text-5xl font-bold mb-6">Prime Beachfront Location</h1>
+          <p class="text-xl text-primary-100 max-w-3xl mx-auto">
+            Perfectly positioned on the stunning coastline with easy access to beaches, dining, attractions, and all the best the area has to offer.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location Overview -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">The Perfect Coastal Getaway</h2>
+            <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+              Apartments Delfin is strategically located on the pristine coastline, offering guests the perfect blend of tranquil beachfront living and convenient access to local attractions, dining, and entertainment.
+            </p>
+            <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+              Our prime location means you're just steps away from crystal-clear waters, golden sandy beaches, and a vibrant coastal community that offers something for everyone.
+            </p>
+            
+            <div class="grid grid-cols-2 gap-6">
+              <div class="text-center p-4 bg-primary-50 rounded-lg">
+                <div class="text-2xl font-bold text-primary-600 mb-1">2 min</div>
+                <div class="text-sm text-gray-600">to Beach</div>
+              </div>
+              <div class="text-center p-4 bg-primary-50 rounded-lg">
+                <div class="text-2xl font-bold text-primary-600 mb-1">5 min</div>
+                <div class="text-sm text-gray-600">to Marina</div>
+              </div>
+              <div class="text-center p-4 bg-primary-50 rounded-lg">
+                <div class="text-2xl font-bold text-primary-600 mb-1">20 min</div>
+                <div class="text-sm text-gray-600">to Downtown</div>
+              </div>
+              <div class="text-center p-4 bg-primary-50 rounded-lg">
+                <div class="text-2xl font-bold text-primary-600 mb-1">45 min</div>
+                <div class="text-sm text-gray-600">to Airport</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="relative">
+            <img
+              src="https://images.pexels.com/photos/1032650/pexels-photo-1032650.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+              alt="Beachfront Location"
+              class="w-full h-96 object-cover rounded-xl shadow-lg"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-xl"></div>
+            <div class="absolute bottom-6 left-6 text-white">
+              <div class="text-lg font-semibold">123 Ocean View Drive</div>
+              <div class="text-sm opacity-90">Coastal City, CA 90210</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Explore the Area</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Discover nearby attractions, restaurants, and points of interest around Apartments Delfin.
+          </p>
+        </div>
+        
+        <!-- Map Placeholder -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+          <div class="h-96 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center relative">
+            <div class="text-center">
+              <svg class="w-16 h-16 text-blue-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              </svg>
+              <h3 class="text-xl font-semibold text-gray-700 mb-2">Interactive Map</h3>
+              <p class="text-gray-600">Explore our location and nearby attractions</p>
+            </div>
+            
+            <!-- Map markers -->
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div class="w-4 h-4 bg-red-500 rounded-full animate-pulse"></div>
+              <div class="text-xs text-gray-700 mt-1 whitespace-nowrap">Apartments Delfin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nearby Attractions -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Nearby Attractions</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            From pristine beaches to cultural attractions, discover the best of what our area has to offer.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {nearbyAttractions.map((attraction, index) => (
+            <div 
+              class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-scale-in"
+              style={`animation-delay: ${index * 0.1}s`}
+            >
+              <div class="relative h-48 overflow-hidden">
+                <img
+                  src={attraction.image}
+                  alt={attraction.name}
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  loading="lazy"
+                />
+                <div class="absolute top-4 left-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  {attraction.type}
+                </div>
+                <div class="absolute top-4 right-4 bg-white/90 text-gray-900 px-3 py-1 rounded-full text-sm font-semibold">
+                  {attraction.distance}
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{attraction.name}</h3>
+                <p class="text-gray-600 leading-relaxed">{attraction.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Dining Options -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Dining & Restaurants</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Savor exceptional cuisine at nearby restaurants, from casual beachside dining to fine dining experiences.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {restaurants.map((restaurant, index) => (
+            <div 
+              class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-scale-in"
+              style={`animation-delay: ${index * 0.1}s`}
+            >
+              <div class="flex items-start justify-between mb-4">
+                <div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-1">{restaurant.name}</h3>
+                  <div class="flex items-center space-x-2 text-sm text-gray-600">
+                    <span class="bg-primary-100 text-primary-700 px-2 py-1 rounded">{restaurant.cuisine}</span>
+                    <span>•</span>
+                    <span>{restaurant.distance}</span>
+                  </div>
+                </div>
+                <div class="flex items-center text-yellow-400">
+                  <svg class="w-4 h-4 fill-current">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                  <span class="ml-1 text-sm text-gray-600">{restaurant.rating}</span>
+                </div>
+              </div>
+              <p class="text-gray-600 leading-relaxed">{restaurant.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Transportation -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold text-gray-900 mb-4">Transportation & Access</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Easily accessible by various transportation methods, making your journey to and from Apartments Delfin convenient and stress-free.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {transportation.map((transport, index) => (
+            <div 
+              class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 text-center animate-scale-in"
+              style={`animation-delay: ${index * 0.1}s`}
+            >
+              <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                {transport.type === 'Airport' && (
+                  <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                  </svg>
+                )}
+                {transport.type === 'Train Station' && (
+                  <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 2L3 14h9l4-4V2h-3z"></path>
+                  </svg>
+                )}
+                {transport.type === 'Bus Terminal' && (
+                  <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path>
+                  </svg>
+                )}
+                {transport.type === 'Ferry Terminal' && (
+                  <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                  </svg>
+                )}
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">{transport.name}</h3>
+              <div class="text-primary-600 font-semibold mb-2">{transport.distance}</div>
+              <p class="text-sm text-gray-600 leading-relaxed">{transport.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-primary-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">Experience Our Perfect Location</h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
+          Book your stay at Apartments Delfin and discover why our beachfront location is the perfect base for your coastal vacation.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/apartments"
+            class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          >
+            View Apartments
+          </a>
+          <a
+            href="/contact"
+            class="bg-accent-500 hover:bg-accent-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          >
+            Get Directions
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

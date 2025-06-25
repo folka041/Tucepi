@@ -1,0 +1,456 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Calendar from '../components/Calendar.astro';
+import BookingModal from '../components/BookingModal.astro';
+
+const apartments = [
+  {
+    id: 1,
+    name: "Ocean View Studio",
+    images: [
+      "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+    ],
+    price: "$150",
+    originalPrice: "$180",
+    guests: 2,
+    beds: 1,
+    baths: 1,
+    size: "450 sq ft",
+    description: "Perfect for couples seeking a romantic getaway with stunning ocean views. This modern studio features a comfortable king-size bed, fully equipped kitchenette, and a private balcony overlooking the sea.",
+    features: ["Ocean View", "Balcony", "Kitchen", "WiFi", "Air Conditioning", "Smart TV"],
+    amenities: ["Free WiFi", "Ocean View", "Balcony", "Kitchenette", "Air Conditioning", "Smart TV", "Coffee Machine", "Hair Dryer"]
+  },
+  {
+    id: 2,
+    name: "Deluxe One Bedroom",
+    images: [
+      "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+    ],
+    price: "$220",
+    originalPrice: "$260",
+    guests: 4,
+    beds: 1,
+    baths: 1,
+    size: "650 sq ft",
+    description: "Spacious one-bedroom apartment ideal for small families or groups. Features a separate living area, full kitchen, and panoramic ocean views from multiple windows.",
+    features: ["Ocean View", "Living Room", "Full Kitchen", "Balcony", "WiFi", "Parking"],
+    amenities: ["Free WiFi", "Ocean View", "Balcony", "Full Kitchen", "Living Room", "Air Conditioning", "Smart TV", "Dishwasher", "Washing Machine", "Free Parking"]
+  },
+  {
+    id: 3,
+    name: "Premium Two Bedroom",
+    images: [
+      "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+    ],
+    price: "$320",
+    originalPrice: "$380",
+    guests: 6,
+    beds: 2,
+    baths: 2,
+    size: "950 sq ft",
+    description: "Our premium offering perfect for larger families or groups. Two spacious bedrooms, two full bathrooms, expansive living area, and breathtaking panoramic ocean views.",
+    features: ["Panoramic Ocean View", "Two Balconies", "Dining Area", "Premium Amenities", "Master Suite", "Guest Bathroom"],
+    amenities: ["Free WiFi", "Panoramic Ocean View", "Two Balconies", "Full Kitchen", "Dining Area", "Living Room", "Master Suite", "Two Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Free Parking", "Premium Toiletries"]
+  },
+  {
+    id: 4,
+    name: "Penthouse Suite",
+    images: [
+      "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+    ],
+    price: "$450",
+    originalPrice: "$520",
+    guests: 8,
+    beds: 3,
+    baths: 3,
+    size: "1200 sq ft",
+    description: "The ultimate luxury experience with three bedrooms, three bathrooms, and a private rooftop terrace. Perfect for special occasions and large groups seeking unparalleled comfort.",
+    features: ["Private Rooftop Terrace", "Three Bedrooms", "Luxury Finishes", "Panoramic Views", "Premium Location"],
+    amenities: ["Free WiFi", "Private Rooftop Terrace", "Panoramic Ocean View", "Gourmet Kitchen", "Dining Area", "Living Room", "Three Bedrooms", "Three Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Dryer", "Free Parking", "Concierge Service", "Premium Toiletries", "Jacuzzi"]
+  }
+];
+---
+
+<Layout 
+  title="Luxury Apartments - Apartments Delfin" 
+  description="Browse our collection of luxury oceanfront apartments. From cozy studios to spacious penthouses, find your perfect vacation rental with stunning ocean views and premium amenities."
+  keywords="luxury apartments, ocean view apartments, vacation rentals, beachfront accommodation, Delfin apartments"
+>
+  <Header />
+  
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 sm:py-16 lg:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Our Luxury Apartments</h1>
+          <p class="text-lg sm:text-xl text-primary-100 max-w-3xl mx-auto">
+            Choose from our carefully curated collection of premium oceanfront apartments, each designed to provide the ultimate comfort and breathtaking views.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="py-6 sm:py-8 bg-gray-50 border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row flex-wrap gap-4 items-start sm:items-center justify-between">
+          <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 w-full sm:w-auto">
+            <select id="apartmentFilter" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+              <option value="">All Apartments</option>
+              <option value="studio">Studio</option>
+              <option value="1-bedroom">1 Bedroom</option>
+              <option value="2-bedroom">2+ Bedrooms</option>
+            </select>
+            <select id="priceFilter" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+              <option value="">Any Price</option>
+              <option value="under-200">Under $200</option>
+              <option value="200-300">$200 - $300</option>
+              <option value="300-plus">$300+</option>
+            </select>
+            <select id="guestFilter" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+              <option value="">Any Guests</option>
+              <option value="1-2">1-2 Guests</option>
+              <option value="3-4">3-4 Guests</option>
+              <option value="5-plus">5+ Guests</option>
+            </select>
+          </div>
+          <div id="resultsCount" class="text-sm text-gray-600 mt-2 sm:mt-0">
+            Showing {apartments.length} apartments
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Apartments Grid -->
+    <section class="py-8 sm:py-12 lg:py-16">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
+          <!-- Apartments List -->
+          <div class="xl:col-span-2">
+            <div id="apartmentsList" class="space-y-6 sm:space-y-8">
+              {apartments.map((apartment) => (
+                <div class="apartment-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" data-apartment={JSON.stringify(apartment)}>
+                  <div class="flex flex-col lg:flex-row">
+                    <!-- Image Gallery -->
+                    <div class="lg:w-1/2 relative">
+                      <div class="apartment-gallery relative h-64 sm:h-72 lg:h-full">
+                        {apartment.images.map((image, index) => (
+                          <img
+                            src={image}
+                            alt={`${apartment.name} - Image ${index + 1}`}
+                            class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
+                            loading="lazy"
+                          />
+                        ))}
+                        <div class="absolute top-4 left-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          {apartment.images.length} Photos
+                        </div>
+                        <div class="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          {apartment.price}/night
+                        </div>
+                        {apartment.originalPrice && (
+                          <div class="absolute top-12 right-4 bg-gray-800 text-white px-2 py-1 rounded text-xs line-through">
+                            {apartment.originalPrice}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <!-- Content -->
+                    <div class="lg:w-1/2 p-4 sm:p-6">
+                      <div class="flex items-start justify-between mb-3">
+                        <h3 class="text-lg sm:text-xl font-semibold text-gray-900">{apartment.name}</h3>
+                        <div class="flex items-center text-yellow-400">
+                          {Array.from({ length: 5 }, (_, i) => (
+                            <svg class="w-3 h-3 sm:w-4 sm:h-4 fill-current">
+                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                          ))}
+                          <span class="ml-1 text-xs sm:text-sm text-gray-600">(4.9)</span>
+                        </div>
+                      </div>
+                      
+                      <p class="text-gray-600 mb-4 text-sm leading-relaxed">{apartment.description}</p>
+                      
+                      <!-- Details -->
+                      <div class="grid grid-cols-2 sm:flex sm:items-center sm:justify-between text-xs sm:text-sm text-gray-600 mb-4 gap-2">
+                        <span class="flex items-center">
+                          <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                          </svg>
+                          {apartment.guests} Guests
+                        </span>
+                        <span class="flex items-center">
+                          <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                          </svg>
+                          {apartment.beds} Bed{apartment.beds > 1 ? 's' : ''}
+                        </span>
+                        <span class="flex items-center">
+                          <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1H5zM13 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1h-2z"></path>
+                          </svg>
+                          {apartment.baths} Bath{apartment.baths > 1 ? 's' : ''}
+                        </span>
+                        <span class="text-gray-500 col-span-2 sm:col-span-1">{apartment.size}</span>
+                      </div>
+                      
+                      <!-- Features -->
+                      <div class="flex flex-wrap gap-2 mb-4">
+                        {apartment.features.slice(0, 4).map(feature => (
+                          <span class="bg-primary-50 text-primary-700 px-2 py-1 rounded text-xs font-medium">
+                            {feature}
+                          </span>
+                        ))}
+                        {apartment.features.length > 4 && (
+                          <span class="text-xs text-gray-500 px-2 py-1">
+                            +{apartment.features.length - 4} more
+                          </span>
+                        )}
+                      </div>
+                      
+                      <!-- CTA -->
+                      <div class="flex flex-col sm:flex-row gap-3">
+                        <button
+                          class="book-now-btn flex-1 bg-primary-600 hover:bg-primary-700 text-white text-center py-2 px-4 rounded-lg font-medium transition-colors duration-200"
+                          data-apartment={JSON.stringify(apartment)}
+                        >
+                          Book Now
+                        </button>
+                        <button class="view-details-btn px-4 py-2 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors duration-200" data-apartment={JSON.stringify(apartment)}>
+                          View Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Sidebar with Calendar -->
+          <div class="xl:col-span-1">
+            <div class="sticky top-24 space-y-6">
+              <Calendar />
+              
+              <!-- Quick Booking Form -->
+              <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Booking</h3>
+                <form class="space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Guests</label>
+                    <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                      <option>1 Guest</option>
+                      <option>2 Guests</option>
+                      <option>3 Guests</option>
+                      <option>4 Guests</option>
+                      <option>5+ Guests</option>
+                    </select>
+                  </div>
+                  <button type="button" onclick="document.querySelector('.book-now-btn')?.click()" class="w-full bg-accent-500 hover:bg-accent-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                    Check Availability
+                  </button>
+                </form>
+              </div>
+              
+              <!-- Contact Info -->
+              <div class="bg-primary-50 rounded-lg p-4 sm:p-6">
+                <h3 class="text-lg font-semibold text-gray-900 mb-3">Need Help?</h3>
+                <p class="text-gray-600 mb-4 text-sm">Our team is here to help you find the perfect apartment for your stay.</p>
+                <div class="space-y-2 text-sm">
+                  <div class="flex items-center text-gray-700">
+                    <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                    </svg>
+                    <a href="tel:+15551234567" class="hover:text-primary-600">+1 (555) 123-4567</a>
+                  </div>
+                  <div class="flex items-center text-gray-700">
+                    <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <a href="mailto:info@apartments-delfin.net" class="hover:text-primary-600 break-all">info@apartments-delfin.net</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+  <BookingModal />
+</Layout>
+
+<script>
+  // Image gallery functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const galleries = document.querySelectorAll('.apartment-gallery');
+    
+    galleries.forEach(gallery => {
+      const images = gallery.querySelectorAll('img');
+      let currentIndex = 0;
+      
+      if (images.length > 1) {
+        setInterval(() => {
+          images[currentIndex].classList.remove('opacity-100');
+          images[currentIndex].classList.add('opacity-0');
+          
+          currentIndex = (currentIndex + 1) % images.length;
+          
+          images[currentIndex].classList.remove('opacity-0');
+          images[currentIndex].classList.add('opacity-100');
+        }, 3000);
+      }
+    });
+
+    // Book Now button functionality
+    const bookNowButtons = document.querySelectorAll('.book-now-btn');
+    bookNowButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
+        window.bookingModal?.open(apartmentData);
+      });
+    });
+
+    // View Details button functionality
+    const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+    viewDetailsButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
+        showApartmentDetails(apartmentData);
+      });
+    });
+
+    // Filter functionality
+    const apartmentFilter = document.getElementById('apartmentFilter');
+    const priceFilter = document.getElementById('priceFilter');
+    const guestFilter = document.getElementById('guestFilter');
+
+    function filterApartments() {
+      const apartmentCards = document.querySelectorAll('.apartment-card');
+      let visibleCount = 0;
+
+      apartmentCards.forEach(card => {
+        const apartmentData = JSON.parse(card.getAttribute('data-apartment'));
+        let shouldShow = true;
+
+        // Apartment type filter
+        if (apartmentFilter.value) {
+          const beds = apartmentData.beds;
+          if (apartmentFilter.value === 'studio' && beds !== 1) shouldShow = false;
+          if (apartmentFilter.value === '1-bedroom' && beds !== 1) shouldShow = false;
+          if (apartmentFilter.value === '2-bedroom' && beds < 2) shouldShow = false;
+        }
+
+        // Price filter
+        if (priceFilter.value) {
+          const price = parseInt(apartmentData.price.replace('$', ''));
+          if (priceFilter.value === 'under-200' && price >= 200) shouldShow = false;
+          if (priceFilter.value === '200-300' && (price < 200 || price > 300)) shouldShow = false;
+          if (priceFilter.value === '300-plus' && price < 300) shouldShow = false;
+        }
+
+        // Guest filter
+        if (guestFilter.value) {
+          const guests = apartmentData.guests;
+          if (guestFilter.value === '1-2' && guests > 2) shouldShow = false;
+          if (guestFilter.value === '3-4' && (guests < 3 || guests > 4)) shouldShow = false;
+          if (guestFilter.value === '5-plus' && guests < 5) shouldShow = false;
+        }
+
+        if (shouldShow) {
+          card.style.display = 'block';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('resultsCount').textContent = `Showing ${visibleCount} apartments`;
+    }
+
+    apartmentFilter?.addEventListener('change', filterApartments);
+    priceFilter?.addEventListener('change', filterApartments);
+    guestFilter?.addEventListener('change', filterApartments);
+  });
+
+  function showApartmentDetails(apartment) {
+    // Create a detailed view modal
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+    modal.innerHTML = `
+      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl mx-auto max-h-[90vh] overflow-y-auto">
+        <div class="p-6 sm:p-8">
+          <div class="flex items-center justify-between mb-6">
+            <h2 class="text-2xl font-bold text-gray-900">${apartment.name}</h2>
+            <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-gray-600 transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
+              <img src="${apartment.images[0]}" alt="${apartment.name}" class="w-full h-64 object-cover rounded-lg mb-4">
+              <div class="grid grid-cols-3 gap-2">
+                ${apartment.images.slice(1, 4).map(img => `<img src="${img}" alt="${apartment.name}" class="w-full h-20 object-cover rounded">`).join('')}
+              </div>
+            </div>
+            
+            <div>
+              <div class="mb-6">
+                <div class="text-3xl font-bold text-primary-600 mb-2">${apartment.price}/night</div>
+                <div class="flex items-center space-x-4 text-sm text-gray-600 mb-4">
+                  <span>${apartment.guests} Guests</span>
+                  <span>${apartment.beds} Bed${apartment.beds > 1 ? 's' : ''}</span>
+                  <span>${apartment.baths} Bath${apartment.baths > 1 ? 's' : ''}</span>
+                  <span>${apartment.size}</span>
+                </div>
+              </div>
+              
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-3">Description</h3>
+                <p class="text-gray-600 leading-relaxed">${apartment.description}</p>
+              </div>
+              
+              <div class="mb-6">
+                <h3 class="text-lg font-semibold mb-3">Amenities</h3>
+                <div class="grid grid-cols-2 gap-2">
+                  ${apartment.amenities.map(amenity => `<div class="flex items-center text-sm text-gray-600"><svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>${amenity}</div>`).join('')}
+                </div>
+              </div>
+              
+              <button onclick="window.bookingModal?.open(${JSON.stringify(apartment).replace(/"/g, '&quot;')}); this.closest('.fixed').remove();" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                Book This Apartment
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.remove();
+        document.body.style.overflow = '';
+      }
+    });
+  }
+</script>

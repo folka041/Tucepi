@@ -1,0 +1,60 @@
+---
+const features = [
+  {
+    icon: "🏖️",
+    title: "Beachfront Location",
+    description: "Just steps away from pristine sandy beaches and crystal-clear waters."
+  },
+  {
+    icon: "🌊",
+    title: "Ocean Views",
+    description: "Wake up to breathtaking panoramic views of the ocean from your private balcony."
+  },
+  {
+    icon: "🏊",
+    title: "Swimming Pool",
+    description: "Relax in our infinity pool overlooking the ocean with poolside service."
+  },
+  {
+    icon: "🍽️",
+    title: "Full Kitchen",
+    description: "Modern, fully equipped kitchens with premium appliances and dining areas."
+  },
+  {
+    icon: "📶",
+    title: "Free WiFi",
+    description: "Stay connected with complimentary high-speed wireless internet throughout."
+  },
+  {
+    icon: "🅿️",
+    title: "Free Parking",
+    description: "Secure, covered parking included with every apartment reservation."
+  }
+];
+---
+
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 animate-slide-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        Why Choose Apartments Delfin?
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Discover the perfect combination of luxury, comfort, and convenience that makes our apartments the ideal choice for your vacation.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {features.map((feature, index) => (
+        <div 
+          class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-scale-in"
+          style={`animation-delay: ${index * 0.1}s`}
+        >
+          <div class="text-4xl mb-4 text-center">{feature.icon}</div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-3 text-center">{feature.title}</h3>
+          <p class="text-gray-600 text-center leading-relaxed">{feature.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

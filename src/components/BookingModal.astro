@@ -1,0 +1,408 @@
+---
+---
+
+<div id="bookingModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-auto max-h-[90vh] overflow-y-auto">
+    <div class="p-6 sm:p-8">
+      <!-- Header -->
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-900">Book Your Stay</h2>
+        <button id="closeBookingModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Apartment Info -->
+      <div id="apartmentInfo" class="mb-6 p-4 bg-gray-50 rounded-lg">
+        <div class="flex items-center space-x-4">
+          <img id="apartmentImage" src="" alt="" class="w-16 h-16 object-cover rounded-lg">
+          <div>
+            <h3 id="apartmentName" class="font-semibold text-gray-900"></h3>
+            <p id="apartmentPrice" class="text-primary-600 font-medium"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <form id="bookingForm" class="space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="checkIn" class="block text-sm font-medium text-gray-700 mb-2">Check-in Date</label>
+            <input
+              type="date"
+              id="checkIn"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+            />
+          </div>
+          <div>
+            <label for="checkOut" class="block text-sm font-medium text-gray-700 mb-2">Check-out Date</label>
+            <input
+              type="date"
+              id="checkOut"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="guests" class="block text-sm font-medium text-gray-700 mb-2">Number of Guests</label>
+          <select
+            id="guests"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+          >
+            <option value="">Select number of guests</option>
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5 Guests</option>
+            <option value="6">6 Guests</option>
+            <option value="7">7 Guests</option>
+            <option value="8">8 Guests</option>
+          </select>
+        </div>
+
+        <!-- Guest Information -->
+        <div class="space-y-4">
+          <h4 class="text-lg font-semibold text-gray-900">Guest Information</h4>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+              <input
+                type="text"
+                id="firstName"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="John"
+              />
+            </div>
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+              <input
+                type="text"
+                id="lastName"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="Doe"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+            <input
+              type="email"
+              id="email"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+              placeholder="john@example.com"
+            />
+          </div>
+
+          <div>
+            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+            <input
+              type="tel"
+              id="phone"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+              placeholder="+1 (555) 123-4567"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="specialRequests" class="block text-sm font-medium text-gray-700 mb-2">Special Requests (Optional)</label>
+          <textarea
+            id="specialRequests"
+            rows="3"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-vertical"
+            placeholder="Any special requests or requirements..."
+          ></textarea>
+        </div>
+
+        <!-- Booking Summary -->
+        <div class="bg-primary-50 rounded-lg p-4">
+          <h4 class="font-semibold text-gray-900 mb-3">Booking Summary</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between">
+              <span class="text-gray-600">Nights:</span>
+              <span id="totalNights" class="font-medium">0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Rate per night:</span>
+              <span id="ratePerNight" class="font-medium">$0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Subtotal:</span>
+              <span id="subtotal" class="font-medium">$0</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Taxes & Fees:</span>
+              <span id="taxes" class="font-medium">$0</span>
+            </div>
+            <hr class="my-2">
+            <div class="flex justify-between text-lg font-semibold">
+              <span>Total:</span>
+              <span id="totalPrice" class="text-primary-600">$0</span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-primary-600 hover:bg-primary-700 text-white py-4 px-6 rounded-lg font-semibold transition-colors duration-200 transform hover:scale-105"
+        >
+          Confirm Booking
+        </button>
+      </form>
+
+      <!-- Loading State -->
+      <div id="bookingLoading" class="hidden text-center py-8">
+        <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+        <p class="mt-4 text-gray-600">Processing your booking...</p>
+      </div>
+
+      <!-- Success Message -->
+      <div id="bookingSuccess" class="hidden text-center py-8">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-semibold text-gray-900 mb-2">Booking Confirmed!</h3>
+        <p class="text-gray-600 mb-4">Thank you for your reservation. We'll contact you shortly with confirmation details.</p>
+        <button
+          onclick="window.bookingModal?.close()"
+          class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg font-medium transition-colors"
+        >
+          Close
+        </button>
+      </div>
+
+      <!-- Error Message -->
+      <div id="bookingError" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+        <p class="text-red-700 text-sm"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  class BookingModal {
+    constructor() {
+      this.modal = document.getElementById('bookingModal');
+      this.form = document.getElementById('bookingForm');
+      this.closeButton = document.getElementById('closeBookingModal');
+      this.loading = document.getElementById('bookingLoading');
+      this.success = document.getElementById('bookingSuccess');
+      this.error = document.getElementById('bookingError');
+      this.currentApartment = null;
+
+      this.init();
+    }
+
+    init() {
+      this.closeButton?.addEventListener('click', () => this.close());
+      this.form?.addEventListener('submit', (e) => this.handleBooking(e));
+      
+      // Date change listeners for price calculation
+      document.getElementById('checkIn')?.addEventListener('change', () => this.calculatePrice());
+      document.getElementById('checkOut')?.addEventListener('change', () => this.calculatePrice());
+      
+      // Close on backdrop click
+      this.modal?.addEventListener('click', (e) => {
+        if (e.target === this.modal) this.close();
+      });
+
+      // Set minimum date to today
+      const today = new Date().toISOString().split('T')[0];
+      const checkInInput = document.getElementById('checkIn');
+      const checkOutInput = document.getElementById('checkOut');
+      
+      if (checkInInput) checkInInput.min = today;
+      if (checkOutInput) checkOutInput.min = today;
+
+      // Update checkout min date when checkin changes
+      checkInInput?.addEventListener('change', (e) => {
+        if (checkOutInput) {
+          checkOutInput.min = e.target.value;
+          if (checkOutInput.value && checkOutInput.value <= e.target.value) {
+            checkOutInput.value = '';
+          }
+        }
+      });
+    }
+
+    open(apartment) {
+      this.currentApartment = apartment;
+      this.populateApartmentInfo(apartment);
+      this.modal?.classList.remove('hidden');
+      this.modal?.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      
+      // Reset form state
+      this.showForm();
+      this.hideError();
+    }
+
+    close() {
+      this.modal?.classList.add('hidden');
+      this.modal?.classList.remove('flex');
+      document.body.style.overflow = '';
+      this.hideError();
+      this.form?.reset();
+      this.resetPriceCalculation();
+    }
+
+    populateApartmentInfo(apartment) {
+      document.getElementById('apartmentImage').src = apartment.images[0];
+      document.getElementById('apartmentImage').alt = apartment.name;
+      document.getElementById('apartmentName').textContent = apartment.name;
+      document.getElementById('apartmentPrice').textContent = `${apartment.price}/night`;
+      document.getElementById('ratePerNight').textContent = apartment.price;
+    }
+
+    calculatePrice() {
+      const checkIn = document.getElementById('checkIn').value;
+      const checkOut = document.getElementById('checkOut').value;
+      
+      if (checkIn && checkOut && this.currentApartment) {
+        const startDate = new Date(checkIn);
+        const endDate = new Date(checkOut);
+        const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+        
+        if (nights > 0) {
+          const pricePerNight = parseInt(this.currentApartment.price.replace('$', ''));
+          const subtotal = nights * pricePerNight;
+          const taxes = Math.round(subtotal * 0.12); // 12% taxes
+          const total = subtotal + taxes;
+          
+          document.getElementById('totalNights').textContent = nights;
+          document.getElementById('subtotal').textContent = `$${subtotal}`;
+          document.getElementById('taxes').textContent = `$${taxes}`;
+          document.getElementById('totalPrice').textContent = `$${total}`;
+        } else {
+          this.resetPriceCalculation();
+        }
+      } else {
+        this.resetPriceCalculation();
+      }
+    }
+
+    resetPriceCalculation() {
+      document.getElementById('totalNights').textContent = '0';
+      document.getElementById('subtotal').textContent = '$0';
+      document.getElementById('taxes').textContent = '$0';
+      document.getElementById('totalPrice').textContent = '$0';
+    }
+
+    showForm() {
+      this.form?.classList.remove('hidden');
+      this.loading?.classList.add('hidden');
+      this.success?.classList.add('hidden');
+    }
+
+    showLoading() {
+      this.loading?.classList.remove('hidden');
+      this.form?.classList.add('hidden');
+      this.success?.classList.add('hidden');
+    }
+
+    showSuccess() {
+      this.success?.classList.remove('hidden');
+      this.form?.classList.add('hidden');
+      this.loading?.classList.add('hidden');
+    }
+
+    showError(message) {
+      const errorElement = this.error?.querySelector('p');
+      if (errorElement) {
+        errorElement.textContent = message;
+        this.error?.classList.remove('hidden');
+      }
+    }
+
+    hideError() {
+      this.error?.classList.add('hidden');
+    }
+
+    async handleBooking(e) {
+      e.preventDefault();
+      
+      this.showLoading();
+      this.hideError();
+
+      // Get form data
+      const checkIn = document.getElementById('checkIn').value;
+      const checkOut = document.getElementById('checkOut').value;
+      const guests = parseInt(document.getElementById('guests').value);
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const specialRequests = document.getElementById('specialRequests').value;
+      
+      // Validate dates
+      const startDate = new Date(checkIn);
+      const endDate = new Date(checkOut);
+      const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+      
+      if (nights <= 0) {
+        this.showError('Please select valid check-in and check-out dates.');
+        this.showForm();
+        return;
+      }
+
+      // Calculate total price
+      const pricePerNight = parseInt(this.currentApartment.price.replace('$', ''));
+      const subtotal = nights * pricePerNight;
+      const taxes = Math.round(subtotal * 0.12);
+      const totalPrice = subtotal + taxes;
+
+      try {
+        // Simulate booking process
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Store booking data in localStorage for demo purposes
+        const bookingData = {
+          id: Date.now().toString(),
+          apartment: this.currentApartment,
+          checkIn,
+          checkOut,
+          guests,
+          guestInfo: {
+            firstName,
+            lastName,
+            email,
+            phone
+          },
+          specialRequests,
+          totalPrice,
+          status: 'confirmed',
+          createdAt: new Date().toISOString()
+        };
+
+        // Get existing bookings or create new array
+        const existingBookings = JSON.parse(localStorage.getItem('apartmentBookings') || '[]');
+        existingBookings.push(bookingData);
+        localStorage.setItem('apartmentBookings', JSON.stringify(existingBookings));
+
+        this.showSuccess();
+      } catch (error) {
+        this.showError('There was an error processing your booking. Please try again.');
+        this.showForm();
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.bookingModal = new BookingModal();
+  });
+</script>

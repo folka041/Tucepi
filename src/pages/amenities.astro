@@ -1,0 +1,261 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const amenityCategories = [
+  {
+    title: "Accommodation Features",
+    icon: "🏠",
+    amenities: [
+      { name: "Ocean View", description: "Breathtaking panoramic views of the ocean from every apartment", icon: "🌊" },
+      { name: "Private Balcony", description: "Spacious balconies with outdoor seating and ocean views", icon: "🏖️" },
+      { name: "Full Kitchen", description: "Modern, fully equipped kitchens with premium appliances", icon: "🍽️" },
+      { name: "Air Conditioning", description: "Individual climate control in every room", icon: "❄️" },
+      { name: "Free WiFi", description: "High-speed wireless internet throughout the property", icon: "📶" },
+      { name: "Smart TV", description: "Large screen smart TVs with streaming services", icon: "📺" }
+    ]
+  },
+  {
+    title: "Recreation & Wellness",
+    icon: "🏊",
+    amenities: [
+      { name: "Infinity Pool", description: "Stunning infinity pool overlooking the ocean", icon: "🏊‍♀️" },
+      { name: "Fitness Center", description: "24/7 access to modern fitness equipment", icon: "💪" },
+      { name: "Spa Services", description: "On-site spa treatments and massage services", icon: "💆‍♀️" },
+      { name: "Beach Access", description: "Direct access to pristine private beach", icon: "🏖️" },
+      { name: "Water Sports", description: "Complimentary kayaks, paddleboards, and snorkeling gear", icon: "🏄‍♂️" },
+      { name: "Yoga Deck", description: "Oceanfront yoga and meditation space", icon: "🧘‍♀️" }
+    ]
+  },
+  {
+    title: "Dining & Entertainment",
+    icon: "🍷",
+    amenities: [
+      { name: "Rooftop Restaurant", description: "Fine dining with panoramic ocean views", icon: "🍽️" },
+      { name: "Pool Bar", description: "Tropical cocktails and light meals by the pool", icon: "🍹" },
+      { name: "BBQ Area", description: "Outdoor grilling stations with ocean views", icon: "🔥" },
+      { name: "Wine Cellar", description: "Curated selection of local and international wines", icon: "🍷" },
+      { name: "Live Entertainment", description: "Regular live music and cultural performances", icon: "🎵" },
+      { name: "Game Room", description: "Billiards, table tennis, and board games", icon: "🎮" }
+    ]
+  },
+  {
+    title: "Services & Convenience",
+    icon: "🛎️",
+    amenities: [
+      { name: "24/7 Concierge", description: "Personalized assistance and local recommendations", icon: "🛎️" },
+      { name: "Housekeeping", description: "Daily housekeeping service available", icon: "🧹" },
+      { name: "Laundry Service", description: "On-site laundry facilities and service", icon: "👕" },
+      { name: "Free Parking", description: "Secure covered parking for all guests", icon: "🅿️" },
+      { name: "Airport Transfer", description: "Complimentary shuttle service to/from airport", icon: "✈️" },
+      { name: "Luggage Storage", description: "Secure storage for early arrivals and late departures", icon: "🧳" }
+    ]
+  },
+  {
+    title: "Family & Business",
+    icon: "👨‍👩‍👧‍👦",
+    amenities: [
+      { name: "Kids Club", description: "Supervised activities and entertainment for children", icon: "🎈" },
+      { name: "Playground", description: "Safe outdoor play area for children", icon: "🛝" },
+      { name: "Business Center", description: "Computers, printers, and meeting facilities", icon: "💼" },
+      { name: "Conference Room", description: "Professional meeting space with ocean views", icon: "📊" },
+      { name: "Babysitting", description: "Professional childcare services available", icon: "👶" },
+      { name: "Pet Friendly", description: "Welcome pets with special amenities", icon: "🐕" }
+    ]
+  }
+];
+
+const premiumServices = [
+  {
+    title: "Personal Chef Service",
+    description: "Enjoy gourmet meals prepared by our professional chefs in your apartment",
+    image: "https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    price: "From $150/meal"
+  },
+  {
+    title: "Private Yacht Charter",
+    description: "Explore the coastline with our luxury yacht charter service",
+    image: "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    price: "From $800/day"
+  },
+  {
+    title: "Helicopter Tours",
+    description: "See the stunning coastline from above with our helicopter tour service",
+    image: "https://images.pexels.com/photos/1098365/pexels-photo-1098365.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop",
+    price: "From $300/person"
+  }
+];
+---
+
+<Layout 
+  title="Amenities & Services - Apartments Delfin" 
+  description="Discover our world-class amenities and premium services. From infinity pools and spa treatments to concierge services and fine dining, experience luxury at its finest."
+  keywords="luxury amenities, hotel services, spa, pool, concierge, fine dining, Delfin apartments"
+>
+  <Header />
+  
+  <main class="pt-16">
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-r from-primary-600 to-primary-800 text-white py-20">
+      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl sm:text-5xl font-bold mb-6">World-Class Amenities</h1>
+          <p class="text-xl text-primary-100 max-w-3xl mx-auto">
+            Experience luxury living with our comprehensive collection of premium amenities and personalized services designed to make your stay unforgettable.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Amenities Categories -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {amenityCategories.map((category, categoryIndex) => (
+          <div class="mb-16 last:mb-0">
+            <div class="text-center mb-12">
+              <div class="text-6xl mb-4">{category.icon}</div>
+              <h2 class="text-3xl font-bold text-gray-900 mb-4">{category.title}</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {category.amenities.map((amenity, index) => (
+                <div 
+                  class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-scale-in"
+                  style={`animation-delay: ${(categoryIndex * 0.1) + (index * 0.1)}s`}
+                >
+                  <div class="text-4xl mb-4 text-center">{amenity.icon}</div>
+                  <h3 class="text-xl font-semibold text-gray-900 mb-3 text-center">{amenity.name}</h3>
+                  <p class="text-gray-600 text-center leading-relaxed">{amenity.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Premium Services -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Premium Services</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Elevate your experience with our exclusive premium services, designed for guests seeking the ultimate in luxury and convenience.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {premiumServices.map((service, index) => (
+            <div 
+              class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 animate-scale-in"
+              style={`animation-delay: ${index * 0.2}s`}
+            >
+              <div class="relative h-48 overflow-hidden">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                  loading="lazy"
+                />
+                <div class="absolute top-4 right-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  {service.price}
+                </div>
+              </div>
+              
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">{service.description}</p>
+                <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                  Learn More
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Amenities Gallery -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Experience Our Facilities</h2>
+          <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+            Take a visual tour of our stunning amenities and facilities that make Apartments Delfin the perfect choice for your vacation.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="lg:col-span-2 lg:row-span-2">
+            <img
+              src="https://images.pexels.com/photos/261102/pexels-photo-261102.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+              alt="Infinity Pool"
+              class="w-full h-full object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <img
+              src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+              alt="Ocean View"
+              class="w-full h-48 object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <img
+              src="https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+              alt="Luxury Interior"
+              class="w-full h-48 object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <img
+              src="https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+              alt="Dining Area"
+              class="w-full h-48 object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+          <div>
+            <img
+              src="https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&fit=crop"
+              alt="Bedroom"
+              class="w-full h-48 object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-primary-600 text-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold mb-6">Ready to Experience Luxury?</h2>
+        <p class="text-xl text-primary-100 mb-8 max-w-3xl mx-auto">
+          Book your stay today and enjoy access to all our world-class amenities and premium services.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/apartments"
+            class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          >
+            View Apartments
+          </a>
+          <a
+            href="/contact"
+            class="bg-accent-500 hover:bg-accent-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

@@ -1,0 +1,118 @@
+---
+const apartments = [
+  {
+    id: 1,
+    name: "Ocean View Studio",
+    image: "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    price: "$150",
+    guests: 2,
+    beds: 1,
+    baths: 1,
+    size: "450 sq ft",
+    features: ["Ocean View", "Balcony", "Kitchen", "WiFi"]
+  },
+  {
+    id: 2,
+    name: "Deluxe One Bedroom",
+    image: "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    price: "$220",
+    guests: 4,
+    beds: 1,
+    baths: 1,
+    size: "650 sq ft",
+    features: ["Ocean View", "Living Room", "Full Kitchen", "Balcony"]
+  },
+  {
+    id: 3,
+    name: "Premium Two Bedroom",
+    image: "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+    price: "$320",
+    guests: 6,
+    beds: 2,
+    baths: 2,
+    size: "950 sq ft",
+    features: ["Panoramic Ocean View", "Two Balconies", "Dining Area", "Premium Amenities"]
+  }
+];
+---
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 animate-slide-up">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+        Our Apartment Collection
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Choose from our carefully curated selection of luxury apartments, each designed to provide the ultimate comfort and stunning ocean views.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {apartments.map((apartment, index) => (
+        <div 
+          class="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 animate-scale-in"
+          style={`animation-delay: ${index * 0.2}s`}
+        >
+          <!-- Image -->
+          <div class="relative overflow-hidden">
+            <img
+              src={apartment.image}
+              alt={apartment.name}
+              class="w-full h-64 object-cover transition-transform duration-300 hover:scale-110"
+              loading="lazy"
+            />
+            <div class="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+              {apartment.price}/night
+            </div>
+          </div>
+          
+          <!-- Content -->
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">{apartment.name}</h3>
+            
+            <!-- Details -->
+            <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+              <span class="flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                {apartment.guests} Guests
+              </span>
+              <span class="flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                </svg>
+                {apartment.beds} Bed
+              </span>
+              <span class="flex items-center">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M5 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1H5zM13 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1h-2z"></path>
+                </svg>
+                {apartment.baths} Bath
+              </span>
+            </div>
+            
+            <div class="text-sm text-gray-600 mb-4">{apartment.size}</div>
+            
+            <!-- Features -->
+            <div class="flex flex-wrap gap-2 mb-4">
+              {apartment.features.map(feature => (
+                <span class="bg-primary-50 text-primary-700 px-2 py-1 rounded text-xs font-medium">
+                  {feature}
+                </span>
+              ))}
+            </div>
+            
+            <!-- CTA -->
+            <a
+              href={`/apartments/${apartment.id}`}
+              class="block w-full bg-primary-600 hover:bg-primary-700 text-white text-center py-3 rounded-lg font-semibold transition-colors duration-200"
+            >
+              View Details & Book
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
