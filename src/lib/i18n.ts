@@ -100,9 +100,13 @@ export interface Translation {
   contactUs: string;
   contactUsSubtitle: string;
   phone: string;
+  phoneDesc: string;
   email: string;
+  emailDesc: string;
   address: string;
+  addressDesc: string;
   hours: string;
+  hoursDesc: string;
   sendMessage: string;
   sendMessageSubtitle: string;
   subject: string;
@@ -155,6 +159,18 @@ export interface Translation {
   experiencePerfectLocation: string;
   experiencePerfectLocationSubtitle: string;
   getDirections: string;
+  findUsHere: string;
+  visitLocation: string;
+  visitLocationDesc: string;
+  emergencyContact: string;
+  emergencyContactDesc: string;
+  responseTimes: string;
+  emailInquiries: string;
+  within2Hours: string;
+  phoneCalls: string;
+  immediate: string;
+  reservationRequests: string;
+  within1Hour: string;
   
   // Dashboard
   myBookings: string;
@@ -176,6 +192,27 @@ export interface Translation {
   paid: string;
   viewDetails: string;
   cancel: string;
+  
+  // FAQ
+  faqTitle: string;
+  faqSubtitle: string;
+  faqCancellationQ: string;
+  faqCancellationA: string;
+  faqPetsQ: string;
+  faqPetsA: string;
+  faqParkingQ: string;
+  faqParkingA: string;
+  faqAmenitiesQ: string;
+  faqAmenitiesA: string;
+  faqBeachQ: string;
+  faqBeachA: string;
+  faqTransferQ: string;
+  faqTransferA: string;
+  
+  // CTA Sections
+  readyToBook: string;
+  readyToBookSubtitle: string;
+  callNow: string;
   
   // Common
   learnMore: string;
@@ -298,9 +335,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Kontaktirajte nas",
     contactUsSubtitle: "Tu smo da pomognemo učiniti vaš boravak savršenim. Kontaktirajte nas bilo kada za rezervacije, pitanja ili pomoć.",
     phone: "Telefon",
+    phoneDesc: "Dostupni 24/7 za rezervacije i pomoć",
     email: "Email",
+    emailDesc: "Odgovaramo na sve emailove u roku od 2 sata",
     address: "Adresa",
+    addressDesc: "Vrhunska lokacija na plaži s lakim pristupom",
     hours: "Radno vrijeme",
+    hoursDesc: "Naš tim je tu da vam pomogne bilo kada",
     sendMessage: "Pošaljite nam poruku",
     sendMessageSubtitle: "Ispunite formu ispod i javit ćemo vam se što prije.",
     subject: "Predmet",
@@ -353,6 +394,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Doživite našu savršenu lokaciju",
     experiencePerfectLocationSubtitle: "Rezervirajte boravak u Apartments Delfin i otkrijte zašto je naša lokacija na plaži savršena baza za vaš obalni odmor.",
     getDirections: "Dobijte upute",
+    findUsHere: "Pronađite nas ovdje",
+    visitLocation: "Posjetite našu lokaciju",
+    visitLocationDesc: "Smješteni direktno na plaži s prekrasnim pogledom na ocean i lakim pristupom lokalnim atrakcijama.",
+    emergencyContact: "Hitni kontakt",
+    emergencyContactDesc: "Za hitne slučajeve izvan radnog vremena, molimo koristite našu 24/7 hitnu liniju.",
+    responseTimes: "Vrijeme odgovora",
+    emailInquiries: "Email upiti",
+    within2Hours: "U roku od 2 sata",
+    phoneCalls: "Telefonski pozivi",
+    immediate: "Odmah",
+    reservationRequests: "Zahtjevi za rezervaciju",
+    within1Hour: "U roku od 1 sata",
     
     // Dashboard
     myBookings: "Moje rezervacije",
@@ -374,6 +427,27 @@ const translations: Record<string, Translation> = {
     paid: "Plaćeno",
     viewDetails: "Pogledaj detalje",
     cancel: "Otkaži",
+    
+    // FAQ
+    faqTitle: "Često postavljana pitanja",
+    faqSubtitle: "Pronađite brze odgovore na česta pitanja o našim apartmanima i uslugama.",
+    faqCancellationQ: "Kakva je vaša politika otkazivanja?",
+    faqCancellationA: "Nudimo fleksibilno otkazivanje do 48 sati prije dolaska za puni povrat. Otkazivanja u roku od 48 sati podliježu naplati jedne noći.",
+    faqPetsQ: "Dozvoljavate li kućne ljubimce?",
+    faqPetsA: "Da, prihvaćamo kućne ljubimce! Dobrodošli su dobro odgojeni kućni ljubimci uz malu dodatnu naknadu. Molimo obavijestite nas tijekom rezervacije o vašim krznenim prijateljima.",
+    faqParkingQ: "Je li parkiranje dostupno?",
+    faqParkingA: "Da, pružamo besplatno natkriveno parkiranje za sve goste. Rezervacija nije potrebna - parkiranje je uključeno u vaš boravak.",
+    faqAmenitiesQ: "Koji sadržaji su uključeni?",
+    faqAmenitiesA: "Svi apartmani uključuju besplatni WiFi, potpuno opremljenu kuhinju, pogled na ocean, pristup balkonu i korištenje našeg bazena, fitness centra i concierge usluga.",
+    faqBeachQ: "Koliko je daleko plaža?",
+    faqBeachA: "Naši apartmani su samo 2 minute hoda od netaknute pješčane plaže. Možete vidjeti ocean s vašeg balkona!",
+    faqTransferQ: "Nudite li transfer od zračne luke?",
+    faqTransferA: "Da, pružamo besplatnu shuttle uslugu od zračne luke. Molimo organizirajte ovo najmanje 24 sata unaprijed preko našeg concierge-a.",
+    
+    // CTA Sections
+    readyToBook: "Spremni za rezervaciju?",
+    readyToBookSubtitle: "Ne čekajte - osigurajte svoj savršeni apartman na plaži danas i počnite planirati svoj san odmor.",
+    callNow: "Pozovite sada",
     
     // Common
     learnMore: "Saznaj više",
@@ -495,9 +569,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Contact Us",
     contactUsSubtitle: "We're here to help make your stay perfect. Reach out to us anytime for reservations, questions, or assistance.",
     phone: "Phone",
+    phoneDesc: "Available 24/7 for reservations and assistance",
     email: "Email",
+    emailDesc: "We respond to all emails within 2 hours",
     address: "Address",
+    addressDesc: "Prime beachfront location with easy access",
     hours: "Hours",
+    hoursDesc: "Our team is here to assist you anytime",
     sendMessage: "Send us a Message",
     sendMessageSubtitle: "Fill out the form below and we'll get back to you as soon as possible.",
     subject: "Subject",
@@ -550,6 +628,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Experience Our Perfect Location",
     experiencePerfectLocationSubtitle: "Book your stay at Apartments Delfin and discover why our beachfront location is the perfect base for your coastal vacation.",
     getDirections: "Get Directions",
+    findUsHere: "Find Us Here",
+    visitLocation: "Visit Our Location",
+    visitLocationDesc: "Located directly on the beachfront with stunning ocean views and easy access to local attractions.",
+    emergencyContact: "Emergency Contact",
+    emergencyContactDesc: "For urgent matters outside business hours, please use our 24/7 emergency line.",
+    responseTimes: "Response Times",
+    emailInquiries: "Email inquiries",
+    within2Hours: "Within 2 hours",
+    phoneCalls: "Phone calls",
+    immediate: "Immediate",
+    reservationRequests: "Reservation requests",
+    within1Hour: "Within 1 hour",
     
     // Dashboard
     myBookings: "My Bookings",
@@ -571,6 +661,27 @@ const translations: Record<string, Translation> = {
     paid: "Paid",
     viewDetails: "View Details",
     cancel: "Cancel",
+    
+    // FAQ
+    faqTitle: "Frequently Asked Questions",
+    faqSubtitle: "Find quick answers to common questions about our apartments and services.",
+    faqCancellationQ: "What is your cancellation policy?",
+    faqCancellationA: "We offer flexible cancellation up to 48 hours before check-in for a full refund. Cancellations within 48 hours are subject to a one-night charge.",
+    faqPetsQ: "Do you allow pets?",
+    faqPetsA: "Yes, we are pet-friendly! We welcome well-behaved pets with a small additional fee. Please inform us during booking about your furry companions.",
+    faqParkingQ: "Is parking available?",
+    faqParkingA: "Yes, we provide complimentary covered parking for all guests. No reservation required - parking is included with your stay.",
+    faqAmenitiesQ: "What amenities are included?",
+    faqAmenitiesA: "All apartments include free WiFi, full kitchen, ocean views, balcony access, and use of our pool, fitness center, and concierge services.",
+    faqBeachQ: "How far is the beach?",
+    faqBeachA: "Our apartments are just a 2-minute walk from the pristine sandy beach. You can see the ocean from your balcony!",
+    faqTransferQ: "Do you offer airport transfers?",
+    faqTransferA: "Yes, we provide complimentary airport shuttle service. Please arrange this at least 24 hours in advance through our concierge.",
+    
+    // CTA Sections
+    readyToBook: "Ready to Book Your Stay?",
+    readyToBookSubtitle: "Don't wait - secure your perfect oceanfront apartment today and start planning your dream vacation.",
+    callNow: "Call Now",
     
     // Common
     learnMore: "Learn More",
@@ -692,9 +803,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Kontaktujte nás",
     contactUsSubtitle: "Jsme tu, abychom pomohli učinit váš pobyt dokonalým. Kontaktujte nás kdykoli pro rezervace, dotazy nebo pomoc.",
     phone: "Telefon",
+    phoneDesc: "Dostupní 24/7 pro rezervace a pomoc",
     email: "E-mail",
+    emailDesc: "Odpovídáme na všechny e-maily do 2 hodin",
     address: "Adresa",
+    addressDesc: "Prvotřídní poloha na pláži se snadným přístupem",
     hours: "Otevírací doba",
+    hoursDesc: "Náš tým je tu, aby vám pomohl kdykoli",
     sendMessage: "Pošlete nám zprávu",
     sendMessageSubtitle: "Vyplňte formulář níže a my se vám ozveme co nejdříve.",
     subject: "Předmět",
@@ -747,6 +862,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Zažijte naši dokonalou polohu",
     experiencePerfectLocationSubtitle: "Rezervujte si pobyt v Apartments Delfin a objevte, proč je naše poloha na pláži dokonalou základnou pro vaši pobřežní dovolenou.",
     getDirections: "Získat směry",
+    findUsHere: "Najděte nás zde",
+    visitLocation: "Navštivte naši polohu",
+    visitLocationDesc: "Umístěni přímo na pláži s úžasným výhledem na oceán a snadným přístupem k místním atrakcím.",
+    emergencyContact: "Nouzový kontakt",
+    emergencyContactDesc: "Pro naléhavé záležitosti mimo pracovní dobu použijte naši 24/7 nouzovou linku.",
+    responseTimes: "Doba odezvy",
+    emailInquiries: "E-mailové dotazy",
+    within2Hours: "Do 2 hodin",
+    phoneCalls: "Telefonní hovory",
+    immediate: "Okamžitě",
+    reservationRequests: "Žádosti o rezervaci",
+    within1Hour: "Do 1 hodiny",
     
     // Dashboard
     myBookings: "Moje rezervace",
@@ -768,6 +895,27 @@ const translations: Record<string, Translation> = {
     paid: "Zaplaceno",
     viewDetails: "Zobrazit detaily",
     cancel: "Zrušit",
+    
+    // FAQ
+    faqTitle: "Často kladené otázky",
+    faqSubtitle: "Najděte rychlé odpovědi na běžné otázky o našich apartmánech a službách.",
+    faqCancellationQ: "Jaká je vaše storno politika?",
+    faqCancellationA: "Nabízíme flexibilní storno až 48 hodin před příjezdem s plnou refundací. Storno do 48 hodin podléhá poplatku za jednu noc.",
+    faqPetsQ: "Povolujete domácí zvířata?",
+    faqPetsA: "Ano, jsme přátelští k domácím zvířatům! Vítáme dobře vychovaná domácí zvířata za malý příplatek. Informujte nás prosím při rezervaci o vašich chlupatých společnících.",
+    faqParkingQ: "Je k dispozici parkování?",
+    faqParkingA: "Ano, poskytujeme bezplatné kryté parkování pro všechny hosty. Rezervace není nutná - parkování je zahrnuto ve vašem pobytu.",
+    faqAmenitiesQ: "Jaké vybavení je zahrnuto?",
+    faqAmenitiesA: "Všechny apartmány zahrnují bezplatné WiFi, plně vybavenou kuchyň, výhled na oceán, přístup na balkon a používání našeho bazénu, fitness centra a concierge služeb.",
+    faqBeachQ: "Jak daleko je pláž?",
+    faqBeachA: "Naše apartmány jsou jen 2 minuty chůze od nedotčené písečné pláže. Můžete vidět oceán ze svého balkonu!",
+    faqTransferQ: "Nabízíte transfer z letiště?",
+    faqTransferA: "Ano, poskytujeme bezplatnou shuttle službu z letiště. Zařiďte si to prosím alespoň 24 hodin předem prostřednictvím našeho concierge.",
+    
+    // CTA Sections
+    readyToBook: "Připraveni rezervovat pobyt?",
+    readyToBookSubtitle: "Nečekejte - zajistěte si svůj dokonalý apartmán na pláži ještě dnes a začněte plánovat svou vysněnou dovolenou.",
+    callNow: "Zavolejte nyní",
     
     // Common
     learnMore: "Dozvědět se více",
@@ -889,9 +1037,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Kontaktujte nás",
     contactUsSubtitle: "Sme tu, aby sme pomohli urobiť váš pobyt dokonalým. Kontaktujte nás kedykoľvek pre rezervácie, otázky alebo pomoc.",
     phone: "Telefón",
+    phoneDesc: "Dostupní 24/7 pre rezervácie a pomoc",
     email: "E-mail",
+    emailDesc: "Odpovedáme na všetky e-maily do 2 hodín",
     address: "Adresa",
+    addressDesc: "Prvotridná poloha na pláži s ľahkým prístupom",
     hours: "Otváracie hodiny",
+    hoursDesc: "Náš tím je tu, aby vám pomohol kedykoľvek",
     sendMessage: "Pošlite nám správu",
     sendMessageSubtitle: "Vyplňte formulár nižšie a my sa vám ozveme čo najskôr.",
     subject: "Predmet",
@@ -944,6 +1096,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Zažite našu dokonalú polohu",
     experiencePerfectLocationSubtitle: "Rezervujte si pobyt v Apartments Delfin a objavte, prečo je naša poloha na pláži dokonalou základňou pre vašu pobrežnú dovolenku.",
     getDirections: "Získať smery",
+    findUsHere: "Nájdite nás tu",
+    visitLocation: "Navštívte našu polohu",
+    visitLocationDesc: "Umiestnené priamo na pláži s úžasným výhľadom na oceán a ľahkým prístupom k miestnym atrakciám.",
+    emergencyContact: "Núdzový kontakt",
+    emergencyContactDesc: "Pre naliehavé záležitosti mimo pracovných hodín použite našu 24/7 núdzovú linku.",
+    responseTimes: "Časy odozvy",
+    emailInquiries: "E-mailové dotazy",
+    within2Hours: "Do 2 hodín",
+    phoneCalls: "Telefonické hovory",
+    immediate: "Okamžite",
+    reservationRequests: "Žiadosti o rezerváciu",
+    within1Hour: "Do 1 hodiny",
     
     // Dashboard
     myBookings: "Moje rezervácie",
@@ -965,6 +1129,27 @@ const translations: Record<string, Translation> = {
     paid: "Zaplatené",
     viewDetails: "Zobraziť detaily",
     cancel: "Zrušiť",
+    
+    // FAQ
+    faqTitle: "Často kladené otázky",
+    faqSubtitle: "Nájdite rýchle odpovede na bežné otázky o našich apartmánoch a službách.",
+    faqCancellationQ: "Aká je vaša storno politika?",
+    faqCancellationA: "Ponúkame flexibilné storno až 48 hodín pred príchodom s plnou refundáciou. Storno do 48 hodín podlieha poplatku za jednu noc.",
+    faqPetsQ: "Povolujete domáce zvieratá?",
+    faqPetsA: "Áno, sme priateľskí k domácim zvieratám! Vítame dobre vychované domáce zvieratá za malý príplatok. Informujte nás prosím pri rezervácii o vašich chlpatých spoločníkoch.",
+    faqParkingQ: "Je k dispozícii parkovanie?",
+    faqParkingA: "Áno, poskytujeme bezplatné kryté parkovanie pre všetkých hostí. Rezervácia nie je nutná - parkovanie je zahrnuté vo vašom pobyte.",
+    faqAmenitiesQ: "Aké vybavenie je zahrnuté?",
+    faqAmenitiesA: "Všetky apartmány zahŕňajú bezplatné WiFi, plne vybavené kuchyne, výhľad na oceán, prístup na balkón a používanie nášho bazénu, fitness centra a concierge služieb.",
+    faqBeachQ: "Ako ďaleko je pláž?",
+    faqBeachA: "Naše apartmány sú len 2 minúty chôdze od nedotknutej piesočnej pláže. Môžete vidieť oceán zo svojho balkóna!",
+    faqTransferQ: "Ponúkate transfer z letiska?",
+    faqTransferA: "Áno, poskytujeme bezplatnú shuttle službu z letiska. Zariďte si to prosím aspoň 24 hodín vopred prostredníctvom nášho concierge.",
+    
+    // CTA Sections
+    readyToBook: "Pripravení rezervovať pobyt?",
+    readyToBookSubtitle: "Nečakajte - zabezpečte si svoj dokonalý apartmán na pláži ešte dnes a začnite plánovať svoju vysnívanú dovolenku.",
+    callNow: "Zavolajte teraz",
     
     // Common
     learnMore: "Dozvedieť sa viac",
@@ -1086,9 +1271,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Skontaktuj się z nami",
     contactUsSubtitle: "Jesteśmy tutaj, aby pomóc uczynić twój pobyt idealnym. Skontaktuj się z nami w dowolnym momencie w sprawie rezerwacji, pytań lub pomocy.",
     phone: "Telefon",
+    phoneDesc: "Dostępni 24/7 dla rezerwacji i pomocy",
     email: "E-mail",
+    emailDesc: "Odpowiadamy na wszystkie e-maile w ciągu 2 godzin",
     address: "Adres",
+    addressDesc: "Pierwszorzędna lokalizacja przy plaży z łatwym dostępem",
     hours: "Godziny",
+    hoursDesc: "Nasz zespół jest tutaj, aby pomóc Ci w każdej chwili",
     sendMessage: "Wyślij nam wiadomość",
     sendMessageSubtitle: "Wypełnij formularz poniżej, a my skontaktujemy się z Tobą tak szybko, jak to możliwe.",
     subject: "Temat",
@@ -1141,6 +1330,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Doświadcz naszej idealnej lokalizacji",
     experiencePerfectLocationSubtitle: "Zarezerwuj pobyt w Apartments Delfin i odkryj, dlaczego nasza lokalizacja przy plaży jest idealną bazą na nadmorskie wakacje.",
     getDirections: "Uzyskaj wskazówki",
+    findUsHere: "Znajdź nas tutaj",
+    visitLocation: "Odwiedź naszą lokalizację",
+    visitLocationDesc: "Położone bezpośrednio przy plaży z oszałamiającymi widokami na ocean i łatwym dostępem do lokalnych atrakcji.",
+    emergencyContact: "Kontakt awaryjny",
+    emergencyContactDesc: "W pilnych sprawach poza godzinami pracy, skorzystaj z naszej linii awaryjnej 24/7.",
+    responseTimes: "Czasy odpowiedzi",
+    emailInquiries: "Zapytania e-mail",
+    within2Hours: "W ciągu 2 godzin",
+    phoneCalls: "Rozmowy telefoniczne",
+    immediate: "Natychmiast",
+    reservationRequests: "Prośby o rezerwację",
+    within1Hour: "W ciągu 1 godziny",
     
     // Dashboard
     myBookings: "Moje rezerwacje",
@@ -1162,6 +1363,27 @@ const translations: Record<string, Translation> = {
     paid: "Opłacone",
     viewDetails: "Zobacz szczegóły",
     cancel: "Anuluj",
+    
+    // FAQ
+    faqTitle: "Często zadawane pytania",
+    faqSubtitle: "Znajdź szybkie odpowiedzi na częste pytania o nasze apartamenty i usługi.",
+    faqCancellationQ: "Jaka jest wasza polityka anulowania?",
+    faqCancellationA: "Oferujemy elastyczne anulowanie do 48 godzin przed zameldowaniem z pełnym zwrotem. Anulowania w ciągu 48 godzin podlegają opłacie za jedną noc.",
+    faqPetsQ: "Czy pozwalacie na zwierzęta?",
+    faqPetsA: "Tak, jesteśmy przyjaźni zwierzętom! Witamy dobrze wychowane zwierzęta za małą dodatkową opłatą. Proszę poinformuj nas podczas rezerwacji o swoich futrzanych towarzyszach.",
+    faqParkingQ: "Czy parking jest dostępny?",
+    faqParkingA: "Tak, zapewniamy bezpłatny zadaszony parking dla wszystkich gości. Rezerwacja nie jest wymagana - parking jest wliczony w pobyt.",
+    faqAmenitiesQ: "Jakie udogodnienia są wliczone?",
+    faqAmenitiesA: "Wszystkie apartamenty obejmują bezpłatne WiFi, pełną kuchnię, widoki na ocean, dostęp do balkonu oraz korzystanie z naszego basenu, centrum fitness i usług concierge.",
+    faqBeachQ: "Jak daleko jest plaża?",
+    faqBeachA: "Nasze apartamenty są zaledwie 2 minuty spacerem od dziewiczej piaszczystej plaży. Możesz zobaczyć ocean ze swojego balkonu!",
+    faqTransferQ: "Czy oferujecie transfery z lotniska?",
+    faqTransferA: "Tak, zapewniamy bezpłatny transfer z lotniska. Proszę zorganizuj to co najmniej 24 godziny wcześniej przez naszego concierge.",
+    
+    // CTA Sections
+    readyToBook: "Gotowy zarezerwować pobyt?",
+    readyToBookSubtitle: "Nie czekaj - zabezpiecz swój idealny apartament nad oceanem już dziś i zacznij planować swoje wymarzone wakacje.",
+    callNow: "Zadzwoń teraz",
     
     // Common
     learnMore: "Dowiedz się więcej",
@@ -1283,9 +1505,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Contactez-nous",
     contactUsSubtitle: "Nous sommes là pour vous aider à rendre votre séjour parfait. Contactez-nous à tout moment pour des réservations, des questions ou de l'aide.",
     phone: "Téléphone",
+    phoneDesc: "Disponible 24/7 pour les réservations et l'assistance",
     email: "E-mail",
+    emailDesc: "Nous répondons à tous les e-mails dans les 2 heures",
     address: "Adresse",
+    addressDesc: "Emplacement privilégié en bord de mer avec accès facile",
     hours: "Heures",
+    hoursDesc: "Notre équipe est là pour vous aider à tout moment",
     sendMessage: "Envoyez-nous un message",
     sendMessageSubtitle: "Remplissez le formulaire ci-dessous et nous vous répondrons dès que possible.",
     subject: "Sujet",
@@ -1338,6 +1564,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Découvrez notre emplacement parfait",
     experiencePerfectLocationSubtitle: "Réservez votre séjour à Apartments Delfin et découvrez pourquoi notre emplacement en bord de mer est la base parfaite pour vos vacances côtières.",
     getDirections: "Obtenir des directions",
+    findUsHere: "Trouvez-nous ici",
+    visitLocation: "Visitez notre emplacement",
+    visitLocationDesc: "Situé directement en bord de mer avec des vues magnifiques sur l'océan et un accès facile aux attractions locales.",
+    emergencyContact: "Contact d'urgence",
+    emergencyContactDesc: "Pour les questions urgentes en dehors des heures d'ouverture, veuillez utiliser notre ligne d'urgence 24/7.",
+    responseTimes: "Temps de réponse",
+    emailInquiries: "Demandes par e-mail",
+    within2Hours: "Dans les 2 heures",
+    phoneCalls: "Appels téléphoniques",
+    immediate: "Immédiat",
+    reservationRequests: "Demandes de réservation",
+    within1Hour: "Dans l'heure",
     
     // Dashboard
     myBookings: "Mes réservations",
@@ -1359,6 +1597,27 @@ const translations: Record<string, Translation> = {
     paid: "Payé",
     viewDetails: "Voir les détails",
     cancel: "Annuler",
+    
+    // FAQ
+    faqTitle: "Questions fréquemment posées",
+    faqSubtitle: "Trouvez des réponses rapides aux questions courantes sur nos appartements et services.",
+    faqCancellationQ: "Quelle est votre politique d'annulation ?",
+    faqCancellationA: "Nous offrons une annulation flexible jusqu'à 48 heures avant l'arrivée pour un remboursement complet. Les annulations dans les 48 heures sont soumises à des frais d'une nuit.",
+    faqPetsQ: "Autorisez-vous les animaux de compagnie ?",
+    faqPetsA: "Oui, nous acceptons les animaux de compagnie ! Nous accueillons les animaux bien élevés avec un petit supplément. Veuillez nous informer lors de la réservation de vos compagnons à fourrure.",
+    faqParkingQ: "Le parking est-il disponible ?",
+    faqParkingA: "Oui, nous fournissons un parking couvert gratuit pour tous les clients. Aucune réservation requise - le parking est inclus dans votre séjour.",
+    faqAmenitiesQ: "Quels équipements sont inclus ?",
+    faqAmenitiesA: "Tous les appartements incluent le WiFi gratuit, une cuisine complète, des vues sur l'océan, l'accès au balcon et l'utilisation de notre piscine, centre de fitness et services de conciergerie.",
+    faqBeachQ: "À quelle distance se trouve la plage ?",
+    faqBeachA: "Nos appartements sont à seulement 2 minutes à pied de la plage de sable immaculée. Vous pouvez voir l'océan depuis votre balcon !",
+    faqTransferQ: "Offrez-vous des transferts aéroport ?",
+    faqTransferA: "Oui, nous fournissons un service de navette gratuit depuis l'aéroport. Veuillez organiser cela au moins 24 heures à l'avance via notre conciergerie.",
+    
+    // CTA Sections
+    readyToBook: "Prêt à réserver votre séjour ?",
+    readyToBookSubtitle: "N'attendez pas - sécurisez votre appartement parfait en bord de mer aujourd'hui et commencez à planifier vos vacances de rêve.",
+    callNow: "Appelez maintenant",
     
     // Common
     learnMore: "En savoir plus",
@@ -1480,9 +1739,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Contattaci",
     contactUsSubtitle: "Siamo qui per aiutarti a rendere perfetto il tuo soggiorno. Contattaci in qualsiasi momento per prenotazioni, domande o assistenza.",
     phone: "Telefono",
+    phoneDesc: "Disponibile 24/7 per prenotazioni e assistenza",
     email: "Email",
+    emailDesc: "Rispondiamo a tutte le email entro 2 ore",
     address: "Indirizzo",
+    addressDesc: "Posizione privilegiata fronte mare con facile accesso",
     hours: "Orari",
+    hoursDesc: "Il nostro team è qui per assisterti in qualsiasi momento",
     sendMessage: "Inviaci un messaggio",
     sendMessageSubtitle: "Compila il modulo qui sotto e ti risponderemo il prima possibile.",
     subject: "Oggetto",
@@ -1535,6 +1798,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Vivi la nostra posizione perfetta",
     experiencePerfectLocationSubtitle: "Prenota il tuo soggiorno ad Apartments Delfin e scopri perché la nostra posizione fronte mare è la base perfetta per le tue vacanze costiere.",
     getDirections: "Ottieni indicazioni",
+    findUsHere: "Trovaci qui",
+    visitLocation: "Visita la nostra posizione",
+    visitLocationDesc: "Situato direttamente sul lungomare con splendide viste sull'oceano e facile accesso alle attrazioni locali.",
+    emergencyContact: "Contatto di emergenza",
+    emergencyContactDesc: "Per questioni urgenti fuori dall'orario di lavoro, utilizza la nostra linea di emergenza 24/7.",
+    responseTimes: "Tempi di risposta",
+    emailInquiries: "Richieste email",
+    within2Hours: "Entro 2 ore",
+    phoneCalls: "Chiamate telefoniche",
+    immediate: "Immediato",
+    reservationRequests: "Richieste di prenotazione",
+    within1Hour: "Entro 1 ora",
     
     // Dashboard
     myBookings: "Le mie prenotazioni",
@@ -1556,6 +1831,27 @@ const translations: Record<string, Translation> = {
     paid: "Pagato",
     viewDetails: "Vedi dettagli",
     cancel: "Annulla",
+    
+    // FAQ
+    faqTitle: "Domande frequenti",
+    faqSubtitle: "Trova risposte rapide alle domande comuni sui nostri appartamenti e servizi.",
+    faqCancellationQ: "Qual è la vostra politica di cancellazione?",
+    faqCancellationA: "Offriamo cancellazione flessibile fino a 48 ore prima del check-in per un rimborso completo. Le cancellazioni entro 48 ore sono soggette a una tariffa di una notte.",
+    faqPetsQ: "Permettete animali domestici?",
+    faqPetsA: "Sì, siamo pet-friendly! Accogliamo animali ben educati con un piccolo supplemento. Informaci durante la prenotazione dei tuoi compagni pelosi.",
+    faqParkingQ: "È disponibile il parcheggio?",
+    faqParkingA: "Sì, forniamo parcheggio coperto gratuito per tutti gli ospiti. Nessuna prenotazione richiesta - il parcheggio è incluso nel soggiorno.",
+    faqAmenitiesQ: "Quali servizi sono inclusi?",
+    faqAmenitiesA: "Tutti gli appartamenti includono WiFi gratuito, cucina completa, vista oceano, accesso al balcone e uso della nostra piscina, centro fitness e servizi di concierge.",
+    faqBeachQ: "Quanto dista la spiaggia?",
+    faqBeachA: "I nostri appartamenti sono a soli 2 minuti a piedi dalla spiaggia sabbiosa incontaminata. Puoi vedere l'oceano dal tuo balcone!",
+    faqTransferQ: "Offrite trasferimenti aeroportuali?",
+    faqTransferA: "Sì, forniamo servizio navetta gratuito dall'aeroporto. Organizza questo almeno 24 ore in anticipo tramite il nostro concierge.",
+    
+    // CTA Sections
+    readyToBook: "Pronto a prenotare il tuo soggiorno?",
+    readyToBookSubtitle: "Non aspettare - assicurati il tuo appartamento perfetto fronte oceano oggi e inizia a pianificare la tua vacanza da sogno.",
+    callNow: "Chiama ora",
     
     // Common
     learnMore: "Scopri di più",
@@ -1677,9 +1973,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Kontaktieren Sie uns",
     contactUsSubtitle: "Wir sind hier, um Ihren Aufenthalt perfekt zu machen. Kontaktieren Sie uns jederzeit für Reservierungen, Fragen oder Hilfe.",
     phone: "Telefon",
+    phoneDesc: "24/7 verfügbar für Reservierungen und Hilfe",
     email: "E-Mail",
+    emailDesc: "Wir antworten auf alle E-Mails innerhalb von 2 Stunden",
     address: "Adresse",
+    addressDesc: "Erstklassige Strandlage mit einfachem Zugang",
     hours: "Öffnungszeiten",
+    hoursDesc: "Unser Team ist hier, um Ihnen jederzeit zu helfen",
     sendMessage: "Senden Sie uns eine Nachricht",
     sendMessageSubtitle: "Füllen Sie das untenstehende Formular aus und wir melden uns so schnell wie möglich bei Ihnen.",
     subject: "Betreff",
@@ -1732,6 +2032,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Erleben Sie unsere perfekte Lage",
     experiencePerfectLocationSubtitle: "Buchen Sie Ihren Aufenthalt bei Apartments Delfin und entdecken Sie, warum unsere Strandlage die perfekte Basis für Ihren Küstenurlaub ist.",
     getDirections: "Wegbeschreibung",
+    findUsHere: "Finden Sie uns hier",
+    visitLocation: "Besuchen Sie unsere Lage",
+    visitLocationDesc: "Direkt am Strand gelegen mit atemberaubendem Meerblick und einfachem Zugang zu lokalen Attraktionen.",
+    emergencyContact: "Notfallkontakt",
+    emergencyContactDesc: "Für dringende Angelegenheiten außerhalb der Geschäftszeiten nutzen Sie bitte unsere 24/7-Notfallleitung.",
+    responseTimes: "Antwortzeiten",
+    emailInquiries: "E-Mail-Anfragen",
+    within2Hours: "Innerhalb von 2 Stunden",
+    phoneCalls: "Telefonanrufe",
+    immediate: "Sofort",
+    reservationRequests: "Reservierungsanfragen",
+    within1Hour: "Innerhalb von 1 Stunde",
     
     // Dashboard
     myBookings: "Meine Buchungen",
@@ -1753,6 +2065,27 @@ const translations: Record<string, Translation> = {
     paid: "Bezahlt",
     viewDetails: "Details anzeigen",
     cancel: "Stornieren",
+    
+    // FAQ
+    faqTitle: "Häufig gestellte Fragen",
+    faqSubtitle: "Finden Sie schnelle Antworten auf häufige Fragen zu unseren Apartments und Services.",
+    faqCancellationQ: "Wie ist Ihre Stornierungsrichtlinie?",
+    faqCancellationA: "Wir bieten flexible Stornierung bis 48 Stunden vor Check-in für eine vollständige Rückerstattung. Stornierungen innerhalb von 48 Stunden unterliegen einer Gebühr für eine Nacht.",
+    faqPetsQ: "Erlauben Sie Haustiere?",
+    faqPetsA: "Ja, wir sind haustierfreundlich! Wir begrüßen gut erzogene Haustiere gegen eine kleine zusätzliche Gebühr. Bitte informieren Sie uns bei der Buchung über Ihre pelzigen Begleiter.",
+    faqParkingQ: "Ist Parken verfügbar?",
+    faqParkingA: "Ja, wir bieten kostenloses überdachtes Parken für alle Gäste. Keine Reservierung erforderlich - Parken ist in Ihrem Aufenthalt enthalten.",
+    faqAmenitiesQ: "Welche Annehmlichkeiten sind enthalten?",
+    faqAmenitiesA: "Alle Apartments beinhalten kostenloses WLAN, Vollküche, Meerblick, Balkenzugang und Nutzung unseres Pools, Fitnesscenters und Concierge-Services.",
+    faqBeachQ: "Wie weit ist der Strand?",
+    faqBeachA: "Unsere Apartments sind nur 2 Gehminuten vom unberührten Sandstrand entfernt. Sie können das Meer von Ihrem Balkon sehen!",
+    faqTransferQ: "Bieten Sie Flughafentransfers an?",
+    faqTransferA: "Ja, wir bieten kostenlosen Shuttle-Service vom Flughafen. Bitte arrangieren Sie dies mindestens 24 Stunden im Voraus über unseren Concierge.",
+    
+    // CTA Sections
+    readyToBook: "Bereit, Ihren Aufenthalt zu buchen?",
+    readyToBookSubtitle: "Warten Sie nicht - sichern Sie sich heute Ihr perfektes Apartment am Meer und beginnen Sie mit der Planung Ihres Traumurlaubs.",
+    callNow: "Jetzt anrufen",
     
     // Common
     learnMore: "Mehr erfahren",
@@ -1874,9 +2207,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Зв'яжіться з нами",
     contactUsSubtitle: "Ми тут, щоб допомогти зробити ваше перебування ідеальним. Зв'яжіться з нами в будь-який час для бронювання, питань або допомоги.",
     phone: "Телефон",
+    phoneDesc: "Доступні 24/7 для бронювання та допомоги",
     email: "Електронна пошта",
+    emailDesc: "Ми відповідаємо на всі електронні листи протягом 2 годин",
     address: "Адреса",
+    addressDesc: "Першокласне розташування на березі з легким доступом",
     hours: "Години роботи",
+    hoursDesc: "Наша команда тут, щоб допомогти вам у будь-який час",
     sendMessage: "Надішліть нам повідомлення",
     sendMessageSubtitle: "Заповніть форму нижче, і ми зв'яжемося з вами якомога швидше.",
     subject: "Тема",
@@ -1929,6 +2266,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Відчуйте наше ідеальне розташування",
     experiencePerfectLocationSubtitle: "Забронюйте своє перебування в Apartments Delfin та відкрийте, чому наше розташування на березі є ідеальною базою для вашої прибережної відпустки.",
     getDirections: "Отримати маршрут",
+    findUsHere: "Знайдіть нас тут",
+    visitLocation: "Відвідайте наше розташування",
+    visitLocationDesc: "Розташований безпосередньо на березі з приголомшливими видами на океан та легким доступом до місцевих атракцій.",
+    emergencyContact: "Екстрений контакт",
+    emergencyContactDesc: "Для термінових питань поза робочими годинами, будь ласка, використовуйте нашу 24/7 екстрену лінію.",
+    responseTimes: "Час відповіді",
+    emailInquiries: "Електронні запити",
+    within2Hours: "Протягом 2 годин",
+    phoneCalls: "Телефонні дзвінки",
+    immediate: "Негайно",
+    reservationRequests: "Запити на бронювання",
+    within1Hour: "Протягом 1 години",
     
     // Dashboard
     myBookings: "Мої бронювання",
@@ -1950,6 +2299,27 @@ const translations: Record<string, Translation> = {
     paid: "Сплачено",
     viewDetails: "Переглянути деталі",
     cancel: "Скасувати",
+    
+    // FAQ
+    faqTitle: "Часто задавані питання",
+    faqSubtitle: "Знайдіть швидкі відповіді на поширені питання про наші апартаменти та послуги.",
+    faqCancellationQ: "Яка ваша політика скасування?",
+    faqCancellationA: "Ми пропонуємо гнучке скасування до 48 годин до заїзду з повним поверненням коштів. Скасування протягом 48 годин підлягають оплаті за одну ніч.",
+    faqPetsQ: "Чи дозволяєте ви домашніх тварин?",
+    faqPetsA: "Так, ми дружні до домашніх тварин! Ми вітаємо добре вихованих домашніх тварин за невелику додаткову плату. Будь ласка, повідомте нас під час бронювання про ваших пухнастих супутників.",
+    faqParkingQ: "Чи доступна парковка?",
+    faqParkingA: "Так, ми надаємо безкоштовну криту парковку для всіх гостей. Резервація не потрібна - парковка включена у ваше перебування.",
+    faqAmenitiesQ: "Які зручності включені?",
+    faqAmenitiesA: "Всі апартаменти включають безкоштовний WiFi, повну кухню, вид на океан, доступ до балкону та використання нашого басейну, фітнес-центру та послуг консьєржа.",
+    faqBeachQ: "Як далеко пляж?",
+    faqBeachA: "Наші апартаменти знаходяться лише за 2 хвилини ходьби від незайманого піщаного пляжу. Ви можете бачити океан зі свого балкону!",
+    faqTransferQ: "Чи пропонуєте ви трансфер з аеропорту?",
+    faqTransferA: "Так, ми надаємо безкоштовний трансфер з аеропорту. Будь ласка, організуйте це принаймні за 24 години через нашого консьєржа.",
+    
+    // CTA Sections
+    readyToBook: "Готові забронювати перебування?",
+    readyToBookSubtitle: "Не чекайте - забезпечте собі ідеальний апартамент на березі океану сьогодні та почніть планувати відпустку своєї мрії.",
+    callNow: "Подзвоніть зараз",
     
     // Common
     learnMore: "Дізнатися більше",
@@ -2071,9 +2441,13 @@ const translations: Record<string, Translation> = {
     contactUs: "Свяжитесь с нами",
     contactUsSubtitle: "Мы здесь, чтобы помочь сделать ваше пребывание идеальным. Свяжитесь с нами в любое время для бронирования, вопросов или помощи.",
     phone: "Телефон",
+    phoneDesc: "Доступны 24/7 для бронирования и помощи",
     email: "Электронная почта",
+    emailDesc: "Мы отвечаем на все электронные письма в течение 2 часов",
     address: "Адрес",
+    addressDesc: "Первоклассное расположение на берегу с легким доступом",
     hours: "Часы работы",
+    hoursDesc: "Наша команда здесь, чтобы помочь вам в любое время",
     sendMessage: "Отправьте нам сообщение",
     sendMessageSubtitle: "Заполните форму ниже, и мы свяжемся с вами как можно скорее.",
     subject: "Тема",
@@ -2126,6 +2500,18 @@ const translations: Record<string, Translation> = {
     experiencePerfectLocation: "Почувствуйте наше идеальное расположение",
     experiencePerfectLocationSubtitle: "Забронируйте свое пребывание в Apartments Delfin и откройте, почему наше расположение на берегу является идеальной базой для вашего прибрежного отпуска.",
     getDirections: "Получить маршрут",
+    findUsHere: "Найдите нас здесь",
+    visitLocation: "Посетите наше расположение",
+    visitLocationDesc: "Расположен прямо на берегу с потрясающими видами на океан и легким доступом к местным достопримечательностям.",
+    emergencyContact: "Экстренный контакт",
+    emergencyContactDesc: "Для срочных вопросов вне рабочих часов, пожалуйста, используйте нашу 24/7 экстренную линию.",
+    responseTimes: "Время ответа",
+    emailInquiries: "Электронные запросы",
+    within2Hours: "В течение 2 часов",
+    phoneCalls: "Телефонные звонки",
+    immediate: "Немедленно",
+    reservationRequests: "Запросы на бронирование",
+    within1Hour: "В течение 1 часа",
     
     // Dashboard
     myBookings: "Мои бронирования",
@@ -2147,6 +2533,27 @@ const translations: Record<string, Translation> = {
     paid: "Оплачено",
     viewDetails: "Посмотреть детали",
     cancel: "Отменить",
+    
+    // FAQ
+    faqTitle: "Часто задаваемые вопросы",
+    faqSubtitle: "Найдите быстрые ответы на распространенные вопросы о наших апартаментах и услугах.",
+    faqCancellationQ: "Какова ваша политика отмены?",
+    faqCancellationA: "Мы предлагаем гибкую отмену до 48 часов до заезда с полным возвратом средств. Отмены в течение 48 часов подлежат оплате за одну ночь.",
+    faqPetsQ: "Разрешаете ли вы домашних животных?",
+    faqPetsA: "Да, мы дружелюбны к домашним животным! Мы приветствуем хорошо воспитанных домашних животных за небольшую дополнительную плату. Пожалуйста, сообщите нам при бронировании о ваших пушистых спутниках.",
+    faqParkingQ: "Доступна ли парковка?",
+    faqParkingA: "Да, мы предоставляем бесплатную крытую парковку для всех гостей. Резервация не требуется - парковка включена в ваше пребывание.",
+    faqAmenitiesQ: "Какие удобства включены?",
+    faqAmenitiesA: "Все апартаменты включают бесплатный WiFi, полную кухню, вид на океан, доступ к балкону и использование нашего бассейна, фитнес-центра и услуг консьержа.",
+    faqBeachQ: "Как далеко пляж?",
+    faqBeachA: "Наши апартаменты находятся всего в 2 минутах ходьбы от нетронутого песчаного пляжа. Вы можете видеть океан со своего балкона!",
+    faqTransferQ: "Предлагаете ли вы трансферы из аэропорта?",
+    faqTransferA: "Да, мы предоставляем бесплатный трансфер из аэропорта. Пожалуйста, организуйте это как минимум за 24 часа через нашего консьержа.",
+    
+    // CTA Sections
+    readyToBook: "Готовы забронировать пребывание?",
+    readyToBookSubtitle: "Не ждите - обеспечьте себе идеальный апартамент на берегу океана сегодня и начните планировать отпуск своей мечты.",
+    callNow: "Позвонить сейчас",
     
     // Common
     learnMore: "Узнать больше",
