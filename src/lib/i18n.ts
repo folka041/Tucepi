@@ -2125,7 +2125,7 @@ const translations: Record<string, Translation> = {
     transportationAccessSubtitle: "Легко доступен различными видами транспорта, что делает ваше путешествие в и из Apartments Delfin удобным и без стресса.",
     experiencePerfectLocation: "Почувствуйте наше идеальное расположение",
     experiencePerfectLocationSubtitle: "Забронируйте свое пребывание в Apartments Delfin и откройте, почему наше расположение на берегу является идеальной базой для вашего прибрежного отпуска.",
-    get Directions: "Получить маршрут",
+    getDirections: "Получить маршрут",
     
     // Dashboard
     myBookings: "Мои бронирования",
