@@ -495,6 +495,18 @@ const translations = {
     uk: 'Немає доступних апартаментів для обраної кількості гостей.',
     ru: 'Нет доступных квартир для выбранного количества гостей.'
   },
+  maximumGuestsExceeded: {
+    hr: 'Maksimalno 5 gostiju dozvoljeno po rezervaciji.',
+    en: 'Maximum 5 guests allowed per booking.',
+    cs: 'Maximálně 5 hostů povoleno na rezervaci.',
+    sk: 'Maximálne 5 hostí povolených na rezerváciu.',
+    pl: 'Maksymalnie 5 gości dozwolonych na rezerwację.',
+    fr: 'Maximum 5 invités autorisés par réservation.',
+    it: 'Massimo 5 ospiti consentiti per prenotazione.',
+    de: 'Maximal 5 Gäste pro Buchung erlaubt.',
+    uk: 'Максимум 5 гостей дозволено на бронювання.',
+    ru: 'Максимум 5 гостей разрешено на бронирование.'
+  },
 
   // Calendar
   selectDates: {
@@ -1928,6 +1940,310 @@ const translations = {
     de: 'Mehr erfahren',
     uk: 'Дізнатися більше',
     ru: 'Узнать больше'
+  },
+
+  // Dashboard specific
+  myBookings: {
+    hr: 'Moje rezervacije',
+    en: 'My Bookings',
+    cs: 'Mé rezervace',
+    sk: 'Moje rezervácie',
+    pl: 'Moje rezerwacje',
+    fr: 'Mes réservations',
+    it: 'Le mie prenotazioni',
+    de: 'Meine Buchungen',
+    uk: 'Мої бронювання',
+    ru: 'Мои бронирования'
+  },
+  viewManageReservations: {
+    hr: 'Pogledajte i upravljajte rezervacijama apartmana',
+    en: 'View and manage your apartment reservations',
+    cs: 'Zobrazit a spravovat rezervace apartmánů',
+    sk: 'Zobraziť a spravovať rezervácie apartmánov',
+    pl: 'Przeglądaj i zarządzaj rezerwacjami apartamentów',
+    fr: 'Voir et gérer vos réservations d\'appartements',
+    it: 'Visualizza e gestisci le tue prenotazioni di appartamenti',
+    de: 'Apartment-Reservierungen anzeigen und verwalten',
+    uk: 'Переглядайте та керуйте бронюваннями апартаментів',
+    ru: 'Просматривайте и управляйте бронированием апартаментов'
+  },
+  totalBookings: {
+    hr: 'Ukupno rezervacija',
+    en: 'Total Bookings',
+    cs: 'Celkem rezervací',
+    sk: 'Celkom rezervácií',
+    pl: 'Łączne rezerwacje',
+    fr: 'Total des réservations',
+    it: 'Prenotazioni totali',
+    de: 'Gesamtbuchungen',
+    uk: 'Загальна кількість бронювань',
+    ru: 'Всего бронирований'
+  },
+  confirmed: {
+    hr: 'Potvrđeno',
+    en: 'Confirmed',
+    cs: 'Potvrzeno',
+    sk: 'Potvrdené',
+    pl: 'Potwierdzone',
+    fr: 'Confirmé',
+    it: 'Confermato',
+    de: 'Bestätigt',
+    uk: 'Підтверджено',
+    ru: 'Подтверждено'
+  },
+  upcoming: {
+    hr: 'Nadolazeće',
+    en: 'Upcoming',
+    cs: 'Nadcházející',
+    sk: 'Nadchádzajúce',
+    pl: 'Nadchodzące',
+    fr: 'À venir',
+    it: 'Prossime',
+    de: 'Bevorstehend',
+    uk: 'Майбутні',
+    ru: 'Предстоящие'
+  },
+  totalSpent: {
+    hr: 'Ukupno potrošeno',
+    en: 'Total Spent',
+    cs: 'Celkem utraceno',
+    sk: 'Celkom minúté',
+    pl: 'Łącznie wydane',
+    fr: 'Total dépensé',
+    it: 'Totale speso',
+    de: 'Gesamt ausgegeben',
+    uk: 'Загалом витрачено',
+    ru: 'Всего потрачено'
+  },
+  yourBookings: {
+    hr: 'Vaše rezervacije',
+    en: 'Your Bookings',
+    cs: 'Vaše rezervace',
+    sk: 'Vaše rezervácie',
+    pl: 'Twoje rezerwacje',
+    fr: 'Vos réservations',
+    it: 'Le tue prenotazioni',
+    de: 'Ihre Buchungen',
+    uk: 'Ваші бронювання',
+    ru: 'Ваши бронирования'
+  },
+  newBooking: {
+    hr: 'Nova rezervacija',
+    en: 'New Booking',
+    cs: 'Nová rezervace',
+    sk: 'Nová rezervácia',
+    pl: 'Nowa rezerwacja',
+    fr: 'Nouvelle réservation',
+    it: 'Nuova prenotazione',
+    de: 'Neue Buchung',
+    uk: 'Нове бронювання',
+    ru: 'Новое бронирование'
+  },
+  noBookingsFound: {
+    hr: 'Nema pronađenih rezervacija',
+    en: 'No bookings found',
+    cs: 'Žádné rezervace nenalezeny',
+    sk: 'Žiadne rezervácie nenájdené',
+    pl: 'Nie znaleziono rezerwacji',
+    fr: 'Aucune réservation trouvée',
+    it: 'Nessuna prenotazione trovata',
+    de: 'Keine Buchungen gefunden',
+    uk: 'Бронювань не знайдено',
+    ru: 'Бронирования не найдены'
+  },
+  makeFirstBooking: {
+    hr: 'Napravite svoju prvu rezervaciju',
+    en: 'Make Your First Booking',
+    cs: 'Proveďte svou první rezervaci',
+    sk: 'Urobte svoju prvú rezerváciu',
+    pl: 'Dokonaj swojej pierwszej rezerwacji',
+    fr: 'Effectuez votre première réservation',
+    it: 'Fai la tua prima prenotazione',
+    de: 'Machen Sie Ihre erste Buchung',
+    uk: 'Зробіть своє перше бронювання',
+    ru: 'Сделайте свое первое бронирование'
+  },
+  bookingDetails: {
+    hr: 'Detalji rezervacije',
+    en: 'Booking Details',
+    cs: 'Podrobnosti rezervace',
+    sk: 'Podrobnosti rezervácie',
+    pl: 'Szczegóły rezerwacji',
+    fr: 'Détails de la réservation',
+    it: 'Dettagli prenotazione',
+    de: 'Buchungsdetails',
+    uk: 'Деталі бронювання',
+    ru: 'Детали бронирования'
+  },
+  stayDetails: {
+    hr: 'Detalji boravka',
+    en: 'Stay Details',
+    cs: 'Podrobnosti pobytu',
+    sk: 'Podrobnosti pobytu',
+    pl: 'Szczegóły pobytu',
+    fr: 'Détails du séjour',
+    it: 'Dettagli soggiorno',
+    de: 'Aufenthaltsdetails',
+    uk: 'Деталі перебування',
+    ru: 'Детали пребывания'
+  },
+  bookingId: {
+    hr: 'ID rezervacije',
+    en: 'Booking ID',
+    cs: 'ID rezervace',
+    sk: 'ID rezervácie',
+    pl: 'ID rezerwacji',
+    fr: 'ID de réservation',
+    it: 'ID prenotazione',
+    de: 'Buchungs-ID',
+    uk: 'ID бронювання',
+    ru: 'ID бронирования'
+  },
+  paymentSummary: {
+    hr: 'Sažetak plaćanja',
+    en: 'Payment Summary',
+    cs: 'Souhrn platby',
+    sk: 'Súhrn platby',
+    pl: 'Podsumowanie płatności',
+    fr: 'Résumé du paiement',
+    it: 'Riepilogo pagamento',
+    de: 'Zahlungsübersicht',
+    uk: 'Підсумок платежу',
+    ru: 'Сводка платежа'
+  },
+  totalAmount: {
+    hr: 'Ukupan iznos',
+    en: 'Total Amount',
+    cs: 'Celková částka',
+    sk: 'Celková suma',
+    pl: 'Łączna kwota',
+    fr: 'Montant total',
+    it: 'Importo totale',
+    de: 'Gesamtbetrag',
+    uk: 'Загальна сума',
+    ru: 'Общая сумма'
+  },
+  status: {
+    hr: 'Status',
+    en: 'Status',
+    cs: 'Stav',
+    sk: 'Stav',
+    pl: 'Status',
+    fr: 'Statut',
+    it: 'Stato',
+    de: 'Status',
+    uk: 'Статус',
+    ru: 'Статус'
+  },
+  paid: {
+    hr: 'Plaćeno',
+    en: 'Paid',
+    cs: 'Zaplaceno',
+    sk: 'Zaplatené',
+    pl: 'Opłacone',
+    fr: 'Payé',
+    it: 'Pagato',
+    de: 'Bezahlt',
+    uk: 'Сплачено',
+    ru: 'Оплачено'
+  },
+  cancel: {
+    hr: 'Otkaži',
+    en: 'Cancel',
+    cs: 'Zrušit',
+    sk: 'Zrušiť',
+    pl: 'Anuluj',
+    fr: 'Annuler',
+    it: 'Annulla',
+    de: 'Stornieren',
+    uk: 'Скасувати',
+    ru: 'Отменить'
+  },
+
+  // Auth Modal
+  signIn: {
+    hr: 'Prijavite se',
+    en: 'Sign In',
+    cs: 'Přihlásit se',
+    sk: 'Prihlásiť sa',
+    pl: 'Zaloguj się',
+    fr: 'Se connecter',
+    it: 'Accedi',
+    de: 'Anmelden',
+    uk: 'Увійти',
+    ru: 'Войти'
+  },
+  createAccount: {
+    hr: 'Stvori račun',
+    en: 'Create Account',
+    cs: 'Vytvořit účet',
+    sk: 'Vytvoriť účet',
+    pl: 'Utwórz konto',
+    fr: 'Créer un compte',
+    it: 'Crea account',
+    de: 'Konto erstellen',
+    uk: 'Створити обліковий запис',
+    ru: 'Создать аккаунт'
+  },
+  fullName: {
+    hr: 'Puno ime',
+    en: 'Full Name',
+    cs: 'Celé jméno',
+    sk: 'Celé meno',
+    pl: 'Pełne imię',
+    fr: 'Nom complet',
+    it: 'Nome completo',
+    de: 'Vollständiger Name',
+    uk: 'Повне ім\'я',
+    ru: 'Полное имя'
+  },
+  password: {
+    hr: 'Lozinka',
+    en: 'Password',
+    cs: 'Heslo',
+    sk: 'Heslo',
+    pl: 'Hasło',
+    fr: 'Mot de passe',
+    it: 'Password',
+    de: 'Passwort',
+    uk: 'Пароль',
+    ru: 'Пароль'
+  },
+  dontHaveAccount: {
+    hr: 'Nemate račun? Registrirajte se',
+    en: 'Don\'t have an account? Sign up',
+    cs: 'Nemáte účet? Zaregistrujte se',
+    sk: 'Nemáte účet? Zaregistrujte sa',
+    pl: 'Nie masz konta? Zarejestruj się',
+    fr: 'Vous n\'avez pas de compte? Inscrivez-vous',
+    it: 'Non hai un account? Registrati',
+    de: 'Haben Sie kein Konto? Registrieren',
+    uk: 'Немає облікового запису? Зареєструйтеся',
+    ru: 'Нет аккаунта? Зарегистрируйтесь'
+  },
+  alreadyHaveAccount: {
+    hr: 'Već imate račun? Prijavite se',
+    en: 'Already have an account? Sign in',
+    cs: 'Již máte účet? Přihlaste se',
+    sk: 'Už máte účet? Prihláste sa',
+    pl: 'Masz już konto? Zaloguj się',
+    fr: 'Vous avez déjà un compte? Connectez-vous',
+    it: 'Hai già un account? Accedi',
+    de: 'Haben Sie bereits ein Konto? Anmelden',
+    uk: 'Вже маєте обліковий запис? Увійдіть',
+    ru: 'Уже есть аккаунт? Войдите'
+  },
+  processing: {
+    hr: 'Obrađuje se...',
+    en: 'Processing...',
+    cs: 'Zpracovává se...',
+    sk: 'Spracováva sa...',
+    pl: 'Przetwarzanie...',
+    fr: 'Traitement en cours...',
+    it: 'Elaborazione...',
+    de: 'Verarbeitung...',
+    uk: 'Обробка...',
+    ru: 'Обработка...'
   }
 };
 

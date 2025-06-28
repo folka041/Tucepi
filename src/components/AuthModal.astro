@@ -6,7 +6,7 @@
     <div class="p-6 sm:p-8">
       <!-- Header -->
       <div class="flex items-center justify-between mb-6">
-        <h2 id="authTitle" class="text-2xl font-bold text-gray-900">Sign In</h2>
+        <h2 id="authTitle" class="text-2xl font-bold text-gray-900" data-key="signIn">Sign In</h2>
         <button id="closeAuthModal" class="text-gray-400 hover:text-gray-600 transition-colors">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -19,7 +19,7 @@
         <!-- Sign In Form -->
         <form id="signInForm" class="space-y-4">
           <div>
-            <label for="signInEmail" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <label for="signInEmail" class="block text-sm font-medium text-gray-700 mb-2" data-key="emailAddress">Email</label>
             <input
               type="email"
               id="signInEmail"
@@ -29,7 +29,7 @@
             />
           </div>
           <div>
-            <label for="signInPassword" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <label for="signInPassword" class="block text-sm font-medium text-gray-700 mb-2" data-key="password">Password</label>
             <input
               type="password"
               id="signInPassword"
@@ -41,6 +41,7 @@
           <button
             type="submit"
             class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200"
+            data-key="signIn"
           >
             Sign In
           </button>
@@ -49,7 +50,7 @@
         <!-- Sign Up Form -->
         <form id="signUpForm" class="space-y-4 hidden">
           <div>
-            <label for="signUpName" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+            <label for="signUpName" class="block text-sm font-medium text-gray-700 mb-2" data-key="fullName">Full Name</label>
             <input
               type="text"
               id="signUpName"
@@ -59,7 +60,7 @@
             />
           </div>
           <div>
-            <label for="signUpEmail" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <label for="signUpEmail" class="block text-sm font-medium text-gray-700 mb-2" data-key="emailAddress">Email</label>
             <input
               type="email"
               id="signUpEmail"
@@ -69,7 +70,9 @@
             />
           </div>
           <div>
-            <label for="signUpPhone" class="block text-sm font-medium text-gray-700 mb-2">Phone (Optional)</label>
+            <label for="signUpPhone" class="block text-sm font-medium text-gray-700 mb-2">
+              <span data-key="phoneNumber">Phone</span> (<span data-key="optional">Optional</span>)
+            </label>
             <input
               type="tel"
               id="signUpPhone"
@@ -78,7 +81,7 @@
             />
           </div>
           <div>
-            <label for="signUpPassword" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+            <label for="signUpPassword" class="block text-sm font-medium text-gray-700 mb-2" data-key="password">Password</label>
             <input
               type="password"
               id="signUpPassword"
@@ -91,6 +94,7 @@
           <button
             type="submit"
             class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200"
+            data-key="createAccount"
           >
             Create Account
           </button>
@@ -99,7 +103,7 @@
 
       <!-- Toggle Forms -->
       <div class="mt-6 text-center">
-        <button id="toggleAuth" class="text-primary-600 hover:text-primary-700 font-medium">
+        <button id="toggleAuth" class="text-primary-600 hover:text-primary-700 font-medium" data-key="dontHaveAccount">
           Don't have an account? Sign up
         </button>
       </div>
@@ -107,7 +111,7 @@
       <!-- Loading State -->
       <div id="authLoading" class="hidden text-center py-4">
         <div class="inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-primary-600"></div>
-        <p class="mt-2 text-gray-600">Processing...</p>
+        <p class="mt-2 text-gray-600" data-key="processing">Processing...</p>
       </div>
 
       <!-- Error Message -->
@@ -120,6 +124,7 @@
 
 <script>
   import { supabase } from '../lib/supabase';
+  import { t } from '../lib/i18n';
 
   class AuthModal {
     constructor() {
@@ -134,6 +139,7 @@
       this.isSignUp = false;
 
       this.init();
+      this.updateTranslations();
     }
 
     init() {
@@ -145,6 +151,11 @@
       // Close on backdrop click
       this.modal?.addEventListener('click', (e) => {
         if (e.target === this.modal) this.close();
+      });
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
       });
     }
 
@@ -167,13 +178,17 @@
       if (this.isSignUp) {
         this.signInForm?.classList.add('hidden');
         this.signUpForm?.classList.remove('hidden');
-        this.title.textContent = 'Create Account';
-        this.toggleButton.textContent = 'Already have an account? Sign in';
+        this.title.setAttribute('data-key', 'createAccount');
+        this.title.textContent = t('createAccount');
+        this.toggleButton.setAttribute('data-key', 'alreadyHaveAccount');
+        this.toggleButton.textContent = t('alreadyHaveAccount');
       } else {
         this.signUpForm?.classList.add('hidden');
         this.signInForm?.classList.remove('hidden');
-        this.title.textContent = 'Sign In';
-        this.toggleButton.textContent = "Don't have an account? Sign up";
+        this.title.setAttribute('data-key', 'signIn');
+        this.title.textContent = t('signIn');
+        this.toggleButton.setAttribute('data-key', 'dontHaveAccount');
+        this.toggleButton.textContent = t('dontHaveAccount');
       }
       
       this.hideError();
@@ -199,6 +214,21 @@
 
     hideError() {
       this.error?.classList.add('hidden');
+    }
+
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
+            // Don't translate input placeholders for auth form
+            return;
+          } else {
+            element.textContent = t(key);
+          }
+        }
+      });
     }
 
     async handleSignIn(e) {
@@ -265,7 +295,7 @@
         }
 
         this.close();
-        alert('Account created successfully! Please check your email to verify your account.');
+        alert(t('accountCreatedSuccess') || 'Account created successfully! Please check your email to verify your account.');
       } catch (error) {
         this.showError(error.message);
       } finally {

@@ -56,11 +56,11 @@
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
           >
             <option value="" data-key="selectGuests">Select number of guests</option>
-            <option value="1">1 Guest</option>
-            <option value="2">2 Guests</option>
-            <option value="3">3 Guests</option>
-            <option value="4">4 Guests</option>
-            <option value="5">5 Guests</option>
+            <option value="1">1 <span data-key="guest">Guest</span></option>
+            <option value="2">2 <span data-key="guests">Guests</span></option>
+            <option value="3">3 <span data-key="guests">Guests</span></option>
+            <option value="4">4 <span data-key="guests">Guests</span></option>
+            <option value="5">5 <span data-key="guests">Guests</span></option>
           </select>
         </div>
 
@@ -315,7 +315,7 @@
       document.getElementById('apartmentImage').src = apartment.images[0];
       document.getElementById('apartmentImage').alt = apartment.name;
       document.getElementById('apartmentName').textContent = apartment.name;
-      document.getElementById('apartmentPrice').textContent = `${apartment.price}/night`;
+      document.getElementById('apartmentPrice').textContent = `${apartment.price}/${t('night')}`;
       document.getElementById('ratePerNight').textContent = apartment.price;
     }
 
@@ -392,11 +392,22 @@
             element.placeholder = t(key);
           } else if (element.tagName === 'TEXTAREA') {
             element.placeholder = t(key);
+          } else if (element.tagName === 'OPTION') {
+            // Handle option elements specially
+            const originalText = element.textContent;
+            if (originalText && (originalText.includes('Guest') || originalText.includes('Select'))) {
+              element.textContent = t(key);
+            }
           } else {
             element.textContent = t(key);
           }
         }
       });
+
+      // Update apartment price display if modal is open
+      if (this.currentApartment && !this.modal?.classList.contains('hidden')) {
+        document.getElementById('apartmentPrice').textContent = `${this.currentApartment.price}/${t('night')}`;
+      }
     }
 
     async handleBooking(e) {
@@ -421,14 +432,14 @@
       const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
       
       if (nights <= 0) {
-        this.showError('Please select valid check-in and check-out dates.');
+        this.showError(t('pleaseSelectDates') || 'Please select valid check-in and check-out dates.');
         this.showForm();
         return;
       }
 
       // Validate guest count
       if (guests > 5) {
-        this.showError('Maximum 5 guests allowed per booking.');
+        this.showError(t('maximumGuestsExceeded') || 'Maximum 5 guests allowed per booking.');
         this.showForm();
         return;
       }
@@ -474,7 +485,7 @@
 
         this.showSuccess();
       } catch (error) {
-        this.showError('There was an error processing your booking. Please try again.');
+        this.showError(t('bookingError') || 'There was an error processing your booking. Please try again.');
         this.showForm();
       }
     }

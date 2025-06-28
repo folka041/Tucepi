@@ -16,8 +16,8 @@ import Footer from '../components/Footer.astro';
     <section class="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 sm:py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-          <h1 class="text-3xl sm:text-4xl font-bold mb-4">My Bookings</h1>
-          <p class="text-lg sm:text-xl text-primary-100">
+          <h1 class="text-3xl sm:text-4xl font-bold mb-4" data-key="myBookings">My Bookings</h1>
+          <p class="text-lg sm:text-xl text-primary-100" data-key="viewManageReservations">
             View and manage your apartment reservations
           </p>
         </div>
@@ -37,7 +37,7 @@ import Footer from '../components/Footer.astro';
                 </svg>
               </div>
               <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600">Total Bookings</p>
+                <p class="text-sm font-medium text-gray-600" data-key="totalBookings">Total Bookings</p>
                 <p id="totalBookings" class="text-2xl font-bold text-gray-900">0</p>
               </div>
             </div>
@@ -51,7 +51,7 @@ import Footer from '../components/Footer.astro';
                 </svg>
               </div>
               <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600">Confirmed</p>
+                <p class="text-sm font-medium text-gray-600" data-key="confirmed">Confirmed</p>
                 <p id="confirmedBookings" class="text-2xl font-bold text-gray-900">0</p>
               </div>
             </div>
@@ -65,7 +65,7 @@ import Footer from '../components/Footer.astro';
                 </svg>
               </div>
               <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600">Upcoming</p>
+                <p class="text-sm font-medium text-gray-600" data-key="upcoming">Upcoming</p>
                 <p id="upcomingBookings" class="text-2xl font-bold text-gray-900">0</p>
               </div>
             </div>
@@ -79,7 +79,7 @@ import Footer from '../components/Footer.astro';
                 </svg>
               </div>
               <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600">Total Spent</p>
+                <p class="text-sm font-medium text-gray-600" data-key="totalSpent">Total Spent</p>
                 <p id="totalSpent" class="text-2xl font-bold text-gray-900">$0</p>
               </div>
             </div>
@@ -89,8 +89,8 @@ import Footer from '../components/Footer.astro';
         <!-- Bookings List -->
         <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8">
           <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold text-gray-900">Your Bookings</h3>
-            <a href="/apartments" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
+            <h3 class="text-xl font-bold text-gray-900" data-key="yourBookings">Your Bookings</h3>
+            <a href="/apartments" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200" data-key="newBooking">
               New Booking
             </a>
           </div>
@@ -100,8 +100,8 @@ import Footer from '../components/Footer.astro';
               <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
-              <p>No bookings found</p>
-              <a href="/apartments" class="mt-4 inline-block bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
+              <p data-key="noBookingsFound">No bookings found</p>
+              <a href="/apartments" class="mt-4 inline-block bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200" data-key="makeFirstBooking">
                 Make Your First Booking
               </a>
             </div>
@@ -115,15 +115,34 @@ import Footer from '../components/Footer.astro';
 </Layout>
 
 <script>
+  import { t } from '../lib/i18n';
+
   class Dashboard {
     constructor() {
       this.bookings = [];
       this.init();
+      this.updateTranslations();
     }
 
     init() {
       this.loadBookings();
       this.updateStats();
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
+        this.renderBookings(); // Re-render to update translations
+      });
+    }
+
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          element.textContent = t(key);
+        }
+      });
     }
 
     loadBookings() {
@@ -146,9 +165,9 @@ import Footer from '../components/Footer.astro';
             <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
             </svg>
-            <p>No bookings found</p>
-            <a href="/apartments" class="mt-4 inline-block bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200">
-              Make Your First Booking
+            <p data-key="noBookingsFound">${t('noBookingsFound')}</p>
+            <a href="/apartments" class="mt-4 inline-block bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200" data-key="makeFirstBooking">
+              ${t('makeFirstBooking')}
             </a>
           </div>
         `;
@@ -165,19 +184,19 @@ import Footer from '../components/Footer.astro';
                   <div>
                     <h4 class="font-semibold text-gray-900">${booking.apartment.name}</h4>
                     <span class="px-2 py-1 text-xs rounded-full ${this.getStatusClasses(booking.status)}">
-                      ${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+                      ${t(booking.status) || booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
                     </span>
                   </div>
                 </div>
                 <div class="text-right">
                   <div class="text-lg font-bold text-primary-600">$${booking.totalPrice}</div>
-                  <div class="text-sm text-gray-500">Total</div>
+                  <div class="text-sm text-gray-500">${t('total')}</div>
                 </div>
               </div>
               
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-gray-600">
                 <div>
-                  <strong>Check-in:</strong><br>
+                  <strong>${t('checkin')}:</strong><br>
                   ${new Date(booking.checkIn).toLocaleDateString('en-US', { 
                     weekday: 'short', 
                     year: 'numeric', 
@@ -186,7 +205,7 @@ import Footer from '../components/Footer.astro';
                   })}
                 </div>
                 <div>
-                  <strong>Check-out:</strong><br>
+                  <strong>${t('checkout')}:</strong><br>
                   ${new Date(booking.checkOut).toLocaleDateString('en-US', { 
                     weekday: 'short', 
                     year: 'numeric', 
@@ -195,35 +214,35 @@ import Footer from '../components/Footer.astro';
                   })}
                 </div>
                 <div>
-                  <strong>Guests:</strong><br>
-                  ${booking.guests} ${booking.guests === 1 ? 'Guest' : 'Guests'}
+                  <strong>${t('guests')}:</strong><br>
+                  ${booking.guests} ${booking.guests === 1 ? t('guest') : t('guests')}
                 </div>
                 <div>
-                  <strong>Booking ID:</strong><br>
+                  <strong>${t('bookingId')}:</strong><br>
                   #${booking.id.slice(-6).toUpperCase()}
                 </div>
               </div>
               
               <div class="mt-4 text-sm text-gray-600">
-                <strong>Guest:</strong> ${booking.guestInfo.firstName} ${booking.guestInfo.lastName}<br>
-                <strong>Email:</strong> ${booking.guestInfo.email}<br>
-                <strong>Phone:</strong> ${booking.guestInfo.phone}
+                <strong>${t('guest')}:</strong> ${booking.guestInfo.firstName} ${booking.guestInfo.lastName}<br>
+                <strong>${t('emailAddress')}:</strong> ${booking.guestInfo.email}<br>
+                <strong>${t('phoneNumber')}:</strong> ${booking.guestInfo.phone}
               </div>
             </div>
             
             <div class="mt-4 lg:mt-0 lg:ml-6 flex flex-col sm:flex-row lg:flex-col gap-2">
               <button 
-                onclick="this.showBookingDetails('${booking.id}')"
+                onclick="window.dashboard.showBookingDetails('${booking.id}')"
                 class="px-4 py-2 text-primary-600 border border-primary-600 rounded-lg hover:bg-primary-50 transition-colors text-sm font-medium"
               >
-                View Details
+                ${t('viewDetails')}
               </button>
               ${this.isUpcoming(booking.checkIn) ? `
                 <button 
-                  onclick="this.cancelBooking('${booking.id}')"
+                  onclick="window.dashboard.cancelBooking('${booking.id}')"
                   class="px-4 py-2 text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors text-sm font-medium"
                 >
-                  Cancel
+                  ${t('cancel')}
                 </button>
               ` : ''}
             </div>
@@ -273,8 +292,8 @@ import Footer from '../components/Footer.astro';
         <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-auto max-h-[90vh] overflow-y-auto">
           <div class="p-6 sm:p-8">
             <div class="flex items-center justify-between mb-6">
-              <h2 class="text-2xl font-bold text-gray-900">Booking Details</h2>
-              <button onclick="this.closest('.fixed').remove()" class="text-gray-400 hover:text-gray-600 transition-colors">
+              <h2 class="text-2xl font-bold text-gray-900">${t('bookingDetails')}</h2>
+              <button onclick="this.closest('.fixed').remove(); document.body.style.overflow = '';" class="text-gray-400 hover:text-gray-600 transition-colors">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -286,51 +305,51 @@ import Footer from '../components/Footer.astro';
                 <img src="${booking.apartment.images[0]}" alt="${booking.apartment.name}" class="w-20 h-20 object-cover rounded-lg">
                 <div>
                   <h3 class="font-semibold text-gray-900">${booking.apartment.name}</h3>
-                  <p class="text-primary-600 font-medium">${booking.apartment.price}/night</p>
+                  <p class="text-primary-600 font-medium">${booking.apartment.price}/${t('night')}</p>
                   <span class="px-2 py-1 text-xs rounded-full ${this.getStatusClasses(booking.status)}">
-                    ${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+                    ${t(booking.status) || booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
                   </span>
                 </div>
               </div>
               
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                  <h4 class="font-semibold text-gray-900 mb-2">Stay Details</h4>
+                  <h4 class="font-semibold text-gray-900 mb-2">${t('stayDetails')}</h4>
                   <div class="space-y-2 text-sm">
-                    <div><strong>Check-in:</strong> ${new Date(booking.checkIn).toLocaleDateString()}</div>
-                    <div><strong>Check-out:</strong> ${new Date(booking.checkOut).toLocaleDateString()}</div>
-                    <div><strong>Guests:</strong> ${booking.guests}</div>
-                    <div><strong>Booking ID:</strong> #${booking.id.slice(-6).toUpperCase()}</div>
+                    <div><strong>${t('checkin')}:</strong> ${new Date(booking.checkIn).toLocaleDateString()}</div>
+                    <div><strong>${t('checkout')}:</strong> ${new Date(booking.checkOut).toLocaleDateString()}</div>
+                    <div><strong>${t('guests')}:</strong> ${booking.guests}</div>
+                    <div><strong>${t('bookingId')}:</strong> #${booking.id.slice(-6).toUpperCase()}</div>
                   </div>
                 </div>
                 
                 <div>
-                  <h4 class="font-semibold text-gray-900 mb-2">Guest Information</h4>
+                  <h4 class="font-semibold text-gray-900 mb-2">${t('guestInformation')}</h4>
                   <div class="space-y-2 text-sm">
-                    <div><strong>Name:</strong> ${booking.guestInfo.firstName} ${booking.guestInfo.lastName}</div>
-                    <div><strong>Email:</strong> ${booking.guestInfo.email}</div>
-                    <div><strong>Phone:</strong> ${booking.guestInfo.phone}</div>
+                    <div><strong>${t('fullName')}:</strong> ${booking.guestInfo.firstName} ${booking.guestInfo.lastName}</div>
+                    <div><strong>${t('emailAddress')}:</strong> ${booking.guestInfo.email}</div>
+                    <div><strong>${t('phoneNumber')}:</strong> ${booking.guestInfo.phone}</div>
                   </div>
                 </div>
               </div>
               
               <div class="bg-primary-50 rounded-lg p-4">
-                <h4 class="font-semibold text-gray-900 mb-3">Payment Summary</h4>
+                <h4 class="font-semibold text-gray-900 mb-3">${t('paymentSummary')}</h4>
                 <div class="space-y-2 text-sm">
                   <div class="flex justify-between">
-                    <span>Total Amount:</span>
+                    <span>${t('totalAmount')}:</span>
                     <span class="font-semibold">$${booking.totalPrice}</span>
                   </div>
                   <div class="flex justify-between">
-                    <span>Status:</span>
-                    <span class="font-semibold text-green-600">Paid</span>
+                    <span>${t('status')}:</span>
+                    <span class="font-semibold text-green-600">${t('paid')}</span>
                   </div>
                 </div>
               </div>
               
               ${booking.specialRequests ? `
                 <div>
-                  <h4 class="font-semibold text-gray-900 mb-2">Special Requests</h4>
+                  <h4 class="font-semibold text-gray-900 mb-2">${t('specialRequests')}</h4>
                   <p class="text-sm text-gray-600">${booking.specialRequests}</p>
                 </div>
               ` : ''}
@@ -351,24 +370,20 @@ import Footer from '../components/Footer.astro';
     }
 
     cancelBooking(bookingId) {
-      if (confirm('Are you sure you want to cancel this booking?')) {
+      if (confirm(t('confirmCancelBooking') || 'Are you sure you want to cancel this booking?')) {
         const bookingIndex = this.bookings.findIndex(b => b.id === bookingId);
         if (bookingIndex !== -1) {
           this.bookings[bookingIndex].status = 'cancelled';
           localStorage.setItem('apartmentBookings', JSON.stringify(this.bookings));
           this.renderBookings();
           this.updateStats();
-          alert('Booking cancelled successfully.');
+          alert(t('bookingCancelledSuccess') || 'Booking cancelled successfully.');
         }
       }
     }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    const dashboard = new Dashboard();
-    
-    // Make methods available globally for onclick handlers
-    window.showBookingDetails = (id) => dashboard.showBookingDetails(id);
-    window.cancelBooking = (id) => dashboard.cancelBooking(id);
+    window.dashboard = new Dashboard();
   });
 </script>
