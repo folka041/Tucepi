@@ -73,50 +73,6 @@ import BookingModal from '../components/BookingModal.astro';
             <div class="sticky top-24 space-y-6">
               <Calendar />
               
-              <!-- Quick Booking Form -->
-              <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-key="quickBooking">Quick Booking</h3>
-                <form id="quickBookingForm" class="space-y-4">
-                  <div class="grid grid-cols-1 gap-4">
-                    <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-1" data-key="checkinDate">Check-in Date</label>
-                      <input
-                        type="text"
-                        id="quickCheckin"
-                        readonly
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 text-sm cursor-pointer"
-                        data-key="selectCheckinDate"
-                        placeholder="Select check-in date"
-                      />
-                    </div>
-                    <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-1" data-key="checkoutDate">Check-out Date</label>
-                      <input
-                        type="text"
-                        id="quickCheckout"
-                        readonly
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 text-sm cursor-pointer"
-                        data-key="selectCheckoutDate"
-                        placeholder="Select check-out date"
-                      />
-                    </div>
-                    <div>
-                      <label class="block text-sm font-medium text-gray-700 mb-1" data-key="numberOfGuests">Guests</label>
-                      <select id="quickBookingGuests" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
-                        <option value="1">1 <span data-key="guest">Guest</span></option>
-                        <option value="2">2 <span data-key="guests">Guests</span></option>
-                        <option value="3">3 <span data-key="guests">Guests</span></option>
-                        <option value="4">4 <span data-key="guests">Guests</span></option>
-                        <option value="5">5 <span data-key="guests">Guests</span></option>
-                      </select>
-                    </div>
-                  </div>
-                  <button type="submit" class="w-full bg-accent-500 hover:bg-accent-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200" data-key="checkAvailability">
-                    Check Availability
-                  </button>
-                </form>
-              </div>
-              
               <!-- Contact Info -->
               <div class="bg-primary-50 rounded-lg p-4 sm:p-6">
                 <h3 class="text-lg font-semibold text-gray-900 mb-3" data-key="needHelp">Need Help?</h3>
@@ -382,7 +338,37 @@ import BookingModal from '../components/BookingModal.astro';
       bookNowButtons.forEach(button => {
         button.addEventListener('click', function() {
           const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
-          window.bookingModal?.open(apartmentData);
+          
+          // Get selected dates from calendar if available
+          let selectedDates = null;
+          if (window.calendar) {
+            selectedDates = window.calendar.getSelectedDates();
+          }
+          
+          // Open booking modal with apartment data and pre-filled dates
+          if (window.bookingModal) {
+            window.bookingModal.open(apartmentData);
+            
+            // If dates are selected, pre-fill them in the booking modal
+            if (selectedDates && selectedDates.checkin && selectedDates.checkout) {
+              setTimeout(() => {
+                const checkinInput = document.getElementById('checkIn');
+                const checkoutInput = document.getElementById('checkOut');
+                
+                if (checkinInput) {
+                  checkinInput.value = selectedDates.checkin.toISOString().split('T')[0];
+                }
+                if (checkoutInput) {
+                  checkoutInput.value = selectedDates.checkout.toISOString().split('T')[0];
+                }
+                
+                // Trigger price calculation
+                if (window.bookingModal.calculatePrice) {
+                  window.bookingModal.calculatePrice();
+                }
+              }, 100);
+            }
+          }
         });
       });
 
@@ -421,52 +407,6 @@ import BookingModal from '../components/BookingModal.astro';
     }
 
     bindEvents() {
-      // Quick Booking Form functionality
-      const quickBookingForm = document.getElementById('quickBookingForm');
-      if (quickBookingForm) {
-        quickBookingForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          
-          const checkinInput = document.getElementById('quickCheckin');
-          const checkoutInput = document.getElementById('quickCheckout');
-          const guestsSelect = document.getElementById('quickBookingGuests');
-          
-          const checkin = checkinInput.value;
-          const checkout = checkoutInput.value;
-          const guests = parseInt(guestsSelect.value);
-          
-          if (!checkin || !checkout) {
-            alert(t('pleaseSelectDates') || 'Please select check-in and check-out dates first.');
-            return;
-          }
-          
-          // Find suitable apartments based on guest count
-          const suitableApartments = this.apartments.filter(apt => apt.guests >= guests);
-          
-          if (suitableApartments.length === 0) {
-            alert(t('noApartmentsAvailable') || 'No apartments available for the selected number of guests.');
-            return;
-          }
-          
-          // Open booking modal with the first suitable apartment
-          window.bookingModal?.open(suitableApartments[0]);
-        });
-      }
-
-      // Listen for calendar date changes to update quick booking form
-      window.addEventListener('datesSelected', (e) => {
-        const { checkin, checkout } = e.detail;
-        const checkinInput = document.getElementById('quickCheckin');
-        const checkoutInput = document.getElementById('quickCheckout');
-        
-        if (checkinInput && checkin) {
-          checkinInput.value = checkin.toLocaleDateString();
-        }
-        if (checkoutInput && checkout) {
-          checkoutInput.value = checkout.toLocaleDateString();
-        }
-      });
-
       // Filter functionality
       const apartmentFilter = document.getElementById('apartmentFilter');
       const priceFilter = document.getElementById('priceFilter');
@@ -594,7 +534,7 @@ import BookingModal from '../components/BookingModal.astro';
                   </div>
                 </div>
                 
-                <button onclick="window.bookingModal?.open(${JSON.stringify(apartment).replace(/"/g, '&quot;')}); this.closest('.fixed').remove(); document.body.style.overflow = '';" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                <button onclick="window.bookingModal?.open(${JSON.stringify(apartment).replace(/"/g, '"')}); this.closest('.fixed').remove(); document.body.style.overflow = '';" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
                   ${t('bookThisApartment')}
                 </button>
               </div>
