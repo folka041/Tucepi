@@ -138,6 +138,364 @@ const translations = {
     ru: 'Забронировать проживание'
   },
 
+  // Apartments page specific
+  ourLuxuryApartments: {
+    hr: 'Naši luksuzni apartmani',
+    en: 'Our Luxury Apartments',
+    cs: 'Naše luxusní apartmány',
+    sk: 'Naše luxusné apartmány',
+    pl: 'Nasze luksusowe apartamenty',
+    fr: 'Nos appartements de luxe',
+    it: 'I nostri appartamenti di lusso',
+    de: 'Unsere Luxus-Apartments',
+    uk: 'Наші розкішні апартаменти',
+    ru: 'Наши роскошные апартаменты'
+  },
+  ourLuxuryApartmentsSubtitle: {
+    hr: 'Odaberite iz naše pažljivo odabrane kolekcije premium apartmana na obali, svaki dizajniran da pruži vrhunsku udobnost i prekrasan pogled.',
+    en: 'Choose from our carefully curated collection of premium oceanfront apartments, each designed to provide the ultimate comfort and breathtaking views.',
+    cs: 'Vyberte si z naší pečlivě vybrané kolekce prémiových apartmánů na pobřeží, z nichž každý je navržen tak, aby poskytoval nejvyšší pohodlí a úchvatné výhledy.',
+    sk: 'Vyberte si z našej starostlivo vybranej kolekcie prémiových apartmánov na pobreží, z ktorých každý je navrhnutý tak, aby poskytoval najvyšší pohodlie a úchvatné výhľady.',
+    pl: 'Wybierz z naszej starannie wyselekcjonowanej kolekcji premium apartamentów nad oceanem, z których każdy został zaprojektowany, aby zapewnić najwyższy komfort i zapierające dech widoki.',
+    fr: 'Choisissez parmi notre collection soigneusement sélectionnée d\'appartements premium en bord de mer, chacun conçu pour offrir un confort ultime et des vues à couper le souffle.',
+    it: 'Scegli dalla nostra collezione accuratamente selezionata di appartamenti premium fronte oceano, ognuno progettato per offrire il massimo comfort e viste mozzafiato.',
+    de: 'Wählen Sie aus unserer sorgfältig kuratierten Sammlung von Premium-Apartments am Meer, die alle darauf ausgelegt sind, ultimativen Komfort und atemberaubende Aussichten zu bieten.',
+    uk: 'Оберіть з нашої ретельно підібраної колекції преміум-апартаментів на березі океану, кожен з яких розроблений для забезпечення найвищого комфорту та захоплюючих видів.',
+    ru: 'Выберите из нашей тщательно подобранной коллекции премиальных апартаментов на берегу океана, каждый из которых спроектирован для обеспечения максимального комфорта и захватывающих видов.'
+  },
+
+  // Filter options
+  allApartments: {
+    hr: 'Svi apartmani',
+    en: 'All Apartments',
+    cs: 'Všechny apartmány',
+    sk: 'Všetky apartmány',
+    pl: 'Wszystkie apartamenty',
+    fr: 'Tous les appartements',
+    it: 'Tutti gli appartamenti',
+    de: 'Alle Apartments',
+    uk: 'Всі апартаменти',
+    ru: 'Все апартаменты'
+  },
+  studio: {
+    hr: 'Studio',
+    en: 'Studio',
+    cs: 'Studio',
+    sk: 'Studio',
+    pl: 'Studio',
+    fr: 'Studio',
+    it: 'Monolocale',
+    de: 'Studio',
+    uk: 'Студія',
+    ru: 'Студия'
+  },
+  oneBedroom: {
+    hr: '1 spavaća soba',
+    en: '1 Bedroom',
+    cs: '1 ložnice',
+    sk: '1 spálňa',
+    pl: '1 sypialnia',
+    fr: '1 chambre',
+    it: '1 camera da letto',
+    de: '1 Schlafzimmer',
+    uk: '1 спальня',
+    ru: '1 спальня'
+  },
+  twoPlusBedrooms: {
+    hr: '2+ spavaće sobe',
+    en: '2+ Bedrooms',
+    cs: '2+ ložnice',
+    sk: '2+ spálne',
+    pl: '2+ sypialnie',
+    fr: '2+ chambres',
+    it: '2+ camere da letto',
+    de: '2+ Schlafzimmer',
+    uk: '2+ спальні',
+    ru: '2+ спальни'
+  },
+  anyPrice: {
+    hr: 'Bilo koja cijena',
+    en: 'Any Price',
+    cs: 'Jakákoli cena',
+    sk: 'Akákoľvek cena',
+    pl: 'Dowolna cena',
+    fr: 'Tout prix',
+    it: 'Qualsiasi prezzo',
+    de: 'Jeder Preis',
+    uk: 'Будь-яка ціна',
+    ru: 'Любая цена'
+  },
+  under200: {
+    hr: 'Ispod $200',
+    en: 'Under $200',
+    cs: 'Pod $200',
+    sk: 'Pod $200',
+    pl: 'Poniżej $200',
+    fr: 'Moins de $200',
+    it: 'Sotto $200',
+    de: 'Unter $200',
+    uk: 'Менше $200',
+    ru: 'Менее $200'
+  },
+  price200to300: {
+    hr: '$200 - $300',
+    en: '$200 - $300',
+    cs: '$200 - $300',
+    sk: '$200 - $300',
+    pl: '$200 - $300',
+    fr: '$200 - $300',
+    it: '$200 - $300',
+    de: '$200 - $300',
+    uk: '$200 - $300',
+    ru: '$200 - $300'
+  },
+  price300plus: {
+    hr: '$300+',
+    en: '$300+',
+    cs: '$300+',
+    sk: '$300+',
+    pl: '$300+',
+    fr: '$300+',
+    it: '$300+',
+    de: '$300+',
+    uk: '$300+',
+    ru: '$300+'
+  },
+  anyGuests: {
+    hr: 'Bilo koji broj gostiju',
+    en: 'Any Guests',
+    cs: 'Jakýkoli počet hostů',
+    sk: 'Akýkoľvek počet hostí',
+    pl: 'Dowolna liczba gości',
+    fr: 'Tout nombre d\'invités',
+    it: 'Qualsiasi numero di ospiti',
+    de: 'Beliebige Gästeanzahl',
+    uk: 'Будь-яка кількість гостей',
+    ru: 'Любое количество гостей'
+  },
+  oneToTwoGuests: {
+    hr: '1-2 gosta',
+    en: '1-2 Guests',
+    cs: '1-2 hosté',
+    sk: '1-2 hostia',
+    pl: '1-2 gości',
+    fr: '1-2 invités',
+    it: '1-2 ospiti',
+    de: '1-2 Gäste',
+    uk: '1-2 гості',
+    ru: '1-2 гостя'
+  },
+  threeToFourGuests: {
+    hr: '3-4 gosta',
+    en: '3-4 Guests',
+    cs: '3-4 hosté',
+    sk: '3-4 hostia',
+    pl: '3-4 gości',
+    fr: '3-4 invités',
+    it: '3-4 ospiti',
+    de: '3-4 Gäste',
+    uk: '3-4 гості',
+    ru: '3-4 гостя'
+  },
+  fiveGuests: {
+    hr: '5 gostiju',
+    en: '5 Guests',
+    cs: '5 hostů',
+    sk: '5 hostí',
+    pl: '5 gości',
+    fr: '5 invités',
+    it: '5 ospiti',
+    de: '5 Gäste',
+    uk: '5 гостей',
+    ru: '5 гостей'
+  },
+  showing: {
+    hr: 'Prikazuje se',
+    en: 'Showing',
+    cs: 'Zobrazuje se',
+    sk: 'Zobrazuje sa',
+    pl: 'Pokazuje',
+    fr: 'Affichage',
+    it: 'Mostrando',
+    de: 'Zeige',
+    uk: 'Показано',
+    ru: 'Показано'
+  },
+
+  // Apartment details
+  photos: {
+    hr: 'Fotografije',
+    en: 'Photos',
+    cs: 'Fotografie',
+    sk: 'Fotografie',
+    pl: 'Zdjęcia',
+    fr: 'Photos',
+    it: 'Foto',
+    de: 'Fotos',
+    uk: 'Фотографії',
+    ru: 'Фотографии'
+  },
+  night: {
+    hr: 'noć',
+    en: 'night',
+    cs: 'noc',
+    sk: 'noc',
+    pl: 'noc',
+    fr: 'nuit',
+    it: 'notte',
+    de: 'Nacht',
+    uk: 'ніч',
+    ru: 'ночь'
+  },
+  more: {
+    hr: 'više',
+    en: 'more',
+    cs: 'více',
+    sk: 'viac',
+    pl: 'więcej',
+    fr: 'plus',
+    it: 'altro',
+    de: 'mehr',
+    uk: 'більше',
+    ru: 'больше'
+  },
+  viewDetails: {
+    hr: 'Pogledaj detalje',
+    en: 'View Details',
+    cs: 'Zobrazit detaily',
+    sk: 'Zobraziť detaily',
+    pl: 'Zobacz szczegóły',
+    fr: 'Voir les détails',
+    it: 'Vedi dettagli',
+    de: 'Details anzeigen',
+    uk: 'Переглянути деталі',
+    ru: 'Посмотреть детали'
+  },
+  description: {
+    hr: 'Opis',
+    en: 'Description',
+    cs: 'Popis',
+    sk: 'Popis',
+    pl: 'Opis',
+    fr: 'Description',
+    it: 'Descrizione',
+    de: 'Beschreibung',
+    uk: 'Опис',
+    ru: 'Описание'
+  },
+  bookThisApartment: {
+    hr: 'Rezerviraj ovaj apartman',
+    en: 'Book This Apartment',
+    cs: 'Rezervovat tento apartmán',
+    sk: 'Rezervovať tento apartmán',
+    pl: 'Zarezerwuj ten apartament',
+    fr: 'Réserver cet appartement',
+    it: 'Prenota questo appartamento',
+    de: 'Dieses Apartment buchen',
+    uk: 'Забронювати цей апартамент',
+    ru: 'Забронировать эту квартиру'
+  },
+
+  // Quick booking
+  quickBooking: {
+    hr: 'Brza rezervacija',
+    en: 'Quick Booking',
+    cs: 'Rychlá rezervace',
+    sk: 'Rýchla rezervácia',
+    pl: 'Szybka rezerwacja',
+    fr: 'Réservation rapide',
+    it: 'Prenotazione rapida',
+    de: 'Schnellbuchung',
+    uk: 'Швидке бронювання',
+    ru: 'Быстрое бронирование'
+  },
+  selectCheckinDate: {
+    hr: 'Odaberite datum dolaska',
+    en: 'Select check-in date',
+    cs: 'Vyberte datum příjezdu',
+    sk: 'Vyberte dátum príchodu',
+    pl: 'Wybierz datę zameldowania',
+    fr: 'Sélectionnez la date d\'arrivée',
+    it: 'Seleziona data di check-in',
+    de: 'Anreisedatum auswählen',
+    uk: 'Оберіть дату заїзду',
+    ru: 'Выберите дату заезда'
+  },
+  selectCheckoutDate: {
+    hr: 'Odaberite datum odlaska',
+    en: 'Select check-out date',
+    cs: 'Vyberte datum odjezdu',
+    sk: 'Vyberte dátum odchodu',
+    pl: 'Wybierz datę wymeldowania',
+    fr: 'Sélectionnez la date de départ',
+    it: 'Seleziona data di check-out',
+    de: 'Abreisedatum auswählen',
+    uk: 'Оберіть дату виїзду',
+    ru: 'Выберите дату выезда'
+  },
+  checkAvailability: {
+    hr: 'Provjeri dostupnost',
+    en: 'Check Availability',
+    cs: 'Zkontrolovat dostupnost',
+    sk: 'Skontrolovať dostupnosť',
+    pl: 'Sprawdź dostępność',
+    fr: 'Vérifier la disponibilité',
+    it: 'Verifica disponibilità',
+    de: 'Verfügbarkeit prüfen',
+    uk: 'Перевірити наявність',
+    ru: 'Проверить доступность'
+  },
+  needHelp: {
+    hr: 'Trebate pomoć?',
+    en: 'Need Help?',
+    cs: 'Potřebujete pomoc?',
+    sk: 'Potrebujete pomoc?',
+    pl: 'Potrzebujesz pomocy?',
+    fr: 'Besoin d\'aide?',
+    it: 'Hai bisogno di aiuto?',
+    de: 'Brauchen Sie Hilfe?',
+    uk: 'Потрібна допомога?',
+    ru: 'Нужна помощь?'
+  },
+  needHelpDesc: {
+    hr: 'Naš tim je tu da vam pomogne pronaći savršen apartman za vaš boravak.',
+    en: 'Our team is here to help you find the perfect apartment for your stay.',
+    cs: 'Náš tým je tu, aby vám pomohl najít dokonalý apartmán pro váš pobyt.',
+    sk: 'Náš tím je tu, aby vám pomohol nájsť dokonalý apartmán pre váš pobyt.',
+    pl: 'Nasz zespół jest tutaj, aby pomóc ci znaleźć idealny apartament na pobyt.',
+    fr: 'Notre équipe est là pour vous aider à trouver l\'appartement parfait pour votre séjour.',
+    it: 'Il nostro team è qui per aiutarti a trovare l\'appartamento perfetto per il tuo soggiorno.',
+    de: 'Unser Team ist da, um Ihnen zu helfen, das perfekte Apartment für Ihren Aufenthalt zu finden.',
+    uk: 'Наша команда тут, щоб допомогти вам знайти ідеальний апартамент для вашого перебування.',
+    ru: 'Наша команда здесь, чтобы помочь вам найти идеальную квартиру для вашего пребывания.'
+  },
+
+  // Error messages
+  pleaseSelectDates: {
+    hr: 'Molimo odaberite datume dolaska i odlaska.',
+    en: 'Please select check-in and check-out dates first.',
+    cs: 'Nejprve prosím vyberte datum příjezdu a odjezdu.',
+    sk: 'Prosím najprv vyberte dátum príchodu a odchodu.',
+    pl: 'Proszę najpierw wybrać daty zameldowania i wymeldowania.',
+    fr: 'Veuillez d\'abord sélectionner les dates d\'arrivée et de départ.',
+    it: 'Seleziona prima le date di check-in e check-out.',
+    de: 'Bitte wählen Sie zuerst die An- und Abreisedaten aus.',
+    uk: 'Будь ласка, спочатку оберіть дати заїзду та виїзду.',
+    ru: 'Пожалуйста, сначала выберите даты заезда и выезда.'
+  },
+  noApartmentsAvailable: {
+    hr: 'Nema dostupnih apartmana za odabrani broj gostiju.',
+    en: 'No apartments available for the selected number of guests.',
+    cs: 'Žádné apartmány nejsou k dispozici pro vybraný počet hostů.',
+    sk: 'Žiadne apartmány nie sú k dispozícii pre vybraný počet hostí.',
+    pl: 'Brak dostępnych apartamentów dla wybranej liczby gości.',
+    fr: 'Aucun appartement disponible pour le nombre d\'invités sélectionné.',
+    it: 'Nessun appartamento disponibile per il numero di ospiti selezionato.',
+    de: 'Keine Apartments verfügbar für die ausgewählte Gästeanzahl.',
+    uk: 'Немає доступних апартаментів для обраної кількості гостей.',
+    ru: 'Нет доступных квартир для выбранного количества гостей.'
+  },
+
   // Calendar
   selectDates: {
     hr: 'Odaberite datume',
@@ -664,6 +1022,18 @@ const translations = {
     de: 'Gäste',
     uk: 'Гості',
     ru: 'Гости'
+  },
+  guest: {
+    hr: 'Gost',
+    en: 'Guest',
+    cs: 'Host',
+    sk: 'Hosť',
+    pl: 'Gość',
+    fr: 'Invité',
+    it: 'Ospite',
+    de: 'Gast',
+    uk: 'Гість',
+    ru: 'Гость'
   },
   beds: {
     hr: 'Kreveti',

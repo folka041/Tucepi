@@ -93,8 +93,8 @@ const apartments = [
     <section class="bg-gradient-to-r from-primary-600 to-primary-800 text-white py-12 sm:py-16 lg:py-20">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center">
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">Our Luxury Apartments</h1>
-          <p class="text-lg sm:text-xl text-primary-100 max-w-3xl mx-auto">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6" data-key="ourLuxuryApartments">Our Luxury Apartments</h1>
+          <p class="text-lg sm:text-xl text-primary-100 max-w-3xl mx-auto" data-key="ourLuxuryApartmentsSubtitle">
             Choose from our carefully curated collection of premium oceanfront apartments, each designed to provide the ultimate comfort and breathtaking views.
           </p>
         </div>
@@ -107,26 +107,26 @@ const apartments = [
         <div class="flex flex-col sm:flex-row flex-wrap gap-4 items-start sm:items-center justify-between">
           <div class="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 w-full sm:w-auto">
             <select id="apartmentFilter" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
-              <option value="">All Apartments</option>
-              <option value="studio">Studio</option>
-              <option value="1-bedroom">1 Bedroom</option>
-              <option value="2-bedroom">2+ Bedrooms</option>
+              <option value="" data-key="allApartments">All Apartments</option>
+              <option value="studio" data-key="studio">Studio</option>
+              <option value="1-bedroom" data-key="oneBedroom">1 Bedroom</option>
+              <option value="2-bedroom" data-key="twoPlusBedrooms">2+ Bedrooms</option>
             </select>
             <select id="priceFilter" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
-              <option value="">Any Price</option>
-              <option value="under-200">Under $200</option>
-              <option value="200-300">$200 - $300</option>
-              <option value="300-plus">$300+</option>
+              <option value="" data-key="anyPrice">Any Price</option>
+              <option value="under-200" data-key="under200">Under $200</option>
+              <option value="200-300" data-key="price200to300">$200 - $300</option>
+              <option value="300-plus" data-key="price300plus">$300+</option>
             </select>
             <select id="guestFilter" class="px-3 sm:px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
-              <option value="">Any Guests</option>
-              <option value="1-2">1-2 Guests</option>
-              <option value="3-4">3-4 Guests</option>
-              <option value="5">5 Guests</option>
+              <option value="" data-key="anyGuests">Any Guests</option>
+              <option value="1-2" data-key="oneToTwoGuests">1-2 Guests</option>
+              <option value="3-4" data-key="threeToFourGuests">3-4 Guests</option>
+              <option value="5" data-key="fiveGuests">5 Guests</option>
             </select>
           </div>
           <div id="resultsCount" class="text-sm text-gray-600 mt-2 sm:mt-0">
-            Showing {apartments.length} apartments
+            <span data-key="showing">Showing</span> {apartments.length} <span data-key="apartments">apartments</span>
           </div>
         </div>
       </div>
@@ -154,10 +154,10 @@ const apartments = [
                           />
                         ))}
                         <div class="absolute top-4 left-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {apartment.images.length} Photos
+                          {apartment.images.length} <span data-key="photos">Photos</span>
                         </div>
                         <div class="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {apartment.price}/night
+                          {apartment.price}/<span data-key="night">night</span>
                         </div>
                         {apartment.originalPrice && (
                           <div class="absolute top-12 right-4 bg-gray-800 text-white px-2 py-1 rounded text-xs line-through">
@@ -189,19 +189,19 @@ const apartments = [
                           <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                           </svg>
-                          {apartment.guests} Guests
+                          {apartment.guests} <span data-key="guests">Guests</span>
                         </span>
                         <span class="flex items-center">
                           <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
                           </svg>
-                          {apartment.beds} Bed{apartment.beds > 1 ? 's' : ''}
+                          {apartment.beds} <span data-key={apartment.beds > 1 ? "beds" : "bed"}>{apartment.beds > 1 ? "Beds" : "Bed"}</span>
                         </span>
                         <span class="flex items-center">
                           <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M5 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1H5zM13 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1h-2z"></path>
                           </svg>
-                          {apartment.baths} Bath{apartment.baths > 1 ? 's' : ''}
+                          {apartment.baths} <span data-key={apartment.baths > 1 ? "baths" : "bath"}>{apartment.baths > 1 ? "Baths" : "Bath"}</span>
                         </span>
                         <span class="text-gray-500 col-span-2 sm:col-span-1">{apartment.size}</span>
                       </div>
@@ -215,7 +215,7 @@ const apartments = [
                         ))}
                         {apartment.features.length > 4 && (
                           <span class="text-xs text-gray-500 px-2 py-1">
-                            +{apartment.features.length - 4} more
+                            +{apartment.features.length - 4} <span data-key="more">more</span>
                           </span>
                         )}
                       </div>
@@ -225,10 +225,11 @@ const apartments = [
                         <button
                           class="book-now-btn flex-1 bg-primary-600 hover:bg-primary-700 text-white text-center py-2 px-4 rounded-lg font-medium transition-colors duration-200"
                           data-apartment={JSON.stringify(apartment)}
+                          data-key="bookNow"
                         >
                           Book Now
                         </button>
-                        <button class="view-details-btn px-4 py-2 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors duration-200" data-apartment={JSON.stringify(apartment)}>
+                        <button class="view-details-btn px-4 py-2 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors duration-200" data-apartment={JSON.stringify(apartment)} data-key="viewDetails">
                           View Details
                         </button>
                       </div>
@@ -246,19 +247,43 @@ const apartments = [
               
               <!-- Quick Booking Form -->
               <div class="bg-white rounded-lg shadow-lg p-4 sm:p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Booking</h3>
+                <h3 class="text-lg font-semibold text-gray-900 mb-4" data-key="quickBooking">Quick Booking</h3>
                 <form id="quickBookingForm" class="space-y-4">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Guests</label>
-                    <select id="quickBookingGuests" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
-                      <option value="1">1 Guest</option>
-                      <option value="2">2 Guests</option>
-                      <option value="3">3 Guests</option>
-                      <option value="4">4 Guests</option>
-                      <option value="5">5 Guests</option>
-                    </select>
+                  <div class="grid grid-cols-1 gap-4">
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-1" data-key="checkinDate">Check-in Date</label>
+                      <input
+                        type="text"
+                        id="quickCheckin"
+                        readonly
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 text-sm cursor-pointer"
+                        data-key="selectCheckinDate"
+                        placeholder="Select check-in date"
+                      />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-1" data-key="checkoutDate">Check-out Date</label>
+                      <input
+                        type="text"
+                        id="quickCheckout"
+                        readonly
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-900 text-sm cursor-pointer"
+                        data-key="selectCheckoutDate"
+                        placeholder="Select check-out date"
+                      />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-700 mb-1" data-key="numberOfGuests">Guests</label>
+                      <select id="quickBookingGuests" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 text-sm">
+                        <option value="1">1 <span data-key="guest">Guest</span></option>
+                        <option value="2">2 <span data-key="guests">Guests</span></option>
+                        <option value="3">3 <span data-key="guests">Guests</span></option>
+                        <option value="4">4 <span data-key="guests">Guests</span></option>
+                        <option value="5">5 <span data-key="guests">Guests</span></option>
+                      </select>
+                    </div>
                   </div>
-                  <button type="submit" class="w-full bg-accent-500 hover:bg-accent-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                  <button type="submit" class="w-full bg-accent-500 hover:bg-accent-600 text-white py-3 rounded-lg font-semibold transition-colors duration-200" data-key="checkAvailability">
                     Check Availability
                   </button>
                 </form>
@@ -266,8 +291,8 @@ const apartments = [
               
               <!-- Contact Info -->
               <div class="bg-primary-50 rounded-lg p-4 sm:p-6">
-                <h3 class="text-lg font-semibold text-gray-900 mb-3">Need Help?</h3>
-                <p class="text-gray-600 mb-4 text-sm">Our team is here to help you find the perfect apartment for your stay.</p>
+                <h3 class="text-lg font-semibold text-gray-900 mb-3" data-key="needHelp">Need Help?</h3>
+                <p class="text-gray-600 mb-4 text-sm" data-key="needHelpDesc">Our team is here to help you find the perfect apartment for your stay.</p>
                 <div class="space-y-2 text-sm">
                   <div class="flex items-center text-gray-700">
                     <svg class="w-4 h-4 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -295,6 +320,8 @@ const apartments = [
 </Layout>
 
 <script>
+  import { t } from '../lib/i18n';
+
   // Image gallery functionality
   document.addEventListener('DOMContentLoaded', function() {
     const galleries = document.querySelectorAll('.apartment-gallery');
@@ -315,6 +342,9 @@ const apartments = [
         }, 3000);
       }
     });
+
+    // Update translations
+    updateTranslations();
 
     // Book Now button functionality
     const bookNowButtons = document.querySelectorAll('.book-now-btn');
@@ -340,19 +370,91 @@ const apartments = [
       quickBookingForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const selectedDates = window.calendar?.getSelectedDates();
-        const guests = document.getElementById('quickBookingGuests').value;
+        const checkinInput = document.getElementById('quickCheckin');
+        const checkoutInput = document.getElementById('quickCheckout');
+        const guestsSelect = document.getElementById('quickBookingGuests');
         
-        if (!selectedDates || !selectedDates.checkin || !selectedDates.checkout) {
-          alert('Please select check-in and check-out dates first.');
+        const checkin = checkinInput.value;
+        const checkout = checkoutInput.value;
+        const guests = parseInt(guestsSelect.value);
+        
+        if (!checkin || !checkout) {
+          alert(t('pleaseSelectDates') || 'Please select check-in and check-out dates first.');
           return;
         }
         
         // Find suitable apartments based on guest count
-        const suitableApartments = apartments.filter(apt => apt.guests >= parseInt(guests));
+        const apartments = [
+          {
+            id: 1,
+            name: "Ocean View Studio",
+            images: [
+              "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+              "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+              "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+            ],
+            price: "$150",
+            guests: 2,
+            beds: 1,
+            baths: 1,
+            size: "450 sq ft",
+            features: ["Ocean View", "Balcony", "Kitchen", "WiFi", "Air Conditioning", "Smart TV"],
+            amenities: ["Free WiFi", "Ocean View", "Balcony", "Kitchenette", "Air Conditioning", "Smart TV", "Coffee Machine", "Hair Dryer"]
+          },
+          {
+            id: 2,
+            name: "Deluxe One Bedroom",
+            images: [
+              "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+              "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+              "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+            ],
+            price: "$220",
+            guests: 4,
+            beds: 1,
+            baths: 1,
+            size: "650 sq ft",
+            features: ["Ocean View", "Living Room", "Full Kitchen", "Balcony", "WiFi", "Parking"],
+            amenities: ["Free WiFi", "Ocean View", "Balcony", "Full Kitchen", "Living Room", "Air Conditioning", "Smart TV", "Dishwasher", "Washing Machine", "Free Parking"]
+          },
+          {
+            id: 3,
+            name: "Premium Two Bedroom",
+            images: [
+              "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+              "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+              "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+            ],
+            price: "$320",
+            guests: 5,
+            beds: 2,
+            baths: 2,
+            size: "950 sq ft",
+            features: ["Panoramic Ocean View", "Two Balconies", "Dining Area", "Premium Amenities", "Master Suite", "Guest Bathroom"],
+            amenities: ["Free WiFi", "Panoramic Ocean View", "Two Balconies", "Full Kitchen", "Dining Area", "Living Room", "Master Suite", "Two Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Free Parking", "Premium Toiletries"]
+          },
+          {
+            id: 4,
+            name: "Penthouse Suite",
+            images: [
+              "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+              "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+              "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+            ],
+            price: "$450",
+            guests: 5,
+            beds: 3,
+            baths: 3,
+            size: "1200 sq ft",
+            features: ["Private Rooftop Terrace", "Three Bedrooms", "Luxury Finishes", "Panoramic Views", "Premium Location"],
+            amenities: ["Free WiFi", "Private Rooftop Terrace", "Panoramic Ocean View", "Gourmet Kitchen", "Dining Area", "Living Room", "Three Bedrooms", "Three Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Dryer", "Free Parking", "Concierge Service", "Premium Toiletries", "Jacuzzi"]
+          }
+        ];
+        
+        const suitableApartments = apartments.filter(apt => apt.guests >= guests);
         
         if (suitableApartments.length === 0) {
-          alert('No apartments available for the selected number of guests.');
+          alert(t('noApartmentsAvailable') || 'No apartments available for the selected number of guests.');
           return;
         }
         
@@ -360,6 +462,20 @@ const apartments = [
         window.bookingModal?.open(suitableApartments[0]);
       });
     }
+
+    // Listen for calendar date changes to update quick booking form
+    window.addEventListener('datesSelected', function(e) {
+      const { checkin, checkout } = e.detail;
+      const checkinInput = document.getElementById('quickCheckin');
+      const checkoutInput = document.getElementById('quickCheckout');
+      
+      if (checkinInput && checkout) {
+        checkinInput.value = checkin.toLocaleDateString();
+      }
+      if (checkoutInput && checkout) {
+        checkoutInput.value = checkout.toLocaleDateString();
+      }
+    });
 
     // Filter functionality
     const apartmentFilter = document.getElementById('apartmentFilter');
@@ -406,19 +522,44 @@ const apartments = [
         }
       });
 
-      document.getElementById('resultsCount').textContent = `Showing ${visibleCount} apartments`;
+      const resultsCount = document.getElementById('resultsCount');
+      if (resultsCount) {
+        resultsCount.innerHTML = `<span data-key="showing">${t('showing')}</span> ${visibleCount} <span data-key="apartments">${t('apartments')}</span>`;
+      }
     }
 
     apartmentFilter?.addEventListener('change', filterApartments);
     priceFilter?.addEventListener('change', filterApartments);
     guestFilter?.addEventListener('change', filterApartments);
 
-    // Listen for calendar date changes
-    window.addEventListener('datesSelected', function(e) {
-      // Update quick booking form or show availability
-      console.log('Dates selected:', e.detail);
+    // Listen for language changes
+    window.addEventListener('languageChanged', () => {
+      updateTranslations();
+      filterApartments(); // Re-run filter to update results count
     });
   });
+
+  function updateTranslations() {
+    const elements = document.querySelectorAll('[data-key]');
+    elements.forEach(element => {
+      const key = element.getAttribute('data-key');
+      if (key) {
+        if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
+          element.placeholder = t(key);
+        } else if (element.tagName === 'OPTION') {
+          // For option elements, we need to handle them specially
+          const originalText = element.textContent;
+          if (originalText.includes('Guest') || originalText.includes('Bedroom') || originalText.includes('$')) {
+            // Keep the original text for complex options
+            return;
+          }
+          element.textContent = t(key);
+        } else {
+          element.textContent = t(key);
+        }
+      }
+    });
+  }
 
   function showApartmentDetails(apartment) {
     // Create a detailed view modal
@@ -446,29 +587,29 @@ const apartments = [
             
             <div>
               <div class="mb-6">
-                <div class="text-3xl font-bold text-primary-600 mb-2">${apartment.price}/night</div>
+                <div class="text-3xl font-bold text-primary-600 mb-2">${apartment.price}/${t('night')}</div>
                 <div class="flex items-center space-x-4 text-sm text-gray-600 mb-4">
-                  <span>${apartment.guests} Guests</span>
-                  <span>${apartment.beds} Bed${apartment.beds > 1 ? 's' : ''}</span>
-                  <span>${apartment.baths} Bath${apartment.baths > 1 ? 's' : ''}</span>
+                  <span>${apartment.guests} ${t('guests')}</span>
+                  <span>${apartment.beds} ${apartment.beds > 1 ? t('beds') : t('bed')}</span>
+                  <span>${apartment.baths} ${apartment.baths > 1 ? t('baths') : t('bath')}</span>
                   <span>${apartment.size}</span>
                 </div>
               </div>
               
               <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-3">Description</h3>
+                <h3 class="text-lg font-semibold mb-3">${t('description')}</h3>
                 <p class="text-gray-600 leading-relaxed">${apartment.description}</p>
               </div>
               
               <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-3">Amenities</h3>
+                <h3 class="text-lg font-semibold mb-3">${t('amenities')}</h3>
                 <div class="grid grid-cols-2 gap-2">
                   ${apartment.amenities.map(amenity => `<div class="flex items-center text-sm text-gray-600"><svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>${amenity}</div>`).join('')}
                 </div>
               </div>
               
-              <button onclick="window.bookingModal?.open(${JSON.stringify(apartment).replace(/"/g, '&quot;')}); this.closest('.fixed').remove(); document.body.style.overflow = '';" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
-                Book This Apartment
+              <button onclick="window.bookingModal?.open(${JSON.stringify(apartment).replace(/"/g, '"')}); this.closest('.fixed').remove(); document.body.style.overflow = '';" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                ${t('bookThisApartment')}
               </button>
             </div>
           </div>
