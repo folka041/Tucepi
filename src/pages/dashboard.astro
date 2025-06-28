@@ -24,91 +24,104 @@ import Footer from '../components/Footer.astro';
       </div>
     </section>
 
-    <!-- Bookings Content -->
-    <section class="py-8 sm:py-12">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <div class="flex items-center">
-              <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600" data-key="totalBookings">Total Bookings</p>
-                <p id="totalBookings" class="text-2xl font-bold text-gray-900">0</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <div class="flex items-center">
-              <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600" data-key="confirmed">Confirmed</p>
-                <p id="confirmedBookings" class="text-2xl font-bold text-gray-900">0</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <div class="flex items-center">
-              <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600" data-key="upcoming">Upcoming</p>
-                <p id="upcomingBookings" class="text-2xl font-bold text-gray-900">0</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-white rounded-xl shadow-lg p-6">
-            <div class="flex items-center">
-              <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                </svg>
-              </div>
-              <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600" data-key="totalSpent">Total Spent</p>
-                <p id="totalSpent" class="text-2xl font-bold text-gray-900">$0</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bookings List -->
-        <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8">
-          <div class="flex items-center justify-between mb-6">
-            <h3 class="text-xl font-bold text-gray-900" data-key="yourBookings">Your Bookings</h3>
-            <a href="/apartments" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200" data-key="newBooking">
-              New Booking
-            </a>
-          </div>
-
-          <div id="bookingsList" class="space-y-4">
-            <div class="text-center py-8 text-gray-500">
-              <svg class="w-12 h-12 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-              <p data-key="noBookingsFound">No bookings found</p>
-              <a href="/apartments" class="mt-4 inline-block bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200" data-key="makeFirstBooking">
-                Make Your First Booking
-              </a>
-            </div>
-          </div>
+    <!-- Auth Check -->
+    <div id="authRequired" class="hidden py-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="bg-white rounded-xl shadow-lg p-8">
+          <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          </svg>
+          <h2 class="text-2xl font-bold text-gray-900 mb-4" data-key="signInRequired">Sign In Required</h2>
+          <p class="text-gray-600 mb-6" data-key="signInRequiredDesc">Please sign in to view your bookings and manage your reservations.</p>
+          <button onclick="window.authModal?.open()" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200" data-key="signIn">
+            Sign In
+          </button>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- Dashboard Content -->
+    <div id="dashboardContent" class="hidden">
+      <!-- Stats Cards -->
+      <section class="py-8 sm:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-600" data-key="totalBookings">Total Bookings</p>
+                  <p id="totalBookings" class="text-2xl font-bold text-gray-900">0</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-600" data-key="confirmed">Confirmed</p>
+                  <p id="confirmedBookings" class="text-2xl font-bold text-gray-900">0</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-600" data-key="upcoming">Upcoming</p>
+                  <p id="upcomingBookings" class="text-2xl font-bold text-gray-900">0</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg p-6">
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                  </svg>
+                </div>
+                <div class="ml-4">
+                  <p class="text-sm font-medium text-gray-600" data-key="totalSpent">Total Spent</p>
+                  <p id="totalSpent" class="text-2xl font-bold text-gray-900">$0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bookings List -->
+          <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-bold text-gray-900" data-key="yourBookings">Your Bookings</h3>
+              <a href="/apartments" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200" data-key="newBooking">
+                New Booking
+              </a>
+            </div>
+
+            <div id="bookingsList" class="space-y-4">
+              <div class="text-center py-8 text-gray-500">
+                <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600 mb-4"></div>
+                <p data-key="loading">Loading your bookings...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
   
   <Footer />
@@ -116,17 +129,19 @@ import Footer from '../components/Footer.astro';
 
 <script>
   import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
 
   class Dashboard {
     constructor() {
       this.bookings = [];
+      this.apartments = [];
+      this.user = null;
       this.init();
-      this.updateTranslations();
     }
 
-    init() {
-      this.loadBookings();
-      this.updateStats();
+    async init() {
+      await this.checkAuth();
+      this.updateTranslations();
 
       // Listen for language changes
       window.addEventListener('languageChanged', () => {
@@ -135,24 +150,78 @@ import Footer from '../components/Footer.astro';
       });
     }
 
-    updateTranslations() {
-      const elements = document.querySelectorAll('[data-key]');
-      elements.forEach(element => {
-        const key = element.getAttribute('data-key');
-        if (key) {
-          element.textContent = t(key);
+    async checkAuth() {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (!user) {
+          this.showAuthRequired();
+          return;
         }
-      });
+
+        this.user = user;
+        this.showDashboard();
+        await this.loadData();
+      } catch (error) {
+        console.error('Auth check error:', error);
+        this.showAuthRequired();
+      }
     }
 
-    loadBookings() {
+    showAuthRequired() {
+      document.getElementById('authRequired').classList.remove('hidden');
+      document.getElementById('dashboardContent').classList.add('hidden');
+    }
+
+    showDashboard() {
+      document.getElementById('authRequired').classList.add('hidden');
+      document.getElementById('dashboardContent').classList.remove('hidden');
+    }
+
+    async loadData() {
       try {
-        const storedBookings = localStorage.getItem('apartmentBookings');
-        this.bookings = storedBookings ? JSON.parse(storedBookings) : [];
+        // Load apartments data
+        const { data: apartmentsData, error: apartmentsError } = await supabase
+          .from('apartments')
+          .select('*');
+
+        if (apartmentsError) throw apartmentsError;
+        this.apartments = apartmentsData;
+
+        // Load user's bookings
+        const { data: bookingsData, error: bookingsError } = await supabase
+          .from('bookings')
+          .select('*')
+          .eq('user_id', this.user.id)
+          .order('created_at', { ascending: false });
+
+        if (bookingsError) throw bookingsError;
+
+        // Combine booking data with apartment details
+        this.bookings = bookingsData.map(booking => {
+          const apartment = this.apartments.find(apt => apt.id === booking.apartment_id);
+          return {
+            ...booking,
+            apartment: apartment ? {
+              id: apartment.id,
+              name: apartment.name,
+              images: apartment.images,
+              price: `$${apartment.price_per_night}`,
+              guests: apartment.max_guests,
+              beds: apartment.bedrooms,
+              baths: apartment.bathrooms,
+              size: `${apartment.size_sqft} sq ft`,
+              features: apartment.features,
+              amenities: apartment.amenities
+            } : null
+          };
+        });
+
         this.renderBookings();
+        this.updateStats();
       } catch (error) {
-        console.error('Error loading bookings:', error);
-        this.bookings = [];
+        console.error('Error loading data:', error);
+        this.showError('Failed to load booking data');
       }
     }
 
@@ -180,16 +249,30 @@ import Footer from '../components/Footer.astro';
             <div class="flex-1">
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
                 <div class="flex items-center space-x-3 mb-2 sm:mb-0">
-                  <img src="${booking.apartment.images[0]}" alt="${booking.apartment.name}" class="w-16 h-16 object-cover rounded-lg">
-                  <div>
-                    <h4 class="font-semibold text-gray-900">${booking.apartment.name}</h4>
-                    <span class="px-2 py-1 text-xs rounded-full ${this.getStatusClasses(booking.status)}">
-                      ${t(booking.status) || booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                    </span>
-                  </div>
+                  ${booking.apartment ? `
+                    <img src="${booking.apartment.images[0]}" alt="${booking.apartment.name}" class="w-16 h-16 object-cover rounded-lg">
+                    <div>
+                      <h4 class="font-semibold text-gray-900">${booking.apartment.name}</h4>
+                      <span class="px-2 py-1 text-xs rounded-full ${this.getStatusClasses(booking.status)}">
+                        ${t(booking.status) || booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+                      </span>
+                    </div>
+                  ` : `
+                    <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center">
+                      <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900">${t('apartmentNotFound')}</h4>
+                      <span class="px-2 py-1 text-xs rounded-full ${this.getStatusClasses(booking.status)}">
+                        ${t(booking.status) || booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+                      </span>
+                    </div>
+                  `}
                 </div>
                 <div class="text-right">
-                  <div class="text-lg font-bold text-primary-600">$${booking.totalPrice}</div>
+                  <div class="text-lg font-bold text-primary-600">$${booking.total_price}</div>
                   <div class="text-sm text-gray-500">${t('total')}</div>
                 </div>
               </div>
@@ -197,7 +280,7 @@ import Footer from '../components/Footer.astro';
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-sm text-gray-600">
                 <div>
                   <strong>${t('checkin')}:</strong><br>
-                  ${new Date(booking.checkIn).toLocaleDateString('en-US', { 
+                  ${new Date(booking.check_in).toLocaleDateString('en-US', { 
                     weekday: 'short', 
                     year: 'numeric', 
                     month: 'short', 
@@ -206,7 +289,7 @@ import Footer from '../components/Footer.astro';
                 </div>
                 <div>
                   <strong>${t('checkout')}:</strong><br>
-                  ${new Date(booking.checkOut).toLocaleDateString('en-US', { 
+                  ${new Date(booking.check_out).toLocaleDateString('en-US', { 
                     weekday: 'short', 
                     year: 'numeric', 
                     month: 'short', 
@@ -222,12 +305,6 @@ import Footer from '../components/Footer.astro';
                   #${booking.id.slice(-6).toUpperCase()}
                 </div>
               </div>
-              
-              <div class="mt-4 text-sm text-gray-600">
-                <strong>${t('guest')}:</strong> ${booking.guestInfo.firstName} ${booking.guestInfo.lastName}<br>
-                <strong>${t('emailAddress')}:</strong> ${booking.guestInfo.email}<br>
-                <strong>${t('phoneNumber')}:</strong> ${booking.guestInfo.phone}
-              </div>
             </div>
             
             <div class="mt-4 lg:mt-0 lg:ml-6 flex flex-col sm:flex-row lg:flex-col gap-2">
@@ -237,7 +314,7 @@ import Footer from '../components/Footer.astro';
               >
                 ${t('viewDetails')}
               </button>
-              ${this.isUpcoming(booking.checkIn) ? `
+              ${this.isUpcoming(booking.check_in) && booking.status === 'confirmed' ? `
                 <button 
                   onclick="window.dashboard.cancelBooking('${booking.id}')"
                   class="px-4 py-2 text-red-600 border border-red-600 rounded-lg hover:bg-red-50 transition-colors text-sm font-medium"
@@ -271,10 +348,10 @@ import Footer from '../components/Footer.astro';
     updateStats() {
       const total = this.bookings.length;
       const confirmed = this.bookings.filter(b => b.status === 'confirmed').length;
-      const upcoming = this.bookings.filter(b => this.isUpcoming(b.checkIn) && b.status === 'confirmed').length;
+      const upcoming = this.bookings.filter(b => this.isUpcoming(b.check_in) && b.status === 'confirmed').length;
       const totalSpent = this.bookings
         .filter(b => b.status === 'confirmed')
-        .reduce((sum, b) => sum + b.totalPrice, 0);
+        .reduce((sum, b) => sum + b.total_price, 0);
 
       document.getElementById('totalBookings').textContent = total;
       document.getElementById('confirmedBookings').textContent = confirmed;
@@ -282,7 +359,7 @@ import Footer from '../components/Footer.astro';
       document.getElementById('totalSpent').textContent = `$${totalSpent}`;
     }
 
-    showBookingDetails(bookingId) {
+    async showBookingDetails(bookingId) {
       const booking = this.bookings.find(b => b.id === bookingId);
       if (!booking) return;
 
@@ -301,34 +378,40 @@ import Footer from '../components/Footer.astro';
             </div>
             
             <div class="space-y-6">
-              <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
-                <img src="${booking.apartment.images[0]}" alt="${booking.apartment.name}" class="w-20 h-20 object-cover rounded-lg">
-                <div>
-                  <h3 class="font-semibold text-gray-900">${booking.apartment.name}</h3>
-                  <p class="text-primary-600 font-medium">${booking.apartment.price}/${t('night')}</p>
-                  <span class="px-2 py-1 text-xs rounded-full ${this.getStatusClasses(booking.status)}">
-                    ${t(booking.status) || booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
-                  </span>
+              ${booking.apartment ? `
+                <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+                  <img src="${booking.apartment.images[0]}" alt="${booking.apartment.name}" class="w-20 h-20 object-cover rounded-lg">
+                  <div>
+                    <h3 class="font-semibold text-gray-900">${booking.apartment.name}</h3>
+                    <p class="text-primary-600 font-medium">${booking.apartment.price}/${t('night')}</p>
+                    <span class="px-2 py-1 text-xs rounded-full ${this.getStatusClasses(booking.status)}">
+                      ${t(booking.status) || booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+                    </span>
+                  </div>
                 </div>
-              </div>
+              ` : `
+                <div class="p-4 bg-gray-50 rounded-lg">
+                  <p class="text-gray-600">${t('apartmentNotFound')}</p>
+                </div>
+              `}
               
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <h4 class="font-semibold text-gray-900 mb-2">${t('stayDetails')}</h4>
                   <div class="space-y-2 text-sm">
-                    <div><strong>${t('checkin')}:</strong> ${new Date(booking.checkIn).toLocaleDateString()}</div>
-                    <div><strong>${t('checkout')}:</strong> ${new Date(booking.checkOut).toLocaleDateString()}</div>
+                    <div><strong>${t('checkin')}:</strong> ${new Date(booking.check_in).toLocaleDateString()}</div>
+                    <div><strong>${t('checkout')}:</strong> ${new Date(booking.check_out).toLocaleDateString()}</div>
                     <div><strong>${t('guests')}:</strong> ${booking.guests}</div>
                     <div><strong>${t('bookingId')}:</strong> #${booking.id.slice(-6).toUpperCase()}</div>
                   </div>
                 </div>
                 
                 <div>
-                  <h4 class="font-semibold text-gray-900 mb-2">${t('guestInformation')}</h4>
+                  <h4 class="font-semibold text-gray-900 mb-2">${t('bookingInformation')}</h4>
                   <div class="space-y-2 text-sm">
-                    <div><strong>${t('fullName')}:</strong> ${booking.guestInfo.firstName} ${booking.guestInfo.lastName}</div>
-                    <div><strong>${t('emailAddress')}:</strong> ${booking.guestInfo.email}</div>
-                    <div><strong>${t('phoneNumber')}:</strong> ${booking.guestInfo.phone}</div>
+                    <div><strong>${t('created')}:</strong> ${new Date(booking.created_at).toLocaleDateString()}</div>
+                    <div><strong>${t('status')}:</strong> ${t(booking.status) || booking.status}</div>
+                    <div><strong>${t('totalPrice')}:</strong> $${booking.total_price}</div>
                   </div>
                 </div>
               </div>
@@ -338,21 +421,14 @@ import Footer from '../components/Footer.astro';
                 <div class="space-y-2 text-sm">
                   <div class="flex justify-between">
                     <span>${t('totalAmount')}:</span>
-                    <span class="font-semibold">$${booking.totalPrice}</span>
+                    <span class="font-semibold">$${booking.total_price}</span>
                   </div>
                   <div class="flex justify-between">
                     <span>${t('status')}:</span>
-                    <span class="font-semibold text-green-600">${t('paid')}</span>
+                    <span class="font-semibold text-green-600">${booking.status === 'confirmed' ? t('paid') : t('pending')}</span>
                   </div>
                 </div>
               </div>
-              
-              ${booking.specialRequests ? `
-                <div>
-                  <h4 class="font-semibold text-gray-900 mb-2">${t('specialRequests')}</h4>
-                  <p class="text-sm text-gray-600">${booking.specialRequests}</p>
-                </div>
-              ` : ''}
             </div>
           </div>
         </div>
@@ -369,17 +445,46 @@ import Footer from '../components/Footer.astro';
       });
     }
 
-    cancelBooking(bookingId) {
+    async cancelBooking(bookingId) {
       if (confirm(t('confirmCancelBooking') || 'Are you sure you want to cancel this booking?')) {
-        const bookingIndex = this.bookings.findIndex(b => b.id === bookingId);
-        if (bookingIndex !== -1) {
-          this.bookings[bookingIndex].status = 'cancelled';
-          localStorage.setItem('apartmentBookings', JSON.stringify(this.bookings));
-          this.renderBookings();
-          this.updateStats();
+        try {
+          const { error } = await supabase
+            .from('bookings')
+            .update({ status: 'cancelled' })
+            .eq('id', bookingId);
+
+          if (error) throw error;
+
+          // Reload data to reflect changes
+          await this.loadData();
           alert(t('bookingCancelledSuccess') || 'Booking cancelled successfully.');
+        } catch (error) {
+          console.error('Error cancelling booking:', error);
+          alert(t('bookingCancelError') || 'Error cancelling booking. Please try again.');
         }
       }
+    }
+
+    showError(message) {
+      const container = document.getElementById('bookingsList');
+      container.innerHTML = `
+        <div class="text-center py-8 text-red-500">
+          <svg class="w-12 h-12 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <p>${message}</p>
+        </div>
+      `;
+    }
+
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          element.textContent = t(key);
+        }
+      });
     }
   }
 
@@ -387,3 +492,4 @@ import Footer from '../components/Footer.astro';
     window.dashboard = new Dashboard();
   });
 </script>
+</Layout>

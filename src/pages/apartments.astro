@@ -4,81 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Calendar from '../components/Calendar.astro';
 import BookingModal from '../components/BookingModal.astro';
-
-const apartments = [
-  {
-    id: 1,
-    name: "Ocean View Studio",
-    images: [
-      "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-      "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-      "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-    ],
-    price: "$150",
-    originalPrice: "$180",
-    guests: 2,
-    beds: 1,
-    baths: 1,
-    size: "450 sq ft",
-    description: "Perfect for couples seeking a romantic getaway with stunning ocean views. This modern studio features a comfortable king-size bed, fully equipped kitchenette, and a private balcony overlooking the sea.",
-    features: ["Ocean View", "Balcony", "Kitchen", "WiFi", "Air Conditioning", "Smart TV"],
-    amenities: ["Free WiFi", "Ocean View", "Balcony", "Kitchenette", "Air Conditioning", "Smart TV", "Coffee Machine", "Hair Dryer"]
-  },
-  {
-    id: 2,
-    name: "Deluxe One Bedroom",
-    images: [
-      "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-      "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-      "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-    ],
-    price: "$220",
-    originalPrice: "$260",
-    guests: 4,
-    beds: 1,
-    baths: 1,
-    size: "650 sq ft",
-    description: "Spacious one-bedroom apartment ideal for small families or groups. Features a separate living area, full kitchen, and panoramic ocean views from multiple windows.",
-    features: ["Ocean View", "Living Room", "Full Kitchen", "Balcony", "WiFi", "Parking"],
-    amenities: ["Free WiFi", "Ocean View", "Balcony", "Full Kitchen", "Living Room", "Air Conditioning", "Smart TV", "Dishwasher", "Washing Machine", "Free Parking"]
-  },
-  {
-    id: 3,
-    name: "Premium Two Bedroom",
-    images: [
-      "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-      "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-      "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-    ],
-    price: "$320",
-    originalPrice: "$380",
-    guests: 5,
-    beds: 2,
-    baths: 2,
-    size: "950 sq ft",
-    description: "Our premium offering perfect for larger families or groups. Two spacious bedrooms, two full bathrooms, expansive living area, and breathtaking panoramic ocean views.",
-    features: ["Panoramic Ocean View", "Two Balconies", "Dining Area", "Premium Amenities", "Master Suite", "Guest Bathroom"],
-    amenities: ["Free WiFi", "Panoramic Ocean View", "Two Balconies", "Full Kitchen", "Dining Area", "Living Room", "Master Suite", "Two Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Free Parking", "Premium Toiletries"]
-  },
-  {
-    id: 4,
-    name: "Penthouse Suite",
-    images: [
-      "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-      "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-      "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-    ],
-    price: "$450",
-    originalPrice: "$520",
-    guests: 5,
-    beds: 3,
-    baths: 3,
-    size: "1200 sq ft",
-    description: "The ultimate luxury experience with three bedrooms, three bathrooms, and a private rooftop terrace. Perfect for special occasions and large groups seeking unparalleled comfort.",
-    features: ["Private Rooftop Terrace", "Three Bedrooms", "Luxury Finishes", "Panoramic Views", "Premium Location"],
-    amenities: ["Free WiFi", "Private Rooftop Terrace", "Panoramic Ocean View", "Gourmet Kitchen", "Dining Area", "Living Room", "Three Bedrooms", "Three Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Dryer", "Free Parking", "Concierge Service", "Premium Toiletries", "Jacuzzi"]
-  }
-];
 ---
 
 <Layout 
@@ -126,7 +51,7 @@ const apartments = [
             </select>
           </div>
           <div id="resultsCount" class="text-sm text-gray-600 mt-2 sm:mt-0">
-            <span data-key="showing">Showing</span> {apartments.length} <span data-key="apartments">apartments</span>
+            <span data-key="showing">Showing</span> <span id="apartmentCount">0</span> <span data-key="apartments">apartments</span>
           </div>
         </div>
       </div>
@@ -139,104 +64,7 @@ const apartments = [
           <!-- Apartments List -->
           <div class="xl:col-span-2">
             <div id="apartmentsList" class="space-y-6 sm:space-y-8">
-              {apartments.map((apartment) => (
-                <div class="apartment-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" data-apartment={JSON.stringify(apartment)}>
-                  <div class="flex flex-col lg:flex-row">
-                    <!-- Image Gallery -->
-                    <div class="lg:w-1/2 relative">
-                      <div class="apartment-gallery relative h-64 sm:h-72 lg:h-full">
-                        {apartment.images.map((image, index) => (
-                          <img
-                            src={image}
-                            alt={`${apartment.name} - Image ${index + 1}`}
-                            class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0'}`}
-                            loading="lazy"
-                          />
-                        ))}
-                        <div class="absolute top-4 left-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {apartment.images.length} <span data-key="photos">Photos</span>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {apartment.price}/<span data-key="night">night</span>
-                        </div>
-                        {apartment.originalPrice && (
-                          <div class="absolute top-12 right-4 bg-gray-800 text-white px-2 py-1 rounded text-xs line-through">
-                            {apartment.originalPrice}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <!-- Content -->
-                    <div class="lg:w-1/2 p-4 sm:p-6">
-                      <div class="flex items-start justify-between mb-3">
-                        <h3 class="text-lg sm:text-xl font-semibold text-gray-900">{apartment.name}</h3>
-                        <div class="flex items-center text-yellow-400">
-                          {Array.from({ length: 5 }, (_, i) => (
-                            <svg class="w-3 h-3 sm:w-4 sm:h-4 fill-current">
-                              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                            </svg>
-                          ))}
-                          <span class="ml-1 text-xs sm:text-sm text-gray-600">(4.9)</span>
-                        </div>
-                      </div>
-                      
-                      <p class="text-gray-600 mb-4 text-sm leading-relaxed">{apartment.description}</p>
-                      
-                      <!-- Details -->
-                      <div class="grid grid-cols-2 sm:flex sm:items-center sm:justify-between text-xs sm:text-sm text-gray-600 mb-4 gap-2">
-                        <span class="flex items-center">
-                          <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                          </svg>
-                          {apartment.guests} <span data-key="guests">Guests</span>
-                        </span>
-                        <span class="flex items-center">
-                          <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
-                          </svg>
-                          {apartment.beds} <span data-key={apartment.beds > 1 ? "beds" : "bed"}>{apartment.beds > 1 ? "Beds" : "Bed"}</span>
-                        </span>
-                        <span class="flex items-center">
-                          <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M5 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1H5zM13 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1h-2z"></path>
-                          </svg>
-                          {apartment.baths} <span data-key={apartment.baths > 1 ? "baths" : "bath"}>{apartment.baths > 1 ? "Baths" : "Bath"}</span>
-                        </span>
-                        <span class="text-gray-500 col-span-2 sm:col-span-1">{apartment.size}</span>
-                      </div>
-                      
-                      <!-- Features -->
-                      <div class="flex flex-wrap gap-2 mb-4">
-                        {apartment.features.slice(0, 4).map(feature => (
-                          <span class="bg-primary-50 text-primary-700 px-2 py-1 rounded text-xs font-medium">
-                            {feature}
-                          </span>
-                        ))}
-                        {apartment.features.length > 4 && (
-                          <span class="text-xs text-gray-500 px-2 py-1">
-                            +{apartment.features.length - 4} <span data-key="more">more</span>
-                          </span>
-                        )}
-                      </div>
-                      
-                      <!-- CTA -->
-                      <div class="flex flex-col sm:flex-row gap-3">
-                        <button
-                          class="book-now-btn flex-1 bg-primary-600 hover:bg-primary-700 text-white text-center py-2 px-4 rounded-lg font-medium transition-colors duration-200"
-                          data-apartment={JSON.stringify(apartment)}
-                          data-key="bookNow"
-                        >
-                          Book Now
-                        </button>
-                        <button class="view-details-btn px-4 py-2 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors duration-200" data-apartment={JSON.stringify(apartment)} data-key="viewDetails">
-                          View Details
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+              <!-- Apartments will be loaded here -->
             </div>
           </div>
           
@@ -321,178 +149,352 @@ const apartments = [
 
 <script>
   import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
 
-  // Image gallery functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const galleries = document.querySelectorAll('.apartment-gallery');
-    
-    galleries.forEach(gallery => {
-      const images = gallery.querySelectorAll('img');
-      let currentIndex = 0;
-      
-      if (images.length > 1) {
-        setInterval(() => {
-          images[currentIndex].classList.remove('opacity-100');
-          images[currentIndex].classList.add('opacity-0');
-          
-          currentIndex = (currentIndex + 1) % images.length;
-          
-          images[currentIndex].classList.remove('opacity-0');
-          images[currentIndex].classList.add('opacity-100');
-        }, 3000);
+  class ApartmentsPage {
+    constructor() {
+      this.apartments = [];
+      this.filteredApartments = [];
+      this.init();
+    }
+
+    async init() {
+      await this.loadApartments();
+      this.setupImageGalleries();
+      this.updateTranslations();
+      this.bindEvents();
+    }
+
+    async loadApartments() {
+      try {
+        const { data, error } = await supabase
+          .from('apartments')
+          .select('*')
+          .eq('available', true);
+
+        if (error) throw error;
+
+        this.apartments = data.map(apt => ({
+          id: apt.id,
+          name: apt.name,
+          images: apt.images,
+          price: `$${apt.price_per_night}`,
+          guests: apt.max_guests,
+          beds: apt.bedrooms,
+          baths: apt.bathrooms,
+          size: `${apt.size_sqft} sq ft`,
+          description: apt.description,
+          features: apt.features,
+          amenities: apt.amenities
+        }));
+
+        this.filteredApartments = [...this.apartments];
+        this.renderApartments();
+        this.updateResultsCount();
+      } catch (error) {
+        console.error('Error loading apartments:', error);
+        // Fallback to static data
+        this.loadStaticApartments();
       }
-    });
+    }
 
-    // Update translations
-    updateTranslations();
-
-    // Book Now button functionality
-    const bookNowButtons = document.querySelectorAll('.book-now-btn');
-    bookNowButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
-        window.bookingModal?.open(apartmentData);
-      });
-    });
-
-    // View Details button functionality
-    const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
-    viewDetailsButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
-        showApartmentDetails(apartmentData);
-      });
-    });
-
-    // Quick Booking Form functionality
-    const quickBookingForm = document.getElementById('quickBookingForm');
-    if (quickBookingForm) {
-      quickBookingForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const checkinInput = document.getElementById('quickCheckin');
-        const checkoutInput = document.getElementById('quickCheckout');
-        const guestsSelect = document.getElementById('quickBookingGuests');
-        
-        const checkin = checkinInput.value;
-        const checkout = checkoutInput.value;
-        const guests = parseInt(guestsSelect.value);
-        
-        if (!checkin || !checkout) {
-          alert(t('pleaseSelectDates') || 'Please select check-in and check-out dates first.');
-          return;
+    loadStaticApartments() {
+      this.apartments = [
+        {
+          id: 1,
+          name: "Ocean View Studio",
+          images: [
+            "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+            "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+            "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+          ],
+          price: "$150",
+          guests: 2,
+          beds: 1,
+          baths: 1,
+          size: "450 sq ft",
+          description: "Perfect for couples seeking a romantic getaway with stunning ocean views. This modern studio features a comfortable king-size bed, fully equipped kitchenette, and a private balcony overlooking the sea.",
+          features: ["Ocean View", "Balcony", "Kitchen", "WiFi", "Air Conditioning", "Smart TV"],
+          amenities: ["Free WiFi", "Ocean View", "Balcony", "Kitchenette", "Air Conditioning", "Smart TV", "Coffee Machine", "Hair Dryer"]
+        },
+        {
+          id: 2,
+          name: "Deluxe One Bedroom",
+          images: [
+            "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+            "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+            "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+          ],
+          price: "$220",
+          guests: 4,
+          beds: 1,
+          baths: 1,
+          size: "650 sq ft",
+          description: "Spacious one-bedroom apartment ideal for small families or groups. Features a separate living area, full kitchen, and panoramic ocean views from multiple windows.",
+          features: ["Ocean View", "Living Room", "Full Kitchen", "Balcony", "WiFi", "Parking"],
+          amenities: ["Free WiFi", "Ocean View", "Balcony", "Full Kitchen", "Living Room", "Air Conditioning", "Smart TV", "Dishwasher", "Washing Machine", "Free Parking"]
+        },
+        {
+          id: 3,
+          name: "Premium Two Bedroom",
+          images: [
+            "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+            "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+            "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+          ],
+          price: "$320",
+          guests: 5,
+          beds: 2,
+          baths: 2,
+          size: "950 sq ft",
+          description: "Our premium offering perfect for larger families or groups. Two spacious bedrooms, two full bathrooms, expansive living area, and breathtaking panoramic ocean views.",
+          features: ["Panoramic Ocean View", "Two Balconies", "Dining Area", "Premium Amenities", "Master Suite", "Guest Bathroom"],
+          amenities: ["Free WiFi", "Panoramic Ocean View", "Two Balconies", "Full Kitchen", "Dining Area", "Living Room", "Master Suite", "Two Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Free Parking", "Premium Toiletries"]
+        },
+        {
+          id: 4,
+          name: "Penthouse Suite",
+          images: [
+            "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+            "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+            "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+          ],
+          price: "$450",
+          guests: 5,
+          beds: 3,
+          baths: 3,
+          size: "1200 sq ft",
+          description: "The ultimate luxury experience with three bedrooms, three bathrooms, and a private rooftop terrace. Perfect for special occasions and large groups seeking unparalleled comfort.",
+          features: ["Private Rooftop Terrace", "Three Bedrooms", "Luxury Finishes", "Panoramic Views", "Premium Location"],
+          amenities: ["Free WiFi", "Private Rooftop Terrace", "Panoramic Ocean View", "Gourmet Kitchen", "Dining Area", "Living Room", "Three Bedrooms", "Three Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Dryer", "Free Parking", "Concierge Service", "Premium Toiletries", "Jacuzzi"]
         }
-        
-        // Find suitable apartments based on guest count
-        const apartments = [
-          {
-            id: 1,
-            name: "Ocean View Studio",
-            images: [
-              "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-              "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-              "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-            ],
-            price: "$150",
-            guests: 2,
-            beds: 1,
-            baths: 1,
-            size: "450 sq ft",
-            features: ["Ocean View", "Balcony", "Kitchen", "WiFi", "Air Conditioning", "Smart TV"],
-            amenities: ["Free WiFi", "Ocean View", "Balcony", "Kitchenette", "Air Conditioning", "Smart TV", "Coffee Machine", "Hair Dryer"]
-          },
-          {
-            id: 2,
-            name: "Deluxe One Bedroom",
-            images: [
-              "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-              "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-              "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-            ],
-            price: "$220",
-            guests: 4,
-            beds: 1,
-            baths: 1,
-            size: "650 sq ft",
-            features: ["Ocean View", "Living Room", "Full Kitchen", "Balcony", "WiFi", "Parking"],
-            amenities: ["Free WiFi", "Ocean View", "Balcony", "Full Kitchen", "Living Room", "Air Conditioning", "Smart TV", "Dishwasher", "Washing Machine", "Free Parking"]
-          },
-          {
-            id: 3,
-            name: "Premium Two Bedroom",
-            images: [
-              "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-              "https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-              "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-            ],
-            price: "$320",
-            guests: 5,
-            beds: 2,
-            baths: 2,
-            size: "950 sq ft",
-            features: ["Panoramic Ocean View", "Two Balconies", "Dining Area", "Premium Amenities", "Master Suite", "Guest Bathroom"],
-            amenities: ["Free WiFi", "Panoramic Ocean View", "Two Balconies", "Full Kitchen", "Dining Area", "Living Room", "Master Suite", "Two Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Free Parking", "Premium Toiletries"]
-          },
-          {
-            id: 4,
-            name: "Penthouse Suite",
-            images: [
-              "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-              "https://images.pexels.com/photos/1743229/pexels-photo-1743229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-              "https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-            ],
-            price: "$450",
-            guests: 5,
-            beds: 3,
-            baths: 3,
-            size: "1200 sq ft",
-            features: ["Private Rooftop Terrace", "Three Bedrooms", "Luxury Finishes", "Panoramic Views", "Premium Location"],
-            amenities: ["Free WiFi", "Private Rooftop Terrace", "Panoramic Ocean View", "Gourmet Kitchen", "Dining Area", "Living Room", "Three Bedrooms", "Three Bathrooms", "Air Conditioning", "Smart TVs", "Dishwasher", "Washing Machine", "Dryer", "Free Parking", "Concierge Service", "Premium Toiletries", "Jacuzzi"]
-          }
-        ];
-        
-        const suitableApartments = apartments.filter(apt => apt.guests >= guests);
-        
-        if (suitableApartments.length === 0) {
-          alert(t('noApartmentsAvailable') || 'No apartments available for the selected number of guests.');
-          return;
-        }
-        
-        // Open booking modal with the first suitable apartment
-        window.bookingModal?.open(suitableApartments[0]);
+      ];
+
+      this.filteredApartments = [...this.apartments];
+      this.renderApartments();
+      this.updateResultsCount();
+    }
+
+    renderApartments() {
+      const container = document.getElementById('apartmentsList');
+      if (!container) return;
+
+      container.innerHTML = this.filteredApartments.map(apartment => `
+        <div class="apartment-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300" data-apartment='${JSON.stringify(apartment)}'>
+          <div class="flex flex-col lg:flex-row">
+            <!-- Image Gallery -->
+            <div class="lg:w-1/2 relative">
+              <div class="apartment-gallery relative h-64 sm:h-72 lg:h-full">
+                ${apartment.images.map((image, index) => `
+                  <img
+                    src="${image}"
+                    alt="${apartment.name} - Image ${index + 1}"
+                    class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${index === 0 ? 'opacity-100' : 'opacity-0'}"
+                    loading="lazy"
+                  />
+                `).join('')}
+                <div class="absolute top-4 left-4 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  ${apartment.images.length} <span data-key="photos">${t('photos')}</span>
+                </div>
+                <div class="absolute top-4 right-4 bg-primary-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                  ${apartment.price}/<span data-key="night">${t('night')}</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="lg:w-1/2 p-4 sm:p-6">
+              <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg sm:text-xl font-semibold text-gray-900">${apartment.name}</h3>
+                <div class="flex items-center text-yellow-400">
+                  ${Array.from({ length: 5 }, () => `
+                    <svg class="w-3 h-3 sm:w-4 sm:h-4 fill-current">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                    </svg>
+                  `).join('')}
+                  <span class="ml-1 text-xs sm:text-sm text-gray-600">(4.9)</span>
+                </div>
+              </div>
+              
+              <p class="text-gray-600 mb-4 text-sm leading-relaxed">${apartment.description}</p>
+              
+              <!-- Details -->
+              <div class="grid grid-cols-2 sm:flex sm:items-center sm:justify-between text-xs sm:text-sm text-gray-600 mb-4 gap-2">
+                <span class="flex items-center">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  ${apartment.guests} <span data-key="guests">${t('guests')}</span>
+                </span>
+                <span class="flex items-center">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                  </svg>
+                  ${apartment.beds} <span data-key="${apartment.beds > 1 ? 'beds' : 'bed'}">${apartment.beds > 1 ? t('beds') : t('bed')}</span>
+                </span>
+                <span class="flex items-center">
+                  <svg class="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M5 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1H5zM13 4a1 1 0 00-1 1v10a1 1 0 001 1h2a1 1 0 001-1V5a1 1 0 00-1-1h-2z"></path>
+                  </svg>
+                  ${apartment.baths} <span data-key="${apartment.baths > 1 ? 'baths' : 'bath'}">${apartment.baths > 1 ? t('baths') : t('bath')}</span>
+                </span>
+                <span class="text-gray-500 col-span-2 sm:col-span-1">${apartment.size}</span>
+              </div>
+              
+              <!-- Features -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                ${apartment.features.slice(0, 4).map(feature => `
+                  <span class="bg-primary-50 text-primary-700 px-2 py-1 rounded text-xs font-medium">
+                    ${feature}
+                  </span>
+                `).join('')}
+                ${apartment.features.length > 4 ? `
+                  <span class="text-xs text-gray-500 px-2 py-1">
+                    +${apartment.features.length - 4} <span data-key="more">${t('more')}</span>
+                  </span>
+                ` : ''}
+              </div>
+              
+              <!-- CTA -->
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button
+                  class="book-now-btn flex-1 bg-primary-600 hover:bg-primary-700 text-white text-center py-2 px-4 rounded-lg font-medium transition-colors duration-200"
+                  data-apartment='${JSON.stringify(apartment)}'
+                  data-key="bookNow"
+                >
+                  ${t('bookNow')}
+                </button>
+                <button class="view-details-btn px-4 py-2 border border-primary-600 text-primary-600 rounded-lg hover:bg-primary-50 transition-colors duration-200" data-apartment='${JSON.stringify(apartment)}' data-key="viewDetails">
+                  ${t('viewDetails')}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      this.bindApartmentEvents();
+    }
+
+    bindApartmentEvents() {
+      // Book Now button functionality
+      const bookNowButtons = document.querySelectorAll('.book-now-btn');
+      bookNowButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
+          window.bookingModal?.open(apartmentData);
+        });
+      });
+
+      // View Details button functionality
+      const viewDetailsButtons = document.querySelectorAll('.view-details-btn');
+      viewDetailsButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
+          window.apartmentsPage.showApartmentDetails(apartmentData);
+        });
       });
     }
 
-    // Listen for calendar date changes to update quick booking form
-    window.addEventListener('datesSelected', function(e) {
-      const { checkin, checkout } = e.detail;
-      const checkinInput = document.getElementById('quickCheckin');
-      const checkoutInput = document.getElementById('quickCheckout');
-      
-      if (checkinInput && checkout) {
-        checkinInput.value = checkin.toLocaleDateString();
+    setupImageGalleries() {
+      // This will be called after rendering
+      setTimeout(() => {
+        const galleries = document.querySelectorAll('.apartment-gallery');
+        
+        galleries.forEach(gallery => {
+          const images = gallery.querySelectorAll('img');
+          let currentIndex = 0;
+          
+          if (images.length > 1) {
+            setInterval(() => {
+              images[currentIndex].classList.remove('opacity-100');
+              images[currentIndex].classList.add('opacity-0');
+              
+              currentIndex = (currentIndex + 1) % images.length;
+              
+              images[currentIndex].classList.remove('opacity-0');
+              images[currentIndex].classList.add('opacity-100');
+            }, 3000);
+          }
+        });
+      }, 100);
+    }
+
+    bindEvents() {
+      // Quick Booking Form functionality
+      const quickBookingForm = document.getElementById('quickBookingForm');
+      if (quickBookingForm) {
+        quickBookingForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const checkinInput = document.getElementById('quickCheckin');
+          const checkoutInput = document.getElementById('quickCheckout');
+          const guestsSelect = document.getElementById('quickBookingGuests');
+          
+          const checkin = checkinInput.value;
+          const checkout = checkoutInput.value;
+          const guests = parseInt(guestsSelect.value);
+          
+          if (!checkin || !checkout) {
+            alert(t('pleaseSelectDates') || 'Please select check-in and check-out dates first.');
+            return;
+          }
+          
+          // Find suitable apartments based on guest count
+          const suitableApartments = this.apartments.filter(apt => apt.guests >= guests);
+          
+          if (suitableApartments.length === 0) {
+            alert(t('noApartmentsAvailable') || 'No apartments available for the selected number of guests.');
+            return;
+          }
+          
+          // Open booking modal with the first suitable apartment
+          window.bookingModal?.open(suitableApartments[0]);
+        });
       }
-      if (checkoutInput && checkout) {
-        checkoutInput.value = checkout.toLocaleDateString();
-      }
-    });
 
-    // Filter functionality
-    const apartmentFilter = document.getElementById('apartmentFilter');
-    const priceFilter = document.getElementById('priceFilter');
-    const guestFilter = document.getElementById('guestFilter');
+      // Listen for calendar date changes to update quick booking form
+      window.addEventListener('datesSelected', (e) => {
+        const { checkin, checkout } = e.detail;
+        const checkinInput = document.getElementById('quickCheckin');
+        const checkoutInput = document.getElementById('quickCheckout');
+        
+        if (checkinInput && checkin) {
+          checkinInput.value = checkin.toLocaleDateString();
+        }
+        if (checkoutInput && checkout) {
+          checkoutInput.value = checkout.toLocaleDateString();
+        }
+      });
 
-    function filterApartments() {
-      const apartmentCards = document.querySelectorAll('.apartment-card');
-      let visibleCount = 0;
+      // Filter functionality
+      const apartmentFilter = document.getElementById('apartmentFilter');
+      const priceFilter = document.getElementById('priceFilter');
+      const guestFilter = document.getElementById('guestFilter');
 
-      apartmentCards.forEach(card => {
-        const apartmentData = JSON.parse(card.getAttribute('data-apartment'));
+      apartmentFilter?.addEventListener('change', () => this.filterApartments());
+      priceFilter?.addEventListener('change', () => this.filterApartments());
+      guestFilter?.addEventListener('change', () => this.filterApartments());
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
+        this.renderApartments();
+        this.updateResultsCount();
+      });
+    }
+
+    filterApartments() {
+      const apartmentFilter = document.getElementById('apartmentFilter');
+      const priceFilter = document.getElementById('priceFilter');
+      const guestFilter = document.getElementById('guestFilter');
+
+      this.filteredApartments = this.apartments.filter(apartment => {
         let shouldShow = true;
 
         // Apartment type filter
         if (apartmentFilter.value) {
-          const beds = apartmentData.beds;
+          const beds = apartment.beds;
           if (apartmentFilter.value === 'studio' && beds !== 1) shouldShow = false;
           if (apartmentFilter.value === '1-bedroom' && beds !== 1) shouldShow = false;
           if (apartmentFilter.value === '2-bedroom' && beds < 2) shouldShow = false;
@@ -500,7 +502,7 @@ const apartments = [
 
         // Price filter
         if (priceFilter.value) {
-          const price = parseInt(apartmentData.price.replace('$', ''));
+          const price = parseInt(apartment.price.replace('$', ''));
           if (priceFilter.value === 'under-200' && price >= 200) shouldShow = false;
           if (priceFilter.value === '200-300' && (price < 200 || price > 300)) shouldShow = false;
           if (priceFilter.value === '300-plus' && price < 300) shouldShow = false;
@@ -508,126 +510,113 @@ const apartments = [
 
         // Guest filter
         if (guestFilter.value) {
-          const guests = apartmentData.guests;
+          const guests = apartment.guests;
           if (guestFilter.value === '1-2' && guests > 2) shouldShow = false;
           if (guestFilter.value === '3-4' && (guests < 3 || guests > 4)) shouldShow = false;
           if (guestFilter.value === '5' && guests !== 5) shouldShow = false;
         }
 
-        if (shouldShow) {
-          card.style.display = 'block';
-          visibleCount++;
-        } else {
-          card.style.display = 'none';
-        }
+        return shouldShow;
       });
 
-      const resultsCount = document.getElementById('resultsCount');
-      if (resultsCount) {
-        resultsCount.innerHTML = `<span data-key="showing">${t('showing')}</span> ${visibleCount} <span data-key="apartments">${t('apartments')}</span>`;
+      this.renderApartments();
+      this.updateResultsCount();
+      this.setupImageGalleries();
+    }
+
+    updateResultsCount() {
+      const countElement = document.getElementById('apartmentCount');
+      if (countElement) {
+        countElement.textContent = this.filteredApartments.length;
       }
     }
 
-    apartmentFilter?.addEventListener('change', filterApartments);
-    priceFilter?.addEventListener('change', filterApartments);
-    guestFilter?.addEventListener('change', filterApartments);
-
-    // Listen for language changes
-    window.addEventListener('languageChanged', () => {
-      updateTranslations();
-      filterApartments(); // Re-run filter to update results count
-    });
-  });
-
-  function updateTranslations() {
-    const elements = document.querySelectorAll('[data-key]');
-    elements.forEach(element => {
-      const key = element.getAttribute('data-key');
-      if (key) {
-        if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
-          element.placeholder = t(key);
-        } else if (element.tagName === 'OPTION') {
-          // For option elements, we need to handle them specially
-          const originalText = element.textContent;
-          if (originalText.includes('Guest') || originalText.includes('Bedroom') || originalText.includes('$')) {
-            // Keep the original text for complex options
-            return;
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
+            element.placeholder = t(key);
+          } else if (element.tagName === 'OPTION') {
+            element.textContent = t(key);
+          } else {
+            element.textContent = t(key);
           }
-          element.textContent = t(key);
-        } else {
-          element.textContent = t(key);
         }
-      }
-    });
-  }
+      });
+    }
 
-  function showApartmentDetails(apartment) {
-    // Create a detailed view modal
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4';
-    modal.innerHTML = `
-      <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl mx-auto max-h-[90vh] overflow-y-auto">
-        <div class="p-6 sm:p-8">
-          <div class="flex items-center justify-between mb-6">
-            <h2 class="text-2xl font-bold text-gray-900">${apartment.name}</h2>
-            <button onclick="this.closest('.fixed').remove(); document.body.style.overflow = '';" class="text-gray-400 hover:text-gray-600 transition-colors">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-              </svg>
-            </button>
-          </div>
-          
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
-              <img src="${apartment.images[0]}" alt="${apartment.name}" class="w-full h-64 object-cover rounded-lg mb-4">
-              <div class="grid grid-cols-3 gap-2">
-                ${apartment.images.slice(1, 4).map(img => `<img src="${img}" alt="${apartment.name}" class="w-full h-20 object-cover rounded">`).join('')}
-              </div>
+    showApartmentDetails(apartment) {
+      // Create a detailed view modal
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4';
+      modal.innerHTML = `
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl mx-auto max-h-[90vh] overflow-y-auto">
+          <div class="p-6 sm:p-8">
+            <div class="flex items-center justify-between mb-6">
+              <h2 class="text-2xl font-bold text-gray-900">${apartment.name}</h2>
+              <button onclick="this.closest('.fixed').remove(); document.body.style.overflow = '';" class="text-gray-400 hover:text-gray-600 transition-colors">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </button>
             </div>
             
-            <div>
-              <div class="mb-6">
-                <div class="text-3xl font-bold text-primary-600 mb-2">${apartment.price}/${t('night')}</div>
-                <div class="flex items-center space-x-4 text-sm text-gray-600 mb-4">
-                  <span>${apartment.guests} ${t('guests')}</span>
-                  <span>${apartment.beds} ${apartment.beds > 1 ? t('beds') : t('bed')}</span>
-                  <span>${apartment.baths} ${apartment.baths > 1 ? t('baths') : t('bath')}</span>
-                  <span>${apartment.size}</span>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div>
+                <img src="${apartment.images[0]}" alt="${apartment.name}" class="w-full h-64 object-cover rounded-lg mb-4">
+                <div class="grid grid-cols-3 gap-2">
+                  ${apartment.images.slice(1, 4).map(img => `<img src="${img}" alt="${apartment.name}" class="w-full h-20 object-cover rounded">`).join('')}
                 </div>
               </div>
               
-              <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-3">${t('description')}</h3>
-                <p class="text-gray-600 leading-relaxed">${apartment.description}</p>
-              </div>
-              
-              <div class="mb-6">
-                <h3 class="text-lg font-semibold mb-3">${t('amenities')}</h3>
-                <div class="grid grid-cols-2 gap-2">
-                  ${apartment.amenities.map(amenity => `<div class="flex items-center text-sm text-gray-600"><svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>${amenity}</div>`).join('')}
+              <div>
+                <div class="mb-6">
+                  <div class="text-3xl font-bold text-primary-600 mb-2">${apartment.price}/${t('night')}</div>
+                  <div class="flex items-center space-x-4 text-sm text-gray-600 mb-4">
+                    <span>${apartment.guests} ${t('guests')}</span>
+                    <span>${apartment.beds} ${apartment.beds > 1 ? t('beds') : t('bed')}</span>
+                    <span>${apartment.baths} ${apartment.baths > 1 ? t('baths') : t('bath')}</span>
+                    <span>${apartment.size}</span>
+                  </div>
                 </div>
+                
+                <div class="mb-6">
+                  <h3 class="text-lg font-semibold mb-3">${t('description')}</h3>
+                  <p class="text-gray-600 leading-relaxed">${apartment.description}</p>
+                </div>
+                
+                <div class="mb-6">
+                  <h3 class="text-lg font-semibold mb-3">${t('amenities')}</h3>
+                  <div class="grid grid-cols-2 gap-2">
+                    ${apartment.amenities.map(amenity => `<div class="flex items-center text-sm text-gray-600"><svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>${amenity}</div>`).join('')}
+                  </div>
+                </div>
+                
+                <button onclick="window.bookingModal?.open(${JSON.stringify(apartment).replace(/"/g, '&quot;')}); this.closest('.fixed').remove(); document.body.style.overflow = '';" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                  ${t('bookThisApartment')}
+                </button>
               </div>
-              
-              <button onclick="window.bookingModal?.open(${JSON.stringify(apartment).replace(/"/g, '"')}); this.closest('.fixed').remove(); document.body.style.overflow = '';" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
-                ${t('bookThisApartment')}
-              </button>
             </div>
           </div>
         </div>
-      </div>
-    `;
-    
-    document.body.appendChild(modal);
-    document.body.style.overflow = 'hidden';
-    
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.remove();
-        document.body.style.overflow = '';
-      }
-    });
+      `;
+      
+      document.body.appendChild(modal);
+      document.body.style.overflow = 'hidden';
+      
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.remove();
+          document.body.style.overflow = '';
+        }
+      });
+    }
   }
 
-  // Make function available globally
-  window.showApartmentDetails = showApartmentDetails;
+  document.addEventListener('DOMContentLoaded', () => {
+    window.apartmentsPage = new ApartmentsPage();
+  });
 </script>
+</Layout>

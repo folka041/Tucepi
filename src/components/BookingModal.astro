@@ -206,6 +206,7 @@
 
 <script>
   import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
 
   class BookingModal {
     constructor() {
@@ -457,32 +458,50 @@
       const totalPrice = subtotal + taxes;
 
       try {
-        // Simulate booking process
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Check if user is authenticated
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (!user) {
+          // If not authenticated, create a guest booking record
+          const guestBookingData = {
+            apartment: this.currentApartment,
+            checkIn,
+            checkOut,
+            guests,
+            guestInfo: {
+              firstName,
+              lastName,
+              email,
+              phone
+            },
+            specialRequests,
+            totalPrice,
+            status: 'pending',
+            createdAt: new Date().toISOString()
+          };
 
-        // Store booking data in localStorage for demo purposes
-        const bookingData = {
-          id: Date.now().toString(),
-          apartment: this.currentApartment,
-          checkIn,
-          checkOut,
-          guests,
-          guestInfo: {
-            firstName,
-            lastName,
-            email,
-            phone
-          },
-          specialRequests,
-          totalPrice,
-          status: 'confirmed',
-          createdAt: new Date().toISOString()
-        };
+          // Store in localStorage for guest users
+          const existingBookings = JSON.parse(localStorage.getItem('guestBookings') || '[]');
+          existingBookings.push(guestBookingData);
+          localStorage.setItem('guestBookings', JSON.stringify(existingBookings));
+        } else {
+          // For authenticated users, save to Supabase
+          const { error: bookingError } = await supabase
+            .from('bookings')
+            .insert({
+              user_id: user.id,
+              apartment_id: this.currentApartment.id,
+              check_in: checkIn,
+              check_out: checkOut,
+              guests: guests,
+              total_price: totalPrice,
+              status: 'confirmed'
+            });
 
-        // Get existing bookings or create new array
-        const existingBookings = JSON.parse(localStorage.getItem('apartmentBookings') || '[]');
-        existingBookings.push(bookingData);
-        localStorage.setItem('apartmentBookings', JSON.stringify(existingBookings));
+          if (bookingError) {
+            throw bookingError;
+          }
+        }
 
         // Clear calendar selection
         if (window.calendar) {
@@ -491,6 +510,7 @@
 
         this.showSuccess();
       } catch (error) {
+        console.error('Booking error:', error);
         this.showError(t('bookingError') || 'There was an error processing your booking. Please try again.');
         this.showForm();
       }
