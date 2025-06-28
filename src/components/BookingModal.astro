@@ -389,14 +389,20 @@
         const key = element.getAttribute('data-key');
         if (key) {
           if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
-            element.placeholder = t(key);
+            // Don't translate input placeholders for booking form
+            return;
           } else if (element.tagName === 'TEXTAREA') {
             element.placeholder = t(key);
           } else if (element.tagName === 'OPTION') {
-            // Handle option elements specially
+            // Handle option elements specially for guest selection
             const originalText = element.textContent;
-            if (originalText && (originalText.includes('Guest') || originalText.includes('Select'))) {
+            if (originalText && originalText.includes('Select')) {
               element.textContent = t(key);
+            } else if (originalText && (originalText.includes('Guest') || originalText.includes('Guests'))) {
+              // Keep the number but translate the word
+              const number = originalText.match(/\d+/)?.[0] || '';
+              const guestWord = number === '1' ? t('guest') : t('guests');
+              element.textContent = `${number} ${guestWord}`;
             }
           } else {
             element.textContent = t(key);
