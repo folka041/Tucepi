@@ -218,6 +218,12 @@
       this.error = document.getElementById('bookingError');
       this.currentApartment = null;
 
+      // Store DOM element references with null checks
+      this.apartmentImage = document.getElementById('apartmentImage');
+      this.apartmentName = document.getElementById('apartmentName');
+      this.apartmentPrice = document.getElementById('apartmentPrice');
+      this.ratePerNight = document.getElementById('ratePerNight');
+
       this.init();
       this.updateTranslations();
     }
@@ -313,16 +319,28 @@
     }
 
     populateApartmentInfo(apartment) {
-      document.getElementById('apartmentImage').src = apartment.images[0];
-      document.getElementById('apartmentImage').alt = apartment.name;
-      document.getElementById('apartmentName').textContent = apartment.name;
-      document.getElementById('apartmentPrice').textContent = `${apartment.price}/${t('night')}`;
-      document.getElementById('ratePerNight').textContent = apartment.price;
+      // Use stored element references with null checks
+      if (this.apartmentImage && apartment.images && apartment.images[0]) {
+        this.apartmentImage.src = apartment.images[0];
+        this.apartmentImage.alt = apartment.name || '';
+      }
+      
+      if (this.apartmentName && apartment.name) {
+        this.apartmentName.textContent = apartment.name;
+      }
+      
+      if (this.apartmentPrice && apartment.price) {
+        this.apartmentPrice.textContent = `${apartment.price}/${t('night')}`;
+      }
+      
+      if (this.ratePerNight && apartment.price) {
+        this.ratePerNight.textContent = apartment.price;
+      }
     }
 
     calculatePrice() {
-      const checkIn = document.getElementById('checkIn').value;
-      const checkOut = document.getElementById('checkOut').value;
+      const checkIn = document.getElementById('checkIn')?.value;
+      const checkOut = document.getElementById('checkOut')?.value;
       
       if (checkIn && checkOut && this.currentApartment) {
         const startDate = new Date(checkIn);
@@ -335,10 +353,15 @@
           const taxes = Math.round(subtotal * 0.12); // 12% taxes
           const total = subtotal + taxes;
           
-          document.getElementById('totalNights').textContent = nights;
-          document.getElementById('subtotal').textContent = `$${subtotal}`;
-          document.getElementById('taxes').textContent = `$${taxes}`;
-          document.getElementById('totalPrice').textContent = `$${total}`;
+          const totalNightsEl = document.getElementById('totalNights');
+          const subtotalEl = document.getElementById('subtotal');
+          const taxesEl = document.getElementById('taxes');
+          const totalPriceEl = document.getElementById('totalPrice');
+          
+          if (totalNightsEl) totalNightsEl.textContent = nights.toString();
+          if (subtotalEl) subtotalEl.textContent = `$${subtotal}`;
+          if (taxesEl) taxesEl.textContent = `$${taxes}`;
+          if (totalPriceEl) totalPriceEl.textContent = `$${total}`;
         } else {
           this.resetPriceCalculation();
         }
@@ -348,10 +371,15 @@
     }
 
     resetPriceCalculation() {
-      document.getElementById('totalNights').textContent = '0';
-      document.getElementById('subtotal').textContent = '$0';
-      document.getElementById('taxes').textContent = '$0';
-      document.getElementById('totalPrice').textContent = '$0';
+      const totalNightsEl = document.getElementById('totalNights');
+      const subtotalEl = document.getElementById('subtotal');
+      const taxesEl = document.getElementById('taxes');
+      const totalPriceEl = document.getElementById('totalPrice');
+      
+      if (totalNightsEl) totalNightsEl.textContent = '0';
+      if (subtotalEl) subtotalEl.textContent = '$0';
+      if (taxesEl) taxesEl.textContent = '$0';
+      if (totalPriceEl) totalPriceEl.textContent = '$0';
     }
 
     showForm() {
@@ -412,8 +440,8 @@
       });
 
       // Update apartment price display if modal is open
-      if (this.currentApartment && !this.modal?.classList.contains('hidden')) {
-        document.getElementById('apartmentPrice').textContent = `${this.currentApartment.price}/${t('night')}`;
+      if (this.currentApartment && !this.modal?.classList.contains('hidden') && this.apartmentPrice) {
+        this.apartmentPrice.textContent = `${this.currentApartment.price}/${t('night')}`;
       }
     }
 
@@ -424,16 +452,23 @@
       this.hideError();
 
       // Get form data
-      const checkIn = document.getElementById('checkIn').value;
-      const checkOut = document.getElementById('checkOut').value;
-      const guests = parseInt(document.getElementById('guests').value);
-      const firstName = document.getElementById('firstName').value;
-      const lastName = document.getElementById('lastName').value;
-      const email = document.getElementById('email').value;
-      const phone = document.getElementById('phone').value;
-      const specialRequests = document.getElementById('specialRequests').value;
+      const checkIn = document.getElementById('checkIn')?.value;
+      const checkOut = document.getElementById('checkOut')?.value;
+      const guestsValue = document.getElementById('guests')?.value;
+      const guests = guestsValue ? parseInt(guestsValue) : 0;
+      const firstName = document.getElementById('firstName')?.value;
+      const lastName = document.getElementById('lastName')?.value;
+      const email = document.getElementById('email')?.value;
+      const phone = document.getElementById('phone')?.value;
+      const specialRequests = document.getElementById('specialRequests')?.value;
       
       // Validate dates
+      if (!checkIn || !checkOut) {
+        this.showError(t('pleaseSelectDates') || 'Please select valid check-in and check-out dates.');
+        this.showForm();
+        return;
+      }
+
       const startDate = new Date(checkIn);
       const endDate = new Date(checkOut);
       const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
