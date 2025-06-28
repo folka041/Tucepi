@@ -534,7 +534,10 @@ import BookingModal from '../components/BookingModal.astro';
                   </div>
                 </div>
                 
-                <button onclick="window.bookingModal?.open(${JSON.stringify(apartment).replace(/"/g, '"')}); this.closest('.fixed').remove(); document.body.style.overflow = '';" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200">
+                <button 
+                  class="book-this-apartment-btn w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200"
+                  data-apartment='${JSON.stringify(apartment).replace(/'/g, "&#39;")}'
+                >
                   ${t('bookThisApartment')}
                 </button>
               </div>
@@ -545,6 +548,46 @@ import BookingModal from '../components/BookingModal.astro';
       
       document.body.appendChild(modal);
       document.body.style.overflow = 'hidden';
+      
+      // Add event listener for the "Book this apartment" button
+      const bookThisApartmentBtn = modal.querySelector('.book-this-apartment-btn');
+      if (bookThisApartmentBtn) {
+        bookThisApartmentBtn.addEventListener('click', function() {
+          const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
+          
+          // Close the details modal
+          modal.remove();
+          document.body.style.overflow = '';
+          
+          // Open booking modal
+          if (window.bookingModal) {
+            window.bookingModal.open(apartmentData);
+            
+            // Get selected dates from calendar if available
+            if (window.calendar) {
+              const selectedDates = window.calendar.getSelectedDates();
+              if (selectedDates && selectedDates.checkin && selectedDates.checkout) {
+                setTimeout(() => {
+                  const checkinInput = document.getElementById('checkIn');
+                  const checkoutInput = document.getElementById('checkOut');
+                  
+                  if (checkinInput) {
+                    checkinInput.value = selectedDates.checkin.toISOString().split('T')[0];
+                  }
+                  if (checkoutInput) {
+                    checkoutInput.value = selectedDates.checkout.toISOString().split('T')[0];
+                  }
+                  
+                  // Trigger price calculation
+                  if (window.bookingModal.calculatePrice) {
+                    window.bookingModal.calculatePrice();
+                  }
+                }, 100);
+              }
+            }
+          }
+        });
+      }
       
       modal.addEventListener('click', (e) => {
         if (e.target === modal) {
