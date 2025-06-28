@@ -61,9 +61,6 @@
             <option value="3">3 Guests</option>
             <option value="4">4 Guests</option>
             <option value="5">5 Guests</option>
-            <option value="6">6 Guests</option>
-            <option value="7">7 Guests</option>
-            <option value="8">8 Guests</option>
           </select>
         </div>
 
@@ -425,6 +422,13 @@
       
       if (nights <= 0) {
         this.showError('Please select valid check-in and check-out dates.');
+        this.showForm();
+        return;
+      }
+
+      // Validate guest count
+      if (guests > 5) {
+        this.showError('Maximum 5 guests allowed per booking.');
         this.showForm();
         return;
       }
