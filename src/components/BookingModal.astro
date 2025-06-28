@@ -56,11 +56,14 @@
             class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
           >
             <option value="" data-key="selectGuests">Select number of guests</option>
-            <option value="1">1 <span data-key="guest">Guest</span></option>
-            <option value="2">2 <span data-key="guests">Guests</span></option>
-            <option value="3">3 <span data-key="guests">Guests</span></option>
-            <option value="4">4 <span data-key="guests">Guests</span></option>
-            <option value="5">5 <span data-key="guests">Guests</span></option>
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5 Guests</option>
+            <option value="6">6 Guests</option>
+            <option value="7">7 Guests</option>
+            <option value="8">8 Guests</option>
           </select>
         </div>
 
@@ -280,6 +283,7 @@
     open(apartment) {
       this.currentApartment = apartment;
       this.populateApartmentInfo(apartment);
+      this.updateGuestOptions(apartment);
       this.modal?.classList.remove('hidden');
       this.modal?.classList.add('flex');
       document.body.style.overflow = 'hidden';
@@ -335,6 +339,28 @@
       
       if (this.ratePerNight && apartment.price) {
         this.ratePerNight.textContent = apartment.price;
+      }
+    }
+
+    updateGuestOptions(apartment) {
+      const guestsSelect = document.getElementById('guests');
+      if (!guestsSelect || !apartment) return;
+
+      const maxGuests = apartment.guests || 8;
+      
+      // Clear existing options except the first one (placeholder)
+      const placeholder = guestsSelect.querySelector('option[value=""]');
+      guestsSelect.innerHTML = '';
+      if (placeholder) {
+        guestsSelect.appendChild(placeholder);
+      }
+
+      // Add guest options up to the apartment's maximum
+      for (let i = 1; i <= maxGuests; i++) {
+        const option = document.createElement('option');
+        option.value = i.toString();
+        option.textContent = i === 1 ? `1 ${t('guest')}` : `${i} ${t('guests')}`;
+        guestsSelect.appendChild(option);
       }
     }
 
@@ -462,13 +488,26 @@
       const phone = document.getElementById('phone')?.value;
       const specialRequests = document.getElementById('specialRequests')?.value;
       
-      // Validate dates
+      // Validate required fields
       if (!checkIn || !checkOut) {
         this.showError(t('pleaseSelectDates') || 'Please select valid check-in and check-out dates.');
         this.showForm();
         return;
       }
 
+      if (!guests || guests === 0) {
+        this.showError(t('pleaseSelectGuests') || 'Please select the number of guests.');
+        this.showForm();
+        return;
+      }
+
+      if (!firstName || !lastName || !email || !phone) {
+        this.showError(t('pleaseCompleteForm') || 'Please complete all required fields.');
+        this.showForm();
+        return;
+      }
+
+      // Validate dates
       const startDate = new Date(checkIn);
       const endDate = new Date(checkOut);
       const nights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
@@ -479,9 +518,9 @@
         return;
       }
 
-      // Validate guest count
-      if (guests > 5) {
-        this.showError(t('maximumGuestsExceeded') || 'Maximum 5 guests allowed per booking.');
+      // Validate guest count against apartment capacity
+      if (this.currentApartment && guests > this.currentApartment.guests) {
+        this.showError(t('maximumGuestsExceeded') || `Maximum ${this.currentApartment.guests} guests allowed for this apartment.`);
         this.showForm();
         return;
       }
