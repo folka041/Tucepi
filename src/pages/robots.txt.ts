@@ -1,0 +1,61 @@
+export async function GET() {
+  const robotsTxt = `
+# Robots.txt for Apartments Delfin
+
+User-agent: *
+Allow: /
+
+# Allow all pages except admin/internal pages
+Disallow: /kamena
+Disallow: /dashboard
+Disallow: /admin/
+Disallow: /_astro/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://apartments-delfin.net/sitemap-index.xml
+Sitemap: https://apartments-delfin.net/sitemap-0.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1
+
+# Specific rules for search engines
+User-agent: Googlebot
+Allow: /
+Disallow: /kamena
+Disallow: /dashboard
+
+User-agent: Bingbot
+Allow: /
+Disallow: /kamena
+Disallow: /dashboard
+
+# Block access to sensitive files
+User-agent: *
+Disallow: /*.json$
+Disallow: /*.env$
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /tsconfig.json
+Disallow: /astro.config.mjs
+Disallow: /tailwind.config.mjs
+
+# Allow important files
+Allow: /favicon.svg
+Allow: /apple-touch-icon.png
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.webp$
+`.trim();
+
+  return new Response(robotsTxt, {
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+    },
+  });
+}
