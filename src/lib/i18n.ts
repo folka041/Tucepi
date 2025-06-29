@@ -403,7 +403,7 @@ const translations: Record<SupportedLanguage, Record<string, string>> = {
     checkinDate: 'Datum příjezdu',
     checkoutDate: 'Datum odjezdu',
     numberOfGuests: 'Počet hostů',
-    selectGu ests: 'Vyberte počet hostů',
+    selectGuests: 'Vyberte počet hostů',
     guestInformation: 'Informace o hostovi',
     specialRequests: 'Speciální požadavky',
     specialRequestsPlaceholder: 'Jakékoli speciální požadavky nebo potřeby...',
