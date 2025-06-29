@@ -30,14 +30,37 @@
           </div>
           <div>
             <label for="signInPassword" class="block text-sm font-medium text-gray-700 mb-2" data-key="password">Password</label>
-            <input
-              type="password"
-              id="signInPassword"
-              required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-              placeholder="••••••••"
-            />
+            <div class="relative">
+              <input
+                type="password"
+                id="signInPassword"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors pr-12"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                id="toggleSignInPassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
+          
+          <div class="flex items-center justify-between">
+            <label class="flex items-center">
+              <input type="checkbox" id="rememberMe" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+              <span class="ml-2 text-sm text-gray-600" data-key="rememberMe">Remember me</span>
+            </label>
+            <button type="button" id="forgotPasswordBtn" class="text-sm text-primary-600 hover:text-primary-700 font-medium" data-key="forgotPassword">
+              Forgot password?
+            </button>
+          </div>
+          
           <button
             type="submit"
             class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200"
@@ -49,16 +72,29 @@
 
         <!-- Sign Up Form -->
         <form id="signUpForm" class="space-y-4 hidden">
-          <div>
-            <label for="signUpName" class="block text-sm font-medium text-gray-700 mb-2" data-key="fullName">Full Name</label>
-            <input
-              type="text"
-              id="signUpName"
-              required
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-              placeholder="John Doe"
-            />
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="signUpFirstName" class="block text-sm font-medium text-gray-700 mb-2" data-key="firstName">First Name</label>
+              <input
+                type="text"
+                id="signUpFirstName"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="John"
+              />
+            </div>
+            <div>
+              <label for="signUpLastName" class="block text-sm font-medium text-gray-700 mb-2" data-key="lastName">Last Name</label>
+              <input
+                type="text"
+                id="signUpLastName"
+                required
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                placeholder="Doe"
+              />
+            </div>
           </div>
+          
           <div>
             <label for="signUpEmail" class="block text-sm font-medium text-gray-700 mb-2" data-key="emailAddress">Email</label>
             <input
@@ -69,6 +105,7 @@
               placeholder="your@email.com"
             />
           </div>
+          
           <div>
             <label for="signUpPhone" class="block text-sm font-medium text-gray-700 mb-2">
               <span data-key="phoneNumber">Phone</span> (<span data-key="optional">Optional</span>)
@@ -80,17 +117,75 @@
               placeholder="+1 (555) 123-4567"
             />
           </div>
+          
           <div>
             <label for="signUpPassword" class="block text-sm font-medium text-gray-700 mb-2" data-key="password">Password</label>
-            <input
-              type="password"
-              id="signUpPassword"
-              required
-              minlength="6"
-              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
-              placeholder="••••••••"
-            />
+            <div class="relative">
+              <input
+                type="password"
+                id="signUpPassword"
+                required
+                minlength="6"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors pr-12"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                id="toggleSignUpPassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="mt-1">
+              <div id="passwordStrength" class="text-xs text-gray-500">
+                <span data-key="passwordRequirements">Password must be at least 6 characters</span>
+              </div>
+            </div>
           </div>
+          
+          <div>
+            <label for="signUpConfirmPassword" class="block text-sm font-medium text-gray-700 mb-2" data-key="confirmPassword">Confirm Password</label>
+            <div class="relative">
+              <input
+                type="password"
+                id="signUpConfirmPassword"
+                required
+                minlength="6"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors pr-12"
+                placeholder="••••••••"
+              />
+              <button
+                type="button"
+                id="toggleConfirmPassword"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <div class="flex items-start">
+            <input
+              type="checkbox"
+              id="agreeTerms"
+              required
+              class="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+            />
+            <label for="agreeTerms" class="ml-3 text-sm text-gray-600">
+              <span data-key="agreeTermsText">I agree to the</span> 
+              <a href="/terms" target="_blank" class="text-primary-600 hover:text-primary-700 underline font-medium" data-key="termsOfService">Terms of Service</a> 
+              <span data-key="and">and</span> 
+              <a href="/privacy" target="_blank" class="text-primary-600 hover:text-primary-700 underline font-medium" data-key="privacyPolicy">Privacy Policy</a>
+            </label>
+          </div>
+          
           <button
             type="submit"
             class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200"
@@ -99,10 +194,47 @@
             Create Account
           </button>
         </form>
+
+        <!-- Forgot Password Form -->
+        <form id="forgotPasswordForm" class="space-y-4 hidden">
+          <div class="text-center mb-4">
+            <p class="text-gray-600" data-key="forgotPasswordDesc">
+              Enter your email address and we'll send you a link to reset your password.
+            </p>
+          </div>
+          
+          <div>
+            <label for="resetEmail" class="block text-sm font-medium text-gray-700 mb-2" data-key="emailAddress">Email</label>
+            <input
+              type="email"
+              id="resetEmail"
+              required
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+              placeholder="your@email.com"
+            />
+          </div>
+          
+          <button
+            type="submit"
+            class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200"
+            data-key="sendResetLink"
+          >
+            Send Reset Link
+          </button>
+          
+          <button
+            type="button"
+            id="backToSignIn"
+            class="w-full text-primary-600 hover:text-primary-700 py-2 font-medium transition-colors"
+            data-key="backToSignIn"
+          >
+            Back to Sign In
+          </button>
+        </form>
       </div>
 
       <!-- Toggle Forms -->
-      <div class="mt-6 text-center">
+      <div id="authToggle" class="mt-6 text-center">
         <button id="toggleAuth" class="text-primary-600 hover:text-primary-700 font-medium" data-key="dontHaveAccount">
           Don't have an account? Sign up
         </button>
@@ -114,9 +246,24 @@
         <p class="mt-2 text-gray-600" data-key="processing">Processing...</p>
       </div>
 
+      <!-- Success Message -->
+      <div id="authSuccess" class="hidden mt-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <p class="text-green-700 text-sm"></p>
+        </div>
+      </div>
+
       <!-- Error Message -->
       <div id="authError" class="hidden mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
-        <p class="text-red-700 text-sm"></p>
+        <div class="flex items-center">
+          <svg class="w-5 h-5 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <p class="text-red-700 text-sm"></p>
+        </div>
       </div>
     </div>
   </div>
@@ -131,12 +278,15 @@
       this.modal = document.getElementById('authModal');
       this.signInForm = document.getElementById('signInForm');
       this.signUpForm = document.getElementById('signUpForm');
+      this.forgotPasswordForm = document.getElementById('forgotPasswordForm');
       this.toggleButton = document.getElementById('toggleAuth');
       this.closeButton = document.getElementById('closeAuthModal');
       this.title = document.getElementById('authTitle');
       this.loading = document.getElementById('authLoading');
+      this.success = document.getElementById('authSuccess');
       this.error = document.getElementById('authError');
-      this.isSignUp = false;
+      this.authToggle = document.getElementById('authToggle');
+      this.currentForm = 'signIn'; // 'signIn', 'signUp', 'forgotPassword'
 
       this.init();
       this.updateTranslations();
@@ -147,6 +297,20 @@
       this.toggleButton?.addEventListener('click', () => this.toggle());
       this.signInForm?.addEventListener('submit', (e) => this.handleSignIn(e));
       this.signUpForm?.addEventListener('submit', (e) => this.handleSignUp(e));
+      this.forgotPasswordForm?.addEventListener('submit', (e) => this.handleForgotPassword(e));
+      
+      // Password visibility toggles
+      this.setupPasswordToggle('toggleSignInPassword', 'signInPassword');
+      this.setupPasswordToggle('toggleSignUpPassword', 'signUpPassword');
+      this.setupPasswordToggle('toggleConfirmPassword', 'signUpConfirmPassword');
+      
+      // Forgot password navigation
+      document.getElementById('forgotPasswordBtn')?.addEventListener('click', () => this.showForgotPassword());
+      document.getElementById('backToSignIn')?.addEventListener('click', () => this.showSignIn());
+      
+      // Password strength validation
+      document.getElementById('signUpPassword')?.addEventListener('input', (e) => this.validatePassword(e.target.value));
+      document.getElementById('signUpConfirmPassword')?.addEventListener('input', (e) => this.validatePasswordMatch());
       
       // Close on backdrop click
       this.modal?.addEventListener('click', (e) => {
@@ -157,9 +321,101 @@
       window.addEventListener('languageChanged', () => {
         this.updateTranslations();
       });
+
+      // Check for existing session
+      this.checkSession();
     }
 
-    open() {
+    async checkSession() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          this.updateUIForAuthenticatedUser(session.user);
+        }
+      } catch (error) {
+        console.error('Session check error:', error);
+      }
+    }
+
+    setupPasswordToggle(buttonId, inputId) {
+      const button = document.getElementById(buttonId);
+      const input = document.getElementById(inputId);
+      
+      if (button && input) {
+        button.addEventListener('click', () => {
+          const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+          input.setAttribute('type', type);
+          
+          // Update icon
+          const icon = button.querySelector('svg');
+          if (type === 'text') {
+            icon.innerHTML = `
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+            `;
+          } else {
+            icon.innerHTML = `
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+            `;
+          }
+        });
+      }
+    }
+
+    validatePassword(password) {
+      const strengthElement = document.getElementById('passwordStrength');
+      if (!strengthElement) return;
+
+      let strength = 0;
+      let feedback = [];
+
+      if (password.length >= 6) strength++;
+      else feedback.push(t('passwordLength') || 'At least 6 characters');
+
+      if (/[A-Z]/.test(password)) strength++;
+      else feedback.push(t('passwordUppercase') || 'One uppercase letter');
+
+      if (/[a-z]/.test(password)) strength++;
+      else feedback.push(t('passwordLowercase') || 'One lowercase letter');
+
+      if (/\d/.test(password)) strength++;
+      else feedback.push(t('passwordNumber') || 'One number');
+
+      if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+      else feedback.push(t('passwordSpecial') || 'One special character');
+
+      const colors = ['text-red-500', 'text-orange-500', 'text-yellow-500', 'text-blue-500', 'text-green-500'];
+      const labels = [t('veryWeak') || 'Very Weak', t('weak') || 'Weak', t('fair') || 'Fair', t('good') || 'Good', t('strong') || 'Strong'];
+
+      strengthElement.className = `text-xs ${colors[Math.min(strength, 4)]}`;
+      
+      if (password.length === 0) {
+        strengthElement.textContent = t('passwordRequirements') || 'Password must be at least 6 characters';
+        strengthElement.className = 'text-xs text-gray-500';
+      } else if (feedback.length > 0) {
+        strengthElement.textContent = `${labels[strength]} - ${t('missing') || 'Missing'}: ${feedback.join(', ')}`;
+      } else {
+        strengthElement.textContent = `${labels[strength]} ${t('password') || 'password'}`;
+      }
+    }
+
+    validatePasswordMatch() {
+      const password = document.getElementById('signUpPassword')?.value;
+      const confirmPassword = document.getElementById('signUpConfirmPassword')?.value;
+      const confirmInput = document.getElementById('signUpConfirmPassword');
+
+      if (confirmPassword && password !== confirmPassword) {
+        confirmInput?.setCustomValidity(t('passwordsDoNotMatch') || 'Passwords do not match');
+        confirmInput?.classList.add('border-red-500');
+      } else {
+        confirmInput?.setCustomValidity('');
+        confirmInput?.classList.remove('border-red-500');
+      }
+    }
+
+    open(formType = 'signIn') {
+      this.currentForm = formType;
+      this.showForm(formType);
       this.modal?.classList.remove('hidden');
       this.modal?.classList.add('flex');
       document.body.style.overflow = 'hidden';
@@ -169,39 +425,86 @@
       this.modal?.classList.add('hidden');
       this.modal?.classList.remove('flex');
       document.body.style.overflow = '';
-      this.hideError();
+      this.hideMessages();
+      this.resetForms();
+    }
+
+    showForm(formType) {
+      // Hide all forms
+      this.signInForm?.classList.add('hidden');
+      this.signUpForm?.classList.add('hidden');
+      this.forgotPasswordForm?.classList.add('hidden');
+      
+      // Show selected form
+      switch (formType) {
+        case 'signUp':
+          this.signUpForm?.classList.remove('hidden');
+          this.title.setAttribute('data-key', 'createAccount');
+          this.title.textContent = t('createAccount');
+          this.toggleButton.setAttribute('data-key', 'alreadyHaveAccount');
+          this.toggleButton.textContent = t('alreadyHaveAccount');
+          this.authToggle?.classList.remove('hidden');
+          break;
+        case 'forgotPassword':
+          this.forgotPasswordForm?.classList.remove('hidden');
+          this.title.setAttribute('data-key', 'resetPassword');
+          this.title.textContent = t('resetPassword');
+          this.authToggle?.classList.add('hidden');
+          break;
+        default: // signIn
+          this.signInForm?.classList.remove('hidden');
+          this.title.setAttribute('data-key', 'signIn');
+          this.title.textContent = t('signIn');
+          this.toggleButton.setAttribute('data-key', 'dontHaveAccount');
+          this.toggleButton.textContent = t('dontHaveAccount');
+          this.authToggle?.classList.remove('hidden');
+          break;
+      }
+      
+      this.currentForm = formType;
+      this.hideMessages();
+    }
+
+    showSignIn() {
+      this.showForm('signIn');
+    }
+
+    showSignUp() {
+      this.showForm('signUp');
+    }
+
+    showForgotPassword() {
+      this.showForm('forgotPassword');
     }
 
     toggle() {
-      this.isSignUp = !this.isSignUp;
-      
-      if (this.isSignUp) {
-        this.signInForm?.classList.add('hidden');
-        this.signUpForm?.classList.remove('hidden');
-        this.title.setAttribute('data-key', 'createAccount');
-        this.title.textContent = t('createAccount');
-        this.toggleButton.setAttribute('data-key', 'alreadyHaveAccount');
-        this.toggleButton.textContent = t('alreadyHaveAccount');
+      if (this.currentForm === 'signIn') {
+        this.showSignUp();
       } else {
-        this.signUpForm?.classList.add('hidden');
-        this.signInForm?.classList.remove('hidden');
-        this.title.setAttribute('data-key', 'signIn');
-        this.title.textContent = t('signIn');
-        this.toggleButton.setAttribute('data-key', 'dontHaveAccount');
-        this.toggleButton.textContent = t('dontHaveAccount');
+        this.showSignIn();
       }
-      
-      this.hideError();
     }
 
     showLoading() {
       this.loading?.classList.remove('hidden');
       document.getElementById('authForms')?.classList.add('hidden');
+      this.authToggle?.classList.add('hidden');
     }
 
     hideLoading() {
       this.loading?.classList.add('hidden');
       document.getElementById('authForms')?.classList.remove('hidden');
+      if (this.currentForm !== 'forgotPassword') {
+        this.authToggle?.classList.remove('hidden');
+      }
+    }
+
+    showSuccess(message) {
+      const successElement = this.success?.querySelector('p');
+      if (successElement) {
+        successElement.textContent = message;
+        this.success?.classList.remove('hidden');
+      }
     }
 
     showError(message) {
@@ -212,8 +515,22 @@
       }
     }
 
-    hideError() {
+    hideMessages() {
+      this.success?.classList.add('hidden');
       this.error?.classList.add('hidden');
+    }
+
+    resetForms() {
+      this.signInForm?.reset();
+      this.signUpForm?.reset();
+      this.forgotPasswordForm?.reset();
+      
+      // Reset password strength indicator
+      const strengthElement = document.getElementById('passwordStrength');
+      if (strengthElement) {
+        strengthElement.textContent = t('passwordRequirements') || 'Password must be at least 6 characters';
+        strengthElement.className = 'text-xs text-gray-500';
+      }
     }
 
     updateTranslations() {
@@ -234,10 +551,11 @@
     async handleSignIn(e) {
       e.preventDefault();
       this.showLoading();
-      this.hideError();
+      this.hideMessages();
 
-      const email = document.getElementById('signInEmail').value;
-      const password = document.getElementById('signInPassword').value;
+      const email = document.getElementById('signInEmail')?.value;
+      const password = document.getElementById('signInPassword')?.value;
+      const rememberMe = document.getElementById('rememberMe')?.checked;
 
       try {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -247,10 +565,23 @@
 
         if (error) throw error;
 
-        this.close();
-        window.location.reload();
+        // Store remember me preference
+        if (rememberMe) {
+          localStorage.setItem('rememberMe', 'true');
+        } else {
+          localStorage.removeItem('rememberMe');
+        }
+
+        this.showSuccess(t('signInSuccess') || 'Successfully signed in!');
+        
+        setTimeout(() => {
+          this.close();
+          this.updateUIForAuthenticatedUser(data.user);
+          window.location.reload();
+        }, 1500);
+
       } catch (error) {
-        this.showError(error.message);
+        this.showError(this.getErrorMessage(error.message));
       } finally {
         this.hideLoading();
       }
@@ -259,12 +590,21 @@
     async handleSignUp(e) {
       e.preventDefault();
       this.showLoading();
-      this.hideError();
+      this.hideMessages();
 
-      const email = document.getElementById('signUpEmail').value;
-      const password = document.getElementById('signUpPassword').value;
-      const fullName = document.getElementById('signUpName').value;
-      const phone = document.getElementById('signUpPhone').value;
+      const email = document.getElementById('signUpEmail')?.value;
+      const password = document.getElementById('signUpPassword')?.value;
+      const confirmPassword = document.getElementById('signUpConfirmPassword')?.value;
+      const firstName = document.getElementById('signUpFirstName')?.value;
+      const lastName = document.getElementById('signUpLastName')?.value;
+      const phone = document.getElementById('signUpPhone')?.value;
+
+      // Validate passwords match
+      if (password !== confirmPassword) {
+        this.showError(t('passwordsDoNotMatch') || 'Passwords do not match');
+        this.hideLoading();
+        return;
+      }
 
       try {
         const { data, error } = await supabase.auth.signUp({
@@ -272,7 +612,9 @@
           password,
           options: {
             data: {
-              full_name: fullName,
+              first_name: firstName,
+              last_name: lastName,
+              full_name: `${firstName} ${lastName}`,
               phone: phone,
             },
           },
@@ -287,20 +629,92 @@
             .insert({
               id: data.user.id,
               email: email,
-              full_name: fullName,
+              full_name: `${firstName} ${lastName}`,
               phone: phone,
             });
 
-          if (profileError) console.error('Profile creation error:', profileError);
+          if (profileError) {
+            console.error('Profile creation error:', profileError);
+            // Don't throw error, as user account was created successfully
+          }
         }
 
-        this.close();
-        alert(t('accountCreatedSuccess') || 'Account created successfully! Please check your email to verify your account.');
+        this.showSuccess(
+          data.user?.email_confirmed_at 
+            ? t('accountCreatedSuccess') || 'Account created successfully!'
+            : t('checkEmailConfirmation') || 'Please check your email to confirm your account.'
+        );
+
+        setTimeout(() => {
+          if (data.user?.email_confirmed_at) {
+            this.close();
+            this.updateUIForAuthenticatedUser(data.user);
+            window.location.reload();
+          } else {
+            this.showSignIn();
+          }
+        }, 3000);
+
       } catch (error) {
-        this.showError(error.message);
+        this.showError(this.getErrorMessage(error.message));
       } finally {
         this.hideLoading();
       }
+    }
+
+    async handleForgotPassword(e) {
+      e.preventDefault();
+      this.showLoading();
+      this.hideMessages();
+
+      const email = document.getElementById('resetEmail')?.value;
+
+      try {
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password`,
+        });
+
+        if (error) throw error;
+
+        this.showSuccess(t('resetLinkSent') || 'Password reset link sent to your email!');
+        
+        setTimeout(() => {
+          this.showSignIn();
+        }, 3000);
+
+      } catch (error) {
+        this.showError(this.getErrorMessage(error.message));
+      } finally {
+        this.hideLoading();
+      }
+    }
+
+    updateUIForAuthenticatedUser(user) {
+      // Update header to show user menu instead of auth buttons
+      const authButtons = document.querySelectorAll('.auth-button');
+      authButtons.forEach(button => button.style.display = 'none');
+      
+      // Show user menu if it exists
+      const userMenu = document.getElementById('userMenu');
+      if (userMenu) {
+        userMenu.style.display = 'block';
+      }
+      
+      // Dispatch custom event for other components
+      window.dispatchEvent(new CustomEvent('userAuthenticated', { detail: { user } }));
+    }
+
+    getErrorMessage(error) {
+      const errorMessages = {
+        'Invalid login credentials': t('invalidCredentials') || 'Invalid email or password',
+        'Email not confirmed': t('emailNotConfirmed') || 'Please confirm your email address',
+        'User already registered': t('userAlreadyExists') || 'An account with this email already exists',
+        'Password should be at least 6 characters': t('passwordTooShort') || 'Password must be at least 6 characters',
+        'Unable to validate email address: invalid format': t('invalidEmailFormat') || 'Please enter a valid email address',
+        'signup_disabled': t('signupDisabled') || 'Account registration is currently disabled',
+      };
+
+      return errorMessages[error] || error || t('unknownError') || 'An unexpected error occurred';
     }
   }
 

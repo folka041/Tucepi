@@ -1,5 +1,6 @@
 ---
 import LanguageSelector from './LanguageSelector.astro';
+import UserMenu from './UserMenu.astro';
 ---
 
 <header class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-gray-200 z-50 transition-all duration-300">
@@ -32,11 +33,32 @@ import LanguageSelector from './LanguageSelector.astro';
         <!-- Language Selector -->
         <LanguageSelector />
         
+        <!-- User Menu (shown when authenticated) -->
+        <UserMenu />
+        
+        <!-- Auth Buttons (shown when not authenticated) -->
+        <div id="authButtons" class="hidden sm:flex items-center space-x-3">
+          <button
+            onclick="window.authModal?.open('signIn')"
+            class="auth-button text-gray-700 hover:text-primary-600 px-3 py-2 text-sm font-medium transition-colors"
+            data-key="signIn"
+          >
+            Sign In
+          </button>
+          <button
+            onclick="window.authModal?.open('signUp')"
+            class="auth-button bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
+            data-key="signUp"
+          >
+            Sign Up
+          </button>
+        </div>
+        
         <!-- Book Now Button -->
         <div class="hidden sm:block">
           <a
             href="/apartments"
-            class="book-now-btn bg-primary-600 hover:bg-primary-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
+            class="book-now-btn bg-accent-500 hover:bg-accent-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
             data-key="bookNow"
           >
             Book Now
@@ -67,11 +89,29 @@ import LanguageSelector from './LanguageSelector.astro';
         <a href="/location" class="nav-link text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md" data-key="location">Location</a>
         <a href="/contact" class="nav-link text-gray-700 hover:text-primary-600 hover:bg-gray-50 block px-3 py-3 text-base font-medium transition-colors rounded-md" data-key="contact">Contact</a>
         
+        <!-- Mobile Auth Buttons -->
+        <div id="mobileAuthButtons" class="pt-4 border-t border-gray-200 space-y-2">
+          <button
+            onclick="window.authModal?.open('signIn')"
+            class="auth-button w-full text-left text-gray-700 hover:text-primary-600 hover:bg-gray-50 px-3 py-3 text-base font-medium transition-colors rounded-md"
+            data-key="signIn"
+          >
+            Sign In
+          </button>
+          <button
+            onclick="window.authModal?.open('signUp')"
+            class="auth-button w-full bg-primary-600 hover:bg-primary-700 text-white px-3 py-3 text-base font-medium rounded-lg text-center transition-colors"
+            data-key="signUp"
+          >
+            Sign Up
+          </button>
+        </div>
+        
         <!-- Mobile Book Now Button -->
         <div class="pt-4 border-t border-gray-200">
           <a
             href="/apartments"
-            class="book-now-btn bg-primary-600 hover:bg-primary-700 text-white block px-3 py-3 text-base font-medium rounded-lg text-center transition-colors"
+            class="book-now-btn bg-accent-500 hover:bg-accent-600 text-white block px-3 py-3 text-base font-medium rounded-lg text-center transition-colors"
             data-key="bookNow"
           >
             Book Now
@@ -84,11 +124,13 @@ import LanguageSelector from './LanguageSelector.astro';
 
 <script>
   import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
 
   class Header {
     constructor() {
       this.init();
       this.updateTranslations();
+      this.checkAuthState();
     }
 
     init() {
@@ -141,6 +183,58 @@ import LanguageSelector from './LanguageSelector.astro';
       window.addEventListener('languageChanged', () => {
         this.updateTranslations();
       });
+
+      // Listen for authentication changes
+      window.addEventListener('userAuthenticated', () => {
+        this.showUserMenu();
+      });
+
+      // Listen for Supabase auth state changes
+      supabase.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN') {
+          this.showUserMenu();
+        } else if (event === 'SIGNED_OUT') {
+          this.showAuthButtons();
+        }
+      });
+    }
+
+    async checkAuthState() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          this.showUserMenu();
+        } else {
+          this.showAuthButtons();
+        }
+      } catch (error) {
+        console.error('Auth state check error:', error);
+        this.showAuthButtons();
+      }
+    }
+
+    showUserMenu() {
+      // Hide auth buttons
+      const authButtons = document.getElementById('authButtons');
+      const mobileAuthButtons = document.getElementById('mobileAuthButtons');
+      
+      if (authButtons) authButtons.classList.add('hidden');
+      if (mobileAuthButtons) mobileAuthButtons.classList.add('hidden');
+      
+      // User menu will be shown by UserMenu component
+    }
+
+    showAuthButtons() {
+      // Show auth buttons
+      const authButtons = document.getElementById('authButtons');
+      const mobileAuthButtons = document.getElementById('mobileAuthButtons');
+      
+      if (authButtons) authButtons.classList.remove('hidden');
+      if (mobileAuthButtons) mobileAuthButtons.classList.remove('hidden');
+      
+      // Hide user menu
+      const userMenu = document.getElementById('userMenu');
+      if (userMenu) userMenu.classList.add('hidden');
     }
 
     updateTranslations() {
@@ -150,6 +244,15 @@ import LanguageSelector from './LanguageSelector.astro';
         const key = link.getAttribute('data-key');
         if (key) {
           link.textContent = t(key);
+        }
+      });
+
+      // Update auth buttons
+      const authButtons = document.querySelectorAll('.auth-button[data-key]');
+      authButtons.forEach(button => {
+        const key = button.getAttribute('data-key');
+        if (key) {
+          button.textContent = t(key);
         }
       });
 
