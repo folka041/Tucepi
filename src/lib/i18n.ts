@@ -11,7 +11,7 @@ export const supportedLanguages = [
   { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
   { code: 'uk', name: 'Українська', flag: '🇺🇦' },
   { code: 'ru', name: 'Русский', flag: '🇷🇺' }
-] as const;
+];
 
 const translations = {
   // Navigation
@@ -106,7 +106,7 @@ const translations = {
     en: 'Experience the perfect blend of comfort, elegance, and breathtaking ocean views in our premium vacation apartments.',
     cs: 'Zažijte dokonalou kombinaci pohodlí, elegance a úchvatných výhledů na oceán v našich prémiových prázdninových apartmánech.',
     sk: 'Zažite dokonalú kombináciu pohodlia, elegancie a úchvatných výhľadov na oceán v našich prémiových prázdninových apartmánoch.',
-    pl: 'Doświadcz idealnego połączenia komfortu, elegancji i zapierających dech widoków na ocean w naszych premium apartamentach wakacyjnych.',
+    pl: 'Doświadcz idealnego połączenia komfortu, elegancji i zapierających dech widoków na ocean w naszych luksusowych apartamentach wakacyjnych.',
     fr: 'Découvrez le mélange parfait de confort, d\'élégance et de vues océaniques à couper le souffle dans nos appartements de vacances haut de gamme.',
     it: 'Vivi la perfetta combinazione di comfort, eleganza e viste mozzafiato sull\'oceano nei nostri appartamenti vacanza premium.',
     de: 'Erleben Sie die perfekte Mischung aus Komfort, Eleganz und atemberaubenden Meerblicken in unseren Premium-Ferienwohnungen.',
@@ -126,214 +126,288 @@ const translations = {
     ru: 'Изучить апартаменты'
   },
   bookYourStay: {
-    hr: 'Rezerviraj svoj boravak',
+    hr: 'Rezerviraj boravak',
     en: 'Book Your Stay',
     cs: 'Rezervovat pobyt',
     sk: 'Rezervovať pobyt',
     pl: 'Zarezerwuj pobyt',
     fr: 'Réserver votre séjour',
     it: 'Prenota il tuo soggiorno',
-    de: 'Ihren Aufenthalt buchen',
-    uk: 'Забронювати перебування',
+    de: 'Aufenthalt buchen',
+    uk: 'Забронювати проживання',
     ru: 'Забронировать проживание'
   },
 
-  // Apartments page specific
-  ourLuxuryApartments: {
-    hr: 'Naši luksuzni apartmani',
-    en: 'Our Luxury Apartments',
-    cs: 'Naše luxusní apartmány',
-    sk: 'Naše luxusné apartmány',
-    pl: 'Nasze luksusowe apartamenty',
-    fr: 'Nos appartements de luxe',
-    it: 'I nostri appartamenti di lusso',
-    de: 'Unsere Luxus-Apartments',
-    uk: 'Наші розкішні апартаменти',
-    ru: 'Наши роскошные апартаменты'
+  // Features Section
+  whyChoose: {
+    hr: 'Zašto odabrati Apartmane Delfin?',
+    en: 'Why Choose Apartments Delfin?',
+    cs: 'Proč si vybrat Apartmány Delfin?',
+    sk: 'Prečo si vybrať Apartmány Delfin?',
+    pl: 'Dlaczego wybrać Apartamenty Delfin?',
+    fr: 'Pourquoi choisir les Appartements Delfin?',
+    it: 'Perché scegliere Appartamenti Delfin?',
+    de: 'Warum Apartments Delfin wählen?',
+    uk: 'Чому обрати Апартаменти Дельфін?',
+    ru: 'Почему выбрать Апартаменты Дельфин?'
   },
-  ourLuxuryApartmentsSubtitle: {
-    hr: 'Odaberite iz naše pažljivo odabrane kolekcije premium apartmana na obali, svaki dizajniran da pruži vrhunsku udobnost i prekrasan pogled.',
-    en: 'Choose from our carefully curated collection of premium oceanfront apartments, each designed to provide the ultimate comfort and breathtaking views.',
-    cs: 'Vyberte si z naší pečlivě vybrané kolekce prémiových apartmánů na pobřeží, z nichž každý je navržen tak, aby poskytoval nejvyšší pohodlí a úchvatné výhledy.',
-    sk: 'Vyberte si z našej starostlivo vybranej kolekcie prémiových apartmánov na pobreží, z ktorých každý je navrhnutý tak, aby poskytoval najvyšší pohodlie a úchvatné výhľady.',
-    pl: 'Wybierz z naszej starannie wyselekcjonowanej kolekcji premium apartamentów nad oceanem, z których każdy został zaprojektowany, aby zapewnić najwyższy komfort i zapierające dech widoki.',
-    fr: 'Choisissez parmi notre collection soigneusement sélectionnée d\'appartements premium en bord de mer, chacun conçu pour offrir un confort ultime et des vues à couper le souffle.',
-    it: 'Scegli dalla nostra collezione accuratamente selezionata di appartamenti premium fronte oceano, ognuno progettato per offrire il massimo comfort e viste mozzafiato.',
-    de: 'Wählen Sie aus unserer sorgfältig kuratierten Sammlung von Premium-Apartments am Meer, die alle darauf ausgelegt sind, ultimativen Komfort und atemberaubende Aussichten zu bieten.',
-    uk: 'Оберіть з нашої ретельно підібраної колекції преміум-апартаментів на березі океану, кожен з яких розроблений для забезпечення найвищого комфорту та захоплюючих видів.',
-    ru: 'Выберите из нашей тщательно подобранной коллекции премиальных апартаментов на берегу океана, каждый из которых спроектирован для обеспечения максимального комфорта и захватывающих видов.'
-  },
-
-  // Filter options
-  allApartments: {
-    hr: 'Svi apartmani',
-    en: 'All Apartments',
-    cs: 'Všechny apartmány',
-    sk: 'Všetky apartmány',
-    pl: 'Wszystkie apartamenty',
-    fr: 'Tous les appartements',
-    it: 'Tutti gli appartamenti',
-    de: 'Alle Apartments',
-    uk: 'Всі апартаменти',
-    ru: 'Все апартаменты'
-  },
-  studio: {
-    hr: 'Studio',
-    en: 'Studio',
-    cs: 'Studio',
-    sk: 'Studio',
-    pl: 'Studio',
-    fr: 'Studio',
-    it: 'Monolocale',
-    de: 'Studio',
-    uk: 'Студія',
-    ru: 'Студия'
-  },
-  oneBedroom: {
-    hr: '1 spavaća soba',
-    en: '1 Bedroom',
-    cs: '1 ložnice',
-    sk: '1 spálňa',
-    pl: '1 sypialnia',
-    fr: '1 chambre',
-    it: '1 camera da letto',
-    de: '1 Schlafzimmer',
-    uk: '1 спальня',
-    ru: '1 спальня'
-  },
-  twoPlusBedrooms: {
-    hr: '2+ spavaće sobe',
-    en: '2+ Bedrooms',
-    cs: '2+ ložnice',
-    sk: '2+ spálne',
-    pl: '2+ sypialnie',
-    fr: '2+ chambres',
-    it: '2+ camere da letto',
-    de: '2+ Schlafzimmer',
-    uk: '2+ спальні',
-    ru: '2+ спальни'
-  },
-  anyPrice: {
-    hr: 'Bilo koja cijena',
-    en: 'Any Price',
-    cs: 'Jakákoli cena',
-    sk: 'Akákoľvek cena',
-    pl: 'Dowolna cena',
-    fr: 'Tout prix',
-    it: 'Qualsiasi prezzo',
-    de: 'Jeder Preis',
-    uk: 'Будь-яка ціна',
-    ru: 'Любая цена'
-  },
-  under200: {
-    hr: 'Ispod $200',
-    en: 'Under $200',
-    cs: 'Pod $200',
-    sk: 'Pod $200',
-    pl: 'Poniżej $200',
-    fr: 'Moins de $200',
-    it: 'Sotto $200',
-    de: 'Unter $200',
-    uk: 'Менше $200',
-    ru: 'Менее $200'
-  },
-  price200to300: {
-    hr: '$200 - $300',
-    en: '$200 - $300',
-    cs: '$200 - $300',
-    sk: '$200 - $300',
-    pl: '$200 - $300',
-    fr: '$200 - $300',
-    it: '$200 - $300',
-    de: '$200 - $300',
-    uk: '$200 - $300',
-    ru: '$200 - $300'
-  },
-  price300plus: {
-    hr: '$300+',
-    en: '$300+',
-    cs: '$300+',
-    sk: '$300+',
-    pl: '$300+',
-    fr: '$300+',
-    it: '$300+',
-    de: '$300+',
-    uk: '$300+',
-    ru: '$300+'
-  },
-  anyGuests: {
-    hr: 'Bilo koji broj gostiju',
-    en: 'Any Guests',
-    cs: 'Jakýkoli počet hostů',
-    sk: 'Akýkoľvek počet hostí',
-    pl: 'Dowolna liczba gości',
-    fr: 'Tout nombre d\'invités',
-    it: 'Qualsiasi numero di ospiti',
-    de: 'Beliebige Gästeanzahl',
-    uk: 'Будь-яка кількість гостей',
-    ru: 'Любое количество гостей'
-  },
-  oneToTwoGuests: {
-    hr: '1-2 gosta',
-    en: '1-2 Guests',
-    cs: '1-2 hosté',
-    sk: '1-2 hostia',
-    pl: '1-2 gości',
-    fr: '1-2 invités',
-    it: '1-2 ospiti',
-    de: '1-2 Gäste',
-    uk: '1-2 гості',
-    ru: '1-2 гостя'
-  },
-  threeToFourGuests: {
-    hr: '3-4 gosta',
-    en: '3-4 Guests',
-    cs: '3-4 hosté',
-    sk: '3-4 hostia',
-    pl: '3-4 gości',
-    fr: '3-4 invités',
-    it: '3-4 ospiti',
-    de: '3-4 Gäste',
-    uk: '3-4 гості',
-    ru: '3-4 гостя'
-  },
-  fiveGuests: {
-    hr: '5 gostiju',
-    en: '5 Guests',
-    cs: '5 hostů',
-    sk: '5 hostí',
-    pl: '5 gości',
-    fr: '5 invités',
-    it: '5 ospiti',
-    de: '5 Gäste',
-    uk: '5 гостей',
-    ru: '5 гостей'
-  },
-  showing: {
-    hr: 'Prikazuje se',
-    en: 'Showing',
-    cs: 'Zobrazuje se',
-    sk: 'Zobrazuje sa',
-    pl: 'Pokazuje',
-    fr: 'Affichage',
-    it: 'Mostrando',
-    de: 'Zeige',
-    uk: 'Показано',
-    ru: 'Показано'
+  whyChooseSubtitle: {
+    hr: 'Otkrijte savršenu kombinaciju luksuza, udobnosti i praktičnosti koja čini naše apartmane idealnim izborom za vaš odmor.',
+    en: 'Discover the perfect combination of luxury, comfort, and convenience that makes our apartments the ideal choice for your vacation.',
+    cs: 'Objevte dokonalou kombinaci luxusu, pohodlí a praktičnosti, která činí naše apartmány ideální volbou pro vaši dovolenou.',
+    sk: 'Objavte dokonalú kombináciu luxusu, pohodlia a praktičnosti, ktorá robí naše apartmány ideálnou voľbou pre vašu dovolenku.',
+    pl: 'Odkryj idealną kombinację luksusu, komfortu i wygody, która czyni nasze apartamenty idealnym wyborem na wakacje.',
+    fr: 'Découvrez la combinaison parfaite de luxe, de confort et de commodité qui fait de nos appartements le choix idéal pour vos vacances.',
+    it: 'Scopri la perfetta combinazione di lusso, comfort e convenienza che rende i nostri appartamenti la scelta ideale per le tue vacanze.',
+    de: 'Entdecken Sie die perfekte Kombination aus Luxus, Komfort und Bequemlichkeit, die unsere Apartments zur idealen Wahl für Ihren Urlaub macht.',
+    uk: 'Відкрийте ідеальне поєднання розкоші, комфорту та зручності, що робить наші апартаменти ідеальним вибором для вашої відпустки.',
+    ru: 'Откройте идеальное сочетание роскоши, комфорта и удобства, которое делает наши апартаменты идеальным выбором для вашего отпуска.'
   },
 
-  // Apartment details
-  photos: {
-    hr: 'Fotografije',
-    en: 'Photos',
-    cs: 'Fotografie',
-    sk: 'Fotografie',
-    pl: 'Zdjęcia',
-    fr: 'Photos',
-    it: 'Foto',
-    de: 'Fotos',
-    uk: 'Фотографії',
-    ru: 'Фотографии'
+  // Feature items
+  beachfrontLocation: {
+    hr: 'Lokacija na plaži',
+    en: 'Beachfront Location',
+    cs: 'Poloha na pláži',
+    sk: 'Poloha na pláži',
+    pl: 'Lokalizacja przy plaży',
+    fr: 'Emplacement en bord de mer',
+    it: 'Posizione fronte mare',
+    de: 'Strandlage',
+    uk: 'Розташування на березі',
+    ru: 'Расположение на берегу'
+  },
+  beachfrontDesc: {
+    hr: 'Direktan pristup prekrasnoj plaži s kristalno čistim morem',
+    en: 'Direct access to beautiful beach with crystal clear waters',
+    cs: 'Přímý přístup na krásnou pláž s křišťálově čistou vodou',
+    sk: 'Priamy prístup na krásnu pláž s krištáľovo čistou vodou',
+    pl: 'Bezpośredni dostęp do pięknej plaży z krystalicznie czystą wodą',
+    fr: 'Accès direct à une belle plage aux eaux cristallines',
+    it: 'Accesso diretto a una bellissima spiaggia con acque cristalline',
+    de: 'Direkter Zugang zu einem wunderschönen Strand mit kristallklarem Wasser',
+    uk: 'Прямий доступ до прекрасного пляжу з кришталево чистою водою',
+    ru: 'Прямой доступ к прекрасному пляжу с кристально чистой водой'
+  },
+  oceanViews: {
+    hr: 'Pogled na ocean',
+    en: 'Ocean Views',
+    cs: 'Výhledy na oceán',
+    sk: 'Výhľady na oceán',
+    pl: 'Widoki na ocean',
+    fr: 'Vues sur l\'océan',
+    it: 'Vista oceano',
+    de: 'Meerblick',
+    uk: 'Вид на океан',
+    ru: 'Вид на океан'
+  },
+  oceanViewsDesc: {
+    hr: 'Panoramski pogledi na ocean iz svakog apartmana',
+    en: 'Panoramic ocean views from every apartment',
+    cs: 'Panoramatické výhledy na oceán z každého apartmánu',
+    sk: 'Panoramatické výhľady na oceán z každého apartmánu',
+    pl: 'Panoramiczne widoki na ocean z każdego apartamentu',
+    fr: 'Vues panoramiques sur l\'océan depuis chaque appartement',
+    it: 'Vista panoramica sull\'oceano da ogni appartamento',
+    de: 'Panoramablick auf das Meer von jedem Apartment',
+    uk: 'Панорамний вид на океан з кожного апартаменту',
+    ru: 'Панорамный вид на океан из каждого апартамента'
+  },
+  swimmingPool: {
+    hr: 'Bazen',
+    en: 'Swimming Pool',
+    cs: 'Bazén',
+    sk: 'Bazén',
+    pl: 'Basen',
+    fr: 'Piscine',
+    it: 'Piscina',
+    de: 'Schwimmbad',
+    uk: 'Басейн',
+    ru: 'Бассейн'
+  },
+  swimmingPoolDesc: {
+    hr: 'Infinity bazen s pogledom na ocean za potpuno opuštanje',
+    en: 'Infinity pool with ocean views for ultimate relaxation',
+    cs: 'Nekonečný bazén s výhledem na oceán pro dokonalé uvolnění',
+    sk: 'Nekonečný bazén s výhľadom na oceán pre dokonalé uvoľnenie',
+    pl: 'Basen bez krawędzi z widokiem na ocean dla pełnego relaksu',
+    fr: 'Piscine à débordement avec vue sur l\'océan pour une détente ultime',
+    it: 'Piscina a sfioro con vista oceano per il massimo relax',
+    de: 'Infinity-Pool mit Meerblick für ultimative Entspannung',
+    uk: 'Безкрайовий басейн з видом на океан для повного розслаблення',
+    ru: 'Бесконечный бассейн с видом на океан для полного расслабления'
+  },
+  fullKitchen: {
+    hr: 'Potpuno opremljena kuhinja',
+    en: 'Full Kitchen',
+    cs: 'Plně vybavená kuchyň',
+    sk: 'Plne vybavená kuchyňa',
+    pl: 'W pełni wyposażona kuchnia',
+    fr: 'Cuisine complète',
+    it: 'Cucina completa',
+    de: 'Vollküche',
+    uk: 'Повністю обладнана кухня',
+    ru: 'Полностью оборудованная кухня'
+  },
+  fullKitchenDesc: {
+    hr: 'Moderne kuhinje s premium aparatima za kućno kuhanje',
+    en: 'Modern kitchens with premium appliances for home cooking',
+    cs: 'Moderní kuchyně s prémiovými spotřebiči pro domácí vaření',
+    sk: 'Moderné kuchyne s prémiovými spotrebičmi pre domáce varenie',
+    pl: 'Nowoczesne kuchnie z urządzeniami premium do gotowania w domu',
+    fr: 'Cuisines modernes avec appareils haut de gamme pour cuisiner à la maison',
+    it: 'Cucine moderne con elettrodomestici premium per cucinare a casa',
+    de: 'Moderne Küchen mit Premium-Geräten zum Kochen zu Hause',
+    uk: 'Сучасні кухні з преміум-технікою для домашнього приготування їжі',
+    ru: 'Современные кухни с премиальной техникой для домашней готовки'
+  },
+  freeWifi: {
+    hr: 'Besplatni WiFi',
+    en: 'Free WiFi',
+    cs: 'Zdarma WiFi',
+    sk: 'Bezplatné WiFi',
+    pl: 'Darmowe WiFi',
+    fr: 'WiFi gratuit',
+    it: 'WiFi gratuito',
+    de: 'Kostenloses WLAN',
+    uk: 'Безкоштовний WiFi',
+    ru: 'Бесплатный WiFi'
+  },
+  freeWifiDesc: {
+    hr: 'Brzi internet u cijelom objektu za rad i zabavu',
+    en: 'High-speed internet throughout the property for work and entertainment',
+    cs: 'Vysokorychlostní internet v celém objektu pro práci a zábavu',
+    sk: 'Vysokorýchlostný internet v celom objekte pre prácu a zábavu',
+    pl: 'Szybki internet w całym obiekcie do pracy i rozrywki',
+    fr: 'Internet haut débit dans toute la propriété pour le travail et le divertissement',
+    it: 'Internet ad alta velocità in tutta la struttura per lavoro e intrattenimento',
+    de: 'Hochgeschwindigkeits-Internet im gesamten Gebäude für Arbeit und Unterhaltung',
+    uk: 'Високошвидкісний інтернет по всій території для роботи та розваг',
+    ru: 'Высокоскоростной интернет по всей территории для работы и развлечений'
+  },
+  freeParking: {
+    hr: 'Besplatno parkiranje',
+    en: 'Free Parking',
+    cs: 'Zdarma parkování',
+    sk: 'Bezplatné parkovanie',
+    pl: 'Darmowy parking',
+    fr: 'Parking gratuit',
+    it: 'Parcheggio gratuito',
+    de: 'Kostenlose Parkplätze',
+    uk: 'Безкоштовна парковка',
+    ru: 'Бесплатная парковка'
+  },
+  freeParkingDesc: {
+    hr: 'Sigurno natkriveno parkiranje za sve goste',
+    en: 'Secure covered parking for all guests',
+    cs: 'Bezpečné kryté parkování pro všechny hosty',
+    sk: 'Bezpečné kryté parkovanie pre všetkých hostí',
+    pl: 'Bezpieczny zadaszony parking dla wszystkich gości',
+    fr: 'Parking couvert sécurisé pour tous les clients',
+    it: 'Parcheggio coperto sicuro per tutti gli ospiti',
+    de: 'Sichere überdachte Parkplätze für alle Gäste',
+    uk: 'Безпечна критая парковка для всіх гостей',
+    ru: 'Безопасная крытая парковка для всех гостей'
+  },
+
+  // Apartments Section
+  ourApartments: {
+    hr: 'Naša kolekcija apartmana',
+    en: 'Our Apartment Collection',
+    cs: 'Naše kolekce apartmánů',
+    sk: 'Naša kolekcia apartmánov',
+    pl: 'Nasza kolekcja apartamentów',
+    fr: 'Notre collection d\'appartements',
+    it: 'La nostra collezione di appartamenti',
+    de: 'Unsere Apartment-Kollektion',
+    uk: 'Наша колекція апартаментів',
+    ru: 'Наша коллекция апартаментов'
+  },
+  ourApartmentsSubtitle: {
+    hr: 'Odaberite iz naše pažljivo odabrane kolekcije luksuznih apartmana, svaki dizajniran da pruži vrhunsku udobnost i prekrasan pogled na ocean.',
+    en: 'Choose from our carefully curated selection of luxury apartments, each designed to provide the ultimate comfort and stunning ocean views.',
+    cs: 'Vyberte si z našeho pečlivě vybraného výběru luxusních apartmánů, z nichž každý je navržen tak, aby poskytoval nejvyšší pohodlí a úžasné výhledy na oceán.',
+    sk: 'Vyberte si z nášho starostlivo vybraného výberu luxusných apartmánov, z ktorých každý je navrhnutý tak, aby poskytoval najvyššie pohodlie a úžasné výhľady na oceán.',
+    pl: 'Wybierz z naszej starannie wyselekcjonowanej kolekcji luksusowych apartamentów, z których każdy został zaprojektowany, aby zapewnić najwyższy komfort i wspaniałe widoki na ocean.',
+    fr: 'Choisissez parmi notre sélection soigneusement choisie d\'appartements de luxe, chacun conçu pour offrir un confort ultime et des vues océaniques époustouflantes.',
+    it: 'Scegli dalla nostra selezione accuratamente curata di appartamenti di lusso, ognuno progettato per offrire il massimo comfort e splendide viste sull\'oceano.',
+    de: 'Wählen Sie aus unserer sorgfältig kuratierten Auswahl an Luxus-Apartments, die alle darauf ausgelegt sind, ultimativen Komfort und atemberaubende Meerblicke zu bieten.',
+    uk: 'Оберіть з нашої ретельно підібраної колекції розкішних апартаментів, кожен з яких розроблений для забезпечення найвищого комфорту та приголомшливих видів на океан.',
+    ru: 'Выберите из нашей тщательно подобранной коллекции роскошных апартаментов, каждый из которых спроектирован для обеспечения максимального комфорта и потрясающих видов на океан.'
+  },
+
+  // Common terms
+  guests: {
+    hr: 'gostiju',
+    en: 'guests',
+    cs: 'hostů',
+    sk: 'hostí',
+    pl: 'gości',
+    fr: 'invités',
+    it: 'ospiti',
+    de: 'Gäste',
+    uk: 'гостей',
+    ru: 'гостей'
+  },
+  guest: {
+    hr: 'gost',
+    en: 'guest',
+    cs: 'host',
+    sk: 'hosť',
+    pl: 'gość',
+    fr: 'invité',
+    it: 'ospite',
+    de: 'Gast',
+    uk: 'гість',
+    ru: 'гость'
+  },
+  beds: {
+    hr: 'kreveta',
+    en: 'beds',
+    cs: 'postelí',
+    sk: 'postelí',
+    pl: 'łóżek',
+    fr: 'lits',
+    it: 'letti',
+    de: 'Betten',
+    uk: 'ліжок',
+    ru: 'кроватей'
+  },
+  bed: {
+    hr: 'krevet',
+    en: 'bed',
+    cs: 'postel',
+    sk: 'posteľ',
+    pl: 'łóżko',
+    fr: 'lit',
+    it: 'letto',
+    de: 'Bett',
+    uk: 'ліжко',
+    ru: 'кровать'
+  },
+  baths: {
+    hr: 'kupaonice',
+    en: 'baths',
+    cs: 'koupelny',
+    sk: 'kúpeľne',
+    pl: 'łazienki',
+    fr: 'salles de bain',
+    it: 'bagni',
+    de: 'Bäder',
+    uk: 'ванних',
+    ru: 'ванных'
+  },
+  bath: {
+    hr: 'kupaonica',
+    en: 'bath',
+    cs: 'koupelna',
+    sk: 'kúpeľňa',
+    pl: 'łazienka',
+    fr: 'salle de bain',
+    it: 'bagno',
+    de: 'Bad',
+    uk: 'ванна',
+    ru: 'ванная'
   },
   night: {
     hr: 'noć',
@@ -347,6 +421,18 @@ const translations = {
     uk: 'ніч',
     ru: 'ночь'
   },
+  photos: {
+    hr: 'fotografija',
+    en: 'photos',
+    cs: 'fotografií',
+    sk: 'fotografií',
+    pl: 'zdjęć',
+    fr: 'photos',
+    it: 'foto',
+    de: 'Fotos',
+    uk: 'фото',
+    ru: 'фото'
+  },
   more: {
     hr: 'više',
     en: 'more',
@@ -359,11 +445,23 @@ const translations = {
     uk: 'більше',
     ru: 'больше'
   },
+  viewDetailsBook: {
+    hr: 'Pogledaj detalje i rezerviraj',
+    en: 'View Details & Book',
+    cs: 'Zobrazit podrobnosti a rezervovat',
+    sk: 'Zobraziť podrobnosti a rezervovať',
+    pl: 'Zobacz szczegóły i zarezerwuj',
+    fr: 'Voir les détails et réserver',
+    it: 'Vedi dettagli e prenota',
+    de: 'Details anzeigen & buchen',
+    uk: 'Переглянути деталі та забронювати',
+    ru: 'Посмотреть детали и забронировать'
+  },
   viewDetails: {
     hr: 'Pogledaj detalje',
     en: 'View Details',
-    cs: 'Zobrazit detaily',
-    sk: 'Zobraziť detaily',
+    cs: 'Zobrazit podrobnosti',
+    sk: 'Zobraziť podrobnosti',
     pl: 'Zobacz szczegóły',
     fr: 'Voir les détails',
     it: 'Vedi dettagli',
@@ -371,167 +469,19 @@ const translations = {
     uk: 'Переглянути деталі',
     ru: 'Посмотреть детали'
   },
-  description: {
-    hr: 'Opis',
-    en: 'Description',
-    cs: 'Popis',
-    sk: 'Popis',
-    pl: 'Opis',
-    fr: 'Description',
-    it: 'Descrizione',
-    de: 'Beschreibung',
-    uk: 'Опис',
-    ru: 'Описание'
-  },
-  bookThisApartment: {
-    hr: 'Rezerviraj ovaj apartman',
-    en: 'Book This Apartment',
-    cs: 'Rezervovat tento apartmán',
-    sk: 'Rezervovať tento apartmán',
-    pl: 'Zarezerwuj ten apartament',
-    fr: 'Réserver cet appartement',
-    it: 'Prenota questo appartamento',
-    de: 'Dieses Apartment buchen',
-    uk: 'Забронювати цей апартамент',
-    ru: 'Забронировать эту квартиру'
-  },
-
-  // Quick booking
-  quickBooking: {
-    hr: 'Brza rezervacija',
-    en: 'Quick Booking',
-    cs: 'Rychlá rezervace',
-    sk: 'Rýchla rezervácia',
-    pl: 'Szybka rezerwacja',
-    fr: 'Réservation rapide',
-    it: 'Prenotazione rapida',
-    de: 'Schnellbuchung',
-    uk: 'Швидке бронювання',
-    ru: 'Быстрое бронирование'
-  },
-  selectCheckinDate: {
-    hr: 'Odaberite datum dolaska',
-    en: 'Select check-in date',
-    cs: 'Vyberte datum příjezdu',
-    sk: 'Vyberte dátum príchodu',
-    pl: 'Wybierz datę zameldowania',
-    fr: 'Sélectionnez la date d\'arrivée',
-    it: 'Seleziona data di check-in',
-    de: 'Anreisedatum auswählen',
-    uk: 'Оберіть дату заїзду',
-    ru: 'Выберите дату заезда'
-  },
-  selectCheckoutDate: {
-    hr: 'Odaberite datum odlaska',
-    en: 'Select check-out date',
-    cs: 'Vyberte datum odjezdu',
-    sk: 'Vyberte dátum odchodu',
-    pl: 'Wybierz datę wymeldowania',
-    fr: 'Sélectionnez la date de départ',
-    it: 'Seleziona data di check-out',
-    de: 'Abreisedatum auswählen',
-    uk: 'Оберіть дату виїзду',
-    ru: 'Выберите дату выезда'
-  },
-  checkAvailability: {
-    hr: 'Provjeri dostupnost',
-    en: 'Check Availability',
-    cs: 'Zkontrolovat dostupnost',
-    sk: 'Skontrolovať dostupnosť',
-    pl: 'Sprawdź dostępność',
-    fr: 'Vérifier la disponibilité',
-    it: 'Verifica disponibilità',
-    de: 'Verfügbarkeit prüfen',
-    uk: 'Перевірити наявність',
-    ru: 'Проверить доступность'
-  },
-  needHelp: {
-    hr: 'Trebate pomoć?',
-    en: 'Need Help?',
-    cs: 'Potřebujete pomoc?',
-    sk: 'Potrebujete pomoc?',
-    pl: 'Potrzebujesz pomocy?',
-    fr: 'Besoin d\'aide?',
-    it: 'Hai bisogno di aiuto?',
-    de: 'Brauchen Sie Hilfe?',
-    uk: 'Потрібна допомога?',
-    ru: 'Нужна помощь?'
-  },
-  needHelpDesc: {
-    hr: 'Naš tim je tu da vam pomogne pronaći savršen apartman za vaš boravak.',
-    en: 'Our team is here to help you find the perfect apartment for your stay.',
-    cs: 'Náš tým je tu, aby vám pomohl najít dokonalý apartmán pro váš pobyt.',
-    sk: 'Náš tím je tu, aby vám pomohol nájsť dokonalý apartmán pre váš pobyt.',
-    pl: 'Nasz zespół jest tutaj, aby pomóc ci znaleźć idealny apartament na pobyt.',
-    fr: 'Notre équipe est là pour vous aider à trouver l\'appartement parfait pour votre séjour.',
-    it: 'Il nostro team è qui per aiutarti a trovare l\'appartamento perfetto per il tuo soggiorno.',
-    de: 'Unser Team ist da, um Ihnen zu helfen, das perfekte Apartment für Ihren Aufenthalt zu finden.',
-    uk: 'Наша команда тут, щоб допомогти вам знайти ідеальний апартамент для вашого перебування.',
-    ru: 'Наша команда здесь, чтобы помочь вам найти идеальную квартиру для вашего пребывания.'
-  },
-
-  // Error messages
-  pleaseSelectDates: {
-    hr: 'Molimo odaberite datume dolaska i odlaska.',
-    en: 'Please select check-in and check-out dates first.',
-    cs: 'Nejprve prosím vyberte datum příjezdu a odjezdu.',
-    sk: 'Prosím najprv vyberte dátum príchodu a odchodu.',
-    pl: 'Proszę najpierw wybrać daty zameldowania i wymeldowania.',
-    fr: 'Veuillez d\'abord sélectionner les dates d\'arrivée et de départ.',
-    it: 'Seleziona prima le date di check-in e check-out.',
-    de: 'Bitte wählen Sie zuerst die An- und Abreisedaten aus.',
-    uk: 'Будь ласка, спочатку оберіть дати заїзду та виїзду.',
-    ru: 'Пожалуйста, сначала выберите даты заезда и выезда.'
-  },
-  noApartmentsAvailable: {
-    hr: 'Nema dostupnih apartmana za odabrani broj gostiju.',
-    en: 'No apartments available for the selected number of guests.',
-    cs: 'Žádné apartmány nejsou k dispozici pro vybraný počet hostů.',
-    sk: 'Žiadne apartmány nie sú k dispozícii pre vybraný počet hostí.',
-    pl: 'Brak dostępnych apartamentów dla wybranej liczby gości.',
-    fr: 'Aucun appartement disponible pour le nombre d\'invités sélectionné.',
-    it: 'Nessun appartamento disponibile per il numero di ospiti selezionato.',
-    de: 'Keine Apartments verfügbar für die ausgewählte Gästeanzahl.',
-    uk: 'Немає доступних апартаментів для обраної кількості гостей.',
-    ru: 'Нет доступных квартир для выбранного количества гостей.'
-  },
-  maximumGuestsExceeded: {
-    hr: 'Maksimalno 5 gostiju po rezervaciji.',
-    en: 'Maximum 5 guests allowed per booking.',
-    cs: 'Maximálně 5 hostů na rezervaci.',
-    sk: 'Maximálne 5 hostí na rezerváciu.',
-    pl: 'Maksymalnie 5 gości na rezerwację.',
-    fr: 'Maximum 5 invités par réservation.',
-    it: 'Massimo 5 ospiti per prenotazione.',
-    de: 'Maximal 5 Gäste pro Buchung.',
-    uk: 'Максимум 5 гостей на бронювання.',
-    ru: 'Максимум 5 гостей на бронирование.'
-  },
-  bookingError: {
-    hr: 'Došlo je do greške prilikom obrade vaše rezervacije. Molimo pokušajte ponovo.',
-    en: 'There was an error processing your booking. Please try again.',
-    cs: 'Při zpracování vaší rezervace došlo k chybě. Zkuste to prosím znovu.',
-    sk: 'Pri spracovaní vašej rezervácie došlo k chybe. Skúste to prosím znovu.',
-    pl: 'Wystąpił błąd podczas przetwarzania rezerwacji. Spróbuj ponownie.',
-    fr: 'Une erreur s\'est produite lors du traitement de votre réservation. Veuillez réessayer.',
-    it: 'Si è verificato un errore durante l\'elaborazione della prenotazione. Riprova.',
-    de: 'Bei der Bearbeitung Ihrer Buchung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-    uk: 'Сталася помилка під час обробки вашого бронювання. Будь ласка, спробуйте ще раз.',
-    ru: 'Произошла ошибка при обработке вашего бронирования. Пожалуйста, попробуйте еще раз.'
-  },
 
   // Calendar
   selectDates: {
     hr: 'Odaberite datume',
     en: 'Select Your Dates',
-    cs: 'Vyberte data',
-    sk: 'Vyberte dátumy',
-    pl: 'Wybierz daty',
+    cs: 'Vyberte své datumy',
+    sk: 'Vyberte svoje dátumy',
+    pl: 'Wybierz swoje daty',
     fr: 'Sélectionnez vos dates',
     it: 'Seleziona le tue date',
     de: 'Wählen Sie Ihre Daten',
-    uk: 'Оберіть дати',
-    ru: 'Выберите даты'
+    uk: 'Оберіть ваші дати',
+    ru: 'Выберите ваши даты'
   },
   checkin: {
     hr: 'Dolazak',
@@ -556,6 +506,18 @@ const translations = {
     de: 'Abreise',
     uk: 'Виїзд',
     ru: 'Выезд'
+  },
+  clearDates: {
+    hr: 'Obriši datume',
+    en: 'Clear Dates',
+    cs: 'Vymazat data',
+    sk: 'Vymazať dátumy',
+    pl: 'Wyczyść daty',
+    fr: 'Effacer les dates',
+    it: 'Cancella date',
+    de: 'Daten löschen',
+    uk: 'Очистити дати',
+    ru: 'Очистить даты'
   },
   available: {
     hr: 'Dostupno',
@@ -592,18 +554,6 @@ const translations = {
     de: 'Ausgewählt',
     uk: 'Обрано',
     ru: 'Выбрано'
-  },
-  clearDates: {
-    hr: 'Obriši datume',
-    en: 'Clear Dates',
-    cs: 'Vymazat data',
-    sk: 'Vymazať dátumy',
-    pl: 'Wyczyść daty',
-    fr: 'Effacer les dates',
-    it: 'Cancella date',
-    de: 'Daten löschen',
-    uk: 'Очистити дати',
-    ru: 'Очистить даты'
   },
 
   // Month names
@@ -838,300 +788,152 @@ const translations = {
     ru: 'Сб'
   },
 
-  // Features Section
-  whyChoose: {
-    hr: 'Zašto odabrati Apartmane Delfin?',
-    en: 'Why Choose Apartments Delfin?',
-    cs: 'Proč si vybrat Apartmány Delfin?',
-    sk: 'Prečo si vybrať Apartmány Delfin?',
-    pl: 'Dlaczego wybrać Apartamenty Delfin?',
-    fr: 'Pourquoi choisir les Appartements Delfin?',
-    it: 'Perché scegliere Appartamenti Delfin?',
-    de: 'Warum Apartments Delfin wählen?',
-    uk: 'Чому обрати Апартаменти Дельфін?',
-    ru: 'Почему выбрать Апартаменты Дельфин?'
+  // Authentication
+  signIn: {
+    hr: 'Prijava',
+    en: 'Sign In',
+    cs: 'Přihlásit se',
+    sk: 'Prihlásiť sa',
+    pl: 'Zaloguj się',
+    fr: 'Se connecter',
+    it: 'Accedi',
+    de: 'Anmelden',
+    uk: 'Увійти',
+    ru: 'Войти'
   },
-  whyChooseSubtitle: {
-    hr: 'Otkrijte savršenu kombinaciju luksuza, udobnosti i praktičnosti koja čini naše apartmane idealnim izborom za vaš odmor.',
-    en: 'Discover the perfect combination of luxury, comfort, and convenience that makes our apartments the ideal choice for your vacation.',
-    cs: 'Objevte dokonalou kombinaci luxusu, pohodlí a praktičnosti, která činí naše apartmány ideální volbou pro vaši dovolenou.',
-    sk: 'Objavte dokonalú kombináciu luxusu, pohodlia a praktičnosti, ktorá robí naše apartmány ideálnou voľbou pre vašu dovolenku.',
-    pl: 'Odkryj idealną kombinację luksusu, komfortu i wygody, która czyni nasze apartamenty idealnym wyborem na wakacje.',
-    fr: 'Découvrez la combinaison parfaite de luxe, de confort et de commodité qui fait de nos appartements le choix idéal pour vos vacances.',
-    it: 'Scopri la perfetta combinazione di lusso, comfort e convenienza che rende i nostri appartamenti la scelta ideale per le tue vacanze.',
-    de: 'Entdecken Sie die perfekte Kombination aus Luxus, Komfort und Bequemlichkeit, die unsere Apartments zur idealen Wahl für Ihren Urlaub macht.',
-    uk: 'Відкрийте ідеальне поєднання розкоші, комфорту та зручності, що робить наші апартаменти ідеальним вибором для вашої відпустки.',
-    ru: 'Откройте идеальное сочетание роскоши, комфорта и удобства, которое делает наши апартаменты идеальным выбором для вашего отпуска.'
+  createAccount: {
+    hr: 'Stvori račun',
+    en: 'Create Account',
+    cs: 'Vytvořit účet',
+    sk: 'Vytvoriť účet',
+    pl: 'Utwórz konto',
+    fr: 'Créer un compte',
+    it: 'Crea account',
+    de: 'Konto erstellen',
+    uk: 'Створити акаунт',
+    ru: 'Создать аккаунт'
   },
-
-  // Feature items
-  beachfrontLocation: {
-    hr: 'Lokacija na plaži',
-    en: 'Beachfront Location',
-    cs: 'Poloha na pláži',
-    sk: 'Poloha na pláži',
-    pl: 'Lokalizacja przy plaży',
-    fr: 'Emplacement en bord de mer',
-    it: 'Posizione fronte mare',
-    de: 'Strandlage',
-    uk: 'Розташування на березі',
-    ru: 'Расположение на берегу'
+  emailAddress: {
+    hr: 'Email adresa',
+    en: 'Email Address',
+    cs: 'E-mailová adresa',
+    sk: 'E-mailová adresa',
+    pl: 'Adres email',
+    fr: 'Adresse e-mail',
+    it: 'Indirizzo email',
+    de: 'E-Mail-Adresse',
+    uk: 'Електронна адреса',
+    ru: 'Адрес электронной почты'
   },
-  beachfrontDesc: {
-    hr: 'Direktan pristup prekrasnoj plaži s kristalno čistim morem',
-    en: 'Direct access to pristine beach with crystal clear waters',
-    cs: 'Přímý přístup k nedotčené pláži s křišťálově čistou vodou',
-    sk: 'Priamy prístup k nedotknutej pláži s krištáľovo čistou vodou',
-    pl: 'Bezpośredni dostęp do dziewiczej plaży z krystalicznie czystą wodą',
-    fr: 'Accès direct à une plage immaculée aux eaux cristallines',
-    it: 'Accesso diretto a una spiaggia incontaminata con acque cristalline',
-    de: 'Direkter Zugang zu unberührtem Strand mit kristallklarem Wasser',
-    uk: 'Прямий доступ до незайманого пляжу з кришталево чистою водою',
-    ru: 'Прямой доступ к нетронутому пляжу с кристально чистой водой'
+  password: {
+    hr: 'Lozinka',
+    en: 'Password',
+    cs: 'Heslo',
+    sk: 'Heslo',
+    pl: 'Hasło',
+    fr: 'Mot de passe',
+    it: 'Password',
+    de: 'Passwort',
+    uk: 'Пароль',
+    ru: 'Пароль'
   },
-  oceanViews: {
-    hr: 'Pogled na ocean',
-    en: 'Ocean Views',
-    cs: 'Výhledy na oceán',
-    sk: 'Výhľady na oceán',
-    pl: 'Widoki na ocean',
-    fr: 'Vues sur l\'océan',
-    it: 'Vista oceano',
-    de: 'Meerblick',
-    uk: 'Вид на океан',
-    ru: 'Вид на океан'
+  fullName: {
+    hr: 'Puno ime',
+    en: 'Full Name',
+    cs: 'Celé jméno',
+    sk: 'Celé meno',
+    pl: 'Pełne imię',
+    fr: 'Nom complet',
+    it: 'Nome completo',
+    de: 'Vollständiger Name',
+    uk: 'Повне ім\'я',
+    ru: 'Полное имя'
   },
-  oceanViewsDesc: {
-    hr: 'Panoramski pogledi na ocean iz svakog apartmana',
-    en: 'Panoramic ocean views from every apartment',
-    cs: 'Panoramatické výhledy na oceán z každého apartmánu',
-    sk: 'Panoramatické výhľady na oceán z každého apartmánu',
-    pl: 'Panoramiczne widoki na ocean z każdego apartamentu',
-    fr: 'Vues panoramiques sur l\'océan depuis chaque appartement',
-    it: 'Vista panoramica sull\'oceano da ogni appartamento',
-    de: 'Panoramablick auf das Meer von jedem Apartment',
-    uk: 'Панорамний вид на океан з кожного апартаменту',
-    ru: 'Панорамный вид на океан из каждого апартамента'
+  phoneNumber: {
+    hr: 'Broj telefona',
+    en: 'Phone Number',
+    cs: 'Telefonní číslo',
+    sk: 'Telefónne číslo',
+    pl: 'Numer telefonu',
+    fr: 'Numéro de téléphone',
+    it: 'Numero di telefono',
+    de: 'Telefonnummer',
+    uk: 'Номер телефону',
+    ru: 'Номер телефона'
   },
-  swimmingPool: {
-    hr: 'Bazen',
-    en: 'Swimming Pool',
-    cs: 'Bazén',
-    sk: 'Bazén',
-    pl: 'Basen',
-    fr: 'Piscine',
-    it: 'Piscina',
-    de: 'Schwimmbad',
-    uk: 'Басейн',
-    ru: 'Бассейн'
+  optional: {
+    hr: 'Opcionalno',
+    en: 'Optional',
+    cs: 'Volitelné',
+    sk: 'Voliteľné',
+    pl: 'Opcjonalne',
+    fr: 'Optionnel',
+    it: 'Opzionale',
+    de: 'Optional',
+    uk: 'Необов\'язково',
+    ru: 'Необязательно'
   },
-  swimmingPoolDesc: {
-    hr: 'Infinity bazen s pogledom na ocean za potpuno opuštanje',
-    en: 'Infinity pool with ocean views for ultimate relaxation',
-    cs: 'Nekonečný bazén s výhledem na oceán pro dokonalé uvolnění',
-    sk: 'Nekonečný bazén s výhľadom na oceán pre dokonalé uvoľnenie',
-    pl: 'Basen bez krawędzi z widokiem na ocean dla pełnego relaksu',
-    fr: 'Piscine à débordement avec vue sur l\'océan pour une détente ultime',
-    it: 'Piscina a sfioro con vista oceano per il massimo relax',
-    de: 'Infinity-Pool mit Meerblick für ultimative Entspannung',
-    uk: 'Безкрайовий басейн з видом на океан для повного розслаблення',
-    ru: 'Бесконечный бассейн с видом на океан для полного расслабления'
+  dontHaveAccount: {
+    hr: 'Nemate račun? Registrirajte se',
+    en: 'Don\'t have an account? Sign up',
+    cs: 'Nemáte účet? Zaregistrujte se',
+    sk: 'Nemáte účet? Zaregistrujte sa',
+    pl: 'Nie masz konta? Zarejestruj się',
+    fr: 'Vous n\'avez pas de compte ? Inscrivez-vous',
+    it: 'Non hai un account? Registrati',
+    de: 'Haben Sie kein Konto? Registrieren',
+    uk: 'Немає акаунту? Зареєструйтесь',
+    ru: 'Нет аккаунта? Зарегистрируйтесь'
   },
-  fullKitchen: {
-    hr: 'Potpuno opremljena kuhinja',
-    en: 'Full Kitchen',
-    cs: 'Plně vybavená kuchyň',
-    sk: 'Plne vybavená kuchyňa',
-    pl: 'W pełni wyposażona kuchnia',
-    fr: 'Cuisine complète',
-    it: 'Cucina completa',
-    de: 'Vollküche',
-    uk: 'Повністю обладнана кухня',
-    ru: 'Полностью оборудованная кухня'
+  alreadyHaveAccount: {
+    hr: 'Već imate račun? Prijavite se',
+    en: 'Already have an account? Sign in',
+    cs: 'Již máte účet? Přihlaste se',
+    sk: 'Už máte účet? Prihláste sa',
+    pl: 'Masz już konto? Zaloguj się',
+    fr: 'Vous avez déjà un compte ? Connectez-vous',
+    it: 'Hai già un account? Accedi',
+    de: 'Haben Sie bereits ein Konto? Anmelden',
+    uk: 'Вже маєте акаунт? Увійдіть',
+    ru: 'Уже есть аккаунт? Войдите'
   },
-  fullKitchenDesc: {
-    hr: 'Moderne kuhinje s premium aparatima za sve vaše potrebe',
-    en: 'Modern kitchens with premium appliances for all your needs',
-    cs: 'Moderní kuchyně s prémiovými spotřebiči pro všechny vaše potřeby',
-    sk: 'Moderné kuchyne s prémiovými spotrebičmi pre všetky vaše potreby',
-    pl: 'Nowoczesne kuchnie z urządzeniami premium dla wszystkich potrzeb',
-    fr: 'Cuisines modernes avec appareils haut de gamme pour tous vos besoins',
-    it: 'Cucine moderne con elettrodomestici premium per tutte le tue esigenze',
-    de: 'Moderne Küchen mit Premium-Geräten für alle Ihre Bedürfnisse',
-    uk: 'Сучасні кухні з преміум-техникою для всіх ваших потреб',
-    ru: 'Современные кухни с премиальной техникой для всех ваших потребностей'
+  processing: {
+    hr: 'Obrađuje se...',
+    en: 'Processing...',
+    cs: 'Zpracovává se...',
+    sk: 'Spracováva sa...',
+    pl: 'Przetwarzanie...',
+    fr: 'Traitement en cours...',
+    it: 'Elaborazione...',
+    de: 'Verarbeitung...',
+    uk: 'Обробка...',
+    ru: 'Обработка...'
   },
-  freeWifi: {
-    hr: 'Besplatni WiFi',
-    en: 'Free WiFi',
-    cs: 'Zdarma WiFi',
-    sk: 'Bezplatné WiFi',
-    pl: 'Darmowe WiFi',
-    fr: 'WiFi gratuit',
-    it: 'WiFi gratuito',
-    de: 'Kostenloses WLAN',
-    uk: 'Безкоштовний WiFi',
-    ru: 'Бесплатный WiFi'
-  },
-  freeWifiDesc: {
-    hr: 'Brzi internet u cijelom objektu za rad i zabavu',
-    en: 'High-speed internet throughout the property for work and entertainment',
-    cs: 'Vysokorychlostní internet v celém objektu pro práci a zábavu',
-    sk: 'Vysokorýchlostný internet v celom objekte pre prácu a zábavu',
-    pl: 'Szybki internet w całym obiekcie do pracy i rozrywki',
-    fr: 'Internet haut débit dans toute la propriété pour le travail et le divertissement',
-    it: 'Internet ad alta velocità in tutta la proprietà per lavoro e intrattenimento',
-    de: 'Hochgeschwindigkeits-Internet im gesamten Anwesen für Arbeit und Unterhaltung',
-    uk: 'Високошвидкісний інтернет по всій території для роботи та розваг',
-    ru: 'Высокоскоростной интернет по всей территории для работы и развлечений'
-  },
-  freeParking: {
-    hr: 'Besplatno parkiranje',
-    en: 'Free Parking',
-    cs: 'Zdarma parkování',
-    sk: 'Bezplatné parkovanie',
-    pl: 'Darmowy parking',
-    fr: 'Parking gratuit',
-    it: 'Parcheggio gratuito',
-    de: 'Kostenlose Parkplätze',
-    uk: 'Безкоштовна парковка',
-    ru: 'Бесплатная парковка'
-  },
-  freeParkingDesc: {
-    hr: 'Sigurno natkriveno parkiranje za sve goste',
-    en: 'Secure covered parking for all guests',
-    cs: 'Bezpečné kryté parkování pro všechny hosty',
-    sk: 'Bezpečné kryté parkovanie pre všetkých hostí',
-    pl: 'Bezpieczny zadaszony parking dla wszystkich gości',
-    fr: 'Parking couvert sécurisé pour tous les clients',
-    it: 'Parcheggio coperto sicuro per tutti gli ospiti',
-    de: 'Sichere überdachte Parkplätze für alle Gäste',
-    uk: 'Безпечна критая парковка для всіх гостей',
-    ru: 'Безопасная крытая парковка для всех гостей'
-  },
-
-  // Apartments Section
-  ourApartments: {
-    hr: 'Naša kolekcija apartmana',
-    en: 'Our Apartment Collection',
-    cs: 'Naše kolekce apartmánů',
-    sk: 'Naša kolekcia apartmánov',
-    pl: 'Nasza kolekcja apartamentów',
-    fr: 'Notre collection d\'appartements',
-    it: 'La nostra collezione di appartamenti',
-    de: 'Unsere Apartment-Kollektion',
-    uk: 'Наша колекція апартаментів',
-    ru: 'Наша коллекция апартаментов'
-  },
-  ourApartmentsSubtitle: {
-    hr: 'Odaberite iz naše pažljivo odabrane kolekcije luksuznih apartmana, svaki dizajniran da pruži vrhunsku udobnost i prekrasan pogled na ocean.',
-    en: 'Choose from our carefully curated selection of luxury apartments, each designed to provide the ultimate comfort and stunning ocean views.',
-    cs: 'Vyberte si z našeho pečlivě vybraného výběru luxusních apartmánů, z nichž každý je navržen tak, aby poskytoval nejvyšší pohodlí a úžasné výhledy na oceán.',
-    sk: 'Vyberte si z našej starostlivo vybranej kolekcie luxusných apartmánov, z ktorých každý je navrhnutý tak, aby poskytoval najvyšší pohodlie a úžasné výhľady na oceán.',
-    pl: 'Wybierz z naszej starannie wyselekcjonowanej kolekcji luksusowych apartamentów, z których każdy został zaprojektowany, aby zapewnić najwyższy komfort i wspaniałe widoki na ocean.',
-    fr: 'Choisissez parmi notre sélection soigneusement organisée d\'appartements de luxe, chacun conçu pour offrir un confort ultime et des vues océaniques époustouflantes.',
-    it: 'Scegli dalla nostra selezione accuratamente curata di appartamenti di lusso, ognuno progettato per offrire il massimo comfort e viste mozzafiato sull\'oceano.',
-    de: 'Wählen Sie aus unserer sorgfältig kuratierten Auswahl an Luxus-Apartments, die alle darauf ausgelegt sind, ultimativen Komfort und atemberaubende Meerblicke zu bieten.',
-    uk: 'Оберіть з нашої ретельно підібраної колекції розкішних апартаментів, кожен з яких розроблений для забезпечення найвищого комфорту та приголомшливих видів на океан.',
-    ru: 'Выберите из нашей тщательно подобранной коллекции роскошных апартаментов, каждый из которых спроектирован для обеспечения максимального комфорта и потрясающих видов на океан.'
-  },
-  guests: {
-    hr: 'Gosti',
-    en: 'Guests',
-    cs: 'Hosté',
-    sk: 'Hostia',
-    pl: 'Goście',
-    fr: 'Invités',
-    it: 'Ospiti',
-    de: 'Gäste',
-    uk: 'Гості',
-    ru: 'Гости'
-  },
-  guest: {
-    hr: 'Gost',
-    en: 'Guest',
-    cs: 'Host',
-    sk: 'Hosť',
-    pl: 'Gość',
-    fr: 'Invité',
-    it: 'Ospite',
-    de: 'Gast',
-    uk: 'Гість',
-    ru: 'Гость'
-  },
-  beds: {
-    hr: 'Kreveti',
-    en: 'Beds',
-    cs: 'Postele',
-    sk: 'Postele',
-    pl: 'Łóżka',
-    fr: 'Lits',
-    it: 'Letti',
-    de: 'Betten',
-    uk: 'Ліжка',
-    ru: 'Кровати'
-  },
-  bed: {
-    hr: 'Krevet',
-    en: 'Bed',
-    cs: 'Postel',
-    sk: 'Posteľ',
-    pl: 'Łóżko',
-    fr: 'Lit',
-    it: 'Letto',
-    de: 'Bett',
-    uk: 'Ліжко',
-    ru: 'Кровать'
-  },
-  baths: {
-    hr: 'Kupaonice',
-    en: 'Baths',
-    cs: 'Koupelny',
-    sk: 'Kúpeľne',
-    pl: 'Łazienki',
-    fr: 'Salles de bain',
-    it: 'Bagni',
-    de: 'Bäder',
-    uk: 'Ванні',
-    ru: 'Ванные'
-  },
-  bath: {
-    hr: 'Kupaonica',
-    en: 'Bath',
-    cs: 'Koupelna',
-    sk: 'Kúpeľňa',
-    pl: 'Łazienka',
-    fr: 'Salle de bain',
-    it: 'Bagno',
-    de: 'Bad',
-    uk: 'Ванна',
-    ru: 'Ванная'
-  },
-  viewDetailsBook: {
-    hr: 'Pogledaj detalje i rezerviraj',
-    en: 'View Details & Book',
-    cs: 'Zobrazit detaily a rezervovat',
-    sk: 'Zobraziť detaily a rezervovať',
-    pl: 'Zobacz szczegóły i zarezerwuj',
-    fr: 'Voir les détails et réserver',
-    it: 'Vedi dettagli e prenota',
-    de: 'Details anzeigen & buchen',
-    uk: 'Переглянути деталі та забронювати',
-    ru: 'Посмотреть детали и забронировать'
+  accountCreatedSuccess: {
+    hr: 'Račun je uspješno stvoren! Molimo provjerite email za potvrdu računa.',
+    en: 'Account created successfully! Please check your email to verify your account.',
+    cs: 'Účet byl úspěšně vytvořen! Zkontrolujte prosím svůj e-mail pro ověření účtu.',
+    sk: 'Účet bol úspešne vytvorený! Skontrolujte prosím svoj e-mail pre overenie účtu.',
+    pl: 'Konto zostało pomyślnie utworzone! Sprawdź swój e-mail, aby zweryfikować konto.',
+    fr: 'Compte créé avec succès ! Veuillez vérifier votre e-mail pour confirmer votre compte.',
+    it: 'Account creato con successo! Controlla la tua email per verificare l\'account.',
+    de: 'Konto erfolgreich erstellt! Bitte überprüfen Sie Ihre E-Mail zur Kontobestätigung.',
+    uk: 'Акаунт успішно створено! Будь ласка, перевірте електронну пошту для підтвердження акаунту.',
+    ru: 'Аккаунт успешно создан! Пожалуйста, проверьте электронную почту для подтверждения аккаунта.'
   },
 
   // Booking Modal
   bookYourStayTitle: {
-    hr: 'Rezerviraj svoj boravak',
+    hr: 'Rezervirajte svoj boravak',
     en: 'Book Your Stay',
-    cs: 'Rezervovat pobyt',
-    sk: 'Rezervovať pobyt',
-    pl: 'Zarezerwuj pobyt',
-    fr: 'Réserver votre séjour',
+    cs: 'Rezervujte si pobyt',
+    sk: 'Rezervujte si pobyt',
+    pl: 'Zarezerwuj swój pobyt',
+    fr: 'Réservez votre séjour',
     it: 'Prenota il tuo soggiorno',
-    de: 'Ihren Aufenthalt buchen',
-    uk: 'Забронювати перебування',
-    ru: 'Забронировать проживание'
+    de: 'Buchen Sie Ihren Aufenthalt',
+    uk: 'Забронюйте ваше проживання',
+    ru: 'Забронируйте ваше проживание'
   },
   checkinDate: {
     hr: 'Datum dolaska',
@@ -1217,30 +1019,6 @@ const translations = {
     uk: 'Прізвище',
     ru: 'Фамилия'
   },
-  emailAddress: {
-    hr: 'Email adresa',
-    en: 'Email Address',
-    cs: 'E-mailová adresa',
-    sk: 'E-mailová adresa',
-    pl: 'Adres e-mail',
-    fr: 'Adresse e-mail',
-    it: 'Indirizzo email',
-    de: 'E-Mail-Adresse',
-    uk: 'Електронна адреса',
-    ru: 'Адрес электронной почты'
-  },
-  phoneNumber: {
-    hr: 'Broj telefona',
-    en: 'Phone Number',
-    cs: 'Telefonní číslo',
-    sk: 'Telefónne číslo',
-    pl: 'Numer telefonu',
-    fr: 'Numéro de téléphone',
-    it: 'Numero di telefono',
-    de: 'Telefonnummer',
-    uk: 'Номер телефону',
-    ru: 'Номер телефона'
-  },
   specialRequests: {
     hr: 'Posebni zahtjevi',
     en: 'Special Requests',
@@ -1253,29 +1031,125 @@ const translations = {
     uk: 'Особливі побажання',
     ru: 'Особые пожелания'
   },
-  optional: {
-    hr: 'Opcionalno',
-    en: 'Optional',
-    cs: 'Volitelné',
-    sk: 'Voliteľné',
-    pl: 'Opcjonalne',
-    fr: 'Optionnel',
-    it: 'Opzionale',
-    de: 'Optional',
-    uk: 'Необов\'язково',
-    ru: 'Необязательно'
-  },
   specialRequestsPlaceholder: {
     hr: 'Bilo koji posebni zahtjevi ili potrebe...',
     en: 'Any special requests or requirements...',
     cs: 'Jakékoli speciální požadavky nebo potřeby...',
     sk: 'Akékoľvek špeciálne požiadavky alebo potreby...',
     pl: 'Wszelkie specjalne życzenia lub wymagania...',
-    fr: 'Toute demande ou exigence spéciale...',
-    it: 'Qualsiasi richiesta o requisito speciale...',
+    fr: 'Toute demande spéciale ou exigence...',
+    it: 'Qualsiasi richiesta speciale o requisito...',
     de: 'Besondere Wünsche oder Anforderungen...',
     uk: 'Будь-які особливі побажання або вимоги...',
     ru: 'Любые особые пожелания или требования...'
+  },
+  termsAndConditions: {
+    hr: 'Uvjeti i odredbe',
+    en: 'Terms & Conditions',
+    cs: 'Podmínky a ustanovení',
+    sk: 'Podmienky a ustanovenia',
+    pl: 'Warunki i postanowienia',
+    fr: 'Termes et conditions',
+    it: 'Termini e condizioni',
+    de: 'Geschäftsbedingungen',
+    uk: 'Умови та положення',
+    ru: 'Условия и положения'
+  },
+  agreeTermsText: {
+    hr: 'Slažem se s',
+    en: 'I agree to the',
+    cs: 'Souhlasím s',
+    sk: 'Súhlasím s',
+    pl: 'Zgadzam się z',
+    fr: 'J\'accepte les',
+    it: 'Accetto i',
+    de: 'Ich stimme den',
+    uk: 'Я погоджуюсь з',
+    ru: 'Я согласен с'
+  },
+  termsOfService: {
+    hr: 'Uvjetima pružanja usluge',
+    en: 'Terms of Service',
+    cs: 'Podmínkami služby',
+    sk: 'Podmienkami služby',
+    pl: 'Warunkami świadczenia usług',
+    fr: 'Conditions de service',
+    it: 'Termini di servizio',
+    de: 'Nutzungsbedingungen',
+    uk: 'Умовами надання послуг',
+    ru: 'Условиями предоставления услуг'
+  },
+  and: {
+    hr: 'i',
+    en: 'and',
+    cs: 'a',
+    sk: 'a',
+    pl: 'i',
+    fr: 'et',
+    it: 'e',
+    de: 'und',
+    uk: 'та',
+    ru: 'и'
+  },
+  privacyPolicy: {
+    hr: 'Pravilnikom o privatnosti',
+    en: 'Privacy Policy',
+    cs: 'Zásadami ochrany osobních údajů',
+    sk: 'Zásadami ochrany osobných údajov',
+    pl: 'Polityką prywatności',
+    fr: 'Politique de confidentialité',
+    it: 'Informativa sulla privacy',
+    de: 'Datenschutzrichtlinie',
+    uk: 'Політикою конфіденційності',
+    ru: 'Политикой конфиденциальности'
+  },
+  marketingOptIn: {
+    hr: 'Želim primati posebne ponude i ažuriranja putem emaila',
+    en: 'I would like to receive special offers and updates via email',
+    cs: 'Chtěl bych dostávat speciální nabídky a aktualizace e-mailem',
+    sk: 'Chcel by som dostávať špeciálne ponuky a aktualizácie e-mailom',
+    pl: 'Chciałbym otrzymywać specjalne oferty i aktualizacje przez e-mail',
+    fr: 'Je souhaite recevoir des offres spéciales et des mises à jour par e-mail',
+    it: 'Vorrei ricevere offerte speciali e aggiornamenti via email',
+    de: 'Ich möchte Sonderangebote und Updates per E-Mail erhalten',
+    uk: 'Я хотів би отримувати спеціальні пропозиції та оновлення електронною поштою',
+    ru: 'Я хотел бы получать специальные предложения и обновления по электронной почте'
+  },
+  confirmDetailsText: {
+    hr: 'Potvrđujem da su sve navedene informacije točne i potpune',
+    en: 'I confirm that all the information provided is accurate and complete',
+    cs: 'Potvrzuji, že všechny poskytnuté informace jsou přesné a úplné',
+    sk: 'Potvrdzujem, že všetky poskytnuté informácie sú presné a úplné',
+    pl: 'Potwierdzam, że wszystkie podane informacje są dokładne i kompletne',
+    fr: 'Je confirme que toutes les informations fournies sont exactes et complètes',
+    it: 'Confermo che tutte le informazioni fornite sono accurate e complete',
+    de: 'Ich bestätige, dass alle bereitgestellten Informationen korrekt und vollständig sind',
+    uk: 'Я підтверджую, що вся надана інформація є точною та повною',
+    ru: 'Я подтверждаю, что вся предоставленная информация является точной и полной'
+  },
+  importantNotice: {
+    hr: 'Važna napomena',
+    en: 'Important Notice',
+    cs: 'Důležité upozornění',
+    sk: 'Dôležité upozornenie',
+    pl: 'Ważna uwaga',
+    fr: 'Avis important',
+    it: 'Avviso importante',
+    de: 'Wichtiger Hinweis',
+    uk: 'Важливе повідомлення',
+    ru: 'Важное уведомление'
+  },
+  cancellationPolicy: {
+    hr: 'Besplatno otkazivanje do 48 sati prije dolaska. Otkazivanja unutar 48 sati podliježu naplati jedne noći.',
+    en: 'Free cancellation up to 48 hours before check-in. Cancellations within 48 hours are subject to a one-night charge.',
+    cs: 'Bezplatné zrušení až 48 hodin před příjezdem. Zrušení do 48 hodin podléhá poplatku za jednu noc.',
+    sk: 'Bezplatné zrušenie až 48 hodín pred príchodom. Zrušenia do 48 hodín podliehajú poplatku za jednu noc.',
+    pl: 'Bezpłatne anulowanie do 48 godzin przed zameldowaniem. Anulowania w ciągu 48 godzin podlegają opłacie za jedną noc.',
+    fr: 'Annulation gratuite jusqu\'à 48 heures avant l\'arrivée. Les annulations dans les 48 heures sont soumises à des frais d\'une nuit.',
+    it: 'Cancellazione gratuita fino a 48 ore prima del check-in. Le cancellazioni entro 48 ore sono soggette a una tariffa di una notte.',
+    de: 'Kostenlose Stornierung bis 48 Stunden vor Anreise. Stornierungen innerhalb von 48 Stunden unterliegen einer Gebühr für eine Nacht.',
+    uk: 'Безкоштовне скасування до 48 годин до заїзду. Скасування протягом 48 годин підлягають оплаті за одну ніч.',
+    ru: 'Бесплатная отмена до 48 часов до заезда. Отмены в течение 48 часов облагаются платой за одну ночь.'
   },
   bookingSummary: {
     hr: 'Sažetak rezervacije',
@@ -1290,64 +1164,64 @@ const translations = {
     ru: 'Сводка бронирования'
   },
   nights: {
-    hr: 'Noći',
-    en: 'Nights',
-    cs: 'Noci',
-    sk: 'Noci',
-    pl: 'Noce',
-    fr: 'Nuits',
-    it: 'Notti',
-    de: 'Nächte',
-    uk: 'Ночі',
-    ru: 'Ночи'
+    hr: 'Noći:',
+    en: 'Nights:',
+    cs: 'Noci:',
+    sk: 'Noci:',
+    pl: 'Noce:',
+    fr: 'Nuits:',
+    it: 'Notti:',
+    de: 'Nächte:',
+    uk: 'Ночей:',
+    ru: 'Ночей:'
   },
   ratePerNight: {
-    hr: 'Cijena po noći',
-    en: 'Rate per night',
-    cs: 'Cena za noc',
-    sk: 'Cena za noc',
-    pl: 'Cena za noc',
-    fr: 'Tarif par nuit',
-    it: 'Tariffa per notte',
-    de: 'Preis pro Nacht',
-    uk: 'Ціна за ніч',
-    ru: 'Цена за ночь'
+    hr: 'Cijena po noći:',
+    en: 'Rate per night:',
+    cs: 'Cena za noc:',
+    sk: 'Cena za noc:',
+    pl: 'Cena za noc:',
+    fr: 'Tarif par nuit:',
+    it: 'Tariffa per notte:',
+    de: 'Preis pro Nacht:',
+    uk: 'Ціна за ніч:',
+    ru: 'Цена за ночь:'
   },
   subtotal: {
-    hr: 'Međuzbroj',
-    en: 'Subtotal',
-    cs: 'Mezisoučet',
-    sk: 'Medzisúčet',
-    pl: 'Suma częściowa',
-    fr: 'Sous-total',
-    it: 'Subtotale',
-    de: 'Zwischensumme',
-    uk: 'Проміжний підсумок',
-    ru: 'Промежуточный итог'
+    hr: 'Međuzbroj:',
+    en: 'Subtotal:',
+    cs: 'Mezisoučet:',
+    sk: 'Medzisúčet:',
+    pl: 'Suma częściowa:',
+    fr: 'Sous-total:',
+    it: 'Subtotale:',
+    de: 'Zwischensumme:',
+    uk: 'Проміжний підсумок:',
+    ru: 'Промежуточный итог:'
   },
   taxesFees: {
-    hr: 'Porezi i naknade',
-    en: 'Taxes & Fees',
-    cs: 'Daně a poplatky',
-    sk: 'Dane a poplatky',
-    pl: 'Podatki i opłaty',
-    fr: 'Taxes et frais',
-    it: 'Tasse e commissioni',
-    de: 'Steuern & Gebühren',
-    uk: 'Податки та збори',
-    ru: 'Налоги и сборы'
+    hr: 'Porezi i naknade:',
+    en: 'Taxes & Fees:',
+    cs: 'Daně a poplatky:',
+    sk: 'Dane a poplatky:',
+    pl: 'Podatki i opłaty:',
+    fr: 'Taxes et frais:',
+    it: 'Tasse e commissioni:',
+    de: 'Steuern und Gebühren:',
+    uk: 'Податки та збори:',
+    ru: 'Налоги и сборы:'
   },
   total: {
-    hr: 'Ukupno',
-    en: 'Total',
-    cs: 'Celkem',
-    sk: 'Celkom',
-    pl: 'Razem',
-    fr: 'Total',
-    it: 'Totale',
-    de: 'Gesamt',
-    uk: 'Загалом',
-    ru: 'Итого'
+    hr: 'Ukupno:',
+    en: 'Total:',
+    cs: 'Celkem:',
+    sk: 'Celkom:',
+    pl: 'Razem:',
+    fr: 'Total:',
+    it: 'Totale:',
+    de: 'Gesamt:',
+    uk: 'Всього:',
+    ru: 'Итого:'
   },
   confirmBooking: {
     hr: 'Potvrdi rezervaciju',
@@ -1362,16 +1236,16 @@ const translations = {
     ru: 'Подтвердить бронирование'
   },
   loading: {
-    hr: 'Obrađujemo vašu rezervaciju...',
+    hr: 'Obrađuje se vaša rezervacija...',
     en: 'Processing your booking...',
-    cs: 'Zpracováváme vaši rezervaci...',
-    sk: 'Spracovávame vašu rezerváciu...',
-    pl: 'Przetwarzamy twoją rezerwację...',
+    cs: 'Zpracovává se vaše rezervace...',
+    sk: 'Spracováva sa vaša rezervácia...',
+    pl: 'Przetwarzanie rezerwacji...',
     fr: 'Traitement de votre réservation...',
-    it: 'Elaborazione della tua prenotazione...',
+    it: 'Elaborazione della prenotazione...',
     de: 'Ihre Buchung wird bearbeitet...',
-    uk: 'Обробляємо ваше бронювання...',
-    ru: 'Обрабатываем ваше бронирование...'
+    uk: 'Обробка вашого бронювання...',
+    ru: 'Обработка вашего бронирования...'
   },
   bookingConfirmed: {
     hr: 'Rezervacija potvrđena!',
@@ -1390,7 +1264,7 @@ const translations = {
     en: 'Thank you for your reservation. We\'ll contact you shortly with confirmation details.',
     cs: 'Děkujeme za vaši rezervaci. Brzy vás budeme kontaktovat s podrobnostmi o potvrzení.',
     sk: 'Ďakujeme za vašu rezerváciu. Čoskoro vás budeme kontaktovať s podrobnosťami o potvrdení.',
-    pl: 'Dziękujemy za rezerwację. Wkrótce skontaktujemy się z Tobą z szczegółami potwierdzenia.',
+    pl: 'Dziękujemy za rezerwację. Wkrótce skontaktujemy się z Państwem z szczegółami potwierdzenia.',
     fr: 'Merci pour votre réservation. Nous vous contacterons bientôt avec les détails de confirmation.',
     it: 'Grazie per la tua prenotazione. Ti contatteremo presto con i dettagli di conferma.',
     de: 'Vielen Dank für Ihre Reservierung. Wir werden Sie in Kürze mit Bestätigungsdetails kontaktieren.',
@@ -1410,371 +1284,237 @@ const translations = {
     ru: 'Закрыть'
   },
 
-  // Auth Modal
-  signIn: {
-    hr: 'Prijava',
-    en: 'Sign In',
-    cs: 'Přihlášení',
-    sk: 'Prihlásenie',
-    pl: 'Zaloguj się',
-    fr: 'Se connecter',
-    it: 'Accedi',
-    de: 'Anmelden',
-    uk: 'Увійти',
-    ru: 'Войти'
+  // Apartments page
+  ourLuxuryApartments: {
+    hr: 'Naši luksuzni apartmani',
+    en: 'Our Luxury Apartments',
+    cs: 'Naše luxusní apartmány',
+    sk: 'Naše luxusné apartmány',
+    pl: 'Nasze luksusowe apartamenty',
+    fr: 'Nos appartements de luxe',
+    it: 'I nostri appartamenti di lusso',
+    de: 'Unsere Luxus-Apartments',
+    uk: 'Наші розкішні апартаменти',
+    ru: 'Наши роскошные апартаменты'
   },
-  password: {
-    hr: 'Lozinka',
-    en: 'Password',
-    cs: 'Heslo',
-    sk: 'Heslo',
-    pl: 'Hasło',
-    fr: 'Mot de passe',
-    it: 'Password',
-    de: 'Passwort',
-    uk: 'Пароль',
-    ru: 'Пароль'
+  ourLuxuryApartmentsSubtitle: {
+    hr: 'Odaberite iz naše pažljivo odabrane kolekcije premium apartmana na obali mora, svaki dizajniran da pruži vrhunsku udobnost i prekrasan pogled.',
+    en: 'Choose from our carefully curated collection of premium oceanfront apartments, each designed to provide the ultimate comfort and breathtaking views.',
+    cs: 'Vyberte si z naší pečlivě vybrané kolekce prémiových apartmánů na pobřeží oceánu, z nichž každý je navržen tak, aby poskytoval nejvyšší pohodlí a úchvatné výhledy.',
+    sk: 'Vyberte si z našej starostlivo vybranej kolekcie prémiových apartmánov na pobreží oceánu, z ktorých každý je navrhnutý tak, aby poskytoval najvyššie pohodlie a úchvatné výhľady.',
+    pl: 'Wybierz z naszej starannie wyselekcjonowanej kolekcji luksusowych apartamentów nad oceanem, z których każdy został zaprojektowany, aby zapewnić najwyższy komfort i zapierające dech widoki.',
+    fr: 'Choisissez parmi notre collection soigneusement sélectionnée d\'appartements haut de gamme en bord d\'océan, chacun conçu pour offrir un confort ultime et des vues à couper le souffle.',
+    it: 'Scegli dalla nostra collezione accuratamente selezionata di appartamenti premium fronte oceano, ognuno progettato per offrire il massimo comfort e viste mozzafiato.',
+    de: 'Wählen Sie aus unserer sorgfältig kuratierten Sammlung von Premium-Apartments am Meer, die alle darauf ausgelegt sind, ultimativen Komfort und atemberaubende Aussichten zu bieten.',
+    uk: 'Оберіть з нашої ретельно підібраної колекції преміум-апартаментів на березі океану, кожен з яких розроблений для забезпечення найвищого комфорту та захоплюючих видів.',
+    ru: 'Выберите из нашей тщательно подобранной коллекции премиальных апартаментов на берегу океана, каждый из которых спроектирован для обеспечения максимального комфорта и захватывающих видов.'
   },
-  fullName: {
-    hr: 'Puno ime',
-    en: 'Full Name',
-    cs: 'Celé jméno',
-    sk: 'Celé meno',
-    pl: 'Pełne imię',
-    fr: 'Nom complet',
-    it: 'Nome completo',
-    de: 'Vollständiger Name',
-    uk: 'Повне ім\'я',
-    ru: 'Полное имя'
+  allApartments: {
+    hr: 'Svi apartmani',
+    en: 'All Apartments',
+    cs: 'Všechny apartmány',
+    sk: 'Všetky apartmány',
+    pl: 'Wszystkie apartamenty',
+    fr: 'Tous les appartements',
+    it: 'Tutti gli appartamenti',
+    de: 'Alle Apartments',
+    uk: 'Всі апартаменти',
+    ru: 'Все апартаменты'
   },
-  createAccount: {
-    hr: 'Stvori račun',
-    en: 'Create Account',
-    cs: 'Vytvořit účet',
-    sk: 'Vytvoriť účet',
-    pl: 'Utwórz konto',
-    fr: 'Créer un compte',
-    it: 'Crea account',
-    de: 'Konto erstellen',
-    uk: 'Створити обліковий запис',
-    ru: 'Создать аккаунт'
+  studio: {
+    hr: 'Studio',
+    en: 'Studio',
+    cs: 'Studio',
+    sk: 'Studio',
+    pl: 'Studio',
+    fr: 'Studio',
+    it: 'Monolocale',
+    de: 'Studio',
+    uk: 'Студія',
+    ru: 'Студия'
   },
-  dontHaveAccount: {
-    hr: 'Nemate račun? Registrirajte se',
-    en: 'Don\'t have an account? Sign up',
-    cs: 'Nemáte účet? Zaregistrujte se',
-    sk: 'Nemáte účet? Zaregistrujte sa',
-    pl: 'Nie masz konta? Zarejestruj się',
-    fr: 'Vous n\'avez pas de compte? Inscrivez-vous',
-    it: 'Non hai un account? Registrati',
-    de: 'Haben Sie kein Konto? Registrieren',
-    uk: 'Немає облікового запису? Зареєструйтеся',
-    ru: 'Нет аккаунта? Зарегистрируйтесь'
+  oneBedroom: {
+    hr: '1 spavaća soba',
+    en: '1 Bedroom',
+    cs: '1 ložnice',
+    sk: '1 spálňa',
+    pl: '1 sypialnia',
+    fr: '1 chambre',
+    it: '1 camera da letto',
+    de: '1 Schlafzimmer',
+    uk: '1 спальня',
+    ru: '1 спальня'
   },
-  alreadyHaveAccount: {
-    hr: 'Već imate račun? Prijavite se',
-    en: 'Already have an account? Sign in',
-    cs: 'Již máte účet? Přihlaste se',
-    sk: 'Už máte účet? Prihláste sa',
-    pl: 'Masz już konto? Zaloguj się',
-    fr: 'Vous avez déjà un compte? Connectez-vous',
-    it: 'Hai già un account? Accedi',
-    de: 'Haben Sie bereits ein Konto? Anmelden',
-    uk: 'Вже маєте обліковий запис? Увійдіть',
-    ru: 'Уже есть аккаунт? Войдите'
+  twoPlusBedrooms: {
+    hr: '2+ spavaće sobe',
+    en: '2+ Bedrooms',
+    cs: '2+ ložnice',
+    sk: '2+ spálne',
+    pl: '2+ sypialnie',
+    fr: '2+ chambres',
+    it: '2+ camere da letto',
+    de: '2+ Schlafzimmer',
+    uk: '2+ спальні',
+    ru: '2+ спальни'
   },
-  processing: {
-    hr: 'Obrađuje se...',
-    en: 'Processing...',
-    cs: 'Zpracovává se...',
-    sk: 'Spracováva sa...',
-    pl: 'Przetwarzanie...',
-    fr: 'Traitement en cours...',
-    it: 'Elaborazione...',
-    de: 'Wird bearbeitet...',
-    uk: 'Обробка...',
-    ru: 'Обработка...'
+  anyPrice: {
+    hr: 'Bilo koja cijena',
+    en: 'Any Price',
+    cs: 'Jakákoli cena',
+    sk: 'Akákoľvek cena',
+    pl: 'Dowolna cena',
+    fr: 'Tout prix',
+    it: 'Qualsiasi prezzo',
+    de: 'Jeder Preis',
+    uk: 'Будь-яка ціна',
+    ru: 'Любая цена'
   },
-  accountCreatedSuccess: {
-    hr: 'Račun je uspješno stvoren! Molimo provjerite svoj email za potvrdu računa.',
-    en: 'Account created successfully! Please check your email to verify your account.',
-    cs: 'Účet byl úspěšně vytvořen! Zkontrolujte prosím svůj e-mail pro ověření účtu.',
-    sk: 'Účet bol úspešne vytvorený! Skontrolujte prosím svoj e-mail pre overenie účtu.',
-    pl: 'Konto zostało pomyślnie utworzone! Sprawdź swój e-mail, aby zweryfikować konto.',
-    fr: 'Compte créé avec succès! Veuillez vérifier votre e-mail pour vérifier votre compte.',
-    it: 'Account creato con successo! Controlla la tua email per verificare il tuo account.',
-    de: 'Konto erfolgreich erstellt! Bitte überprüfen Sie Ihre E-Mail, um Ihr Konto zu verifizieren.',
-    uk: 'Обліковий запис успішно створено! Будь ласка, перевірте свою електронну пошту для підтвердження облікового запису.',
-    ru: 'Аккаунт успешно создан! Пожалуйста, проверьте свою электронную почту для подтверждения аккаунта.'
+  under200: {
+    hr: 'Ispod $200',
+    en: 'Under $200',
+    cs: 'Pod $200',
+    sk: 'Pod $200',
+    pl: 'Poniżej $200',
+    fr: 'Moins de $200',
+    it: 'Sotto $200',
+    de: 'Unter $200',
+    uk: 'Менше $200',
+    ru: 'Менее $200'
   },
-
-  // Dashboard
-  myBookings: {
-    hr: 'Moje rezervacije',
-    en: 'My Bookings',
-    cs: 'Moje rezervace',
-    sk: 'Moje rezervácie',
-    pl: 'Moje rezerwacje',
-    fr: 'Mes réservations',
-    it: 'Le mie prenotazioni',
-    de: 'Meine Buchungen',
-    uk: 'Мої бронювання',
-    ru: 'Мои бронирования'
+  price200to300: {
+    hr: '$200 - $300',
+    en: '$200 - $300',
+    cs: '$200 - $300',
+    sk: '$200 - $300',
+    pl: '$200 - $300',
+    fr: '$200 - $300',
+    it: '$200 - $300',
+    de: '$200 - $300',
+    uk: '$200 - $300',
+    ru: '$200 - $300'
   },
-  viewManageReservations: {
-    hr: 'Pregledajte i upravljajte rezervacijama apartmana',
-    en: 'View and manage your apartment reservations',
-    cs: 'Zobrazit a spravovat rezervace apartmánů',
-    sk: 'Zobraziť a spravovať rezervácie apartmánov',
-    pl: 'Przeglądaj i zarządzaj rezerwacjami apartamentów',
-    fr: 'Voir et gérer vos réservations d\'appartements',
-    it: 'Visualizza e gestisci le tue prenotazioni di appartamenti',
-    de: 'Apartment-Reservierungen anzeigen und verwalten',
-    uk: 'Переглядайте та керуйте бронюваннями апартаментів',
-    ru: 'Просматривайте и управляйте бронированием апартаментов'
+  price300plus: {
+    hr: '$300+',
+    en: '$300+',
+    cs: '$300+',
+    sk: '$300+',
+    pl: '$300+',
+    fr: '$300+',
+    it: '$300+',
+    de: '$300+',
+    uk: '$300+',
+    ru: '$300+'
   },
-  totalBookings: {
-    hr: 'Ukupno rezervacija',
-    en: 'Total Bookings',
-    cs: 'Celkem rezervací',
-    sk: 'Celkom rezervácií',
-    pl: 'Łączne rezerwacje',
-    fr: 'Total des réservations',
-    it: 'Prenotazioni totali',
-    de: 'Gesamtbuchungen',
-    uk: 'Загальна кількість бронювань',
-    ru: 'Всего бронирований'
+  anyGuests: {
+    hr: 'Bilo koji broj gostiju',
+    en: 'Any Guests',
+    cs: 'Jakýkoli počet hostů',
+    sk: 'Akýkoľvek počet hostí',
+    pl: 'Dowolna liczba gości',
+    fr: 'Tout nombre d\'invités',
+    it: 'Qualsiasi numero di ospiti',
+    de: 'Beliebige Anzahl Gäste',
+    uk: 'Будь-яка кількість гостей',
+    ru: 'Любое количество гостей'
   },
-  confirmed: {
-    hr: 'Potvrđeno',
-    en: 'Confirmed',
-    cs: 'Potvrzeno',
-    sk: 'Potvrdené',
-    pl: 'Potwierdzone',
-    fr: 'Confirmé',
-    it: 'Confermato',
-    de: 'Bestätigt',
-    uk: 'Підтверджено',
-    ru: 'Подтверждено'
+  oneToTwoGuests: {
+    hr: '1-2 gosta',
+    en: '1-2 Guests',
+    cs: '1-2 hosté',
+    sk: '1-2 hostia',
+    pl: '1-2 gości',
+    fr: '1-2 invités',
+    it: '1-2 ospiti',
+    de: '1-2 Gäste',
+    uk: '1-2 гостя',
+    ru: '1-2 гостя'
   },
-  upcoming: {
-    hr: 'Nadolazeće',
-    en: 'Upcoming',
-    cs: 'Nadcházející',
-    sk: 'Nadchádzajúce',
-    pl: 'Nadchodzące',
-    fr: 'À venir',
-    it: 'Prossime',
-    de: 'Bevorstehend',
-    uk: 'Майбутні',
-    ru: 'Предстоящие'
+  threeToFourGuests: {
+    hr: '3-4 gosta',
+    en: '3-4 Guests',
+    cs: '3-4 hosté',
+    sk: '3-4 hostia',
+    pl: '3-4 gości',
+    fr: '3-4 invités',
+    it: '3-4 ospiti',
+    de: '3-4 Gäste',
+    uk: '3-4 гостя',
+    ru: '3-4 гостя'
   },
-  totalSpent: {
-    hr: 'Ukupno potrošeno',
-    en: 'Total Spent',
-    cs: 'Celkem utraceno',
-    sk: 'Celkom minulé',
-    pl: 'Łącznie wydane',
-    fr: 'Total dépensé',
-    it: 'Totale speso',
-    de: 'Gesamt ausgegeben',
-    uk: 'Загалом витрачено',
-    ru: 'Всего потрачено'
+  fiveGuests: {
+    hr: '5 gostiju',
+    en: '5 Guests',
+    cs: '5 hostů',
+    sk: '5 hostí',
+    pl: '5 gości',
+    fr: '5 invités',
+    it: '5 ospiti',
+    de: '5 Gäste',
+    uk: '5 гостей',
+    ru: '5 гостей'
   },
-  yourBookings: {
-    hr: 'Vaše rezervacije',
-    en: 'Your Bookings',
-    cs: 'Vaše rezervace',
-    sk: 'Vaše rezervácie',
-    pl: 'Twoje rezerwacje',
-    fr: 'Vos réservations',
-    it: 'Le tue prenotazioni',
-    de: 'Ihre Buchungen',
-    uk: 'Ваші бронювання',
-    ru: 'Ваши бронирования'
+  showing: {
+    hr: 'Prikazuje se',
+    en: 'Showing',
+    cs: 'Zobrazuje se',
+    sk: 'Zobrazuje sa',
+    pl: 'Pokazuje',
+    fr: 'Affichage',
+    it: 'Mostrando',
+    de: 'Zeige',
+    uk: 'Показано',
+    ru: 'Показано'
   },
-  newBooking: {
-    hr: 'Nova rezervacija',
-    en: 'New Booking',
-    cs: 'Nová rezervace',
-    sk: 'Nová rezervácia',
-    pl: 'Nowa rezerwacja',
-    fr: 'Nouvelle réservation',
-    it: 'Nuova prenotazione',
-    de: 'Neue Buchung',
-    uk: 'Нове бронювання',
-    ru: 'Новое бронирование'
+  needHelp: {
+    hr: 'Trebate pomoć?',
+    en: 'Need Help?',
+    cs: 'Potřebujete pomoc?',
+    sk: 'Potrebujete pomoc?',
+    pl: 'Potrzebujesz pomocy?',
+    fr: 'Besoin d\'aide?',
+    it: 'Hai bisogno di aiuto?',
+    de: 'Brauchen Sie Hilfe?',
+    uk: 'Потрібна допомога?',
+    ru: 'Нужна помощь?'
   },
-  noBookingsFound: {
-    hr: 'Nema pronađenih rezervacija',
-    en: 'No bookings found',
-    cs: 'Žádné rezervace nenalezeny',
-    sk: 'Žiadne rezervácie nenájdené',
-    pl: 'Nie znaleziono rezerwacji',
-    fr: 'Aucune réservation trouvée',
-    it: 'Nessuna prenotazione trovata',
-    de: 'Keine Buchungen gefunden',
-    uk: 'Бронювання не знайдено',
-    ru: 'Бронирования не найдены'
+  needHelpDesc: {
+    hr: 'Naš tim je tu da vam pomogne pronaći savršen apartman za vaš boravak.',
+    en: 'Our team is here to help you find the perfect apartment for your stay.',
+    cs: 'Náš tým je zde, aby vám pomohl najít dokonalý apartmán pro váš pobyt.',
+    sk: 'Náš tím je tu, aby vám pomohol nájsť dokonalý apartmán pre váš pobyt.',
+    pl: 'Nasz zespół jest tutaj, aby pomóc Ci znaleźć idealny apartament na pobyt.',
+    fr: 'Notre équipe est là pour vous aider à trouver l\'appartement parfait pour votre séjour.',
+    it: 'Il nostro team è qui per aiutarti a trovare l\'appartamento perfetto per il tuo soggiorno.',
+    de: 'Unser Team ist hier, um Ihnen zu helfen, das perfekte Apartment für Ihren Aufenthalt zu finden.',
+    uk: 'Наша команда тут, щоб допомогти вам знайти ідеальний апартамент для вашого проживання.',
+    ru: 'Наша команда здесь, чтобы помочь вам найти идеальный апартамент для вашего проживания.'
   },
-  makeFirstBooking: {
-    hr: 'Napravite svoju prvu rezervaciju',
-    en: 'Make Your First Booking',
-    cs: 'Proveďte svou první rezervaci',
-    sk: 'Urobte svoju prvú rezerváciu',
-    pl: 'Dokonaj swojej pierwszej rezerwacji',
-    fr: 'Effectuez votre première réservation',
-    it: 'Fai la tua prima prenotazione',
-    de: 'Machen Sie Ihre erste Buchung',
-    uk: 'Зробіть своє перше бронювання',
-    ru: 'Сделайте свое первое бронирование'
+  description: {
+    hr: 'Opis',
+    en: 'Description',
+    cs: 'Popis',
+    sk: 'Popis',
+    pl: 'Opis',
+    fr: 'Description',
+    it: 'Descrizione',
+    de: 'Beschreibung',
+    uk: 'Опис',
+    ru: 'Описание'
   },
-  bookingDetails: {
-    hr: 'Detalji rezervacije',
-    en: 'Booking Details',
-    cs: 'Podrobnosti rezervace',
-    sk: 'Podrobnosti rezervácie',
-    pl: 'Szczegóły rezerwacji',
-    fr: 'Détails de la réservation',
-    it: 'Dettagli prenotazione',
-    de: 'Buchungsdetails',
-    uk: 'Деталі бронювання',
-    ru: 'Детали бронирования'
-  },
-  stayDetails: {
-    hr: 'Detalji boravka',
-    en: 'Stay Details',
-    cs: 'Podrobnosti pobytu',
-    sk: 'Podrobnosti pobytu',
-    pl: 'Szczegóły pobytu',
-    fr: 'Détails du séjour',
-    it: 'Dettagli soggiorno',
-    de: 'Aufenthaltsdetails',
-    uk: 'Деталі перебування',
-    ru: 'Детали пребывания'
-  },
-  bookingId: {
-    hr: 'ID rezervacije',
-    en: 'Booking ID',
-    cs: 'ID rezervace',
-    sk: 'ID rezervácie',
-    pl: 'ID rezerwacji',
-    fr: 'ID de réservation',
-    it: 'ID prenotazione',
-    de: 'Buchungs-ID',
-    uk: 'ID бронювання',
-    ru: 'ID бронирования'
-  },
-  paymentSummary: {
-    hr: 'Sažetak plaćanja',
-    en: 'Payment Summary',
-    cs: 'Souhrn platby',
-    sk: 'Súhrn platby',
-    pl: 'Podsumowanie płatności',
-    fr: 'Résumé du paiement',
-    it: 'Riepilogo pagamento',
-    de: 'Zahlungsübersicht',
-    uk: 'Підсумок платежу',
-    ru: 'Сводка платежа'
-  },
-  totalAmount: {
-    hr: 'Ukupan iznos',
-    en: 'Total Amount',
-    cs: 'Celková částka',
-    sk: 'Celková suma',
-    pl: 'Łączna kwota',
-    fr: 'Montant total',
-    it: 'Importo totale',
-    de: 'Gesamtbetrag',
-    uk: 'Загальна сума',
-    ru: 'Общая сумма'
-  },
-  status: {
-    hr: 'Status',
-    en: 'Status',
-    cs: 'Stav',
-    sk: 'Stav',
-    pl: 'Status',
-    fr: 'Statut',
-    it: 'Stato',
-    de: 'Status',
-    uk: 'Статус',
-    ru: 'Статус'
-  },
-  paid: {
-    hr: 'Plaćeno',
-    en: 'Paid',
-    cs: 'Zaplaceno',
-    sk: 'Zaplatené',
-    pl: 'Zapłacone',
-    fr: 'Payé',
-    it: 'Pagato',
-    de: 'Bezahlt',
-    uk: 'Сплачено',
-    ru: 'Оплачено'
-  },
-  cancel: {
-    hr: 'Otkaži',
-    en: 'Cancel',
-    cs: 'Zrušit',
-    sk: 'Zrušiť',
-    pl: 'Anuluj',
-    fr: 'Annuler',
-    it: 'Annulla',
-    de: 'Stornieren',
-    uk: 'Скасувати',
-    ru: 'Отменить'
-  },
-  confirmCancelBooking: {
-    hr: 'Jeste li sigurni da želite otkazati ovu rezervaciju?',
-    en: 'Are you sure you want to cancel this booking?',
-    cs: 'Opravdu chcete zrušit tuto rezervaci?',
-    sk: 'Naozaj chcete zrušiť túto rezerváciu?',
-    pl: 'Czy na pewno chcesz anulować tę rezerwację?',
-    fr: 'Êtes-vous sûr de vouloir annuler cette réservation?',
-    it: 'Sei sicuro di voler annullare questa prenotazione?',
-    de: 'Sind Sie sicher, dass Sie diese Buchung stornieren möchten?',
-    uk: 'Ви впевнені, що хочете скасувати це бронювання?',
-    ru: 'Вы уверены, что хотите отменить это бронирование?'
-  },
-  bookingCancelledSuccess: {
-    hr: 'Rezervacija je uspješno otkazana.',
-    en: 'Booking cancelled successfully.',
-    cs: 'Rezervace byla úspěšně zrušena.',
-    sk: 'Rezervácia bola úspešne zrušená.',
-    pl: 'Rezerwacja została pomyślnie anulowana.',
-    fr: 'Réservation annulée avec succès.',
-    it: 'Prenotazione annullata con successo.',
-    de: 'Buchung erfolgreich storniert.',
-    uk: 'Бронювання успішно скасовано.',
-    ru: 'Бронирование успешно отменено.'
-  },
-  pending: {
-    hr: 'Na čekanju',
-    en: 'Pending',
-    cs: 'Čekající',
-    sk: 'Čakajúce',
-    pl: 'Oczekujące',
-    fr: 'En attente',
-    it: 'In attesa',
-    de: 'Ausstehend',
-    uk: 'Очікує',
-    ru: 'Ожидает'
-  },
-  cancelled: {
-    hr: 'Otkazano',
-    en: 'Cancelled',
-    cs: 'Zrušeno',
-    sk: 'Zrušené',
-    pl: 'Anulowane',
-    fr: 'Annulé',
-    it: 'Annullato',
-    de: 'Storniert',
-    uk: 'Скасовано',
-    ru: 'Отменено'
+  bookThisApartment: {
+    hr: 'Rezerviraj ovaj apartman',
+    en: 'Book this apartment',
+    cs: 'Rezervovat tento apartmán',
+    sk: 'Rezervovať tento apartmán',
+    pl: 'Zarezerwuj ten apartament',
+    fr: 'Réserver cet appartement',
+    it: 'Prenota questo appartamento',
+    de: 'Dieses Apartment buchen',
+    uk: 'Забронювати цей апартамент',
+    ru: 'Забронировать эту квартиру'
   },
 
-  // Contact Page
+  // Contact page
   contactUs: {
     hr: 'Kontaktirajte nas',
     en: 'Contact Us',
@@ -1788,19 +1528,17 @@ const translations = {
     ru: 'Свяжитесь с нами'
   },
   contactUsSubtitle: {
-    hr: 'Tu smo da pomognemo da vaš boravak bude savršen. Obratite nam se bilo kada za rezervacije, pitanja ili pomoć.',
+    hr: 'Tu smo da pomognemo učiniti vaš boravak savršenim. Obratite nam se bilo kada za rezervacije, pitanja ili pomoć.',
     en: 'We\'re here to help make your stay perfect. Reach out to us anytime for reservations, questions, or assistance.',
     cs: 'Jsme tu, abychom vám pomohli udělat váš pobyt dokonalým. Obraťte se na nás kdykoli pro rezervace, otázky nebo pomoc.',
     sk: 'Sme tu, aby sme vám pomohli urobiť váš pobyt dokonalým. Obráťte sa na nás kedykoľvek pre rezervácie, otázky alebo pomoc.',
-    pl: 'Jesteśmy tutaj, aby pomóc uczynić twój pobyt idealnym. Skontaktuj się z nami w dowolnym momencie w sprawie rezerwacji, pytań lub pomocy.',
+    pl: 'Jesteśmy tutaj, aby pomóc uczynić Twój pobyt idealnym. Skontaktuj się z nami w dowolnym momencie w sprawie rezerwacji, pytań lub pomocy.',
     fr: 'Nous sommes là pour vous aider à rendre votre séjour parfait. Contactez-nous à tout moment pour des réservations, des questions ou de l\'aide.',
     it: 'Siamo qui per aiutarti a rendere perfetto il tuo soggiorno. Contattaci in qualsiasi momento per prenotazioni, domande o assistenza.',
     de: 'Wir sind hier, um Ihren Aufenthalt perfekt zu machen. Kontaktieren Sie uns jederzeit für Reservierungen, Fragen oder Hilfe.',
-    uk: 'Ми тут, щоб допомогти зробити ваше перебування ідеальним. Зверніться до нас будь-коли з приводу бронювання, питань або допомоги.',
+    uk: 'Ми тут, щоб допомогти зробити ваше проживання ідеальним. Зверніться до нас будь-коли з приводу бронювання, питань або допомоги.',
     ru: 'Мы здесь, чтобы помочь сделать ваше пребывание идеальным. Обращайтесь к нам в любое время по поводу бронирования, вопросов или помощи.'
   },
-
-  // Contact info
   phone: {
     hr: 'Telefon',
     en: 'Phone',
@@ -1821,7 +1559,7 @@ const translations = {
     pl: 'Dostępne 24/7 dla rezerwacji i pomocy',
     fr: 'Disponible 24h/24 et 7j/7 pour les réservations et l\'assistance',
     it: 'Disponibile 24/7 per prenotazioni e assistenza',
-    de: '24/7 verfügbar für Reservierungen und Hilfe',
+    de: 'Rund um die Uhr für Reservierungen und Hilfe verfügbar',
     uk: 'Доступно 24/7 для бронювання та допомоги',
     ru: 'Доступно 24/7 для бронирования и помощи'
   },
@@ -1871,7 +1609,7 @@ const translations = {
     it: 'Posizione privilegiata fronte mare con facile accesso',
     de: 'Erstklassige Strandlage mit einfachem Zugang',
     uk: 'Першокласне розташування на березі з легким доступом',
-    ru: 'Первоклассное расположение на берегу с легким доступом'
+    ru: 'Превосходное расположение на берегу с легким доступом'
   },
   hours: {
     hr: 'Radno vrijeme',
@@ -1890,15 +1628,13 @@ const translations = {
     en: 'Our team is here to assist you anytime',
     cs: 'Náš tým je tu, aby vám pomohl kdykoli',
     sk: 'Náš tím je tu, aby vám pomohol kedykoľvek',
-    pl: 'Nasz zespół jest tutaj, aby pomóc ci w każdej chwili',
+    pl: 'Nasz zespół jest tutaj, aby pomóc Ci w każdej chwili',
     fr: 'Notre équipe est là pour vous aider à tout moment',
     it: 'Il nostro team è qui per assisterti in qualsiasi momento',
-    de: 'Unser Team ist da, um Ihnen jederzeit zu helfen',
+    de: 'Unser Team ist jederzeit da, um Ihnen zu helfen',
     uk: 'Наша команда тут, щоб допомогти вам будь-коли',
     ru: 'Наша команда здесь, чтобы помочь вам в любое время'
   },
-
-  // Contact form
   sendMessage: {
     hr: 'Pošaljite nam poruku',
     en: 'Send us a Message',
@@ -1950,7 +1686,7 @@ const translations = {
   existingReservation: {
     hr: 'Postojeća rezervacija',
     en: 'Existing Reservation',
-    cs: 'Stávající rezervace',
+    cs: 'Existující rezervace',
     sk: 'Existujúca rezervácia',
     pl: 'Istniejąca rezerwacja',
     fr: 'Réservation existante',
@@ -1979,7 +1715,7 @@ const translations = {
     pl: 'Udogodnienia i usługi',
     fr: 'Équipements et services',
     it: 'Servizi e comfort',
-    de: 'Ausstattung & Services',
+    de: 'Ausstattung und Services',
     uk: 'Зручності та послуги',
     ru: 'Удобства и услуги'
   },
@@ -2003,7 +1739,7 @@ const translations = {
     pl: 'Inne',
     fr: 'Autre',
     it: 'Altro',
-    de: 'Andere',
+    de: 'Sonstiges',
     uk: 'Інше',
     ru: 'Другое'
   },
@@ -2024,7 +1760,7 @@ const translations = {
     en: 'Please tell us how we can help you...',
     cs: 'Řekněte nám prosím, jak vám můžeme pomoci...',
     sk: 'Prosím, povedzte nám, ako vám môžeme pomôcť...',
-    pl: 'Proszę powiedz nam, jak możemy ci pomóc...',
+    pl: 'Proszę powiedz nam, jak możemy Ci pomóc...',
     fr: 'Veuillez nous dire comment nous pouvons vous aider...',
     it: 'Per favore dicci come possiamo aiutarti...',
     de: 'Bitte teilen Sie uns mit, wie wir Ihnen helfen können...',
@@ -2032,7 +1768,7 @@ const translations = {
     ru: 'Пожалуйста, расскажите нам, как мы можем вам помочь...'
   },
   newsletter: {
-    hr: 'Želio bih primati ažuriranja i posebne ponude putem emaila',
+    hr: 'Želim primati ažuriranja i posebne ponude putem emaila',
     en: 'I would like to receive updates and special offers via email',
     cs: 'Chtěl bych dostávat aktualizace a speciální nabídky e-mailem',
     sk: 'Chcel by som dostávať aktualizácie a špeciálne ponuky e-mailom',
@@ -2055,8 +1791,6 @@ const translations = {
     uk: 'Надіслати повідомлення',
     ru: 'Отправить сообщение'
   },
-
-  // Additional contact elements
   findUsHere: {
     hr: 'Pronađite nas ovdje',
     en: 'Find Us Here',
@@ -2086,7 +1820,7 @@ const translations = {
     en: 'Located directly on the beachfront with stunning ocean views and easy access to local attractions.',
     cs: 'Nachází se přímo na pláži s úžasnými výhledy na oceán a snadným přístupem k místním atrakcím.',
     sk: 'Nachádza sa priamo na pláži s úžasnými výhľadmi na oceán a ľahkým prístupom k miestnym atrakciám.',
-    pl: 'Położone bezpośrednio przy plaży z wspaniałymi widokami na ocean i łatwym dostępem do lokalnych atrakcji.',
+    pl: 'Położone bezpośrednio przy plaży ze wspaniałymi widokami na ocean i łatwym dostępem do lokalnych atrakcji.',
     fr: 'Situé directement sur le front de mer avec une vue imprenable sur l\'océan et un accès facile aux attractions locales.',
     it: 'Situato direttamente sul lungomare con splendide viste sull\'oceano e facile accesso alle attrazioni locali.',
     de: 'Direkt am Strand gelegen mit atemberaubendem Meerblick und einfachem Zugang zu lokalen Attraktionen.',
@@ -2125,9 +1859,9 @@ const translations = {
     pl: 'W pilnych sprawach poza godzinami pracy, skorzystaj z naszej całodobowej linii awaryjnej.',
     fr: 'Pour les questions urgentes en dehors des heures d\'ouverture, veuillez utiliser notre ligne d\'urgence 24h/24 et 7j/7.',
     it: 'Per questioni urgenti fuori dall\'orario di lavoro, utilizza la nostra linea di emergenza 24/7.',
-    de: 'Für dringende Angelegenheiten außerhalb der Geschäftszeiten nutzen Sie bitte unsere 24/7-Notfallleitung.',
-    uk: 'Для термінових питань поза робочим часом, будь ласка, використовуйте нашу цілодобову екстрену лінію.',
-    ru: 'По срочным вопросам вне рабочих часов, пожалуйста, используйте нашу круглосуточную экстренную линию.'
+    de: 'Für dringende Angelegenheiten außerhalb der Geschäftszeiten nutzen Sie bitte unsere 24/7-Notfallhotline.',
+    uk: 'Для термінових питань поза робочим часом, будь ласка, використовуйте нашу цілодобову лінію екстреної допомоги.',
+    ru: 'По срочным вопросам в нерабочее время, пожалуйста, используйте нашу круглосуточную линию экстренной помощи.'
   },
   responseTimes: {
     hr: 'Vrijeme odgovora',
@@ -2150,11 +1884,11 @@ const translations = {
     fr: 'Demandes par e-mail',
     it: 'Richieste email',
     de: 'E-Mail-Anfragen',
-    uk: 'Електронні запити',
+    uk: 'Запити електронною поштою',
     ru: 'Запросы по электронной почте'
   },
   within2Hours: {
-    hr: 'U roku od 2 sata',
+    hr: 'Unutar 2 sata',
     en: 'Within 2 hours',
     cs: 'Do 2 hodin',
     sk: 'Do 2 hodín',
@@ -2202,7 +1936,7 @@ const translations = {
     ru: 'Запросы на бронирование'
   },
   within1Hour: {
-    hr: 'U roku od 1 sata',
+    hr: 'Unutar 1 sata',
     en: 'Within 1 hour',
     cs: 'Do 1 hodiny',
     sk: 'Do 1 hodiny',
@@ -2250,20 +1984,20 @@ const translations = {
     fr: 'Prêt à réserver votre séjour?',
     it: 'Pronto a prenotare il tuo soggiorno?',
     de: 'Bereit, Ihren Aufenthalt zu buchen?',
-    uk: 'Готові забронювати перебування?',
+    uk: 'Готові забронювати проживання?',
     ru: 'Готовы забронировать проживание?'
   },
   readyToBookSubtitle: {
-    hr: 'Ne čekajte - osigurajte svoj savršen apartman na obali već danas i počnite planirati svoj san odmor.',
+    hr: 'Ne čekajte - osigurajte svoj savršen apartman na obali mora danas i počnite planirati svoj san odmor.',
     en: 'Don\'t wait - secure your perfect oceanfront apartment today and start planning your dream vacation.',
-    cs: 'Nečekejte - zajistěte si svůj dokonalý apartmán na pobřeží ještě dnes a začněte plánovat svou vysněnou dovolenou.',
-    sk: 'Nečakajte - zabezpečte si svoj dokonalý apartmán na pobreží už dnes a začnite plánovať svoju vysnívanú dovolenku.',
+    cs: 'Nečekejte - zajistěte si svůj dokonalý apartmán na pobřeží oceánu ještě dnes a začněte plánovat svou vysněnou dovolenou.',
+    sk: 'Nečakajte - zabezpečte si svoj dokonalý apartmán na pobreží oceánu už dnes a začnite plánovať svoju vysnívanú dovolenku.',
     pl: 'Nie czekaj - zabezpiecz swój idealny apartament nad oceanem już dziś i zacznij planować wymarzone wakacje.',
-    fr: 'N\'attendez pas - sécurisez votre appartement parfait en bord de mer dès aujourd\'hui et commencez à planifier vos vacances de rêve.',
+    fr: 'N\'attendez pas - sécurisez votre appartement parfait en bord d\'océan aujourd\'hui et commencez à planifier vos vacances de rêve.',
     it: 'Non aspettare - assicurati il tuo appartamento perfetto fronte oceano oggi e inizia a pianificare la tua vacanza da sogno.',
-    de: 'Warten Sie nicht - sichern Sie sich noch heute Ihr perfektes Apartment am Meer und beginnen Sie mit der Planung Ihres Traumurlaubs.',
-    uk: 'Не чекайте - забезпечте собі ідеальний апартамент на березі океану вже сьогодні та почніть планувати відпустку своєї мрії.',
-    ru: 'Не ждите - обеспечьте себе идеальную квартиру на берегу океана уже сегодня и начните планировать отпуск своей мечты.'
+    de: 'Warten Sie nicht - sichern Sie sich heute Ihr perfektes Apartment am Meer und beginnen Sie mit der Planung Ihres Traumurlaubs.',
+    uk: 'Не чекайте - забезпечте собі ідеальний апартамент на березі океану сьогодні та почніть планувати відпустку своєї мрії.',
+    ru: 'Не ждите - обеспечьте себе идеальный апартамент на берегу океана сегодня и начните планировать отпуск своей мечты.'
   },
   viewApartments: {
     hr: 'Pogledaj apartmane',
@@ -2290,7 +2024,381 @@ const translations = {
     ru: 'Позвонить сейчас'
   },
 
-  // Success message
+  // Dashboard
+  myBookings: {
+    hr: 'Moje rezervacije',
+    en: 'My Bookings',
+    cs: 'Mé rezervace',
+    sk: 'Moje rezervácie',
+    pl: 'Moje rezerwacje',
+    fr: 'Mes réservations',
+    it: 'Le mie prenotazioni',
+    de: 'Meine Buchungen',
+    uk: 'Мої бронювання',
+    ru: 'Мои бронирования'
+  },
+  viewManageReservations: {
+    hr: 'Pogledajte i upravljajte svojim rezervacijama apartmana',
+    en: 'View and manage your apartment reservations',
+    cs: 'Zobrazit a spravovat rezervace apartmánů',
+    sk: 'Zobraziť a spravovať rezervácie apartmánov',
+    pl: 'Zobacz i zarządzaj rezerwacjami apartamentów',
+    fr: 'Voir et gérer vos réservations d\'appartements',
+    it: 'Visualizza e gestisci le tue prenotazioni di appartamenti',
+    de: 'Apartment-Reservierungen anzeigen und verwalten',
+    uk: 'Переглядайте та керуйте вашими бронюваннями апартаментів',
+    ru: 'Просматривайте и управляйте вашими бронированиями апартаментов'
+  },
+  signInRequired: {
+    hr: 'Potrebna prijava',
+    en: 'Sign In Required',
+    cs: 'Vyžaduje se přihlášení',
+    sk: 'Vyžaduje sa prihlásenie',
+    pl: 'Wymagane logowanie',
+    fr: 'Connexion requise',
+    it: 'Accesso richiesto',
+    de: 'Anmeldung erforderlich',
+    uk: 'Потрібен вхід',
+    ru: 'Требуется вход'
+  },
+  signInRequiredDesc: {
+    hr: 'Molimo prijavite se da biste vidjeli svoje rezervacije i upravljali njima.',
+    en: 'Please sign in to view your bookings and manage your reservations.',
+    cs: 'Přihlaste se prosím, abyste mohli zobrazit své rezervace a spravovat je.',
+    sk: 'Prihláste sa prosím, aby ste mohli zobraziť svoje rezervácie a spravovať ich.',
+    pl: 'Zaloguj się, aby zobaczyć swoje rezerwacje i zarządzać nimi.',
+    fr: 'Veuillez vous connecter pour voir vos réservations et les gérer.',
+    it: 'Accedi per visualizzare le tue prenotazioni e gestirle.',
+    de: 'Bitte melden Sie sich an, um Ihre Buchungen anzuzeigen und zu verwalten.',
+    uk: 'Будь ласка, увійдіть, щоб переглянути ваші бронювання та керувати ними.',
+    ru: 'Пожалуйста, войдите, чтобы просмотреть ваши бронирования и управлять ими.'
+  },
+  totalBookings: {
+    hr: 'Ukupno rezervacija',
+    en: 'Total Bookings',
+    cs: 'Celkem rezervací',
+    sk: 'Celkom rezervácií',
+    pl: 'Łączne rezerwacje',
+    fr: 'Total des réservations',
+    it: 'Prenotazioni totali',
+    de: 'Gesamtbuchungen',
+    uk: 'Всього бронювань',
+    ru: 'Всего бронирований'
+  },
+  confirmed: {
+    hr: 'Potvrđeno',
+    en: 'Confirmed',
+    cs: 'Potvrzeno',
+    sk: 'Potvrdené',
+    pl: 'Potwierdzone',
+    fr: 'Confirmé',
+    it: 'Confermato',
+    de: 'Bestätigt',
+    uk: 'Підтверджено',
+    ru: 'Подтверждено'
+  },
+  upcoming: {
+    hr: 'Nadolazeće',
+    en: 'Upcoming',
+    cs: 'Nadcházející',
+    sk: 'Nadchádzajúce',
+    pl: 'Nadchodzące',
+    fr: 'À venir',
+    it: 'Prossime',
+    de: 'Bevorstehend',
+    uk: 'Майбутні',
+    ru: 'Предстоящие'
+  },
+  totalSpent: {
+    hr: 'Ukupno potrošeno',
+    en: 'Total Spent',
+    cs: 'Celkem utraceno',
+    sk: 'Celkom minúté',
+    pl: 'Łącznie wydane',
+    fr: 'Total dépensé',
+    it: 'Totale speso',
+    de: 'Gesamt ausgegeben',
+    uk: 'Всього витрачено',
+    ru: 'Всего потрачено'
+  },
+  yourBookings: {
+    hr: 'Vaše rezervacije',
+    en: 'Your Bookings',
+    cs: 'Vaše rezervace',
+    sk: 'Vaše rezervácie',
+    pl: 'Twoje rezerwacje',
+    fr: 'Vos réservations',
+    it: 'Le tue prenotazioni',
+    de: 'Ihre Buchungen',
+    uk: 'Ваші бронювання',
+    ru: 'Ваши бронирования'
+  },
+  newBooking: {
+    hr: 'Nova rezervacija',
+    en: 'New Booking',
+    cs: 'Nová rezervace',
+    sk: 'Nová rezervácia',
+    pl: 'Nowa rezerwacja',
+    fr: 'Nouvelle réservation',
+    it: 'Nuova prenotazione',
+    de: 'Neue Buchung',
+    uk: 'Нове бронювання',
+    ru: 'Новое бронирование'
+  },
+  noBookingsFound: {
+    hr: 'Nema pronađenih rezervacija',
+    en: 'No bookings found',
+    cs: 'Nenalezeny žádné rezervace',
+    sk: 'Nenašli sa žiadne rezervácie',
+    pl: 'Nie znaleziono rezerwacji',
+    fr: 'Aucune réservation trouvée',
+    it: 'Nessuna prenotazione trovata',
+    de: 'Keine Buchungen gefunden',
+    uk: 'Бронювань не знайдено',
+    ru: 'Бронирования не найдены'
+  },
+  makeFirstBooking: {
+    hr: 'Napravite prvu rezervaciju',
+    en: 'Make your first booking',
+    cs: 'Proveďte svou první rezervaci',
+    sk: 'Urobte svoju prvú rezerváciu',
+    pl: 'Dokonaj pierwszej rezerwacji',
+    fr: 'Effectuez votre première réservation',
+    it: 'Fai la tua prima prenotazione',
+    de: 'Machen Sie Ihre erste Buchung',
+    uk: 'Зробіть ваше перше бронювання',
+    ru: 'Сделайте ваше первое бронирование'
+  },
+  apartmentNotFound: {
+    hr: 'Apartman nije pronađen',
+    en: 'Apartment not found',
+    cs: 'Apartmán nenalezen',
+    sk: 'Apartmán nenájdený',
+    pl: 'Apartament nie znaleziony',
+    fr: 'Appartement non trouvé',
+    it: 'Appartamento non trovato',
+    de: 'Apartment nicht gefunden',
+    uk: 'Апартамент не знайдено',
+    ru: 'Апартамент не найден'
+  },
+  bookingId: {
+    hr: 'ID rezervacije',
+    en: 'Booking ID',
+    cs: 'ID rezervace',
+    sk: 'ID rezervácie',
+    pl: 'ID rezerwacji',
+    fr: 'ID de réservation',
+    it: 'ID prenotazione',
+    de: 'Buchungs-ID',
+    uk: 'ID бронювання',
+    ru: 'ID бронирования'
+  },
+  cancel: {
+    hr: 'Otkaži',
+    en: 'Cancel',
+    cs: 'Zrušit',
+    sk: 'Zrušiť',
+    pl: 'Anuluj',
+    fr: 'Annuler',
+    it: 'Annulla',
+    de: 'Stornieren',
+    uk: 'Скасувати',
+    ru: 'Отменить'
+  },
+  bookingDetails: {
+    hr: 'Detalji rezervacije',
+    en: 'Booking Details',
+    cs: 'Podrobnosti rezervace',
+    sk: 'Podrobnosti rezervácie',
+    pl: 'Szczegóły rezerwacji',
+    fr: 'Détails de la réservation',
+    it: 'Dettagli prenotazione',
+    de: 'Buchungsdetails',
+    uk: 'Деталі бронювання',
+    ru: 'Детали бронирования'
+  },
+  stayDetails: {
+    hr: 'Detalji boravka',
+    en: 'Stay Details',
+    cs: 'Podrobnosti pobytu',
+    sk: 'Podrobnosti pobytu',
+    pl: 'Szczegóły pobytu',
+    fr: 'Détails du séjour',
+    it: 'Dettagli soggiorno',
+    de: 'Aufenthaltsdetails',
+    uk: 'Деталі проживання',
+    ru: 'Детали проживания'
+  },
+  bookingInformation: {
+    hr: 'Informacije o rezervaciji',
+    en: 'Booking Information',
+    cs: 'Informace o rezervaci',
+    sk: 'Informácie o rezervácii',
+    pl: 'Informacje o rezerwacji',
+    fr: 'Informations de réservation',
+    it: 'Informazioni prenotazione',
+    de: 'Buchungsinformationen',
+    uk: 'Інформація про бронювання',
+    ru: 'Информация о бронировании'
+  },
+  created: {
+    hr: 'Stvoreno',
+    en: 'Created',
+    cs: 'Vytvořeno',
+    sk: 'Vytvorené',
+    pl: 'Utworzone',
+    fr: 'Créé',
+    it: 'Creato',
+    de: 'Erstellt',
+    uk: 'Створено',
+    ru: 'Создано'
+  },
+  status: {
+    hr: 'Status',
+    en: 'Status',
+    cs: 'Stav',
+    sk: 'Stav',
+    pl: 'Status',
+    fr: 'Statut',
+    it: 'Stato',
+    de: 'Status',
+    uk: 'Статус',
+    ru: 'Статус'
+  },
+  totalPrice: {
+    hr: 'Ukupna cijena',
+    en: 'Total Price',
+    cs: 'Celková cena',
+    sk: 'Celková cena',
+    pl: 'Cena całkowita',
+    fr: 'Prix total',
+    it: 'Prezzo totale',
+    de: 'Gesamtpreis',
+    uk: 'Загальна ціна',
+    ru: 'Общая цена'
+  },
+  paymentSummary: {
+    hr: 'Sažetak plaćanja',
+    en: 'Payment Summary',
+    cs: 'Souhrn platby',
+    sk: 'Súhrn platby',
+    pl: 'Podsumowanie płatności',
+    fr: 'Résumé du paiement',
+    it: 'Riepilogo pagamento',
+    de: 'Zahlungsübersicht',
+    uk: 'Підсумок платежу',
+    ru: 'Сводка платежа'
+  },
+  totalAmount: {
+    hr: 'Ukupan iznos',
+    en: 'Total Amount',
+    cs: 'Celková částka',
+    sk: 'Celková suma',
+    pl: 'Łączna kwota',
+    fr: 'Montant total',
+    it: 'Importo totale',
+    de: 'Gesamtbetrag',
+    uk: 'Загальна сума',
+    ru: 'Общая сумма'
+  },
+  paid: {
+    hr: 'Plaćeno',
+    en: 'Paid',
+    cs: 'Zaplaceno',
+    sk: 'Zaplatené',
+    pl: 'Zapłacone',
+    fr: 'Payé',
+    it: 'Pagato',
+    de: 'Bezahlt',
+    uk: 'Сплачено',
+    ru: 'Оплачено'
+  },
+  pending: {
+    hr: 'Na čekanju',
+    en: 'Pending',
+    cs: 'Čekající',
+    sk: 'Čakajúce',
+    pl: 'Oczekujące',
+    fr: 'En attente',
+    it: 'In attesa',
+    de: 'Ausstehend',
+    uk: 'Очікується',
+    ru: 'Ожидается'
+  },
+
+  // Error messages
+  mustAgreeTerms: {
+    hr: 'Morate se složiti s Uvjetima pružanja usluge i Pravilnikom o privatnosti da biste nastavili.',
+    en: 'You must agree to the Terms of Service and Privacy Policy to continue.',
+    cs: 'Musíte souhlasit s Podmínkami služby a Zásadami ochrany osobních údajů, abyste mohli pokračovat.',
+    sk: 'Musíte súhlasiť s Podmienkami služby a Zásadami ochrany osobných údajov, aby ste mohli pokračovať.',
+    pl: 'Musisz zgodzić się z Warunkami świadczenia usług i Polityką prywatności, aby kontynuować.',
+    fr: 'Vous devez accepter les Conditions de service et la Politique de confidentialité pour continuer.',
+    it: 'Devi accettare i Termini di servizio e l\'Informativa sulla privacy per continuare.',
+    de: 'Sie müssen den Nutzungsbedingungen und der Datenschutzrichtlinie zustimmen, um fortzufahren.',
+    uk: 'Ви повинні погодитися з Умовами надання послуг та Політикою конфіденційності, щоб продовжити.',
+    ru: 'Вы должны согласиться с Условиями предоставления услуг и Политикой конфиденциальности, чтобы продолжить.'
+  },
+  mustConfirmDetails: {
+    hr: 'Morate potvrditi da su sve navedene informacije točne.',
+    en: 'You must confirm that all information provided is accurate.',
+    cs: 'Musíte potvrdit, že všechny poskytnuté informace jsou přesné.',
+    sk: 'Musíte potvrdiť, že všetky poskytnuté informácie sú presné.',
+    pl: 'Musisz potwierdzić, że wszystkie podane informacje są dokładne.',
+    fr: 'Vous devez confirmer que toutes les informations fournies sont exactes.',
+    it: 'Devi confermare che tutte le informazioni fornite sono accurate.',
+    de: 'Sie müssen bestätigen, dass alle bereitgestellten Informationen korrekt sind.',
+    uk: 'Ви повинні підтвердити, що вся надана інформація є точною.',
+    ru: 'Вы должны подтвердить, что вся предоставленная информация является точной.'
+  },
+  pleaseSelectDates: {
+    hr: 'Molimo odaberite valjane datume dolaska i odlaska.',
+    en: 'Please select valid check-in and check-out dates.',
+    cs: 'Vyberte prosím platná data příjezdu a odjezdu.',
+    sk: 'Vyberte prosím platné dátumy príchodu a odchodu.',
+    pl: 'Wybierz prawidłowe daty zameldowania i wymeldowania.',
+    fr: 'Veuillez sélectionner des dates d\'arrivée et de départ valides.',
+    it: 'Seleziona date di check-in e check-out valide.',
+    de: 'Bitte wählen Sie gültige An- und Abreisedaten.',
+    uk: 'Будь ласка, оберіть дійсні дати заїзду та виїзду.',
+    ru: 'Пожалуйста, выберите действительные даты заезда и выезда.'
+  },
+  pleaseCompleteForm: {
+    hr: 'Molimo ispunite sva obavezna polja.',
+    en: 'Please complete all required fields.',
+    cs: 'Vyplňte prosím všechna povinná pole.',
+    sk: 'Vyplňte prosím všetky povinné polia.',
+    pl: 'Wypełnij wszystkie wymagane pola.',
+    fr: 'Veuillez remplir tous les champs obligatoires.',
+    it: 'Completa tutti i campi obbligatori.',
+    de: 'Bitte füllen Sie alle Pflichtfelder aus.',
+    uk: 'Будь ласка, заповніть всі обов\'язкові поля.',
+    ru: 'Пожалуйста, заполните все обязательные поля.'
+  },
+  maximumGuestsExceeded: {
+    hr: 'Maksimalno gostiju dozvoljeno za ovaj apartman.',
+    en: 'Maximum guests allowed for this apartment.',
+    cs: 'Maximální počet hostů povolený pro tento apartmán.',
+    sk: 'Maximálny počet hostí povolený pre tento apartmán.',
+    pl: 'Maksymalna liczba gości dozwolona dla tego apartamentu.',
+    fr: 'Nombre maximum d\'invités autorisé pour cet appartement.',
+    it: 'Numero massimo di ospiti consentito per questo appartamento.',
+    de: 'Maximale Anzahl von Gästen für dieses Apartment erlaubt.',
+    uk: 'Максимальна кількість гостей дозволена для цього апартаменту.',
+    ru: 'Максимальное количество гостей разрешено для этого апартамента.'
+  },
+  bookingError: {
+    hr: 'Došlo je do greške pri obradi vaše rezervacije. Molimo pokušajte ponovo.',
+    en: 'There was an error processing your booking. Please try again.',
+    cs: 'Při zpracování vaší rezervace došlo k chybě. Zkuste to prosím znovu.',
+    sk: 'Pri spracovaní vašej rezervácie došlo k chybe. Skúste to prosím znovu.',
+    pl: 'Wystąpił błąd podczas przetwarzania rezerwacji. Spróbuj ponownie.',
+    fr: 'Une erreur s\'est produite lors du traitement de votre réservation. Veuillez réessayer.',
+    it: 'Si è verificato un errore durante l\'elaborazione della prenotazione. Riprova.',
+    de: 'Bei der Bearbeitung Ihrer Buchung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+    uk: 'Сталася помилка при обробці вашого бронювання. Будь ласка, спробуйте ще раз.',
+    ru: 'Произошла ошибка при обработке вашего бронирования. Пожалуйста, попробуйте еще раз.'
+  },
   success: {
     hr: 'Uspjeh',
     en: 'Success',
@@ -2303,8 +2411,6 @@ const translations = {
     uk: 'Успіх',
     ru: 'Успех'
   },
-
-  // Learn more
   learnMore: {
     hr: 'Saznaj više',
     en: 'Learn More',
@@ -2319,13 +2425,19 @@ const translations = {
   }
 };
 
-let currentLanguage: SupportedLanguage = 'hr';
+let currentLanguage: SupportedLanguage = 'en';
 
-// Initialize language from localStorage or default to Croatian
+// Initialize language from localStorage or browser preference
 if (typeof window !== 'undefined') {
   const stored = localStorage.getItem('language') as SupportedLanguage;
   if (stored && supportedLanguages.some(lang => lang.code === stored)) {
     currentLanguage = stored;
+  } else {
+    // Try to detect browser language
+    const browserLang = navigator.language.split('-')[0] as SupportedLanguage;
+    if (supportedLanguages.some(lang => lang.code === browserLang)) {
+      currentLanguage = browserLang;
+    }
   }
 }
 
@@ -2337,8 +2449,7 @@ export function setLanguage(lang: SupportedLanguage): void {
   currentLanguage = lang;
   if (typeof window !== 'undefined') {
     localStorage.setItem('language', lang);
-    // Dispatch custom event for components to listen to
-    window.dispatchEvent(new CustomEvent('languageChanged', { detail: lang }));
+    window.dispatchEvent(new CustomEvent('languageChanged', { detail: { language: lang } }));
   }
 }
 
@@ -2350,5 +2461,3 @@ export function t(key: string): string {
   }
   return translation[currentLanguage] || translation.en || key;
 }
-
-export type { SupportedLanguage };
