@@ -40,6 +40,33 @@ const translations: Record<SupportedLanguage, Record<string, string>> = {
     resetPassword: 'Resetiraj lozinku',
     rememberMe: 'Zapamti me',
     
+    // Email confirmation
+    checkYourEmail: 'Provjerite email',
+    emailConfirmationSent: 'Poslali smo vam link za potvrdu na vašu email adresu. Molimo provjerite email i kliknite na link za verifikaciju računa.',
+    emailConfirmationNote: 'Ako ne vidite email, provjerite spam mapu ili pokušajte ponovno.',
+    resendConfirmation: 'Pošaljite ponovno email za potvrdu',
+    backToSignIn: 'Povratak na prijavu',
+    emailConfirmation: 'Potvrda emaila',
+    confirmingEmail: 'Potvrđujemo vaš email...',
+    emailConfirmed: 'Email potvrđen!',
+    emailConfirmedDesc: 'Vaš email je uspješno potvrđen. Sada se možete prijaviti u svoj račun.',
+    continueToSite: 'Nastavi na stranicu',
+    confirmationFailed: 'Potvrda neuspješna',
+    confirmationFailedDesc: 'Došlo je do greške pri potvrdi vašeg emaila. Link možda nije valjan ili je istekao.',
+    backToHome: 'Povratak na početnu',
+    tryAgain: 'Pokušajte ponovno',
+    
+    // Error messages
+    invalidCredentials: 'Neispravni email ili lozinka',
+    emailNotConfirmed: 'Molimo prvo potvrdite svoju email adresu',
+    userAlreadyExists: 'Račun s ovim emailom već postoji',
+    passwordTooShort: 'Lozinka mora imati najmanje 6 znakova',
+    invalidEmailFormat: 'Molimo unesite valjanu email adresu',
+    signupDisabled: 'Registracija računa trenutno nije dostupna',
+    rateLimitError: 'Molimo pričekajte prije slanja novog emaila za potvrdu',
+    noEmailToResend: 'Nema email adrese za ponovno slanje potvrde',
+    confirmationResent: 'Email za potvrdu poslan! Molimo provjerite svoju poštu.',
+    
     // Profile
     myProfile: 'Moj profil',
     myBookings: 'Moje rezervacije',
@@ -187,6 +214,33 @@ const translations: Record<SupportedLanguage, Record<string, string>> = {
     forgotPassword: 'Forgot password?',
     resetPassword: 'Reset Password',
     rememberMe: 'Remember me',
+    
+    // Email confirmation
+    checkYourEmail: 'Check Your Email',
+    emailConfirmationSent: 'We\'ve sent a confirmation link to your email address. Please check your email and click the link to verify your account.',
+    emailConfirmationNote: 'If you don\'t see the email, check your spam folder or try again.',
+    resendConfirmation: 'Resend Confirmation Email',
+    backToSignIn: 'Back to Sign In',
+    emailConfirmation: 'Email Confirmation',
+    confirmingEmail: 'Confirming your email...',
+    emailConfirmed: 'Email Confirmed!',
+    emailConfirmedDesc: 'Your email has been successfully confirmed. You can now sign in to your account.',
+    continueToSite: 'Continue to Site',
+    confirmationFailed: 'Confirmation Failed',
+    confirmationFailedDesc: 'There was an error confirming your email. The link may be invalid or expired.',
+    backToHome: 'Back to Home',
+    tryAgain: 'Try Again',
+    
+    // Error messages
+    invalidCredentials: 'Invalid email or password',
+    emailNotConfirmed: 'Please confirm your email address first',
+    userAlreadyExists: 'An account with this email already exists',
+    passwordTooShort: 'Password must be at least 6 characters',
+    invalidEmailFormat: 'Please enter a valid email address',
+    signupDisabled: 'Account registration is currently disabled',
+    rateLimitError: 'Please wait before requesting another confirmation email',
+    noEmailToResend: 'No email address to resend confirmation to',
+    confirmationResent: 'Confirmation email sent! Please check your inbox.',
     
     // Profile
     myProfile: 'My Profile',
@@ -336,6 +390,33 @@ const translations: Record<SupportedLanguage, Record<string, string>> = {
     forgotPassword: 'Zapomněli jste heslo?',
     resetPassword: 'Obnovit heslo',
     rememberMe: 'Zapamatovat si mě',
+    
+    // Email confirmation
+    checkYourEmail: 'Zkontrolujte svůj e-mail',
+    emailConfirmationSent: 'Poslali jsme vám potvrzovací odkaz na vaši e-mailovou adresu. Zkontrolujte prosím svůj e-mail a klikněte na odkaz pro ověření účtu.',
+    emailConfirmationNote: 'Pokud e-mail nevidíte, zkontrolujte složku spam nebo to zkuste znovu.',
+    resendConfirmation: 'Znovu odeslat potvrzovací e-mail',
+    backToSignIn: 'Zpět k přihlášení',
+    emailConfirmation: 'Potvrzení e-mailu',
+    confirmingEmail: 'Potvrzujeme váš e-mail...',
+    emailConfirmed: 'E-mail potvrzen!',
+    emailConfirmedDesc: 'Váš e-mail byl úspěšně potvrzen. Nyní se můžete přihlásit ke svému účtu.',
+    continueToSite: 'Pokračovat na stránku',
+    confirmationFailed: 'Potvrzení selhalo',
+    confirmationFailedDesc: 'Při potvrzování vašeho e-mailu došlo k chybě. Odkaz může být neplatný nebo vypršel.',
+    backToHome: 'Zpět domů',
+    tryAgain: 'Zkusit znovu',
+    
+    // Error messages
+    invalidCredentials: 'Neplatný e-mail nebo heslo',
+    emailNotConfirmed: 'Nejprve prosím potvrďte svou e-mailovou adresu',
+    userAlreadyExists: 'Účet s tímto e-mailem již existuje',
+    passwordTooShort: 'Heslo musí mít alespoň 6 znaků',
+    invalidEmailFormat: 'Zadejte prosím platnou e-mailovou adresu',
+    signupDisabled: 'Registrace účtu je momentálně zakázána',
+    rateLimitError: 'Počkejte prosím před požadavkem na další potvrzovací e-mail',
+    noEmailToResend: 'Žádná e-mailová adresa pro opětovné odeslání potvrzení',
+    confirmationResent: 'Potvrzovací e-mail odeslán! Zkontrolujte prosím svou schránku.',
     
     // Profile
     myProfile: 'Můj profil',

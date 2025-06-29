@@ -231,6 +231,43 @@
             Back to Sign In
           </button>
         </form>
+
+        <!-- Email Confirmation Form -->
+        <div id="emailConfirmationForm" class="space-y-4 hidden">
+          <div class="text-center mb-4">
+            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-2" data-key="checkYourEmail">Check Your Email</h3>
+            <p class="text-gray-600 mb-4" data-key="emailConfirmationSent">
+              We've sent a confirmation link to your email address. Please check your email and click the link to verify your account.
+            </p>
+            <p class="text-sm text-gray-500" data-key="emailConfirmationNote">
+              If you don't see the email, check your spam folder or try again.
+            </p>
+          </div>
+          
+          <div class="space-y-3">
+            <button
+              id="resendConfirmation"
+              class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors duration-200"
+              data-key="resendConfirmation"
+            >
+              Resend Confirmation Email
+            </button>
+            
+            <button
+              type="button"
+              id="backToSignInFromConfirm"
+              class="w-full text-primary-600 hover:text-primary-700 py-2 font-medium transition-colors"
+              data-key="backToSignIn"
+            >
+              Back to Sign In
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Toggle Forms -->
@@ -279,6 +316,7 @@
       this.signInForm = document.getElementById('signInForm');
       this.signUpForm = document.getElementById('signUpForm');
       this.forgotPasswordForm = document.getElementById('forgotPasswordForm');
+      this.emailConfirmationForm = document.getElementById('emailConfirmationForm');
       this.toggleButton = document.getElementById('toggleAuth');
       this.closeButton = document.getElementById('closeAuthModal');
       this.title = document.getElementById('authTitle');
@@ -286,7 +324,8 @@
       this.success = document.getElementById('authSuccess');
       this.error = document.getElementById('authError');
       this.authToggle = document.getElementById('authToggle');
-      this.currentForm = 'signIn'; // 'signIn', 'signUp', 'forgotPassword'
+      this.currentForm = 'signIn'; // 'signIn', 'signUp', 'forgotPassword', 'emailConfirmation'
+      this.pendingEmail = null; // Store email for resend confirmation
 
       this.init();
       this.updateTranslations();
@@ -304,9 +343,11 @@
       this.setupPasswordToggle('toggleSignUpPassword', 'signUpPassword');
       this.setupPasswordToggle('toggleConfirmPassword', 'signUpConfirmPassword');
       
-      // Forgot password navigation
+      // Navigation buttons
       document.getElementById('forgotPasswordBtn')?.addEventListener('click', () => this.showForgotPassword());
       document.getElementById('backToSignIn')?.addEventListener('click', () => this.showSignIn());
+      document.getElementById('backToSignInFromConfirm')?.addEventListener('click', () => this.showSignIn());
+      document.getElementById('resendConfirmation')?.addEventListener('click', () => this.resendConfirmation());
       
       // Password strength validation
       document.getElementById('signUpPassword')?.addEventListener('input', (e) => this.validatePassword(e.target.value));
@@ -434,6 +475,7 @@
       this.signInForm?.classList.add('hidden');
       this.signUpForm?.classList.add('hidden');
       this.forgotPasswordForm?.classList.add('hidden');
+      this.emailConfirmationForm?.classList.add('hidden');
       
       // Show selected form
       switch (formType) {
@@ -449,6 +491,12 @@
           this.forgotPasswordForm?.classList.remove('hidden');
           this.title.setAttribute('data-key', 'resetPassword');
           this.title.textContent = t('resetPassword');
+          this.authToggle?.classList.add('hidden');
+          break;
+        case 'emailConfirmation':
+          this.emailConfirmationForm?.classList.remove('hidden');
+          this.title.setAttribute('data-key', 'checkYourEmail');
+          this.title.textContent = t('checkYourEmail');
           this.authToggle?.classList.add('hidden');
           break;
         default: // signIn
@@ -477,6 +525,10 @@
       this.showForm('forgotPassword');
     }
 
+    showEmailConfirmation() {
+      this.showForm('emailConfirmation');
+    }
+
     toggle() {
       if (this.currentForm === 'signIn') {
         this.showSignUp();
@@ -494,7 +546,7 @@
     hideLoading() {
       this.loading?.classList.add('hidden');
       document.getElementById('authForms')?.classList.remove('hidden');
-      if (this.currentForm !== 'forgotPassword') {
+      if (this.currentForm !== 'forgotPassword' && this.currentForm !== 'emailConfirmation') {
         this.authToggle?.classList.remove('hidden');
       }
     }
@@ -524,6 +576,7 @@
       this.signInForm?.reset();
       this.signUpForm?.reset();
       this.forgotPasswordForm?.reset();
+      this.pendingEmail = null;
       
       // Reset password strength indicator
       const strengthElement = document.getElementById('passwordStrength');
@@ -563,7 +616,16 @@
           password,
         });
 
-        if (error) throw error;
+        if (error) {
+          // Handle specific email confirmation error
+          if (error.message.includes('Email not confirmed') || error.message.includes('email_not_confirmed')) {
+            this.pendingEmail = email;
+            this.showEmailConfirmation();
+            this.hideLoading();
+            return;
+          }
+          throw error;
+        }
 
         // Store remember me preference
         if (rememberMe) {
@@ -582,7 +644,6 @@
 
       } catch (error) {
         this.showError(this.getErrorMessage(error.message));
-      } finally {
         this.hideLoading();
       }
     }
@@ -617,13 +678,18 @@
               full_name: `${firstName} ${lastName}`,
               phone: phone,
             },
+            emailRedirectTo: `${window.location.origin}/auth/callback`
           },
         });
 
         if (error) throw error;
 
-        // Create profile
-        if (data.user) {
+        // Store email for potential resend
+        this.pendingEmail = email;
+
+        // Create profile (will be created when user confirms email)
+        if (data.user && data.user.email_confirmed_at) {
+          // User is already confirmed (shouldn't happen with email confirmation enabled)
           const { error: profileError } = await supabase
             .from('profiles')
             .insert({
@@ -635,29 +701,22 @@
 
           if (profileError) {
             console.error('Profile creation error:', profileError);
-            // Don't throw error, as user account was created successfully
           }
-        }
 
-        this.showSuccess(
-          data.user?.email_confirmed_at 
-            ? t('accountCreatedSuccess') || 'Account created successfully!'
-            : t('checkEmailConfirmation') || 'Please check your email to confirm your account.'
-        );
-
-        setTimeout(() => {
-          if (data.user?.email_confirmed_at) {
+          this.showSuccess(t('accountCreatedSuccess') || 'Account created successfully!');
+          setTimeout(() => {
             this.close();
             this.updateUIForAuthenticatedUser(data.user);
             window.location.reload();
-          } else {
-            this.showSignIn();
-          }
-        }, 3000);
+          }, 2000);
+        } else {
+          // Show email confirmation screen
+          this.showEmailConfirmation();
+          this.hideLoading();
+        }
 
       } catch (error) {
         this.showError(this.getErrorMessage(error.message));
-      } finally {
         this.hideLoading();
       }
     }
@@ -689,6 +748,35 @@
       }
     }
 
+    async resendConfirmation() {
+      if (!this.pendingEmail) {
+        this.showError(t('noEmailToResend') || 'No email address to resend confirmation to');
+        return;
+      }
+
+      this.showLoading();
+      this.hideMessages();
+
+      try {
+        const { error } = await supabase.auth.resend({
+          type: 'signup',
+          email: this.pendingEmail,
+          options: {
+            emailRedirectTo: `${window.location.origin}/auth/callback`
+          }
+        });
+
+        if (error) throw error;
+
+        this.showSuccess(t('confirmationResent') || 'Confirmation email sent! Please check your inbox.');
+        this.hideLoading();
+
+      } catch (error) {
+        this.showError(this.getErrorMessage(error.message));
+        this.hideLoading();
+      }
+    }
+
     updateUIForAuthenticatedUser(user) {
       // Update header to show user menu instead of auth buttons
       const authButtons = document.querySelectorAll('.auth-button');
@@ -707,11 +795,13 @@
     getErrorMessage(error) {
       const errorMessages = {
         'Invalid login credentials': t('invalidCredentials') || 'Invalid email or password',
-        'Email not confirmed': t('emailNotConfirmed') || 'Please confirm your email address',
+        'Email not confirmed': t('emailNotConfirmed') || 'Please confirm your email address first',
+        'email_not_confirmed': t('emailNotConfirmed') || 'Please confirm your email address first',
         'User already registered': t('userAlreadyExists') || 'An account with this email already exists',
         'Password should be at least 6 characters': t('passwordTooShort') || 'Password must be at least 6 characters',
         'Unable to validate email address: invalid format': t('invalidEmailFormat') || 'Please enter a valid email address',
         'signup_disabled': t('signupDisabled') || 'Account registration is currently disabled',
+        'For security purposes, you can only request this once every 60 seconds': t('rateLimitError') || 'Please wait before requesting another confirmation email',
       };
 
       return errorMessages[error] || error || t('unknownError') || 'An unexpected error occurred';
