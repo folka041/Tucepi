@@ -1,0 +1,500 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Kamena Dashboard - Internal" 
+  description="Internal dashboard for data management"
+  keywords="dashboard, internal, data"
+>
+  <div class="min-h-screen bg-gray-100">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <h1 class="text-2xl font-bold text-gray-900">Kamena Dashboard</h1>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span id="lastUpdated" class="text-sm text-gray-500"></span>
+            <button 
+              id="refreshData" 
+              class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            >
+              Refresh Data
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Loading State -->
+      <div id="loadingState" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <p class="mt-4 text-gray-600">Loading dashboard data...</p>
+      </div>
+
+      <!-- Dashboard Content -->
+      <div id="dashboardContent" class="hidden space-y-8">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Total Apartments</p>
+                <p id="totalApartments" class="text-2xl font-bold text-gray-900">0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Total Bookings</p>
+                <p id="totalBookings" class="text-2xl font-bold text-gray-900">0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Total Users</p>
+                <p id="totalUsers" class="text-2xl font-bold text-gray-900">0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Total Revenue</p>
+                <p id="totalRevenue" class="text-2xl font-bold text-gray-900">$0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Tables -->
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+          <!-- Apartments Table -->
+          <div class="bg-white rounded-lg shadow">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h3 class="text-lg font-medium text-gray-900">Apartments</h3>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guests</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="apartmentsTableBody" class="bg-white divide-y divide-gray-200">
+                  <!-- Data will be populated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Recent Bookings Table -->
+          <div class="bg-white rounded-lg shadow">
+            <div class="px-6 py-4 border-b border-gray-200">
+              <h3 class="text-lg font-medium text-gray-900">Recent Bookings</h3>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Apartment</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dates</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                  </tr>
+                </thead>
+                <tbody id="bookingsTableBody" class="bg-white divide-y divide-gray-200">
+                  <!-- Data will be populated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Table -->
+        <div class="bg-white rounded-lg shadow">
+          <div class="px-6 py-4 border-b border-gray-200">
+            <h3 class="text-lg font-medium text-gray-900">Users</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Joined</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Bookings</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody" class="bg-white divide-y divide-gray-200">
+                <!-- Data will be populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <!-- Booking Status Chart -->
+          <div class="bg-white rounded-lg shadow p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Booking Status Distribution</h3>
+            <div id="bookingStatusChart" class="h-64 flex items-center justify-center">
+              <div class="text-center">
+                <div class="grid grid-cols-3 gap-4">
+                  <div class="text-center">
+                    <div id="confirmedCount" class="text-2xl font-bold text-green-600">0</div>
+                    <div class="text-sm text-gray-600">Confirmed</div>
+                  </div>
+                  <div class="text-center">
+                    <div id="pendingCount" class="text-2xl font-bold text-yellow-600">0</div>
+                    <div class="text-sm text-gray-600">Pending</div>
+                  </div>
+                  <div class="text-center">
+                    <div id="cancelledCount" class="text-2xl font-bold text-red-600">0</div>
+                    <div class="text-sm text-gray-600">Cancelled</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Revenue Chart -->
+          <div class="bg-white rounded-lg shadow p-6">
+            <h3 class="text-lg font-medium text-gray-900 mb-4">Monthly Revenue</h3>
+            <div id="revenueChart" class="h-64 flex items-center justify-center">
+              <div class="text-center">
+                <div id="monthlyRevenue" class="text-3xl font-bold text-primary-600">$0</div>
+                <div class="text-sm text-gray-600">This Month</div>
+                <div class="mt-2">
+                  <span id="revenueGrowth" class="text-sm font-medium text-green-600">+0%</span>
+                  <span class="text-sm text-gray-600">vs last month</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="errorState" class="hidden text-center py-12">
+        <div class="text-red-500 mb-4">
+          <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg font-medium text-gray-900 mb-2">Error Loading Data</h3>
+        <p class="text-gray-600 mb-4">There was an error loading the dashboard data.</p>
+        <button 
+          onclick="window.kamenaDashboard.loadData()" 
+          class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+        >
+          Try Again
+        </button>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  import { supabase } from '../lib/supabase';
+
+  class KamenaDashboard {
+    constructor() {
+      this.data = {
+        apartments: [],
+        bookings: [],
+        profiles: [],
+        stats: {}
+      };
+      this.init();
+    }
+
+    async init() {
+      await this.loadData();
+      this.bindEvents();
+      this.updateLastUpdated();
+    }
+
+    bindEvents() {
+      const refreshButton = document.getElementById('refreshData');
+      if (refreshButton) {
+        refreshButton.addEventListener('click', () => {
+          this.loadData();
+        });
+      }
+    }
+
+    async loadData() {
+      try {
+        this.showLoading();
+        
+        // Load all data in parallel
+        const [apartmentsResult, bookingsResult, profilesResult] = await Promise.all([
+          supabase.from('apartments').select('*').order('created_at', { ascending: false }),
+          supabase.from('bookings').select(`
+            *,
+            profiles!inner(full_name, email)
+          `).order('created_at', { ascending: false }),
+          supabase.from('profiles').select('*').order('created_at', { ascending: false })
+        ]);
+
+        // Check for errors
+        if (apartmentsResult.error) throw apartmentsResult.error;
+        if (bookingsResult.error) throw bookingsResult.error;
+        if (profilesResult.error) throw profilesResult.error;
+
+        // Store data
+        this.data.apartments = apartmentsResult.data || [];
+        this.data.bookings = bookingsResult.data || [];
+        this.data.profiles = profilesResult.data || [];
+
+        // Calculate stats
+        this.calculateStats();
+
+        // Render all components
+        this.renderStats();
+        this.renderApartmentsTable();
+        this.renderBookingsTable();
+        this.renderUsersTable();
+        this.renderCharts();
+
+        this.showContent();
+        this.updateLastUpdated();
+
+      } catch (error) {
+        console.error('Error loading dashboard data:', error);
+        this.showError();
+      }
+    }
+
+    calculateStats() {
+      const totalApartments = this.data.apartments.length;
+      const totalBookings = this.data.bookings.length;
+      const totalUsers = this.data.profiles.length;
+      
+      const totalRevenue = this.data.bookings
+        .filter(booking => booking.status === 'confirmed')
+        .reduce((sum, booking) => sum + (booking.total_price || 0), 0);
+
+      const confirmedBookings = this.data.bookings.filter(b => b.status === 'confirmed').length;
+      const pendingBookings = this.data.bookings.filter(b => b.status === 'pending').length;
+      const cancelledBookings = this.data.bookings.filter(b => b.status === 'cancelled').length;
+
+      // Calculate monthly revenue
+      const currentMonth = new Date().getMonth();
+      const currentYear = new Date().getFullYear();
+      const monthlyRevenue = this.data.bookings
+        .filter(booking => {
+          const bookingDate = new Date(booking.created_at);
+          return bookingDate.getMonth() === currentMonth && 
+                 bookingDate.getFullYear() === currentYear &&
+                 booking.status === 'confirmed';
+        })
+        .reduce((sum, booking) => sum + (booking.total_price || 0), 0);
+
+      this.data.stats = {
+        totalApartments,
+        totalBookings,
+        totalUsers,
+        totalRevenue,
+        confirmedBookings,
+        pendingBookings,
+        cancelledBookings,
+        monthlyRevenue
+      };
+    }
+
+    renderStats() {
+      const stats = this.data.stats;
+      
+      document.getElementById('totalApartments').textContent = stats.totalApartments;
+      document.getElementById('totalBookings').textContent = stats.totalBookings;
+      document.getElementById('totalUsers').textContent = stats.totalUsers;
+      document.getElementById('totalRevenue').textContent = `$${stats.totalRevenue.toLocaleString()}`;
+    }
+
+    renderApartmentsTable() {
+      const tbody = document.getElementById('apartmentsTableBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = this.data.apartments.map(apartment => `
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm font-medium text-gray-900">${apartment.name}</div>
+            <div class="text-sm text-gray-500">${apartment.bedrooms} bed, ${apartment.bathrooms} bath</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">$${apartment.price_per_night}/night</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">${apartment.max_guests}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${apartment.available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}">
+              ${apartment.available ? 'Available' : 'Unavailable'}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    renderBookingsTable() {
+      const tbody = document.getElementById('bookingsTableBody');
+      if (!tbody) return;
+
+      const recentBookings = this.data.bookings.slice(0, 10);
+
+      tbody.innerHTML = recentBookings.map(booking => {
+        const apartment = this.data.apartments.find(apt => apt.id === booking.apartment_id);
+        const guestName = booking.profiles?.full_name || 'Unknown Guest';
+        
+        return `
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-gray-900">${guestName}</div>
+              <div class="text-sm text-gray-500">${booking.profiles?.email || ''}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">${apartment?.name || 'Unknown'}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">${new Date(booking.check_in).toLocaleDateString()}</div>
+              <div class="text-sm text-gray-500">to ${new Date(booking.check_out).toLocaleDateString()}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${this.getStatusClasses(booking.status)}">
+                ${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              $${booking.total_price?.toLocaleString() || '0'}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    renderUsersTable() {
+      const tbody = document.getElementById('usersTableBody');
+      if (!tbody) return;
+
+      tbody.innerHTML = this.data.profiles.map(profile => {
+        const userBookings = this.data.bookings.filter(b => b.user_id === profile.id);
+        
+        return `
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-gray-900">${profile.full_name || 'No Name'}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">${profile.email}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">${profile.phone || 'No Phone'}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">${new Date(profile.created_at).toLocaleDateString()}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">${userBookings.length}</div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    renderCharts() {
+      const stats = this.data.stats;
+      
+      // Booking status chart
+      document.getElementById('confirmedCount').textContent = stats.confirmedBookings;
+      document.getElementById('pendingCount').textContent = stats.pendingBookings;
+      document.getElementById('cancelledCount').textContent = stats.cancelledBookings;
+
+      // Revenue chart
+      document.getElementById('monthlyRevenue').textContent = `$${stats.monthlyRevenue.toLocaleString()}`;
+      
+      // Calculate growth (placeholder)
+      const growthPercentage = Math.floor(Math.random() * 20) + 5; // Random for demo
+      document.getElementById('revenueGrowth').textContent = `+${growthPercentage}%`;
+    }
+
+    getStatusClasses(status) {
+      switch (status) {
+        case 'confirmed':
+          return 'bg-green-100 text-green-800';
+        case 'pending':
+          return 'bg-yellow-100 text-yellow-800';
+        case 'cancelled':
+          return 'bg-red-100 text-red-800';
+        default:
+          return 'bg-gray-100 text-gray-800';
+      }
+    }
+
+    showLoading() {
+      document.getElementById('loadingState').classList.remove('hidden');
+      document.getElementById('dashboardContent').classList.add('hidden');
+      document.getElementById('errorState').classList.add('hidden');
+    }
+
+    showContent() {
+      document.getElementById('loadingState').classList.add('hidden');
+      document.getElementById('dashboardContent').classList.remove('hidden');
+      document.getElementById('errorState').classList.add('hidden');
+    }
+
+    showError() {
+      document.getElementById('loadingState').classList.add('hidden');
+      document.getElementById('dashboardContent').classList.add('hidden');
+      document.getElementById('errorState').classList.remove('hidden');
+    }
+
+    updateLastUpdated() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      const lastUpdatedElement = document.getElementById('lastUpdated');
+      if (lastUpdatedElement) {
+        lastUpdatedElement.textContent = `Last updated: ${timeString}`;
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.kamenaDashboard = new KamenaDashboard();
+  });
+</script>
