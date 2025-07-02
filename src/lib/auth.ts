@@ -21,7 +21,6 @@ const ADMIN_EMAILS = [
 
 // Super admin emails with full access
 const SUPER_ADMIN_EMAILS = [
-  'admin@apartments-delfin.net',
   'strip.junak@gmail.com'
 ];
 
