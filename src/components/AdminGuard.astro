@@ -1,0 +1,203 @@
+---
+---
+
+<div id="adminGuard" class="min-h-screen bg-gray-50">
+  <!-- Loading State -->
+  <div id="authLoading" class="flex items-center justify-center min-h-screen">
+    <div class="text-center">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mb-4"></div>
+      <p class="text-gray-600">Verifying access permissions...</p>
+    </div>
+  </div>
+
+  <!-- Access Denied -->
+  <div id="accessDenied" class="hidden flex items-center justify-center min-h-screen">
+    <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
+      <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Access Denied</h2>
+      <p class="text-gray-600 mb-6">You don't have permission to access this page. Administrator privileges are required.</p>
+      <div class="space-y-3">
+        <a
+          href="/"
+          class="block w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+        >
+          Return to Home
+        </a>
+        <button
+          onclick="window.authModal?.open('signIn')"
+          class="block w-full text-primary-600 hover:text-primary-700 px-6 py-2 font-medium transition-colors"
+        >
+          Sign In as Admin
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sign In Required -->
+  <div id="signInRequired" class="hidden flex items-center justify-center min-h-screen">
+    <div class="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
+      <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-4">Admin Sign In Required</h2>
+      <p class="text-gray-600 mb-6">Please sign in with your administrator account to access the dashboard.</p>
+      <div class="space-y-3">
+        <button
+          onclick="window.authModal?.open('signIn')"
+          class="block w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+        >
+          Sign In
+        </button>
+        <a
+          href="/"
+          class="block w-full text-primary-600 hover:text-primary-700 px-6 py-2 font-medium transition-colors"
+        >
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Content -->
+  <div id="adminContent" class="hidden">
+    <slot />
+  </div>
+</div>
+
+<script>
+  import { supabase } from '../lib/supabase';
+  import { checkAdminAccess, hasPermission } from '../lib/auth';
+
+  class AdminGuard {
+    constructor() {
+      this.authState = null;
+      this.init();
+    }
+
+    async init() {
+      try {
+        await this.checkAccess();
+      } catch (error) {
+        console.error('Admin guard error:', error);
+        this.showAccessDenied();
+      }
+
+      // Listen for auth state changes
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          await this.checkAccess();
+        } else if (event === 'SIGNED_OUT') {
+          this.showSignInRequired();
+        }
+      });
+    }
+
+    async checkAccess() {
+      const { data: { user } } = await supabase.auth.getUser();
+      this.authState = await checkAdminAccess(user);
+
+      if (!this.authState.isAuthenticated) {
+        this.showSignInRequired();
+      } else if (!this.authState.isAdmin) {
+        this.showAccessDenied();
+      } else if (!hasPermission(this.authState.permissions, 'view_dashboard')) {
+        this.showAccessDenied();
+      } else {
+        this.showAdminContent();
+        this.setupAdminFeatures();
+      }
+    }
+
+    showSignInRequired() {
+      this.hideAll();
+      document.getElementById('signInRequired')?.classList.remove('hidden');
+    }
+
+    showAccessDenied() {
+      this.hideAll();
+      document.getElementById('accessDenied')?.classList.remove('hidden');
+    }
+
+    showAdminContent() {
+      this.hideAll();
+      document.getElementById('adminContent')?.classList.remove('hidden');
+    }
+
+    hideAll() {
+      document.getElementById('authLoading')?.classList.add('hidden');
+      document.getElementById('signInRequired')?.classList.add('hidden');
+      document.getElementById('accessDenied')?.classList.add('hidden');
+      document.getElementById('adminContent')?.classList.add('hidden');
+    }
+
+    setupAdminFeatures() {
+      // Set global admin state for other components
+      window.adminState = this.authState;
+
+      // Show/hide features based on permissions
+      this.toggleFeaturesByPermissions();
+
+      // Add admin info to header
+      this.displayAdminInfo();
+    }
+
+    toggleFeaturesByPermissions() {
+      const permissions = this.authState.permissions;
+
+      // Export buttons
+      const exportButtons = document.querySelectorAll('[data-permission="export_data"]');
+      exportButtons.forEach(button => {
+        if (hasPermission(permissions, 'export_data')) {
+          button.classList.remove('hidden');
+        } else {
+          button.classList.add('hidden');
+        }
+      });
+
+      // Delete buttons
+      const deleteButtons = document.querySelectorAll('[data-permission="delete_data"]');
+      deleteButtons.forEach(button => {
+        if (hasPermission(permissions, 'delete_data')) {
+          button.classList.remove('hidden');
+        } else {
+          button.classList.add('hidden');
+        }
+      });
+
+      // User management
+      const userManagement = document.querySelectorAll('[data-permission="manage_users"]');
+      userManagement.forEach(element => {
+        if (hasPermission(permissions, 'manage_users')) {
+          element.classList.remove('hidden');
+        } else {
+          element.classList.add('hidden');
+        }
+      });
+    }
+
+    displayAdminInfo() {
+      // Add admin badge to header if it exists
+      const header = document.querySelector('header');
+      if (header && this.authState.user) {
+        const adminBadge = document.createElement('div');
+        adminBadge.className = 'fixed top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold z-50';
+        adminBadge.textContent = `ADMIN: ${this.authState.user.email}`;
+        document.body.appendChild(adminBadge);
+      }
+    }
+
+    hasPermission(permission) {
+      return hasPermission(this.authState?.permissions || [], permission);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.adminGuard = new AdminGuard();
+  });
+</script>
