@@ -38,7 +38,7 @@ import Layout from '../layouts/Layout.astro';
       <!-- Dashboard Content -->
       <div id="dashboardContent" class="hidden space-y-8">
         <!-- Stats Overview -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           <div class="bg-white rounded-lg shadow p-6">
             <div class="flex items-center">
               <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
@@ -61,8 +61,22 @@ import Layout from '../layouts/Layout.astro';
                 </svg>
               </div>
               <div class="ml-4">
-                <p class="text-sm font-medium text-gray-600">Total Bookings</p>
+                <p class="text-sm font-medium text-gray-600">DB Bookings</p>
                 <p id="totalBookings" class="text-2xl font-bold text-gray-900">0</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-lg shadow p-6">
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
+                <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <div class="ml-4">
+                <p class="text-sm font-medium text-gray-600">Guest Bookings</p>
+                <p id="guestBookings" class="text-2xl font-bold text-gray-900">0</p>
               </div>
             </div>
           </div>
@@ -123,7 +137,7 @@ import Layout from '../layouts/Layout.astro';
           <!-- Recent Bookings Table -->
           <div class="bg-white rounded-lg shadow">
             <div class="px-6 py-4 border-b border-gray-200">
-              <h3 class="text-lg font-medium text-gray-900">Recent Bookings</h3>
+              <h3 class="text-lg font-medium text-gray-900">Recent Bookings (Database)</h3>
             </div>
             <div class="overflow-x-auto">
               <table class="min-w-full divide-y divide-gray-200">
@@ -141,6 +155,46 @@ import Layout from '../layouts/Layout.astro';
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+
+        <!-- Guest Bookings Table -->
+        <div class="bg-white rounded-lg shadow">
+          <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+            <h3 class="text-lg font-medium text-gray-900">Guest Bookings (LocalStorage)</h3>
+            <div class="flex space-x-2">
+              <button 
+                id="exportGuestBookings" 
+                class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded text-sm font-medium transition-colors"
+              >
+                Export CSV
+              </button>
+              <button 
+                id="clearGuestBookings" 
+                class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm font-medium transition-colors"
+              >
+                Clear All
+              </button>
+            </div>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest Info</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Apartment</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dates</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guests</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="guestBookingsTableBody" class="bg-white divide-y divide-gray-200">
+                <!-- Data will be populated here -->
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -238,6 +292,7 @@ import Layout from '../layouts/Layout.astro';
         apartments: [],
         bookings: [],
         profiles: [],
+        guestBookings: [],
         stats: {}
       };
       this.init();
@@ -256,13 +311,27 @@ import Layout from '../layouts/Layout.astro';
           this.loadData();
         });
       }
+
+      const exportButton = document.getElementById('exportGuestBookings');
+      if (exportButton) {
+        exportButton.addEventListener('click', () => {
+          this.exportGuestBookingsToCSV();
+        });
+      }
+
+      const clearButton = document.getElementById('clearGuestBookings');
+      if (clearButton) {
+        clearButton.addEventListener('click', () => {
+          this.clearGuestBookings();
+        });
+      }
     }
 
     async loadData() {
       try {
         this.showLoading();
         
-        // Load all data in parallel
+        // Load Supabase data in parallel
         const [apartmentsResult, bookingsResult, profilesResult] = await Promise.all([
           supabase.from('apartments').select('*').order('created_at', { ascending: false }),
           supabase.from('bookings').select(`
@@ -277,10 +346,13 @@ import Layout from '../layouts/Layout.astro';
         if (bookingsResult.error) throw bookingsResult.error;
         if (profilesResult.error) throw profilesResult.error;
 
-        // Store data
+        // Store Supabase data
         this.data.apartments = apartmentsResult.data || [];
         this.data.bookings = bookingsResult.data || [];
         this.data.profiles = profilesResult.data || [];
+
+        // Load guest bookings from localStorage
+        this.loadGuestBookings();
 
         // Calculate stats
         this.calculateStats();
@@ -289,6 +361,7 @@ import Layout from '../layouts/Layout.astro';
         this.renderStats();
         this.renderApartmentsTable();
         this.renderBookingsTable();
+        this.renderGuestBookingsTable();
         this.renderUsersTable();
         this.renderCharts();
 
@@ -301,23 +374,41 @@ import Layout from '../layouts/Layout.astro';
       }
     }
 
+    loadGuestBookings() {
+      try {
+        const guestBookingsData = localStorage.getItem('guestBookings');
+        this.data.guestBookings = guestBookingsData ? JSON.parse(guestBookingsData) : [];
+      } catch (error) {
+        console.error('Error loading guest bookings from localStorage:', error);
+        this.data.guestBookings = [];
+      }
+    }
+
     calculateStats() {
       const totalApartments = this.data.apartments.length;
       const totalBookings = this.data.bookings.length;
+      const totalGuestBookings = this.data.guestBookings.length;
       const totalUsers = this.data.profiles.length;
       
-      const totalRevenue = this.data.bookings
+      const dbRevenue = this.data.bookings
         .filter(booking => booking.status === 'confirmed')
         .reduce((sum, booking) => sum + (booking.total_price || 0), 0);
 
+      const guestRevenue = this.data.guestBookings
+        .filter(booking => booking.status === 'confirmed' || booking.status === 'pending')
+        .reduce((sum, booking) => sum + (booking.totalPrice || 0), 0);
+
+      const totalRevenue = dbRevenue + guestRevenue;
+
       const confirmedBookings = this.data.bookings.filter(b => b.status === 'confirmed').length;
-      const pendingBookings = this.data.bookings.filter(b => b.status === 'pending').length;
+      const pendingBookings = this.data.bookings.filter(b => b.status === 'pending').length + 
+                             this.data.guestBookings.filter(b => b.status === 'pending').length;
       const cancelledBookings = this.data.bookings.filter(b => b.status === 'cancelled').length;
 
       // Calculate monthly revenue
       const currentMonth = new Date().getMonth();
       const currentYear = new Date().getFullYear();
-      const monthlyRevenue = this.data.bookings
+      const monthlyDbRevenue = this.data.bookings
         .filter(booking => {
           const bookingDate = new Date(booking.created_at);
           return bookingDate.getMonth() === currentMonth && 
@@ -326,9 +417,20 @@ import Layout from '../layouts/Layout.astro';
         })
         .reduce((sum, booking) => sum + (booking.total_price || 0), 0);
 
+      const monthlyGuestRevenue = this.data.guestBookings
+        .filter(booking => {
+          const bookingDate = new Date(booking.createdAt);
+          return bookingDate.getMonth() === currentMonth && 
+                 bookingDate.getFullYear() === currentYear;
+        })
+        .reduce((sum, booking) => sum + (booking.totalPrice || 0), 0);
+
+      const monthlyRevenue = monthlyDbRevenue + monthlyGuestRevenue;
+
       this.data.stats = {
         totalApartments,
         totalBookings,
+        totalGuestBookings,
         totalUsers,
         totalRevenue,
         confirmedBookings,
@@ -343,6 +445,7 @@ import Layout from '../layouts/Layout.astro';
       
       document.getElementById('totalApartments').textContent = stats.totalApartments;
       document.getElementById('totalBookings').textContent = stats.totalBookings;
+      document.getElementById('guestBookings').textContent = stats.totalGuestBookings;
       document.getElementById('totalUsers').textContent = stats.totalUsers;
       document.getElementById('totalRevenue').textContent = `$${stats.totalRevenue.toLocaleString()}`;
     }
@@ -408,6 +511,60 @@ import Layout from '../layouts/Layout.astro';
       }).join('');
     }
 
+    renderGuestBookingsTable() {
+      const tbody = document.getElementById('guestBookingsTableBody');
+      if (!tbody) return;
+
+      if (this.data.guestBookings.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" class="px-6 py-8 text-center text-gray-500">
+              <div class="text-sm">No guest bookings found in localStorage</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = this.data.guestBookings.map((booking, index) => `
+        <tr>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm font-medium text-gray-900">${booking.guestInfo?.firstName || ''} ${booking.guestInfo?.lastName || ''}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">${booking.guestInfo?.email || ''}</div>
+            <div class="text-sm text-gray-500">${booking.guestInfo?.phone || ''}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">${booking.apartment?.name || 'Unknown'}</div>
+            <div class="text-sm text-gray-500">${booking.apartment?.price || ''}/night</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">${booking.checkIn || ''}</div>
+            <div class="text-sm text-gray-500">to ${booking.checkOut || ''}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">${booking.guests || 0} guests</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm font-medium text-gray-900">$${booking.totalPrice?.toLocaleString() || '0'}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="text-sm text-gray-900">${new Date(booking.createdAt).toLocaleDateString()}</div>
+            <div class="text-sm text-gray-500">${new Date(booking.createdAt).toLocaleTimeString()}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <button 
+              onclick="window.kamenaDashboard.deleteGuestBooking(${index})"
+              class="text-red-600 hover:text-red-900 text-sm font-medium"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
     renderUsersTable() {
       const tbody = document.getElementById('usersTableBody');
       if (!tbody) return;
@@ -451,6 +608,67 @@ import Layout from '../layouts/Layout.astro';
       // Calculate growth (placeholder)
       const growthPercentage = Math.floor(Math.random() * 20) + 5; // Random for demo
       document.getElementById('revenueGrowth').textContent = `+${growthPercentage}%`;
+    }
+
+    exportGuestBookingsToCSV() {
+      if (this.data.guestBookings.length === 0) {
+        alert('No guest bookings to export');
+        return;
+      }
+
+      const headers = [
+        'First Name', 'Last Name', 'Email', 'Phone', 
+        'Apartment', 'Check-in', 'Check-out', 'Guests', 
+        'Total Price', 'Special Requests', 'Created At'
+      ];
+
+      const csvContent = [
+        headers.join(','),
+        ...this.data.guestBookings.map(booking => [
+          booking.guestInfo?.firstName || '',
+          booking.guestInfo?.lastName || '',
+          booking.guestInfo?.email || '',
+          booking.guestInfo?.phone || '',
+          booking.apartment?.name || '',
+          booking.checkIn || '',
+          booking.checkOut || '',
+          booking.guests || '',
+          booking.totalPrice || '',
+          booking.specialRequests || '',
+          booking.createdAt || ''
+        ].map(field => `"${field}"`).join(','))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', `guest-bookings-${new Date().toISOString().split('T')[0]}.csv`);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    deleteGuestBooking(index) {
+      if (confirm('Are you sure you want to delete this guest booking?')) {
+        this.data.guestBookings.splice(index, 1);
+        localStorage.setItem('guestBookings', JSON.stringify(this.data.guestBookings));
+        this.renderGuestBookingsTable();
+        this.calculateStats();
+        this.renderStats();
+      }
+    }
+
+    clearGuestBookings() {
+      if (confirm('Are you sure you want to clear all guest bookings? This action cannot be undone.')) {
+        localStorage.removeItem('guestBookings');
+        this.data.guestBookings = [];
+        this.renderGuestBookingsTable();
+        this.calculateStats();
+        this.renderStats();
+        alert('All guest bookings have been cleared.');
+      }
     }
 
     getStatusClasses(status) {
@@ -498,3 +716,4 @@ import Layout from '../layouts/Layout.astro';
     window.kamenaDashboard = new KamenaDashboard();
   });
 </script>
+</Layout>
