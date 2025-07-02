@@ -16,15 +16,13 @@ export interface AuthState {
 
 // Admin email addresses - in production, this should be in a database
 const ADMIN_EMAILS = [
-  'admin@apartments-delfin.net',
-  'manager@apartments-delfin.net',
-  'owner@apartments-delfin.net'
+  'strip.junak@gmail.com',
 ];
 
 // Super admin emails with full access
 const SUPER_ADMIN_EMAILS = [
   'admin@apartments-delfin.net',
-  'owner@apartments-delfin.net'
+  'strip.junak@gmail.com'
 ];
 
 export function isAdminEmail(email: string): boolean {
