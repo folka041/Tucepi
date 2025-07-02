@@ -742,6 +742,15 @@
           window.calendar.clearSelection();
         }
 
+        // Trigger notification update for admin users
+        if (window.notificationSystem) {
+          // Force check for new bookings after a short delay
+          setTimeout(() => {
+            window.notificationSystem.checkForNewBookings();
+            window.notificationSystem.checkForNewGuestBookings();
+          }, 1000);
+        }
+
         this.showSuccess();
       } catch (error) {
         console.error('Booking error:', error);

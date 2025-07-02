@@ -1,0 +1,422 @@
+---
+---
+
+<div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2 max-w-sm">
+  <!-- Notifications will be dynamically added here -->
+</div>
+
+<!-- Notification Bell Icon for Header -->
+<div id="notificationBell" class="relative hidden">
+  <button 
+    id="notificationButton"
+    class="relative p-2 text-gray-600 hover:text-primary-600 transition-colors"
+    aria-label="Notifications"
+  >
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+    </svg>
+    <span id="notificationBadge" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+  </button>
+  
+  <!-- Notification Dropdown -->
+  <div id="notificationDropdown" class="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 hidden">
+    <div class="p-4 border-b border-gray-200">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-gray-900">Notifications</h3>
+        <button id="markAllRead" class="text-sm text-primary-600 hover:text-primary-700">Mark all read</button>
+      </div>
+    </div>
+    <div id="notificationList" class="max-h-96 overflow-y-auto">
+      <div class="p-4 text-center text-gray-500 text-sm">
+        No new notifications
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { supabase } from '../lib/supabase';
+  import { t } from '../lib/i18n';
+
+  class NotificationSystem {
+    constructor() {
+      this.notifications = [];
+      this.unreadCount = 0;
+      this.isAdmin = false;
+      this.lastBookingCheck = new Date();
+      this.checkInterval = null;
+      this.guestBookingCount = 0;
+      
+      this.init();
+    }
+
+    async init() {
+      await this.checkAdminStatus();
+      if (this.isAdmin) {
+        this.setupNotificationUI();
+        this.loadStoredNotifications();
+        this.startBookingMonitoring();
+        this.bindEvents();
+        this.requestNotificationPermission();
+      }
+    }
+
+    async checkAdminStatus() {
+      try {
+        const { data: { user } } = await supabase.auth.getUser();
+        // For demo purposes, consider any authenticated user as admin
+        // In production, you'd check user roles/permissions
+        this.isAdmin = !!user;
+      } catch (error) {
+        console.error('Error checking admin status:', error);
+        this.isAdmin = false;
+      }
+    }
+
+    setupNotificationUI() {
+      const notificationBell = document.getElementById('notificationBell');
+      if (notificationBell) {
+        notificationBell.classList.remove('hidden');
+      }
+    }
+
+    bindEvents() {
+      const notificationButton = document.getElementById('notificationButton');
+      const notificationDropdown = document.getElementById('notificationDropdown');
+      const markAllReadButton = document.getElementById('markAllRead');
+
+      if (notificationButton && notificationDropdown) {
+        notificationButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleNotificationDropdown();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+          notificationDropdown.classList.add('hidden');
+        });
+
+        notificationDropdown.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      }
+
+      if (markAllReadButton) {
+        markAllReadButton.addEventListener('click', () => {
+          this.markAllAsRead();
+        });
+      }
+    }
+
+    toggleNotificationDropdown() {
+      const dropdown = document.getElementById('notificationDropdown');
+      if (dropdown) {
+        dropdown.classList.toggle('hidden');
+        if (!dropdown.classList.contains('hidden')) {
+          this.renderNotificationList();
+        }
+      }
+    }
+
+    async requestNotificationPermission() {
+      if ('Notification' in window && Notification.permission === 'default') {
+        await Notification.requestPermission();
+      }
+    }
+
+    startBookingMonitoring() {
+      // Check for new bookings every 30 seconds
+      this.checkInterval = setInterval(() => {
+        this.checkForNewBookings();
+        this.checkForNewGuestBookings();
+      }, 30000);
+
+      // Initial check
+      this.checkForNewBookings();
+      this.checkForNewGuestBookings();
+    }
+
+    async checkForNewBookings() {
+      try {
+        const { data: newBookings, error } = await supabase
+          .from('bookings')
+          .select(`
+            *,
+            profiles!inner(full_name, email)
+          `)
+          .gte('created_at', this.lastBookingCheck.toISOString())
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        if (newBookings && newBookings.length > 0) {
+          newBookings.forEach(booking => {
+            this.addNotification({
+              id: `booking-${booking.id}`,
+              type: 'booking',
+              title: 'New Booking Received',
+              message: `${booking.profiles.full_name} booked an apartment`,
+              timestamp: new Date(booking.created_at),
+              data: booking,
+              read: false
+            });
+          });
+
+          this.lastBookingCheck = new Date();
+        }
+      } catch (error) {
+        console.error('Error checking for new bookings:', error);
+      }
+    }
+
+    checkForNewGuestBookings() {
+      try {
+        const guestBookings = JSON.parse(localStorage.getItem('guestBookings') || '[]');
+        const currentCount = guestBookings.length;
+
+        if (currentCount > this.guestBookingCount) {
+          const newBookingsCount = currentCount - this.guestBookingCount;
+          const latestBooking = guestBookings[guestBookings.length - 1];
+
+          this.addNotification({
+            id: `guest-booking-${Date.now()}`,
+            type: 'guest-booking',
+            title: 'New Guest Booking',
+            message: `${latestBooking?.guestInfo?.firstName || 'Guest'} ${latestBooking?.guestInfo?.lastName || ''} made a booking`,
+            timestamp: new Date(),
+            data: latestBooking,
+            read: false
+          });
+        }
+
+        this.guestBookingCount = currentCount;
+      } catch (error) {
+        console.error('Error checking guest bookings:', error);
+      }
+    }
+
+    addNotification(notification) {
+      // Avoid duplicate notifications
+      if (this.notifications.find(n => n.id === notification.id)) {
+        return;
+      }
+
+      this.notifications.unshift(notification);
+      this.unreadCount++;
+      
+      this.updateNotificationBadge();
+      this.showToastNotification(notification);
+      this.showBrowserNotification(notification);
+      this.saveNotifications();
+    }
+
+    showToastNotification(notification) {
+      const container = document.getElementById('notificationContainer');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      toast.className = 'bg-white border border-gray-200 rounded-lg shadow-lg p-4 transform transition-all duration-300 translate-x-full';
+      toast.innerHTML = `
+        <div class="flex items-start space-x-3">
+          <div class="flex-shrink-0">
+            <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+              <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900">${notification.title}</p>
+            <p class="text-sm text-gray-600">${notification.message}</p>
+            <p class="text-xs text-gray-400 mt-1">${this.formatTime(notification.timestamp)}</p>
+          </div>
+          <button class="flex-shrink-0 text-gray-400 hover:text-gray-600" onclick="this.parentElement.parentElement.remove()">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      `;
+
+      container.appendChild(toast);
+
+      // Animate in
+      setTimeout(() => {
+        toast.classList.remove('translate-x-full');
+      }, 100);
+
+      // Auto remove after 5 seconds
+      setTimeout(() => {
+        toast.classList.add('translate-x-full');
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+          }
+        }, 300);
+      }, 5000);
+    }
+
+    showBrowserNotification(notification) {
+      if ('Notification' in window && Notification.permission === 'granted') {
+        const browserNotification = new Notification(notification.title, {
+          body: notification.message,
+          icon: '/favicon.svg',
+          badge: '/favicon.svg',
+          tag: notification.id,
+          requireInteraction: false
+        });
+
+        browserNotification.onclick = () => {
+          window.focus();
+          browserNotification.close();
+          
+          // Navigate to dashboard if it's a booking notification
+          if (notification.type === 'booking' || notification.type === 'guest-booking') {
+            window.location.href = '/kamena';
+          }
+        };
+
+        // Auto close after 5 seconds
+        setTimeout(() => {
+          browserNotification.close();
+        }, 5000);
+      }
+    }
+
+    updateNotificationBadge() {
+      const badge = document.getElementById('notificationBadge');
+      if (badge) {
+        if (this.unreadCount > 0) {
+          badge.textContent = this.unreadCount > 99 ? '99+' : this.unreadCount.toString();
+          badge.classList.remove('hidden');
+        } else {
+          badge.classList.add('hidden');
+        }
+      }
+    }
+
+    renderNotificationList() {
+      const list = document.getElementById('notificationList');
+      if (!list) return;
+
+      if (this.notifications.length === 0) {
+        list.innerHTML = `
+          <div class="p-4 text-center text-gray-500 text-sm">
+            No notifications
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = this.notifications.slice(0, 10).map(notification => `
+        <div class="p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer ${!notification.read ? 'bg-blue-50' : ''}" 
+             onclick="window.notificationSystem.markAsRead('${notification.id}')">
+          <div class="flex items-start space-x-3">
+            <div class="flex-shrink-0">
+              <div class="w-8 h-8 ${notification.type === 'booking' ? 'bg-green-100' : 'bg-orange-100'} rounded-full flex items-center justify-center">
+                <svg class="w-4 h-4 ${notification.type === 'booking' ? 'text-green-600' : 'text-orange-600'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900">${notification.title}</p>
+              <p class="text-sm text-gray-600">${notification.message}</p>
+              <p class="text-xs text-gray-400 mt-1">${this.formatTime(notification.timestamp)}</p>
+            </div>
+            ${!notification.read ? '<div class="w-2 h-2 bg-blue-500 rounded-full flex-shrink-0"></div>' : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    markAsRead(notificationId) {
+      const notification = this.notifications.find(n => n.id === notificationId);
+      if (notification && !notification.read) {
+        notification.read = true;
+        this.unreadCount = Math.max(0, this.unreadCount - 1);
+        this.updateNotificationBadge();
+        this.saveNotifications();
+        this.renderNotificationList();
+      }
+    }
+
+    markAllAsRead() {
+      this.notifications.forEach(notification => {
+        notification.read = true;
+      });
+      this.unreadCount = 0;
+      this.updateNotificationBadge();
+      this.saveNotifications();
+      this.renderNotificationList();
+    }
+
+    formatTime(timestamp) {
+      const now = new Date();
+      const diff = now - timestamp;
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
+
+      if (minutes < 1) return 'Just now';
+      if (minutes < 60) return `${minutes}m ago`;
+      if (hours < 24) return `${hours}h ago`;
+      if (days < 7) return `${days}d ago`;
+      return timestamp.toLocaleDateString();
+    }
+
+    saveNotifications() {
+      try {
+        // Keep only last 50 notifications
+        const notificationsToSave = this.notifications.slice(0, 50);
+        localStorage.setItem('adminNotifications', JSON.stringify(notificationsToSave));
+        localStorage.setItem('notificationUnreadCount', this.unreadCount.toString());
+      } catch (error) {
+        console.error('Error saving notifications:', error);
+      }
+    }
+
+    loadStoredNotifications() {
+      try {
+        const stored = localStorage.getItem('adminNotifications');
+        const unreadCount = localStorage.getItem('notificationUnreadCount');
+        
+        if (stored) {
+          this.notifications = JSON.parse(stored).map(n => ({
+            ...n,
+            timestamp: new Date(n.timestamp)
+          }));
+        }
+        
+        if (unreadCount) {
+          this.unreadCount = parseInt(unreadCount, 10) || 0;
+          this.updateNotificationBadge();
+        }
+
+        // Set initial guest booking count
+        const guestBookings = JSON.parse(localStorage.getItem('guestBookings') || '[]');
+        this.guestBookingCount = guestBookings.length;
+      } catch (error) {
+        console.error('Error loading stored notifications:', error);
+      }
+    }
+
+    destroy() {
+      if (this.checkInterval) {
+        clearInterval(this.checkInterval);
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.notificationSystem = new NotificationSystem();
+  });
+
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    if (window.notificationSystem) {
+      window.notificationSystem.destroy();
+    }
+  });
+</script>
+</div>
