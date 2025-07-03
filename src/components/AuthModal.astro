@@ -322,6 +322,7 @@
 <script>
   import { supabase } from '../lib/supabase';
   import { t } from '../lib/i18n';
+  import { isAdminEmail } from '../lib/auth';
 
   class AuthModal {
     constructor() {
@@ -713,7 +714,10 @@
       }
 
       try {
-        const { data, error } = await supabase.auth.signUp({
+        // Check if this is an admin email - if so, disable email confirmation
+        const isAdmin = isAdminEmail(email);
+        
+        const signUpOptions = {
           email,
           password,
           options: {
@@ -722,19 +726,27 @@
               last_name: lastName,
               full_name: `${firstName} ${lastName}`,
               phone: phone,
-            },
-            emailRedirectTo: `${window.location.origin}/auth/callback`
+            }
           },
-        });
+        };
+
+        // For admin emails, disable email confirmation
+        if (isAdmin) {
+          signUpOptions.options.emailRedirectTo = undefined;
+        } else {
+          signUpOptions.options.emailRedirectTo = `${window.location.origin}/auth/callback`;
+        }
+
+        const { data, error } = await supabase.auth.signUp(signUpOptions);
 
         if (error) throw error;
 
         // Store email for potential resend
         this.pendingEmail = email;
 
-        // Create profile (will be created when user confirms email)
-        if (data.user && data.user.email_confirmed_at) {
-          // User is already confirmed (shouldn't happen with email confirmation enabled)
+        // For admin users or if email is already confirmed
+        if (isAdmin || (data.user && data.user.email_confirmed_at)) {
+          // Create profile immediately
           const { error: profileError } = await supabase
             .from('profiles')
             .insert({
@@ -752,10 +764,16 @@
           setTimeout(() => {
             this.close();
             this.updateUIForAuthenticatedUser(data.user);
-            window.location.reload();
+            
+            // If admin user, redirect to kamena
+            if (isAdmin) {
+              window.location.href = '/kamena';
+            } else {
+              window.location.reload();
+            }
           }, 2000);
         } else {
-          // Show email confirmation screen
+          // Show email confirmation screen for regular users
           this.showEmailConfirmation();
           this.hideLoading();
         }
