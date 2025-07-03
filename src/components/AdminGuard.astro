@@ -125,14 +125,15 @@
       console.log('AdminGuard: Checking access...');
       
       try {
-        const { data: { user }, error } = await supabase.auth.getUser();
+        const { data: { session }, error } = await supabase.auth.getSession();
         
         if (error) {
-          console.error('AdminGuard: Error getting user:', error);
+          console.error('AdminGuard: Error getting session:', error);
           this.showSignInRequired();
           return;
         }
 
+        const user = session?.user || null;
         console.log('AdminGuard: Current user:', user?.email);
         
         this.authState = await checkAdminAccess(user);
