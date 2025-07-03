@@ -28,10 +28,10 @@
           Return to Home
         </a>
         <button
-          onclick="window.authModal?.open('signIn')"
+          onclick="window.location.href = '/'"
           class="block w-full text-primary-600 hover:text-primary-700 px-6 py-2 font-medium transition-colors"
         >
-          Sign In as Admin
+          Sign In as Different User
         </button>
       </div>
     </div>
@@ -49,7 +49,7 @@
       <p class="text-gray-600 mb-6">Please sign in with your administrator account to access the dashboard.</p>
       <div class="space-y-3">
         <button
-          onclick="window.authModal?.open('signIn')"
+          id="openAuthModal"
           class="block w-full bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-medium transition-colors"
         >
           Sign In
@@ -77,54 +77,107 @@
   class AdminGuard {
     constructor() {
       this.authState = null;
+      this.checkInterval = null;
       this.init();
     }
 
     async init() {
+      console.log('AdminGuard: Initializing...');
+      
       try {
         await this.checkAccess();
       } catch (error) {
-        console.error('Admin guard error:', error);
+        console.error('AdminGuard: Error during initialization:', error);
         this.showAccessDenied();
       }
 
       // Listen for auth state changes
       supabase.auth.onAuthStateChange(async (event, session) => {
+        console.log('AdminGuard: Auth state changed:', event, session?.user?.email);
+        
         if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           await this.checkAccess();
         } else if (event === 'SIGNED_OUT') {
           this.showSignInRequired();
         }
       });
+
+      // Bind sign in button
+      this.bindSignInButton();
+
+      // Periodic access check (every 30 seconds)
+      this.checkInterval = setInterval(() => {
+        this.checkAccess();
+      }, 30000);
+    }
+
+    bindSignInButton() {
+      const signInButton = document.getElementById('openAuthModal');
+      if (signInButton) {
+        signInButton.addEventListener('click', () => {
+          // Redirect to home page where auth modal is available
+          window.location.href = '/?signin=admin';
+        });
+      }
     }
 
     async checkAccess() {
-      const { data: { user } } = await supabase.auth.getUser();
-      this.authState = await checkAdminAccess(user);
+      console.log('AdminGuard: Checking access...');
+      
+      try {
+        const { data: { user }, error } = await supabase.auth.getUser();
+        
+        if (error) {
+          console.error('AdminGuard: Error getting user:', error);
+          this.showSignInRequired();
+          return;
+        }
 
-      if (!this.authState.isAuthenticated) {
+        console.log('AdminGuard: Current user:', user?.email);
+        
+        this.authState = await checkAdminAccess(user);
+        
+        console.log('AdminGuard: Auth state:', {
+          isAuthenticated: this.authState.isAuthenticated,
+          isAdmin: this.authState.isAdmin,
+          email: this.authState.user?.email,
+          permissions: this.authState.permissions
+        });
+
+        if (!this.authState.isAuthenticated) {
+          console.log('AdminGuard: User not authenticated');
+          this.showSignInRequired();
+        } else if (!this.authState.isAdmin) {
+          console.log('AdminGuard: User not admin');
+          this.showAccessDenied();
+        } else if (!hasPermission(this.authState.permissions, 'view_dashboard')) {
+          console.log('AdminGuard: User lacks dashboard permission');
+          this.showAccessDenied();
+        } else {
+          console.log('AdminGuard: Access granted');
+          this.showAdminContent();
+          this.setupAdminFeatures();
+        }
+      } catch (error) {
+        console.error('AdminGuard: Error checking access:', error);
         this.showSignInRequired();
-      } else if (!this.authState.isAdmin) {
-        this.showAccessDenied();
-      } else if (!hasPermission(this.authState.permissions, 'view_dashboard')) {
-        this.showAccessDenied();
-      } else {
-        this.showAdminContent();
-        this.setupAdminFeatures();
       }
     }
 
     showSignInRequired() {
+      console.log('AdminGuard: Showing sign in required');
       this.hideAll();
       document.getElementById('signInRequired')?.classList.remove('hidden');
     }
 
     showAccessDenied() {
+      console.log('AdminGuard: Showing access denied');
       this.hideAll();
       document.getElementById('accessDenied')?.classList.remove('hidden');
     }
 
     showAdminContent() {
+      console.log('AdminGuard: Showing admin content');
       this.hideAll();
       document.getElementById('adminContent')?.classList.remove('hidden');
     }
@@ -179,14 +232,24 @@
           element.classList.add('hidden');
         }
       });
+
+      // System settings
+      const systemSettings = document.querySelectorAll('[data-permission="system_settings"]');
+      systemSettings.forEach(element => {
+        if (hasPermission(permissions, 'system_settings')) {
+          element.classList.remove('hidden');
+        } else {
+          element.classList.add('hidden');
+        }
+      });
     }
 
     displayAdminInfo() {
       // Add admin badge to header if it exists
       const header = document.querySelector('header');
-      if (header && this.authState.user) {
+      if (header && this.authState.user && !document.querySelector('.admin-badge')) {
         const adminBadge = document.createElement('div');
-        adminBadge.className = 'fixed top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold z-50';
+        adminBadge.className = 'admin-badge fixed top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-xs font-bold z-50';
         adminBadge.textContent = `ADMIN: ${this.authState.user.email}`;
         document.body.appendChild(adminBadge);
       }
@@ -195,9 +258,22 @@
     hasPermission(permission) {
       return hasPermission(this.authState?.permissions || [], permission);
     }
+
+    destroy() {
+      if (this.checkInterval) {
+        clearInterval(this.checkInterval);
+      }
+    }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     window.adminGuard = new AdminGuard();
+  });
+
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', () => {
+    if (window.adminGuard) {
+      window.adminGuard.destroy();
+    }
   });
 </script>
