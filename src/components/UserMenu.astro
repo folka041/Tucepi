@@ -9,7 +9,7 @@
   >
     <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
       <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7-7h14a7 7 0 00-7-7z"></path>
       </svg>
     </div>
     <span id="userName" class="hidden sm:inline font-medium">User</span>
@@ -134,11 +134,13 @@
       if (!this.user) return;
 
       try {
-        const { data: profile } = await supabase
+        // Load profile data - remove .single() to handle missing profiles gracefully
+        const { data: profiles } = await supabase
           .from('profiles')
           .select('*')
-          .eq('id', this.user.id)
-          .single();
+          .eq('id', this.user.id);
+
+        const profile = profiles?.[0]; // Get first profile or undefined if none exists
 
         if (profile) {
           this.updateUserInfo({ ...this.user, profile });
