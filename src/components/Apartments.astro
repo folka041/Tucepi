@@ -109,7 +109,7 @@ const apartments = [
             <!-- CTA -->
             <a
               href={`/apartments`}
-              class="block w-full bg-primary-600 hover:bg-primary-700 text-white text-center py-3 rounded-lg font-semibold transition-colors duration-200"
+              class="apartment-cta-btn block w-full bg-primary-600 hover:bg-primary-700 text-white text-center py-3 rounded-lg font-semibold transition-colors duration-200"
               data-key="viewDetailsBook"
             >
               View Details & Book
@@ -123,10 +123,61 @@ const apartments = [
 
 <script>
   import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
+  import { checkAdminAccess } from '../lib/auth';
 
   class Apartments {
     constructor() {
+      this.isAdmin = false;
       this.updateTranslations();
+      this.checkAuthState();
+    }
+
+    async checkAuthState() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          await this.checkAdminStatus(session.user);
+        }
+      } catch (error) {
+        console.error('Auth state check error:', error);
+      }
+
+      // Listen for auth state changes
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+          await this.checkAdminStatus(session.user);
+        } else if (event === 'SIGNED_OUT') {
+          this.isAdmin = false;
+          this.updateButtonVisibility();
+        }
+      });
+    }
+
+    async checkAdminStatus(user) {
+      try {
+        const authState = await checkAdminAccess(user);
+        this.isAdmin = authState.isAdmin;
+        this.updateButtonVisibility();
+      } catch (error) {
+        console.error('Error checking admin status:', error);
+        this.isAdmin = false;
+        this.updateButtonVisibility();
+      }
+    }
+
+    updateButtonVisibility() {
+      const ctaButtons = document.querySelectorAll('.apartment-cta-btn');
+      
+      ctaButtons.forEach(button => {
+        if (this.isAdmin) {
+          // Hide CTA buttons for admin users
+          button.style.display = 'none';
+        } else {
+          // Show CTA buttons for regular users
+          button.style.display = 'block';
+        }
+      });
     }
 
     updateTranslations() {

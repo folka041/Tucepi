@@ -59,7 +59,7 @@ import NotificationSystem from './NotificationSystem.astro';
         </div>
         
         <!-- Book Now Button -->
-        <div class="hidden sm:block">
+        <div id="bookNowButton" class="hidden sm:block">
           <a
             href="/apartments"
             class="book-now-btn bg-accent-500 hover:bg-accent-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 transform hover:scale-105"
@@ -112,7 +112,7 @@ import NotificationSystem from './NotificationSystem.astro';
         </div>
         
         <!-- Mobile Book Now Button -->
-        <div class="pt-4 border-t border-gray-200">
+        <div id="mobileBookNowButton" class="pt-4 border-t border-gray-200">
           <a
             href="/apartments"
             class="book-now-btn bg-accent-500 hover:bg-accent-600 text-white block px-3 py-3 text-base font-medium rounded-lg text-center transition-colors"
@@ -129,9 +129,11 @@ import NotificationSystem from './NotificationSystem.astro';
 <script>
   import { t } from '../lib/i18n';
   import { supabase } from '../lib/supabase';
+  import { checkAdminAccess } from '../lib/auth';
 
   class Header {
     constructor() {
+      this.isAdmin = false;
       this.init();
       this.updateTranslations();
       this.checkAuthState();
@@ -197,8 +199,11 @@ import NotificationSystem from './NotificationSystem.astro';
       supabase.auth.onAuthStateChange((event, session) => {
         if (event === 'SIGNED_IN') {
           this.showUserMenu();
+          this.checkAdminStatus(session.user);
         } else if (event === 'SIGNED_OUT') {
           this.showAuthButtons();
+          this.isAdmin = false;
+          this.updateButtonVisibility();
         }
       });
     }
@@ -208,12 +213,40 @@ import NotificationSystem from './NotificationSystem.astro';
         const { data: { session } } = await supabase.auth.getSession();
         if (session) {
           this.showUserMenu();
+          await this.checkAdminStatus(session.user);
         } else {
           this.showAuthButtons();
         }
       } catch (error) {
         console.error('Auth state check error:', error);
         this.showAuthButtons();
+      }
+    }
+
+    async checkAdminStatus(user) {
+      try {
+        const authState = await checkAdminAccess(user);
+        this.isAdmin = authState.isAdmin;
+        this.updateButtonVisibility();
+      } catch (error) {
+        console.error('Error checking admin status:', error);
+        this.isAdmin = false;
+        this.updateButtonVisibility();
+      }
+    }
+
+    updateButtonVisibility() {
+      const bookNowButton = document.getElementById('bookNowButton');
+      const mobileBookNowButton = document.getElementById('mobileBookNowButton');
+      
+      if (this.isAdmin) {
+        // Hide Book Now buttons for admin users
+        if (bookNowButton) bookNowButton.style.display = 'none';
+        if (mobileBookNowButton) mobileBookNowButton.style.display = 'none';
+      } else {
+        // Show Book Now buttons for regular users
+        if (bookNowButton) bookNowButton.style.display = 'block';
+        if (mobileBookNowButton) mobileBookNowButton.style.display = 'block';
       }
     }
 

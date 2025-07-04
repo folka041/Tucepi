@@ -26,8 +26,9 @@
         Experience the perfect blend of comfort, elegance, and breathtaking ocean views in our premium vacation apartments.
       </p>
       
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <div id="heroButtons" class="flex flex-col sm:flex-row gap-4 justify-center items-center">
         <a
+          id="exploreApartmentsBtn"
           href="/apartments"
           class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
           data-key="exploreApartments"
@@ -55,11 +56,63 @@
 
 <script>
   import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
+  import { checkAdminAccess } from '../lib/auth';
 
   class Hero {
     constructor() {
+      this.isAdmin = false;
       this.updateTranslations();
       this.bindEvents();
+      this.checkAuthState();
+    }
+
+    async checkAuthState() {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          await this.checkAdminStatus(session.user);
+        }
+      } catch (error) {
+        console.error('Auth state check error:', error);
+      }
+
+      // Listen for auth state changes
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'SIGNED_IN' && session) {
+          await this.checkAdminStatus(session.user);
+        } else if (event === 'SIGNED_OUT') {
+          this.isAdmin = false;
+          this.updateButtonVisibility();
+        }
+      });
+    }
+
+    async checkAdminStatus(user) {
+      try {
+        const authState = await checkAdminAccess(user);
+        this.isAdmin = authState.isAdmin;
+        this.updateButtonVisibility();
+      } catch (error) {
+        console.error('Error checking admin status:', error);
+        this.isAdmin = false;
+        this.updateButtonVisibility();
+      }
+    }
+
+    updateButtonVisibility() {
+      const exploreBtn = document.getElementById('exploreApartmentsBtn');
+      const bookBtn = document.getElementById('heroBookButton');
+      
+      if (this.isAdmin) {
+        // Hide buttons for admin users
+        if (exploreBtn) exploreBtn.style.display = 'none';
+        if (bookBtn) bookBtn.style.display = 'none';
+      } else {
+        // Show buttons for regular users
+        if (exploreBtn) exploreBtn.style.display = 'inline-block';
+        if (bookBtn) bookBtn.style.display = 'inline-block';
+      }
     }
 
     bindEvents() {
