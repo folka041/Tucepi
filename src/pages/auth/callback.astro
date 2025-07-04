@@ -132,12 +132,13 @@ import Layout from '../../layouts/Layout.astro';
 
     async createUserProfile(user) {
       try {
-        // Check if profile already exists
-        const { data: existingProfile } = await supabase
+        // Check if profile already exists - remove .single() to handle missing profiles gracefully
+        const { data: existingProfiles } = await supabase
           .from('profiles')
           .select('id')
-          .eq('id', user.id)
-          .single();
+          .eq('id', user.id);
+
+        const existingProfile = existingProfiles?.[0]; // Get first profile or undefined if none exists
 
         if (!existingProfile) {
           // Create profile from user metadata

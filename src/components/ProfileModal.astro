@@ -152,12 +152,13 @@
       if (!this.user) return;
 
       try {
-        // Load profile data
-        const { data: profile } = await supabase
+        // Load profile data - remove .single() to handle missing profiles gracefully
+        const { data: profiles } = await supabase
           .from('profiles')
           .select('*')
-          .eq('id', this.user.id)
-          .single();
+          .eq('id', this.user.id);
+
+        const profile = profiles?.[0]; // Get first profile or undefined if none exists
 
         // Populate form fields
         const fullName = profile?.full_name || this.user.user_metadata?.full_name || '';
