@@ -774,6 +774,140 @@ const translations = {
     ru: 'Пароль должен содержать не менее 6 символов'
   },
 
+  // Email Confirmation Modal Translations
+  checkYourEmail: {
+    hr: 'Provjerite svoj email',
+    en: 'Check Your Email',
+    cs: 'Zkontrolujte svůj e-mail',
+    sk: 'Skontrolujte svoj e-mail',
+    pl: 'Sprawdź swoją pocztę',
+    fr: 'Vérifiez votre e-mail',
+    it: 'Controlla la tua email',
+    de: 'Überprüfen Sie Ihre E-Mail',
+    uk: 'Перевірте свою електронну пошту',
+    ru: 'Проверьте свою электронную почту'
+  },
+  emailConfirmationSent: {
+    hr: 'Poslali smo vam link za potvrdu na vašu email adresu. Molimo provjerite svoj email i kliknite na link da potvrdite svoj račun.',
+    en: 'We\'ve sent a confirmation link to your email address. Please check your email and click the link to verify your account.',
+    cs: 'Poslali jsme vám potvrzovací odkaz na vaši e-mailovou adresu. Zkontrolujte prosím svůj e-mail a klikněte na odkaz pro ověření vašeho účtu.',
+    sk: 'Poslali sme vám potvrdzovací odkaz na vašu e-mailovú adresu. Skontrolujte prosím svoj e-mail a kliknite na odkaz pre overenie vášho účtu.',
+    pl: 'Wysłaliśmy link potwierdzający na Twój adres e-mail. Sprawdź swoją pocztę i kliknij link, aby zweryfikować swoje konto.',
+    fr: 'Nous avons envoyé un lien de confirmation à votre adresse e-mail. Veuillez vérifier votre e-mail et cliquer sur le lien pour vérifier votre compte.',
+    it: 'Abbiamo inviato un link di conferma al tuo indirizzo email. Controlla la tua email e clicca sul link per verificare il tuo account.',
+    de: 'Wir haben einen Bestätigungslink an Ihre E-Mail-Adresse gesendet. Bitte überprüfen Sie Ihre E-Mail und klicken Sie auf den Link, um Ihr Konto zu verifizieren.',
+    uk: 'Ми надіслали посилання для підтвердження на вашу електронну адресу. Будь ласка, перевірте свою електронну пошту та натисніть на посилання для підтвердження вашого облікового запису.',
+    ru: 'Мы отправили ссылку для подтверждения на ваш адрес электронной почты. Пожалуйста, проверьте свою электронную почту и нажмите на ссылку для подтверждения вашего аккаунта.'
+  },
+  emailConfirmationNote: {
+    hr: 'Ako ne vidite email, provjerite spam mapu ili pokušajte ponovno.',
+    en: 'If you don\'t see the email, check your spam folder or try again.',
+    cs: 'Pokud nevidíte e-mail, zkontrolujte složku spam nebo to zkuste znovu.',
+    sk: 'Ak nevidíte e-mail, skontrolujte priečinok spam alebo to skúste znovu.',
+    pl: 'Jeśli nie widzisz e-maila, sprawdź folder spam lub spróbuj ponownie.',
+    fr: 'Si vous ne voyez pas l\'e-mail, vérifiez votre dossier spam ou réessayez.',
+    it: 'Se non vedi l\'email, controlla la cartella spam o riprova.',
+    de: 'Wenn Sie die E-Mail nicht sehen, überprüfen Sie Ihren Spam-Ordner oder versuchen Sie es erneut.',
+    uk: 'Якщо ви не бачите електронний лист, перевірте папку спам або спробуйте ще раз.',
+    ru: 'Если вы не видите письмо, проверьте папку спам или попробуйте еще раз.'
+  },
+  resendConfirmation: {
+    hr: 'Pošaljite ponovno email za potvrdu',
+    en: 'Resend Confirmation Email',
+    cs: 'Znovu odeslat potvrzovací e-mail',
+    sk: 'Znovu odoslať potvrdzovací e-mail',
+    pl: 'Wyślij ponownie e-mail potwierdzający',
+    fr: 'Renvoyer l\'e-mail de confirmation',
+    it: 'Invia di nuovo l\'email di conferma',
+    de: 'Bestätigungs-E-Mail erneut senden',
+    uk: 'Надіслати лист підтвердження повторно',
+    ru: 'Отправить письмо подтверждения повторно'
+  },
+  backToSignIn: {
+    hr: 'Natrag na prijavu',
+    en: 'Back to Sign In',
+    cs: 'Zpět na přihlášení',
+    sk: 'Späť na prihlásenie',
+    pl: 'Powrót do logowania',
+    fr: 'Retour à la connexion',
+    it: 'Torna al login',
+    de: 'Zurück zur Anmeldung',
+    uk: 'Повернутися до входу',
+    ru: 'Вернуться к входу'
+  },
+  resetPassword: {
+    hr: 'Resetiraj lozinku',
+    en: 'Reset Password',
+    cs: 'Resetovat heslo',
+    sk: 'Resetovať heslo',
+    pl: 'Resetuj hasło',
+    fr: 'Réinitialiser le mot de passe',
+    it: 'Reimposta password',
+    de: 'Passwort zurücksetzen',
+    uk: 'Скинути пароль',
+    ru: 'Сбросить пароль'
+  },
+  forgotPasswordDesc: {
+    hr: 'Unesite svoju email adresu i poslat ćemo vam link za resetiranje lozinke.',
+    en: 'Enter your email address and we\'ll send you a link to reset your password.',
+    cs: 'Zadejte svou e-mailovou adresu a pošleme vám odkaz pro resetování hesla.',
+    sk: 'Zadajte svoju e-mailovú adresu a pošleme vám odkaz pre resetovanie hesla.',
+    pl: 'Wprowadź swój adres e-mail, a wyślemy Ci link do resetowania hasła.',
+    fr: 'Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.',
+    it: 'Inserisci il tuo indirizzo email e ti invieremo un link per reimpostare la password.',
+    de: 'Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen Ihres Passworts.',
+    uk: 'Введіть свою електронну адресу, і ми надішлемо вам посилання для скидання пароля.',
+    ru: 'Введите свой адрес электронной почты, и мы отправим вам ссылку для сброса пароля.'
+  },
+  sendResetLink: {
+    hr: 'Pošaljite link za resetiranje',
+    en: 'Send Reset Link',
+    cs: 'Odeslat odkaz pro resetování',
+    sk: 'Odoslať odkaz pre resetovanie',
+    pl: 'Wyślij link resetujący',
+    fr: 'Envoyer le lien de réinitialisation',
+    it: 'Invia link di reset',
+    de: 'Reset-Link senden',
+    uk: 'Надіслати посилання для скидання',
+    ru: 'Отправить ссылку для сброса'
+  },
+  processing: {
+    hr: 'Obrađuje se...',
+    en: 'Processing...',
+    cs: 'Zpracovává se...',
+    sk: 'Spracováva sa...',
+    pl: 'Przetwarzanie...',
+    fr: 'Traitement en cours...',
+    it: 'Elaborazione...',
+    de: 'Verarbeitung...',
+    uk: 'Обробка...',
+    ru: 'Обработка...'
+  },
+  adminAccessRequired: {
+    hr: 'Potreban je administratorski pristup',
+    en: 'Admin Access Required',
+    cs: 'Vyžadován přístup administrátora',
+    sk: 'Vyžadovaný prístup administrátora',
+    pl: 'Wymagany dostęp administratora',
+    fr: 'Accès administrateur requis',
+    it: 'Accesso amministratore richiesto',
+    de: 'Administrator-Zugang erforderlich',
+    uk: 'Потрібен доступ адміністратора',
+    ru: 'Требуется доступ администратора'
+  },
+  adminSignInDesc: {
+    hr: 'Molimo prijavite se s administratorskim računom za pristup nadzornoj ploči.',
+    en: 'Please sign in with an administrator account to access the dashboard.',
+    cs: 'Přihlaste se prosím pomocí účtu administrátora pro přístup k řídicímu panelu.',
+    sk: 'Prihláste sa prosím pomocou účtu administrátora pre prístup k ovládaciemu panelu.',
+    pl: 'Zaloguj się kontem administratora, aby uzyskać dostęp do panelu.',
+    fr: 'Veuillez vous connecter avec un compte administrateur pour accéder au tableau de bord.',
+    it: 'Accedi con un account amministratore per accedere al dashboard.',
+    de: 'Bitte melden Sie sich mit einem Administrator-Konto an, um auf das Dashboard zuzugreifen.',
+    uk: 'Будь ласка, увійдіть з обліковим записом адміністратора для доступу до панелі керування.',
+    ru: 'Пожалуйста, войдите с учетной записью администратора для доступа к панели управления.'
+  },
+
   // Amenities
   worldClassAmenities: {
     hr: 'Sadržaji svjetske klase',
