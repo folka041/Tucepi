@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import AuthModal from '../components/AuthModal.astro';
+import ProfileModal from '../components/ProfileModal.astro';
+import PasswordModal from '../components/PasswordModal.astro';
 
 const nearbyAttractions = [
   {
@@ -346,15 +349,16 @@ const transportation = [
           Book your stay at Apartments Delfin and discover why our beachfront location is the perfect base for your coastal vacation.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/apartments"
-            class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          <button
+            class="view-apartments-btn bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+            data-key="viewApartments"
           >
             View Apartments
-          </a>
+          </button>
           <a
             href="/contact"
             class="bg-accent-500 hover:bg-accent-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+            data-key="getDirections"
           >
             Get Directions
           </a>
@@ -364,4 +368,60 @@ const transportation = [
   </main>
   
   <Footer />
+  <AuthModal />
+  <ProfileModal />
+  <PasswordModal />
+</Layout>
+
+<script>
+  import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
+
+  class LocationPage {
+    constructor() {
+      this.updateTranslations();
+      this.bindEvents();
+    }
+
+    bindEvents() {
+      // View Apartments button functionality
+      const viewApartmentsButton = document.querySelector('.view-apartments-btn');
+      if (viewApartmentsButton) {
+        viewApartmentsButton.addEventListener('click', () => {
+          // Check if user is authenticated
+          supabase.auth.getUser().then(({ data: { user } }) => {
+            if (!user) {
+              // User not authenticated, show auth modal
+              if (window.authModal) {
+                window.authModal.open('signIn');
+              }
+            } else {
+              // User authenticated, redirect to apartments page
+              window.location.href = '/apartments';
+            }
+          });
+        });
+      }
+    }
+
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          element.textContent = t(key);
+        }
+      });
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    new LocationPage();
+  });
+</script>
 </Layout>

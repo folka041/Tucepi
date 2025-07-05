@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import AuthModal from '../components/AuthModal.astro';
+import ProfileModal from '../components/ProfileModal.astro';
+import PasswordModal from '../components/PasswordModal.astro';
 
 const contactInfo = [
   {
@@ -272,7 +275,7 @@ const faqs = [
               
               <button
                 type="submit"
-                class="w-full bg-primary-600 hover:bg-primary-700 text-white py-4 px-6 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                class="send-message-btn w-full bg-primary-600 hover:bg-primary-700 text-white py-4 px-6 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 data-key="sendMessageBtn"
               >
                 Send Message
@@ -399,13 +402,12 @@ const faqs = [
           Don't wait - secure your perfect oceanfront apartment today and start planning your dream vacation.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/apartments"
-            class="bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
+          <button
+            class="view-apartments-cta-btn bg-white text-primary-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
             data-key="viewApartments"
           >
             View Apartments
-          </a>
+          </button>
           <a
             href="tel:+15551234567"
             class="bg-accent-500 hover:bg-accent-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105"
@@ -419,10 +421,14 @@ const faqs = [
   </main>
   
   <Footer />
+  <AuthModal />
+  <ProfileModal />
+  <PasswordModal />
 </Layout>
 
 <script>
   import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
 
   function toggleFAQ(button) {
     const answer = button.nextElementSibling;
@@ -441,29 +447,6 @@ const faqs = [
     constructor() {
       this.updateTranslations();
       this.bindEvents();
-    }
-
-    updateTranslations() {
-      const elements = document.querySelectorAll('[data-key]');
-      elements.forEach(element => {
-        const key = element.getAttribute('data-key');
-        if (key) {
-          if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
-            element.placeholder = t(key);
-          } else if (element.tagName === 'TEXTAREA') {
-            element.placeholder = t(key);
-          } else if (element.tagName === 'OPTION') {
-            element.textContent = t(key);
-          } else {
-            element.textContent = t(key);
-          }
-        }
-      });
-
-      // Listen for language changes
-      window.addEventListener('languageChanged', () => {
-        this.updateTranslations();
-      });
     }
 
     bindEvents() {
@@ -489,6 +472,48 @@ const faqs = [
           }, 3000);
         });
       }
+
+      // View Apartments CTA button functionality
+      const viewApartmentsCTAButton = document.querySelector('.view-apartments-cta-btn');
+      if (viewApartmentsCTAButton) {
+        viewApartmentsCTAButton.addEventListener('click', () => {
+          // Check if user is authenticated
+          supabase.auth.getUser().then(({ data: { user } }) => {
+            if (!user) {
+              // User not authenticated, show auth modal
+              if (window.authModal) {
+                window.authModal.open('signIn');
+              }
+            } else {
+              // User authenticated, redirect to apartments page
+              window.location.href = '/apartments';
+            }
+          });
+        });
+      }
+    }
+
+    updateTranslations() {
+      const elements = document.querySelectorAll('[data-key]');
+      elements.forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (key) {
+          if (element.tagName === 'INPUT' && element.type !== 'submit' && element.type !== 'button') {
+            element.placeholder = t(key);
+          } else if (element.tagName === 'TEXTAREA') {
+            element.placeholder = t(key);
+          } else if (element.tagName === 'OPTION') {
+            element.textContent = t(key);
+          } else {
+            element.textContent = t(key);
+          }
+        }
+      });
+
+      // Listen for language changes
+      window.addEventListener('languageChanged', () => {
+        this.updateTranslations();
+      });
     }
   }
 
@@ -499,3 +524,4 @@ const faqs = [
     new ContactPage();
   });
 </script>
+</Layout>

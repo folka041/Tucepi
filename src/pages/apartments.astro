@@ -4,6 +4,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Calendar from '../components/Calendar.astro';
 import BookingModal from '../components/BookingModal.astro';
+import AuthModal from '../components/AuthModal.astro';
+import ProfileModal from '../components/ProfileModal.astro';
+import PasswordModal from '../components/PasswordModal.astro';
 ---
 
 <Layout 
@@ -101,6 +104,9 @@ import BookingModal from '../components/BookingModal.astro';
   
   <Footer />
   <BookingModal />
+  <AuthModal />
+  <ProfileModal />
+  <PasswordModal />
 </Layout>
 
 <script>
@@ -339,36 +345,48 @@ import BookingModal from '../components/BookingModal.astro';
         button.addEventListener('click', function() {
           const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
           
-          // Get selected dates from calendar if available
-          let selectedDates = null;
-          if (window.calendar) {
-            selectedDates = window.calendar.getSelectedDates();
-          }
-          
-          // Open booking modal with apartment data and pre-filled dates
-          if (window.bookingModal) {
-            window.bookingModal.open(apartmentData);
-            
-            // If dates are selected, pre-fill them in the booking modal
-            if (selectedDates && selectedDates.checkin && selectedDates.checkout) {
-              setTimeout(() => {
-                const checkinInput = document.getElementById('checkIn');
-                const checkoutInput = document.getElementById('checkOut');
-                
-                if (checkinInput) {
-                  checkinInput.value = selectedDates.checkin.toISOString().split('T')[0];
-                }
-                if (checkoutInput) {
-                  checkoutInput.value = selectedDates.checkout.toISOString().split('T')[0];
-                }
-                
-                // Trigger price calculation
-                if (window.bookingModal.calculatePrice) {
-                  window.bookingModal.calculatePrice();
-                }
-              }, 100);
+          // Check if user is authenticated
+          supabase.auth.getUser().then(({ data: { user } }) => {
+            if (!user) {
+              // User not authenticated, show auth modal
+              if (window.authModal) {
+                window.authModal.open('signIn');
+              }
+              return;
             }
-          }
+            
+            // User authenticated, proceed with booking
+            // Get selected dates from calendar if available
+            let selectedDates = null;
+            if (window.calendar) {
+              selectedDates = window.calendar.getSelectedDates();
+            }
+            
+            // Open booking modal with apartment data and pre-filled dates
+            if (window.bookingModal) {
+              window.bookingModal.open(apartmentData);
+              
+              // If dates are selected, pre-fill them in the booking modal
+              if (selectedDates && selectedDates.checkin && selectedDates.checkout) {
+                setTimeout(() => {
+                  const checkinInput = document.getElementById('checkIn');
+                  const checkoutInput = document.getElementById('checkOut');
+                  
+                  if (checkinInput) {
+                    checkinInput.value = selectedDates.checkin.toISOString().split('T')[0];
+                  }
+                  if (checkoutInput) {
+                    checkoutInput.value = selectedDates.checkout.toISOString().split('T')[0];
+                  }
+                  
+                  // Trigger price calculation
+                  if (window.bookingModal.calculatePrice) {
+                    window.bookingModal.calculatePrice();
+                  }
+                }, 100);
+              }
+            }
+          });
         });
       });
 
@@ -555,37 +573,50 @@ import BookingModal from '../components/BookingModal.astro';
         bookThisApartmentBtn.addEventListener('click', function() {
           const apartmentData = JSON.parse(this.getAttribute('data-apartment'));
           
-          // Close the details modal
-          modal.remove();
-          document.body.style.overflow = '';
-          
-          // Open booking modal
-          if (window.bookingModal) {
-            window.bookingModal.open(apartmentData);
+          // Check if user is authenticated
+          supabase.auth.getUser().then(({ data: { user } }) => {
+            if (!user) {
+              // User not authenticated, show auth modal
+              modal.remove();
+              document.body.style.overflow = '';
+              if (window.authModal) {
+                window.authModal.open('signIn');
+              }
+              return;
+            }
             
-            // Get selected dates from calendar if available
-            if (window.calendar) {
-              const selectedDates = window.calendar.getSelectedDates();
-              if (selectedDates && selectedDates.checkin && selectedDates.checkout) {
-                setTimeout(() => {
-                  const checkinInput = document.getElementById('checkIn');
-                  const checkoutInput = document.getElementById('checkOut');
-                  
-                  if (checkinInput) {
-                    checkinInput.value = selectedDates.checkin.toISOString().split('T')[0];
-                  }
-                  if (checkoutInput) {
-                    checkoutInput.value = selectedDates.checkout.toISOString().split('T')[0];
-                  }
-                  
-                  // Trigger price calculation
-                  if (window.bookingModal.calculatePrice) {
-                    window.bookingModal.calculatePrice();
-                  }
-                }, 100);
+            // Close the details modal
+            modal.remove();
+            document.body.style.overflow = '';
+            
+            // Open booking modal
+            if (window.bookingModal) {
+              window.bookingModal.open(apartmentData);
+              
+              // Get selected dates from calendar if available
+              if (window.calendar) {
+                const selectedDates = window.calendar.getSelectedDates();
+                if (selectedDates && selectedDates.checkin && selectedDates.checkout) {
+                  setTimeout(() => {
+                    const checkinInput = document.getElementById('checkIn');
+                    const checkoutInput = document.getElementById('checkOut');
+                    
+                    if (checkinInput) {
+                      checkinInput.value = selectedDates.checkin.toISOString().split('T')[0];
+                    }
+                    if (checkoutInput) {
+                      checkoutInput.value = selectedDates.checkout.toISOString().split('T')[0];
+                    }
+                    
+                    // Trigger price calculation
+                    if (window.bookingModal.calculatePrice) {
+                      window.bookingModal.calculatePrice();
+                    }
+                  }, 100);
+                }
               }
             }
-          }
+          });
         });
       }
       

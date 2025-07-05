@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import AuthModal from '../components/AuthModal.astro';
+import ProfileModal from '../components/ProfileModal.astro';
+import PasswordModal from '../components/PasswordModal.astro';
 
 const amenityCategories = [
   {
@@ -178,7 +181,7 @@ const premiumServices = [
               <div class="p-6">
                 <h3 class="text-xl font-semibold text-gray-900 mb-3" data-key={service.titleKey}>{service.title}</h3>
                 <p class="text-gray-600 mb-4 leading-relaxed" data-key={service.descKey}>{service.description}</p>
-                <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200" data-key="learnMore">
+                <button class="learn-more-btn w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-lg font-semibold transition-colors duration-200" data-key="learnMore">
                   Learn More
                 </button>
               </div>
@@ -271,14 +274,40 @@ const premiumServices = [
   </main>
   
   <Footer />
+  <AuthModal />
+  <ProfileModal />
+  <PasswordModal />
 </Layout>
 
 <script>
   import { t } from '../lib/i18n';
+  import { supabase } from '../lib/supabase';
 
   class AmenitiesPage {
     constructor() {
       this.updateTranslations();
+      this.bindEvents();
+    }
+
+    bindEvents() {
+      // Learn More button functionality
+      const learnMoreButtons = document.querySelectorAll('.learn-more-btn');
+      learnMoreButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Check if user is authenticated
+          supabase.auth.getUser().then(({ data: { user } }) => {
+            if (!user) {
+              // User not authenticated, show auth modal
+              if (window.authModal) {
+                window.authModal.open('signIn');
+              }
+            } else {
+              // User authenticated, show contact info or redirect
+              alert(t('contactForMoreInfo') || 'Please contact us for more information about our premium services.');
+            }
+          });
+        });
+      });
     }
 
     updateTranslations() {
@@ -301,3 +330,4 @@ const premiumServices = [
     new AmenitiesPage();
   });
 </script>
+</Layout>
